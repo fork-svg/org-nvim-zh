@@ -1,0 +1,1150 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="assets/site.js" defer></script>
+
+</head>
+<body data-root="">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="index.html">首页</a></li>
+<li class=""><a href="guide.html" aria-current="page">指南</a></li>
+<li class=""><a href="playground.html">互动教程</a></li>
+<li><details class="group"><summary>手册</summary><ul>
+<li class=""><a href="manual/index.html">目录</a></li>
+<li class=""><a href="manual/org-introduction.html">简介</a></li>
+<li class=""><a href="manual/org-installation.html">安装</a></li>
+<li class=""><a href="manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="manual/org-tags.html">标签</a></li>
+<li class=""><a href="manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="manual/org-clock.html">计时和工作量</a></li>
+<li class=""><a href="manual/org-agenda.html">日程</a></li>
+<li class=""><a href="manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="manual/org-capture.html">捕捉</a></li>
+<li class=""><a href="manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="manual/org-babel.html">源代码块（Babel）</a></li>
+<li class=""><a href="manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="manual/org-export.html">导出</a></li>
+<li class=""><a href="manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="manual/org-completion.html">补全</a></li>
+<li class=""><a href="manual/org-appearance.html">外观和高亮</a></li>
+<li class=""><a href="manual/org-config.html">配置参考</a></li>
+<li class=""><a href="manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="manual/org-commands.html">命令</a></li>
+<li class=""><a href="manual/org-api.html">Lua API</a></li>
+<li class=""><a href="manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="manual/org-lint.html">检查</a></li>
+<li class=""><a href="manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="manual/org-extensions-drill.html">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="manual/org-extensions-hugo.html">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="manual/org-extensions-caldav.html">CalDAV sync</a></li>
+<li class="sub"><a href="manual/org-extensions-cli.html">Command line (org)</a></li>
+<li class="sub"><a href="manual/org-extensions-diagrams.html">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="manual/org-extensions-code.html">Code and notes (code)</a></li>
+<li class="sub"><a href="manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="examples/05-tags.html">标签</a></li>
+<li class=""><a href="examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="examples/09-agenda.html">日程</a></li>
+<li class=""><a href="examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="parity/review.html">兼容性审查</a></li>
+<li class=""><a href="parity/index.html">目录</a></li>
+<li class=""><a href="parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content guide">
+<article>
+<h1 id="orgnvim-guide">org.nvim guide</h1>
+<p>The setup and reference guide that goes with the <a href="index.html">README</a>:
+installation in detail, the default keys, configuration, capture templates,
+custom agenda commands, integrations, the Lua API, the differences from
+Emacs Org, every extension and the roadmap. The complete reference is the
+manual, <a href="manual/index.html#org.nvim"><code>:h org.nvim</code></a> (<a href="manual/index.html"><code>doc/org.txt</code></a>), also on the
+<a href="manual/index.html">documentation website</a>.</p>
+<h2 id="contents">目录</h2>
+<ul>
+<li><a href="#-why-another-org-plugin">Why another Org plugin?</a></li>
+<li><a href="#the-tour-in-detail">The tour in detail</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#installation">安装</a></li>
+<li><a href="#keymaps">Keymaps</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#capture-templates">Capture templates</a></li>
+<li><a href="#custom-agenda-commands">Custom agenda commands</a></li>
+<li><a href="#completion">补全</a></li>
+<li><a href="#pickers">Pickers</a></li>
+<li><a href="#statusline">Statusline</a></li>
+<li><a href="#outline-and-breadcrumb-plugins">Outline and breadcrumb plugins</a></li>
+<li><a href="#image-and-latex-previews">Image and LaTeX previews</a></li>
+<li><a href="#lua-api">Lua API</a></li>
+<li><a href="#session-server">Session server</a></li>
+<li><a href="#differences-from-emacs-org-mode">Differences from Emacs Org mode</a></li>
+<li><a href="#-extensions">扩展</a></li>
+<li><a href="#-roadmap">Roadmap</a></li>
+</ul>
+<hr>
+<h2 id="-why-another-org-plugin">🤔 Why another Org plugin?</h2>
+<p>There are already good ways to write Org files in Neovim, above all
+<a href="https://github.com/nvim-orgmode/orgmode">nvim-orgmode</a>, which has been
+around for years and is used by many people. If it does what you need,
+keep using it. <a href="https://github.com/nvim-neorg/neorg">Neorg</a> is another
+fine option, though it uses its own format rather than Org.</p>
+<p>org.nvim exists because I wanted something those projects don't aim for:</p>
+<ul>
+<li><strong>Full parity with Emacs Org.</strong> The goal is to behave like Org 9.8,
+including the parts that are hard to port: Babel with sessions and
+<code>:var</code>, a port of the export engine, clock tables, <code>#+TBLFM</code> formulas
+with a Calc-compatible evaluator, and image and LaTeX previews. Where
+org.nvim differs, it says so (<a href="#differences-from-emacs-org-mode">Differences from Emacs Org
+mode</a> and <a href="manual/org-differences.html"><code>:h org-differences</code></a>).</li>
+<li><strong>A different architecture.</strong> It's pure Lua with its own Org parser,
+where nvim-orgmode is built on a tree-sitter grammar. That's a
+foundational choice, not something a pull request could change.</li>
+<li><strong>Speed.</strong> Adding everything above to an existing project would mean
+big design changes and a slow review cycle, so I built it separately.</li>
+<li><strong>Keys that feel right in both worlds.</strong> The Emacs Org keys work as they
+do in Emacs, and the Vim-style keys fall back to normal Vim behaviour
+when they don't apply.</li>
+</ul>
+<p><strong>On AI:</strong> org.nvim is written with AI assistance
+(<a href="https://claude.com/claude-code">Claude Code</a>). To keep that honest, its
+behaviour is checked against the Emacs Org source rather than guessed,
+every feature comes with headless tests (<code>make test</code>, 6,000+ of them), and
+I review and use every change myself. Bug reports are very welcome,
+especially where it doesn't match Emacs.</p>
+<hr>
+<h2 id="the-tour-in-detail">The tour in detail</h2>
+<p>The <a href="index.html#-a-quick-tour">README tour</a> shows each feature in a GIF;
+this is the longer description of each one.</p>
+<h3 id="outlines-that-fold-like-emacs">Outlines that fold like Emacs</h3>
+<p><code>TAB</code> cycles a subtree through folded, children and everything.
+<code>S-TAB</code> does the same for the whole file. You can move a subtree with all
+of its children (<code>&lt;leader&gt;oK</code> / <code>&lt;leader&gt;oJ</code> or <code>M-k</code> / <code>M-j</code>), promote and
+demote it, or cut, paste and sort it.</p>
+<h3 id="structure-editing">Structure editing</h3>
+<p><code>M-RET</code> adds a heading (or an item) at the right level,
+and <code>&lt;leader&gt;oit</code> adds a TODO heading. <code>M-h</code> / <code>M-l</code> promote and demote.
+<code>&lt;leader&gt;ohs</code> sorts the children (alphabetically, by TODO state, priority,
+date and more), and <code>&lt;leader&gt;ohn</code> narrows to a subtree so you can edit it
+on its own.</p>
+<h3 id="todos-checklists-and-priorities">TODOs, checklists and priorities</h3>
+<p>Ticking a checkbox updates the <code>[2/4]</code> and <code>[50%]</code> cookies of its parents.
+Marking a task DONE updates its parent's cookie and, with
+<code>log_done = &quot;time&quot;</code> (or <code>#+STARTUP: logdone</code>), logs a <code>CLOSED:</code> timestamp.
+Set the state with <code>cit</code> or with the fast-selection menu (<code>&lt;leader&gt;oS</code>), and the
+priority with <code>&lt;leader&gt;o,</code>.</p>
+<h3 id="plain-lists">Plain lists</h3>
+<p><code>S-Right</code> / <code>S-Left</code> on an item cycles the bullet style of its list: <code>-</code>,
+<code>+</code>, <code>*</code> (in indented lists), <code>1.</code> and <code>1)</code>. <code>M-RET</code> adds an item and
+<code>M-S-RET</code> adds a checkbox item. <code>TAB</code> on a new empty item indents it.
+<code>M-Up</code> / <code>M-Down</code> move an item with its children, and numbered lists are
+renumbered as you go. <code>&lt;leader&gt;o-</code> turns plain lines into a list.</p>
+<h3 id="tags-and-properties">Tags and properties</h3>
+<p><code>&lt;leader&gt;ot</code> opens fast tag selection: one key per tag, with mutually
+exclusive groups like <code>{ @office @remote }</code>. <code>&lt;leader&gt;oxe</code> sets the effort
+from <code>Effort_ALL</code>, and <code>&lt;leader&gt;op</code> sets any property.</p>
+<h3 id="dates-with-a-real-calendar">Dates with a real calendar</h3>
+<p><code>&lt;leader&gt;os</code> (schedule) and <code>&lt;leader&gt;od</code> (deadline) open a floating
+calendar with week numbers, today and weekends marked, and a preview of
+the chosen date (&quot;in 3 days&quot;). Move around it with <code>hjkl</code>, or press <code>i</code>
+and type a date the way you'd say it: <code>fri 14:00</code>, <code>+2w</code>, <code>sep 15</code>, <code>w39</code>.
+Its colors are <code>OrgCalendar*</code> highlight groups (<a href="manual/org-dates.html#org-calendar"><code>:h org-calendar</code></a>).</p>
+<p>You don't need the calendar to change a date. <code>S-Right</code> / <code>S-Left</code> move it
+by a day, <code>&lt;C-a&gt;</code> / <code>&lt;C-x&gt;</code> (or <code>S-Up</code> / <code>S-Down</code>) change the part under
+the cursor (year, month, day, hour or minutes, rounded to 5), and <code>&lt;CR&gt;</code>
+on a date opens the agenda for that day.</p>
+<h3 id="a-real-agenda">A real agenda</h3>
+<p><code>&lt;leader&gt;oa</code> → <code>a</code> opens the week, or the day with
+<code>agenda = { span = &quot;day&quot; }</code>. The day view has a time grid, a current-time line, deadline
+countdowns, overdue items and a habit consistency graph, the same as in
+Emacs. From the agenda you can change states, reschedule, clock in,
+refile, filter and run bulk actions. <code>vd</code> / <code>vw</code> switch between day and
+week.</p>
+<p>The dispatcher has the other Emacs views too: every TODO (<code>t</code>), a
+tags/property match (<code>m</code>, here <code>+oss</code>) and a word search (<code>s</code>).</p>
+<h3 id="capture-from-anywhere">Capture from anywhere</h3>
+<p>Press <code>&lt;leader&gt;oc</code> in any buffer and pick a template. Templates can be
+grouped under a prefix key (<code>w</code> → <code>t</code> here). Type the task and finish with
+<code>&lt;C-c&gt;&lt;C-c&gt;</code> or <code>:w</code>. It's filed where the template says: under a
+headline, an outline path or a date tree.</p>
+<h3 id="refile-and-archive">整理和归档</h3>
+<p><code>&lt;leader&gt;or</code> moves a subtree under another heading: by default a
+top-level heading of the current file, or any heading in your agenda files
+with <code>refile = { max_level = N }</code> (here labelled with the file name,
+<code>use_outline_path = &quot;file&quot;</code>). <code>&lt;leader&gt;o$</code> archives a finished subtree to
+<code>&lt;file&gt;_archive</code> and keeps its context in <code>ARCHIVE_*</code> properties.</p>
+<h3 id="spreadsheet-tables">Spreadsheet tables</h3>
+<p>Type a rough table, press <code>&lt;C-c&gt;&lt;C-c&gt;</code> on its <code>#+TBLFM</code> line, and it
+aligns itself and evaluates its formulas with a Calc-compatible evaluator.
+Change a value, recalculate with <code>&lt;leader&gt;oTf</code>, and the totals follow.</p>
+<p>Rows and columns are easy to edit. <code>&lt;leader&gt;oTr</code> / <code>&lt;leader&gt;oTi</code> insert a
+row or a column, <code>M-j</code> / <code>M-k</code> and <code>M-h</code> / <code>M-l</code> move them, and
+<code>&lt;leader&gt;oTR</code> / <code>&lt;leader&gt;oTI</code> delete them. Formulas in <code>#+TBLFM</code> are
+rewritten to follow the moves.</p>
+<p><code>&lt;leader&gt;oTs</code> sorts the rows (alphabetically, numerically, by date or with
+a function), and <code>&lt;leader&gt;oTt</code> transposes the table. Type <code>:=</code> followed by
+a formula in a field to add a field formula to <code>#+TBLFM</code>.</p>
+<h3 id="code-that-runs-in-your-notes">Code that runs in your notes</h3>
+<p><code>&lt;C-c&gt;&lt;C-c&gt;</code> on a source block runs it asynchronously, with a spinner
+while it runs (<code>&lt;prefix&gt;bC</code> cancels it), and writes the output back into
+the file:</p>
+<p>Python, shell, Lua (in-process), Node, Ruby, R, Go, SQLite and more are
+supported, along with <code>:var</code>, <code>:noweb</code>, <code>:wrap</code>, <code>:cache</code>, <code>#+CALL</code>,
+inline <code>src_lang{…}</code> blocks and tangling. Nothing blocks the editor while
+code runs (except Lua, which runs inside Neovim); <code>:session</code> keeps a live
+REPL between blocks (<code>C-c C-v C-z</code> opens it so you can type into it), and
+<code>:session :async</code> writes a placeholder result right away, as in Emacs.</p>
+<p><code>&lt;leader&gt;o'</code> opens a block in its own buffer with the language's filetype,
+so it gets that language's highlighting, indentation and filetype plugins.
+<code>&lt;C-c&gt;'</code> writes it back.</p>
+<h3 id="clocking-clock-tables-and-column-view">Clocking, clock tables and column view</h3>
+<p><code>&lt;leader&gt;oxi</code> clocks in, and <a href="#statusline"><code>require(&quot;org&quot;).statusline()</code></a>
+shows the running total against the effort estimate. <code>&lt;leader&gt;oxr</code> inserts
+a clock table that matches Emacs's output. <code>&lt;leader&gt;oC</code> opens column view,
+drawn over the headlines like Emacs, which sums efforts and clocked time
+up the tree.</p>
+<h3 id="images-and-latex-right-in-your-notes">Images and LaTeX, right in your notes</h3>
+<p><code>&lt;leader&gt;oxv</code> (<code>C-c C-x C-v</code>) shows image links as images in place of the
+link, like Emacs, and <code>&lt;leader&gt;oxl</code> (<code>C-c C-x C-l</code>) renders LaTeX
+fragments. On Neovim 0.13+ they're drawn by the built-in <code>vim.ui.img</code> in
+any terminal with the Kitty graphics protocol (kitty, Ghostty, WezTerm).
+They follow scrolling, folds and splits, and the link text comes back on
+the cursor line so you can edit it. On older Neovim, or inside tmux,
+org.nvim uses <a href="https://github.com/folke/snacks.nvim">snacks.nvim</a>'s image
+module or <a href="https://github.com/3rd/image.nvim">image.nvim</a> instead.
+<code>#+STARTUP: linkpreviews</code> and <code>latexpreview</code> turn them on when a file
+opens.</p>
+<p>LaTeX is rendered in the background with <code>latex</code> + <code>dvipng</code> like Emacs, or
+with <code>tectonic</code> / <code>pdflatex</code>, in your colorscheme's text color, and the
+results are cached:</p>
+<h3 id="jump-to-any-heading">Jump to any heading</h3>
+<p><code>&lt;leader&gt;o.</code> (Emacs <code>C-c C-j</code>) jumps to a heading of the current file.
+By default it opens Emacs's org-goto outline, a read-only copy of the
+buffer you browse and jump from. With <code>goto_interface = &quot;outline-path-completion&quot;</code> (shown here) it's a picker instead, and a count
+switches to the other interface for one jump. <code>&lt;leader&gt;og</code> jumps to any
+heading of your agenda files. The pickers use <code>vim.ui.select</code>, so they get
+your picker: snacks.nvim here, or Telescope / fzf-lua once they're set up
+as the <code>vim.ui.select</code> provider. The <a href="#pickers"><code>pick_*</code> actions</a> talk to
+those pickers directly, with a preview of each heading.</p>
+<h3 id="timers">Timers</h3>
+<p><code>&lt;C-c&gt;&lt;C-x&gt;0</code> starts a relative timer, and <code>&lt;C-c&gt;&lt;C-x&gt;-</code> adds a list item
+with the elapsed time, handy for meeting notes. <code>&lt;C-c&gt;&lt;C-x&gt;,</code> pauses and
+resumes it, and <code>&lt;C-c&gt;&lt;C-x&gt;_</code> stops it. The running time is part of the
+statusline component.</p>
+<p><code>&lt;C-c&gt;&lt;C-x&gt;;</code> starts a countdown for the current entry and notifies you
+when it runs out:</p>
+<h3 id="appointment-reminders">Appointment reminders</h3>
+<p>With <code>notifications.enabled</code> (or <code>:Org notifications_start</code>), org.nvim
+checks your agenda for timed entries and reminds you before they start,
+by default 12, 9, 6, 3 and 0 minutes before, through <code>vim.notify</code> and the
+system notifier (<code>osascript</code>, <code>notify-send</code>, or PowerShell on Windows).</p>
+<h3 id="footnotes">脚注</h3>
+<p><code>&lt;leader&gt;oif</code> (<code>C-c C-x f</code>) inserts a footnote reference and its
+definition, in a Footnotes section or inline. <code>&lt;C-c&gt;&lt;C-c&gt;</code> jumps between a
+reference and its definition. A count sorts, renumbers or normalizes them.</p>
+<h3 id="checking-a-file-with-org-lint">Checking a file with org-lint</h3>
+<p><code>:Org lint</code> runs the org-lint checks, such as misplaced planning lines,
+broken property drawers, links to missing IDs or files and src blocks
+without a language, and lists the problems in the location list.</p>
+<h3 id="speed-keys">Speed keys</h3>
+<p>With <code>use_speed_commands = true</code>, single letters typed at the very start
+of a heading in Insert mode run commands, like Emacs's speed keys: <code>n</code> /
+<code>p</code> to move, <code>t</code> for the TODO state, <code>U</code> / <code>D</code> to move the subtree, <code>c</code> to
+cycle, and <code>?</code> for the full list.</p>
+<h3 id="links">Links</h3>
+<p><code>&lt;leader&gt;ols</code> stores a link to the current heading (or file, line or ID),
+and <code>&lt;leader&gt;oli</code> inserts it with completion. Links show only their
+description. <code>&lt;CR&gt;</code> follows them, and <code>&lt;leader&gt;olt</code> shows the raw text.</p>
+<h3 id="sparse-trees">稀疏树</h3>
+<p><code>&lt;leader&gt;o/</code> folds the file down to what matters: TODO entries, a regexp,
+a tag or property match, or deadlines. The matches are highlighted, and
+<code>&lt;C-c&gt;&lt;C-c&gt;</code> clears the highlights.</p>
+<h3 id="export">导出</h3>
+<p><code>&lt;leader&gt;oe</code> opens the export dispatcher. The HTML, LaTeX, Beamer, KOMA
+letter, man page, Markdown, ASCII, Org, iCalendar, ODT and Texinfo
+back-ends are ports of Emacs's, there's a GitHub-flavoured Markdown
+back-end, Hugo blog posts with the <code>hugo</code> extension (a port of ox-hugo),
+and pandoc handles DOCX, EPUB and more. You can export to a buffer to check
+the result. <code>:Org preview</code> shows a live HTML preview in the browser that
+reloads on every save, served from Neovim itself:</p>
+<h3 id="every-key-one-press-away">Every key, one press away</h3>
+<p>Lost? Press <code>g?</code> in any org or agenda buffer to list every keymap
+available there, grouped by topic (visibility, structure, dates, clock,
+tables, Babel…), with each command's Vim and Emacs keys on one row. <code>/</code>
+searches it, and <code>{</code> / <code>}</code> jump between sections:</p>
+<hr>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Neovim <strong>0.11+</strong> on Linux, macOS or Windows. Nothing else is required
+(Windows notes: <a href="manual/org-installation.html#org-windows"><code>:h org-windows</code></a>).</li>
+<li>Optional:
+<ul>
+<li><code>pandoc</code> for DOCX, EPUB and the other formats without a native
+back-end (HTML, LaTeX, ODT, Texinfo and the rest are built in).</li>
+<li><code>latexmk</code>, <code>pdflatex</code>, <code>xelatex</code> or <code>lualatex</code> for PDF, and
+<code>makeinfo</code> for Info.</li>
+<li>The language interpreters you want Babel to run.</li>
+<li>For image and LaTeX previews: Neovim 0.13+ in kitty, Ghostty or
+WezTerm (or snacks.nvim / image.nvim), ImageMagick for non-PNG images,
+and <code>latex</code> + <code>dvipng</code> or <code>tectonic</code> for LaTeX.</li>
+</ul></li>
+</ul>
+<hr>
+<h2 id="installation">安装</h2>
+<h3 id="lazyvim--lazynvim-with-blinkcmp-completion">LazyVim / lazy.nvim, with blink.cmp completion</h3>
+<pre class="code"><code class="language-lua"><span class="h-c">-- ~/.config/nvim/lua/plugins/org.lua</span>
+<span class="h-k">return</span> {
+  {
+    <span class="h-s">&quot;xheisenbugx/org.nvim&quot;</span>,
+    <span class="h-m">main</span> <span class="h-o">=</span> <span class="h-s">&quot;org&quot;</span>,
+    <span class="h-m">lazy</span> <span class="h-o">=</span> <span class="h-n">false</span>,
+    <span class="h-m">opts</span> <span class="h-o">=</span> {
+      <span class="h-m">org_directory</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org&quot;</span>,
+      <span class="h-m">agenda_files</span> <span class="h-o">=</span> { <span class="h-s">&quot;~/org/**/*.org&quot;</span> },
+      <span class="h-m">default_notes_file</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/refile.org&quot;</span>,
+    },
+  },
+  <span class="h-c">-- completion in blink.cmp (LazyVim default)</span>
+  {
+    <span class="h-s">&quot;saghen/blink.cmp&quot;</span>,
+    <span class="h-m">optional</span> <span class="h-o">=</span> <span class="h-n">true</span>,
+    <span class="h-m">opts</span> <span class="h-o">=</span> {
+      <span class="h-m">sources</span> <span class="h-o">=</span> {
+        <span class="h-m">per_filetype</span> <span class="h-o">=</span> { <span class="h-m">org</span> <span class="h-o">=</span> { <span class="h-m">inherit_defaults</span> <span class="h-o">=</span> <span class="h-n">true</span>, <span class="h-s">&quot;org&quot;</span> } },
+        <span class="h-m">providers</span> <span class="h-o">=</span> { <span class="h-m">org</span> <span class="h-o">=</span> { <span class="h-m">name</span> <span class="h-o">=</span> <span class="h-s">&quot;Org&quot;</span>, <span class="h-m">module</span> <span class="h-o">=</span> <span class="h-s">&quot;org.completion.blink&quot;</span> } },
+      },
+    },
+  },
+}</code></pre>
+<h3 id="without-lazynvim">Without lazy.nvim</h3>
+<p>org.nvim is pure Lua with no build step and no dependencies, so any plugin
+manager works: point it at <code>xheisenbugx/org.nvim</code> and call <code>setup()</code>.</p>
+<p><strong>Neovim 0.12+ built-in manager (<code>vim.pack</code>)</strong>, in <code>init.lua</code>:</p>
+<pre class="code"><code class="language-lua">vim.<span class="h-m">pack</span>.<span class="h-f">add</span>({ <span class="h-s">&quot;https://github.com/xheisenbugx/org.nvim&quot;</span> })
+<span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({
+  <span class="h-m">org_directory</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org&quot;</span>,
+  <span class="h-m">agenda_files</span> <span class="h-o">=</span> { <span class="h-s">&quot;~/org/**/*.org&quot;</span> },
+  <span class="h-m">default_notes_file</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/refile.org&quot;</span>,
+})</code></pre>
+<p><code>:lua vim.pack.update()</code> updates it later.</p>
+<p><strong><a href="https://github.com/lumen-oss/rocks.nvim">rocks.nvim</a> (LuaRocks)</strong>:
+each release is published to <a href="https://luarocks.org/modules/xheisenbugx/org.nvim">luarocks.org</a>
+as <code>org.nvim</code>:</p>
+<pre class="code"><code class="language-vim">:<span class="h-f">Rocks</span> install org.nvim</code></pre>
+<p>Then call <code>require(&quot;org&quot;).setup({ … })</code> as above. <code>:Rocks update</code> takes
+the next release. The <code>org</code> and <code>org-merge</code> command line scripts (<code>bin/</code>)
+aren't in the rock; use a git checkout for those.</p>
+<p><strong>No plugin manager (Vim packages)</strong>: put the repository in a <code>start</code>
+package directory, which Neovim loads at startup:</p>
+<pre class="code"><code class="language-sh"><span class="h-c"># Linux / macOS</span>
+<span class="h-f">git</span> clone https://github.com/xheisenbugx/org.nvim \
+  ~/.local/share/nvim/site/pack/plugins/start/org.nvim</code></pre>
+<pre class="code"><code class="language-powershell"># Windows
+git clone https://github.com/xheisenbugx/org.nvim `
+  &quot;$env:LOCALAPPDATA\nvim-data\site\pack\plugins\start\org.nvim&quot;</code></pre>
+<p>The directory is <code>stdpath(&quot;data&quot;)/site/pack/*/start/</code>
+(<code>:echo stdpath(&quot;data&quot;)</code> prints the first part). Then call
+<code>require(&quot;org&quot;).setup({ … })</code> as above and run <code>:helptags ALL</code> once so
+<a href="manual/index.html#org"><code>:h org</code></a> works. Update with <code>git pull</code> in that directory.</p>
+<ul>
+<li><strong><code>start</code> or <code>opt</code>?</strong> Packages in <code>pack/*/opt/</code> are only loaded by
+<code>:packadd</code>. If you put org.nvim there, call <code>vim.cmd.packadd(&quot;org.nvim&quot;)</code>
+before <code>require(&quot;org&quot;)</code>, or <code>require</code> fails with &quot;module 'org' not found&quot;.</li>
+<li><strong>From a zip download:</strong> GitHub archives unpack into an extra folder
+(<code>org.nvim-main/org.nvim-main/…</code>). The <code>lua/</code>, <code>plugin/</code> and <code>doc/</code>
+folders must sit directly inside <code>…/start/org.nvim/</code>.</li>
+<li><strong>Check it:</strong> <code>:checkhealth org</code> runs once the plugin is found.</li>
+</ul>
+<p><strong><code>setup()</code> is optional.</strong> Without it, the defaults are used the first time
+you open an org file or run <code>:Org</code>: <code>org_directory</code> is <code>~/org</code>, the agenda
+sees only the current file, and capture writes to <code>~/.notes</code>. Call
+<code>setup()</code> to point the agenda and capture at your own files.</p>
+<h3 id="local-development-checkout">Local development checkout</h3>
+<p>Point lazy.nvim at the directory instead of a GitHub repo:</p>
+<pre class="code"><code class="language-lua">{
+  <span class="h-m">dir</span> <span class="h-o">=</span> <span class="h-s">&quot;~/path/to/org.nvim&quot;</span>,
+  <span class="h-m">name</span> <span class="h-o">=</span> <span class="h-s">&quot;org.nvim&quot;</span>,
+  <span class="h-m">main</span> <span class="h-o">=</span> <span class="h-s">&quot;org&quot;</span>,
+  <span class="h-m">lazy</span> <span class="h-o">=</span> <span class="h-n">false</span>,
+  <span class="h-m">opts</span> <span class="h-o">=</span> { <span class="h-c">--[[ … ]]</span> },
+}</code></pre>
+<p>Restart Neovim (or run <code>:Lazy reload org.nvim</code>) and check the result with
+<code>:checkhealth org</code>.</p>
+<div class="alert alert-tip"><p class="alert-title">Tip</p><p><strong>Keymap prefix.</strong> All org commands live under <code>&lt;leader&gt;o</code> by default. If
+another plugin already uses it (obsidian.nvim, overseer), set
+<code>mappings = { prefix = &quot;&lt;leader&gt;O&quot; }</code> or any other prefix.</p></div>
+<hr>
+<h2 id="keymaps">Keymaps</h2>
+<p><code>&lt;prefix&gt;</code> is <code>mappings.prefix</code> (default <code>&lt;leader&gt;o</code>). Every mapping can be
+changed or disabled (<code>false</code>) under <code>mappings.&lt;section&gt;.&lt;action&gt;</code>. Keys
+marked <em>(ctx)</em> depend on what's under the cursor. When they don't apply,
+they fall back to the normal Vim behaviour (<code>&gt;&gt;</code> still indents plain text,
+<code>&lt;C-a&gt;</code> still increments numbers).</p>
+<h3 id="emacs-keys">Emacs keys</h3>
+<p>Coming from Emacs? The standard Org keys work out of the box, on top of
+the Vim-style ones: <code>C-c C-t</code>, <code>C-RET</code> / <code>C-S-RET</code>, <code>C-c C-s</code> / <code>C-c C-d</code>,
+<code>C-c .</code>, <code>C-c C-q</code>, <code>C-c C-w</code>, <code>C-c C-x C-i</code> / <code>C-c C-x C-o</code>, <code>C-c C-l</code>,
+<code>C-c C-e</code>, <code>C-c '</code>, <code>C-c C-v e</code>, <code>C-c =</code>, <code>C-c -</code>, <code>C-c ^</code> and about 150 more.
+Context-sensitive keys behave as in Emacs (<code>C-c -</code> adds an hline in a table,
+cycles a bullet on an item and toggles an item elsewhere). Use a count in
+place of <code>C-u</code>: <code>4&lt;C-c&gt;.</code> inserts a timestamp with the time.</p>
+<p>The full list is in <a href="manual/org-keymaps.html#org-emacs-keys"><code>:h org-emacs-keys</code></a>. Turn them off with
+<code>mappings = { emacs = false, emacs_insert = false, emacs_global = false }</code>.</p>
+<h3 id="global">Global</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td><code>&lt;prefix&gt;a</code></td><td>Agenda dispatcher</td></tr>
+<tr><td><code>&lt;prefix&gt;c</code></td><td>捕捉</td></tr>
+<tr><td><code>&lt;prefix&gt;g</code></td><td>Go to any heading in the agenda files</td></tr>
+<tr><td><code>&lt;prefix&gt;ls</code></td><td>Store a link to the current location</td></tr>
+<tr><td><code>&lt;prefix&gt;xj</code> / <code>xo</code> / <code>xq</code></td><td>Go to clocked task / clock out / cancel clock</td></tr>
+</tbody></table></div>
+<details>
+<summary><b>Org buffers</b> (click to expand)</summary>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td><code>&lt;Tab&gt;</code> / <code>&lt;S-Tab&gt;</code></td><td>Cycle subtree / global visibility <em>(ctx: in insert mode, next table field or cycle the level of a new empty heading/item)</em></td></tr>
+<tr><td><code>&lt;C-c&gt;&lt;C-c&gt;</code>, <code>&lt;prefix&gt;&lt;CR&gt;</code></td><td>Context action: toggle checkbox, align/recalc table, run src block, update dblock/clock line/cookie, set tags on headline, property menu on a property line, clear sparse-tree highlights…</td></tr>
+<tr><td><code>&lt;CR&gt;</code>, <code>gx</code>, <code>&lt;prefix&gt;o</code></td><td>Open link / footnote / date at point <em>(ctx)</em></td></tr>
+<tr><td><code>&lt;M-CR&gt;</code> / <code>&lt;M-S-CR&gt;</code></td><td>New heading, item or row / new TODO heading or checkbox item</td></tr>
+<tr><td><code>&lt;prefix&gt;ih</code> <code>it</code> <code>is</code></td><td>Insert heading / TODO heading / subheading</td></tr>
+<tr><td><code>&lt;prefix&gt;id</code> <code>ib</code> <code>if</code> <code>i@</code></td><td>Insert drawer / block template / footnote (on a footnote: jump; count: sort/renumber/normalize/delete menu) / citation</td></tr>
+<tr><td><code>&lt;&lt;</code> <code>&gt;&gt;</code> / <code>&lt;s</code> <code>&gt;s</code></td><td>Promote/demote heading or item / subtree <em>(ctx)</em></td></tr>
+<tr><td><code>&lt;M-h&gt;</code> <code>&lt;M-l&gt;</code> (also <code>&lt;M-Left&gt;</code> <code>&lt;M-Right&gt;</code>)</td><td>Promote / demote heading or item (Visual: every headline); move table column <em>(ctx)</em></td></tr>
+<tr><td><code>&lt;M-k&gt;</code> <code>&lt;M-j&gt;</code> (also <code>&lt;M-Up&gt;</code> <code>&lt;M-Down&gt;</code>)</td><td>Move subtree, item or table row up / down <em>(ctx)</em></td></tr>
+<tr><td><code>&lt;M-H&gt;</code> <code>&lt;M-L&gt;</code> <code>&lt;M-K&gt;</code> <code>&lt;M-J&gt;</code></td><td>Subtree promote/demote; table delete/insert column, delete/insert row; on a CLOCK timestamp move it and the touching clock; elsewhere drag the line up/down <em>(ctx)</em></td></tr>
+<tr><td><code>&lt;prefix&gt;K</code> / <code>&lt;prefix&gt;J</code></td><td>Move subtree up / down</td></tr>
+<tr><td><code>&lt;prefix&gt;hy</code> <code>hd</code> <code>hp</code> <code>hc</code></td><td>Copy / cut / paste / clone subtree</td></tr>
+<tr><td><code>&lt;prefix&gt;hs</code> <code>hn</code> <code>hC</code> <code>hA</code> <code>hb</code></td><td>Sort / narrow / toggle COMMENT / toggle ARCHIVE tag / cycle bullet</td></tr>
+<tr><td><code>&lt;prefix&gt;*</code> / <code>&lt;prefix&gt;-</code></td><td>Toggle heading / list item</td></tr>
+<tr><td><code>cit</code> / <code>ciT</code> / <code>&lt;prefix&gt;S</code></td><td>Next / previous / select TODO state</td></tr>
+<tr><td><code>&lt;S-Right&gt;</code> <code>&lt;S-Left&gt;</code></td><td>Next/previous TODO; date ±1 day; next/previous allowed property value; cycle bullet <em>(ctx)</em></td></tr>
+<tr><td><code>&lt;S-Up&gt;</code> <code>&lt;S-Down&gt;</code></td><td>Priority or timestamp part up/down; previous/next list item; move table field <em>(ctx)</em></td></tr>
+<tr><td><code>&lt;C-a&gt;</code> <code>&lt;C-x&gt;</code></td><td>Timestamp part or priority cookie up/down; numbers elsewhere <em>(ctx)</em></td></tr>
+<tr><td><code>&lt;prefix&gt;,</code> <code>t</code> <code>p</code> <code>P</code></td><td>Priority / tags (Visual: add/remove a tag on each headline; count: realign all) / set property / delete property</td></tr>
+<tr><td><code>&lt;prefix&gt;s</code> <code>d</code> <code>i.</code> <code>i!</code></td><td>Schedule / deadline / active / inactive timestamp</td></tr>
+<tr><td><code>&lt;C-Space&gt;</code>, <code>&lt;prefix&gt;#</code></td><td>Toggle checkbox (Visual: every item; count 4: add/remove the box, 16: <code>[-]</code>) / update statistics cookies</td></tr>
+<tr><td><code>&lt;prefix&gt;xi</code> <code>xo</code> <code>xq</code> <code>xj</code></td><td>Clock in (count: pick from history) / out / cancel / goto</td></tr>
+<tr><td><code>&lt;prefix&gt;xe</code> <code>xE</code> <code>xm</code> <code>xz</code></td><td>Set effort / next allowed effort / change clocked effort / resolve open clocks</td></tr>
+<tr><td><code>&lt;prefix&gt;xr</code> <code>xd</code> <code>xu</code> <code>xU</code> <code>C</code></td><td>Insert clocktable / show clock sums / update dblock(s) / column view</td></tr>
+<tr><td><code>&lt;prefix&gt;li</code> <code>ls</code> <code>lt</code> <code>ln</code> <code>lp</code> <code>lI</code></td><td>Insert / store link, toggle link display, next/prev link, create ID</td></tr>
+<tr><td><code>&lt;prefix&gt;lL</code> <code>lA</code> <code>lg</code> <code>ly</code></td><td>Insert last / all stored links, go to ID, copy ID</td></tr>
+<tr><td><code>&lt;prefix&gt;r</code> <code>R</code> <code>$</code> <code>A</code></td><td>Refile / copy to a refile target / archive subtree / attachments</td></tr>
+<tr><td><code>&lt;prefix&gt;/</code> <code>e</code></td><td>Sparse tree / export dispatcher</td></tr>
+<tr><td><code>&lt;prefix&gt;E</code> <code>v</code> <code>nb</code> <code>ne</code></td><td>Emphasize / mark element / narrow to block / narrow to element</td></tr>
+<tr><td><code>&lt;prefix&gt;xv</code> <code>xV</code> <code>xl</code></td><td>Toggle image previews / refresh them / toggle LaTeX previews</td></tr>
+<tr><td><code>&lt;prefix&gt;Tc</code> <code>T-</code> <code>Tf</code> <code>Ts</code> <code>Tr</code> <code>TR</code> <code>Ti</code> <code>TI</code></td><td>Table: create/convert, hline, recalc, sort, insert/delete row, insert/delete column</td></tr>
+<tr><td><code>&lt;prefix&gt;Tt</code> <code>T#</code>, <code>&lt;S-CR&gt;</code>, <code>&lt;S-arrows&gt;</code></td><td>Table: transpose, rotate recalc mark, copy field down (with increment), swap field with neighbour</td></tr>
+<tr><td><code>&lt;prefix&gt;'</code></td><td>Edit src block or table formulas in a separate buffer</td></tr>
+<tr><td><code>&lt;prefix&gt;be</code> <code>bb</code> <code>bs</code> <code>bt</code> <code>bk</code> <code>bn</code> <code>bp</code></td><td>Babel: execute block/buffer/subtree, tangle, remove result, next/prev block</td></tr>
+<tr><td><code>&lt;prefix&gt;bv</code> <code>bd</code> <code>bg</code> <code>br</code> <code>bo</code> <code>bj</code> <code>bi</code></td><td>Babel: expand, split/wrap, go to named block/result, open result, insert header arg, ingest library</td></tr>
+<tr><td><code>&lt;prefix&gt;bz</code> <code>bZ</code> <code>bl</code> <code>bK</code></td><td>Babel sessions: show session, show session + edit block, load block into session, kill session</td></tr>
+<tr><td><code>&lt;prefix&gt;bC</code></td><td>Babel: cancel the running block</td></tr>
+<tr><td><code>]]</code> <code>[[</code> <code>][</code> <code>[]</code> <code>g{</code> <code>&lt;prefix&gt;.</code></td><td>Next/prev heading, next/prev sibling, parent, pick heading</td></tr>
+<tr><td><code>ih</code> <code>ah</code> <code>ir</code> <code>ar</code> <code>ie</code> <code>ae</code> <code>i-</code> <code>a-</code></td><td>Text objects: heading section / subtree / element (block, drawer, ...) / list item; a count picks an ancestor (<code>d2ar</code>)</td></tr>
+<tr><td><code>ic</code> <code>ac</code> <code>iR</code> <code>aR</code> <code>iC</code> <code>aC</code> <code>iL</code> <code>aL</code> <code>id</code> <code>ad</code></td><td>Text objects: table cell / row / column / link / timestamp (<code>dac</code>, <code>yiC</code>, <code>ciL</code>)</td></tr>
+<tr><td><code>g?</code></td><td>Show all keymaps</td></tr>
+</tbody></table></div>
+</details>
+<details>
+<summary><b>Agenda buffer</b> (click to expand)</summary>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>Action</th><th>Key</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td><code>f</code> / <code>b</code> / <code>.</code></td><td>later / earlier / today</td><td><code>vd</code> <code>vw</code> <code>vt</code> <code>vm</code> <code>vy</code></td><td>day / week / fortnight / month / year</td></tr>
+<tr><td><code>gd</code></td><td>go to date</td><td><code>r</code></td><td>redo</td></tr>
+<tr><td><code>&lt;CR&gt;</code> / <code>&lt;Tab&gt;</code> / <code>&lt;Space&gt;</code> / <code>L</code></td><td>switch to / go to / show / show and recenter</td><td><code>F</code></td><td>follow mode</td></tr>
+<tr><td><code>t</code>, <code>&lt;C-S-Right/Left&gt;</code></td><td>change TODO</td><td><code>,</code> <code>+</code> <code>-</code></td><td>set/raise/lower priority</td></tr>
+<tr><td><code>:</code> / <code>T</code></td><td>set / show tags</td><td><code>s</code> / <code>d</code></td><td>schedule / deadline</td></tr>
+<tr><td><code>&lt;S-Right&gt;</code> / <code>&lt;S-Left&gt;</code> / <code>&gt;</code></td><td>date +1 / −1 / prompt</td><td><code>e</code> / <code>&lt;C-c&gt;&lt;C-x&gt;p</code></td><td>effort / property</td></tr>
+<tr><td><code>I</code> <code>O</code> <code>X</code> <code>J</code></td><td>clock in / out / cancel / goto</td><td><code>R</code> / <code>$</code> / <code>a</code></td><td>refile / archive / archive with confirmation</td></tr>
+<tr><td><code>&lt;C-c&gt;&lt;C-x&gt;A</code> / <code>&lt;C-c&gt;&lt;C-x&gt;a</code></td><td>archive sibling / ARCHIVE tag</td><td><code>&lt;C-k&gt;</code> / <code>&lt;C-c&gt;&lt;C-o&gt;</code></td><td>delete entry / open link</td></tr>
+<tr><td><code>z</code></td><td>add note</td><td><code>K</code> / <code>c</code></td><td>capture (at the date at point) / jump to a date from the calendar</td></tr>
+<tr><td><code>l</code> <code>vL</code> / <code>C</code></td><td>log mode (all) / clock report</td><td><code>E</code> / <code>vG</code></td><td>entry text / time grid</td></tr>
+<tr><td><code>va</code> / <code>vA</code> / <code>v[</code></td><td>archived trees / archive files / inactive timestamps</td><td><code>/</code> <code>\</code> <code>&lt;</code> <code>=</code> <code>_</code> <code>^</code> <code>|</code></td><td>filter / filter tag / category / regexp / effort / top headline / clear</td></tr>
+<tr><td><code>[</code> <code>]</code> <code>{</code> <code>}</code></td><td>add +word / -word / +{re} / -{re} to the query</td><td><code>n</code> / <code>p</code>, <code>&lt;C-c&gt;&lt;C-n/p&gt;</code></td><td>next / previous item, date line</td></tr>
+<tr><td><code>m</code> <code>u</code> <code>U</code> <code>B</code></td><td>mark / unmark / unmark all / bulk action</td><td><code>&lt;M-m&gt;</code> <code>*</code> <code>&lt;M-*&gt;</code> <code>%</code></td><td>toggle / mark all / toggle all / mark regexp</td></tr>
+<tr><td><code>&lt;C-x&gt;&lt;C-s&gt;</code> / <code>&lt;C-x&gt;&lt;C-w&gt;</code></td><td>save org buffers / export agenda</td><td><code>q</code> / <code>Q</code> / <code>x</code></td><td>quit / quit and wipe / exit (also closes files the agenda opened)</td></tr>
+</tbody></table></div>
+<p>More agenda keys (habits, diary, follow mode, clock check, block
+navigation…): <code>g?</code> in the agenda or <a href="manual/org-agenda.html#org-agenda-keys"><code>:h org-agenda-keys</code></a>.</p>
+</details>
+<details>
+<summary><b>Capture and edit buffers</b> (click to expand)</summary>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>捕捉</th><th>Edit src (<code>C-c '</code>)</th></tr></thead>
+<tbody>
+<tr><td><code>&lt;C-c&gt;&lt;C-c&gt;</code>, <code>&lt;prefix&gt;w</code>, <code>:w</code></td><td>finalize</td><td>— (<code>&lt;C-c&gt;&lt;C-c&gt;</code>, <code>&lt;prefix&gt;e</code>: send to the block's <code>:session</code>)</td></tr>
+<tr><td><code>&lt;C-c&gt;'</code>, <code>&lt;prefix&gt;'</code></td><td>—</td><td>save and exit (<code>:w</code> writes back)</td></tr>
+<tr><td><code>&lt;C-c&gt;&lt;C-k&gt;</code>, <code>&lt;prefix&gt;k</code></td><td>abort</td><td>abort</td></tr>
+<tr><td><code>&lt;C-c&gt;&lt;C-w&gt;</code>, <code>&lt;prefix&gt;r</code></td><td>refile</td><td>—</td></tr>
+</tbody></table></div>
+</details>
+<hr>
+<h2 id="configuration">Configuration</h2>
+<p>Every option with its default is in <a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/lua/org/config"><code>lua/org/config/</code></a>
+and documented in <a href="manual/org-config.html"><code>:h org-config</code></a>. The most common ones:</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({
+  <span class="h-m">org_directory</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org&quot;</span>,
+  <span class="h-m">agenda_files</span> <span class="h-o">=</span> { <span class="h-s">&quot;~/org/**/*.org&quot;</span>, <span class="h-s">&quot;~/work/notes.org&quot;</span> },
+  <span class="h-m">default_notes_file</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/refile.org&quot;</span>,
+
+  <span class="h-m">todo_keywords</span> <span class="h-o">=</span> { <span class="h-s">&quot;TODO(t) NEXT(n) WAITING(w@/!) | DONE(d!) CANCELLED(c@)&quot;</span> },
+  <span class="h-m">log_done</span> <span class="h-o">=</span> <span class="h-s">&quot;time&quot;</span>,          <span class="h-c">-- false | &quot;time&quot; | &quot;note&quot;</span>
+  <span class="h-m">log_into_drawer</span> <span class="h-o">=</span> <span class="h-s">&quot;LOGBOOK&quot;</span>,
+  <span class="h-m">tags</span> <span class="h-o">=</span> { <span class="h-s">&quot;work(w)&quot;</span>, <span class="h-s">&quot;home(h)&quot;</span>, <span class="h-s">&quot;{&quot;</span>, <span class="h-s">&quot;@office(o)&quot;</span>, <span class="h-s">&quot;@remote(r)&quot;</span>, <span class="h-s">&quot;}&quot;</span> },
+  <span class="h-m">tags_column</span> <span class="h-o">=</span> <span class="h-o">-</span><span class="h-n">77</span>,
+  <span class="h-m">startup_folded</span> <span class="h-o">=</span> <span class="h-s">&quot;overview&quot;</span>,
+  <span class="h-m">deadline_warning_days</span> <span class="h-o">=</span> <span class="h-n">14</span>,
+
+  <span class="h-m">agenda</span> <span class="h-o">=</span> { <span class="h-m">span</span> <span class="h-o">=</span> <span class="h-s">&quot;week&quot;</span>, <span class="h-m">start_on_weekday</span> <span class="h-o">=</span> <span class="h-n">1</span>, <span class="h-m">window</span> <span class="h-o">=</span> <span class="h-s">&quot;current&quot;</span> },
+  <span class="h-m">capture</span> <span class="h-o">=</span> { <span class="h-m">templates</span> <span class="h-o">=</span> { <span class="h-c">--[[ see below ]]</span> } },
+  <span class="h-m">refile</span> <span class="h-o">=</span> { <span class="h-m">max_level</span> <span class="h-o">=</span> <span class="h-n">3</span> },
+  <span class="h-m">notifications</span> <span class="h-o">=</span> { <span class="h-m">enabled</span> <span class="h-o">=</span> <span class="h-n">true</span>, <span class="h-m">reminder_time</span> <span class="h-o">=</span> { <span class="h-n">10</span>, <span class="h-n">0</span> } },
+
+  <span class="h-m">ui</span> <span class="h-o">=</span> {
+    <span class="h-m">bullets</span> <span class="h-o">=</span> { <span class="h-s">&quot;◉&quot;</span>, <span class="h-s">&quot;○&quot;</span>, <span class="h-s">&quot;✸&quot;</span>, <span class="h-s">&quot;✿&quot;</span> },      <span class="h-c">-- or false</span>
+    <span class="h-m">checkboxes</span> <span class="h-o">=</span> { <span class="h-s">&quot; &quot;</span>, <span class="h-s">&quot;◐&quot;</span>, <span class="h-s">&quot;✓&quot;</span> },        <span class="h-c">-- or false</span>
+    <span class="h-m">hide_emphasis_markers</span> <span class="h-o">=</span> <span class="h-n">false</span>,
+    <span class="h-m">indent_mode</span> <span class="h-o">=</span> <span class="h-n">false</span>,                   <span class="h-c">-- org-indent-mode</span>
+    <span class="h-m">todo_keyword_faces</span> <span class="h-o">=</span> { <span class="h-m">WAITING</span> <span class="h-o">=</span> <span class="h-s">&quot;:foreground #e0af68 :weight bold&quot;</span> },
+  },
+
+  <span class="h-m">mappings</span> <span class="h-o">=</span> {
+    <span class="h-m">prefix</span> <span class="h-o">=</span> <span class="h-s">&quot;&lt;leader&gt;o&quot;</span>,
+    <span class="h-m">org</span> <span class="h-o">=</span> { <span class="h-m">toggle_checkbox</span> <span class="h-o">=</span> <span class="h-s">&quot;&lt;C-Space&gt;&quot;</span>, <span class="h-m">open_at_point</span> <span class="h-o">=</span> { <span class="h-s">&quot;&lt;CR&gt;&quot;</span>, <span class="h-s">&quot;gx&quot;</span> } },
+    <span class="h-m">agenda</span> <span class="h-o">=</span> { <span class="h-m">goto_date</span> <span class="h-o">=</span> <span class="h-s">&quot;gd&quot;</span> },
+  },
+})</code></pre>
+<hr>
+<h2 id="capture-templates">Capture templates</h2>
+<pre class="code"><code class="language-lua">capture <span class="h-o">=</span> {
+  <span class="h-m">templates</span> <span class="h-o">=</span> {
+    <span class="h-m">t</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Task&quot;</span>, <span class="h-m">template</span> <span class="h-o">=</span> <span class="h-s">&quot;* TODO %?\n  %U\n  %a&quot;</span>, <span class="h-m">target</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/refile.org&quot;</span> },
+    <span class="h-m">w</span> <span class="h-o">=</span> <span class="h-s">&quot;Work&quot;</span>,                                          <span class="h-c">-- a group: w → wt, wm</span>
+    <span class="h-m">wt</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Work task&quot;</span>, <span class="h-m">template</span> <span class="h-o">=</span> <span class="h-s">&quot;* TODO %? :work:&quot;</span>, <span class="h-m">target</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/work.org&quot;</span>, <span class="h-m">headline</span> <span class="h-o">=</span> <span class="h-s">&quot;Inbox&quot;</span> },
+    <span class="h-m">wm</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Meeting&quot;</span>, <span class="h-m">template</span> <span class="h-o">=</span> <span class="h-s">&quot;* %^{Who} %^g\n  %T\n  %?&quot;</span>, <span class="h-m">target</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/work.org&quot;</span>, <span class="h-m">olp</span> <span class="h-o">=</span> { <span class="h-s">&quot;Meetings&quot;</span> }, <span class="h-m">clock_in</span> <span class="h-o">=</span> <span class="h-n">true</span> },
+    <span class="h-m">j</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Journal&quot;</span>, <span class="h-m">template</span> <span class="h-o">=</span> <span class="h-s">&quot;* %&lt;%H:%M&gt; %?&quot;</span>, <span class="h-m">target</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/journal.org&quot;</span>, <span class="h-m">datetree</span> <span class="h-o">=</span> <span class="h-n">true</span> },
+    <span class="h-m">c</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Checklist item&quot;</span>, <span class="h-m">type</span> <span class="h-o">=</span> <span class="h-s">&quot;checkitem&quot;</span>, <span class="h-m">template</span> <span class="h-o">=</span> <span class="h-s">&quot;[ ] %?&quot;</span>, <span class="h-m">target</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/todo.org&quot;</span>, <span class="h-m">headline</span> <span class="h-o">=</span> <span class="h-s">&quot;Shopping&quot;</span> },
+    <span class="h-m">l</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Log line&quot;</span>, <span class="h-m">type</span> <span class="h-o">=</span> <span class="h-s">&quot;table-line&quot;</span>, <span class="h-m">template</span> <span class="h-o">=</span> <span class="h-s">&quot;| %U | %^{Amount} | %^{What} |&quot;</span>, <span class="h-m">target</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/log.org&quot;</span>, <span class="h-m">headline</span> <span class="h-o">=</span> <span class="h-s">&quot;Expenses&quot;</span>, <span class="h-m">immediate_finish</span> <span class="h-o">=</span> <span class="h-n">true</span> },
+  },
+  <span class="h-m">window</span> <span class="h-o">=</span> <span class="h-s">&quot;split&quot;</span>,  <span class="h-c">-- &quot;split&quot; (like Emacs) | &quot;float&quot; | &quot;vsplit&quot; | &quot;tab&quot; | &quot;current&quot;</span>
+}</code></pre>
+<p>Target options:</p>
+<ul>
+<li><code>target</code>: the file to capture into (<code>&quot;&quot;</code> or none: <code>default_notes_file</code>).</li>
+<li><code>headline</code>: a headline in the target, created if it doesn't exist.</li>
+<li><code>olp</code>: an outline path, as a list of headlines (they must exist).</li>
+<li><code>datetree</code>: <code>true</code>, or <code>{ tree_type = &quot;week&quot; | &quot;month&quot; | { &quot;year&quot;, &quot;quarter&quot;, ... } }</code>.</li>
+<li><code>regexp</code>: a Vim regexp; the text goes where the first match ends.</li>
+<li><code>func</code> / <code>location</code>: functions choosing the position (file+function /
+function targets).</li>
+<li><code>id</code>: insert under the entry with this ID.</li>
+<li><code>target = &quot;clock&quot;</code>: insert under the task being clocked.</li>
+</ul>
+<p>Without any template, Emacs's &quot;t&quot; Task template is used (a TODO under
+&quot;Tasks&quot; in <code>default_notes_file</code>). <code>capture.templates_contexts</code> limits
+templates to some buffers (org-capture-templates-contexts).</p>
+<p>Other options: <code>type</code>, <code>prepend</code>, <code>empty_lines</code>, <code>table_line_pos</code>,
+<code>properties</code>, <code>immediate_finish</code>, <code>jump_to_captured</code>, <code>kill_buffer</code>,
+<code>refile_targets</code>, <code>clock_in</code>, <code>clock_keep</code>, <code>clock_resume</code>,
+<code>time_prompt</code>, <code>no_save</code>, and the <code>prepare_finalize</code>, <code>before_finalize</code>
+and <code>after_finalize</code> hook functions.</p>
+<details>
+<summary><b>Template expansions</b> (click to expand)</summary>
+<div class="table-wrap"><table>
+<thead><tr><th>Escape</th><th>Inserts</th></tr></thead>
+<tbody>
+<tr><td><code>%?</code></td><td>cursor position</td></tr>
+<tr><td><code>%t</code> <code>%T</code> <code>%u</code> <code>%U</code></td><td>date / date+time, active / inactive</td></tr>
+<tr><td><code>%^t</code> <code>%^T</code> <code>%^u</code> <code>%^U</code></td><td>same, but prompts with the calendar</td></tr>
+<tr><td><code>%&lt;%Y-%m-%d&gt;</code></td><td>strftime format</td></tr>
+<tr><td><code>%a</code> <code>%A</code> <code>%l</code> <code>%L</code></td><td>annotation link: plain / with description prompt / without description / bare target</td></tr>
+<tr><td><code>%i</code></td><td>initial content (the visual selection), the text before it repeated on each line</td></tr>
+<tr><td><code>%x</code> <code>%c</code></td><td>clipboard / last yank</td></tr>
+<tr><td><code>%f</code> <code>%F</code></td><td>origin file name / full path</td></tr>
+<tr><td><code>%n</code></td><td>your full name</td></tr>
+<tr><td><code>%^{prompt|default|opt}</code></td><td>prompt with a default and options</td></tr>
+<tr><td><code>%\1</code> <code>%\*1</code></td><td>the answer to the first <code>%^{...}</code> prompt / to the first prompt of any kind</td></tr>
+<tr><td><code>%^g</code> <code>%^G</code></td><td>tags prompt</td></tr>
+<tr><td><code>%^{PROP}p</code></td><td>property prompt</td></tr>
+<tr><td><code>%k</code> <code>%K</code></td><td>the running clock's task / a link to it</td></tr>
+<tr><td><code>%(expr)</code></td><td>the value of an Emacs Lisp form, as in Emacs (a Lisp subset, else a separate Emacs); a Lua expression also works</td></tr>
+<tr><td><code>%[file]</code></td><td>the contents of a file</td></tr>
+<tr><td><code>\%</code></td><td>a literal <code>%</code> before an escape character (<code>%%</code> is not an escape, as in Emacs)</td></tr>
+</tbody></table></div>
+</details>
+<hr>
+<h2 id="custom-agenda-commands">Custom agenda commands</h2>
+<pre class="code"><code class="language-lua">agenda <span class="h-o">=</span> {
+  <span class="h-m">custom_commands</span> <span class="h-o">=</span> {
+    <span class="h-m">w</span> <span class="h-o">=</span> {
+      <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Work overview&quot;</span>,
+      <span class="h-m">types</span> <span class="h-o">=</span> {
+        { <span class="h-m">type</span> <span class="h-o">=</span> <span class="h-s">&quot;agenda&quot;</span>, <span class="h-m">span</span> <span class="h-o">=</span> <span class="h-s">&quot;day&quot;</span>, <span class="h-m">header</span> <span class="h-o">=</span> <span class="h-s">&quot;Today&quot;</span> },
+        { <span class="h-m">type</span> <span class="h-o">=</span> <span class="h-s">&quot;tags_todo&quot;</span>, <span class="h-m">match</span> <span class="h-o">=</span> <span class="h-s">&quot;+work-someday/!&quot;</span>, <span class="h-m">header</span> <span class="h-o">=</span> <span class="h-s">&quot;Open work tasks&quot;</span> },
+        { <span class="h-m">type</span> <span class="h-o">=</span> <span class="h-s">&quot;todo&quot;</span>, <span class="h-m">match</span> <span class="h-o">=</span> <span class="h-s">&quot;WAITING&quot;</span>, <span class="h-m">header</span> <span class="h-o">=</span> <span class="h-s">&quot;Waiting for&quot;</span> },
+      },
+    },
+    <span class="h-m">u</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Urgent&quot;</span>, <span class="h-m">type</span> <span class="h-o">=</span> <span class="h-s">&quot;tags&quot;</span>, <span class="h-m">match</span> <span class="h-o">=</span> <span class="h-s">'PRIORITY=&quot;A&quot;|+urgent'</span> },
+  },
+}</code></pre>
+<p>Block types: <code>agenda</code>, <code>todo</code>, <code>tags</code>, <code>tags_todo</code>, <code>search</code>, <code>stuck</code>.
+Per-block options: <code>match</code>, <code>header</code>, <code>span</code>, <code>start_day</code>, <code>files</code>,
+<code>skip = function(headline) … end</code>, and the <code>todo_ignore_*</code> flags.
+Like Emacs' <code>org-agenda-skip-entry-if</code>, <code>require(&quot;org.agenda&quot;).skip_entry_if(&quot;scheduled&quot;, &quot;deadline&quot;)</code>
+and <code>skip_subtree_if(&quot;regexp&quot;, &quot;:someday:&quot;)</code> build <code>skip</code> functions.</p>
+<p>The match syntax is the same as in Emacs. Some examples:</p>
+<ul>
+<li><code>+work-boss</code></li>
+<li><code>work|home</code></li>
+<li><code>LEVEL&gt;1</code></li>
+<li><code>Effort&lt;&quot;1:00&quot;</code></li>
+<li><code>SCHEDULED&lt;=&quot;&lt;+2d&gt;&quot;</code></li>
+<li><code>+proj/NEXT|TODO</code></li>
+<li><code>/!</code> (only entries that aren't done)</li>
+</ul>
+<hr>
+<h2 id="completion">补全</h2>
+<ul>
+<li><strong>blink.cmp:</strong> add the provider shown in <a href="#installation">安装</a>.</li>
+<li><strong>nvim-cmp:</strong>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;cmp&quot;</span>).<span class="h-f">register_source</span>(<span class="h-s">&quot;org&quot;</span>, <span class="h-f">require</span>(<span class="h-s">&quot;org.completion.cmp&quot;</span>).<span class="h-f">new</span>())</code></pre>
+<p>Then add <code>{ name = &quot;org&quot; }</code> to your org sources.</p></li>
+<li><strong>Built in:</strong> <code>&lt;C-x&gt;&lt;C-o&gt;</code> (omnifunc).</li>
+</ul>
+<p>It completes TODO keywords, tags, <code>#+</code> keywords, <code>#+STARTUP</code> and
+<code>#+OPTIONS</code> values, src block languages, property names, link types,
+headings (<code>[[*</code>), custom IDs (<code>[[#</code>) and stored links.</p>
+<hr>
+<h2 id="pickers">Pickers</h2>
+<p>The <code>pick_*</code> actions open a fuzzy picker with a preview, using the first
+one you have installed: <a href="https://github.com/folke/snacks.nvim">snacks.nvim</a>,
+<a href="https://github.com/ibhagwan/fzf-lua">fzf-lua</a>,
+<a href="https://github.com/nvim-telescope/telescope.nvim">telescope.nvim</a> or
+<a href="https://github.com/echasnovski/mini.pick">mini.pick</a>, else <code>vim.ui.select</code>.
+Set <code>picker = &quot;snacks&quot; | &quot;fzf-lua&quot; | &quot;telescope&quot; | &quot;mini&quot; | &quot;select&quot;</code> to
+choose. None of them is required, and none is loaded until a picker opens.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Action</th><th>Picks</th></tr></thead>
+<tbody>
+<tr><td><code>pick_headline</code> / <code>pick_headline_all</code></td><td>a heading of this file / of the agenda files (TODO, priority and tags shown)</td></tr>
+<tr><td><code>pick_tag</code></td><td>a tag, then a heading with it</td></tr>
+<tr><td><code>pick_set_tags</code></td><td>tags to toggle on the heading (multi-select; typing a new one adds it)</td></tr>
+<tr><td><code>pick_agenda</code> / <code>pick_agenda_week</code> / <code>pick_todo</code></td><td>an entry of today's agenda / the next 7 days / the TODO list</td></tr>
+<tr><td><code>pick_agenda_file</code>, <code>pick_capture_template</code></td><td>an agenda file, a capture template</td></tr>
+</tbody></table></div>
+<p>They have no default keys; bind them like any action:</p>
+<pre class="code"><code class="language-lua">mappings <span class="h-o">=</span> { global <span class="h-o">=</span> { <span class="h-m">pick_headline_all</span> <span class="h-o">=</span> <span class="h-s">&quot;&lt;leader&gt;fo&quot;</span>, <span class="h-m">pick_todo</span> <span class="h-o">=</span> <span class="h-s">&quot;&lt;leader&gt;ft&quot;</span> } }</code></pre>
+<p>Telescope users can also <code>require(&quot;telescope&quot;).load_extension(&quot;org&quot;)</code> and
+run <code>:Telescope org headlines</code>. The roam extension's node finder uses the
+same picker. See <a href="manual/org-completion.html#org-pickers"><code>:h org-pickers</code></a>.</p>
+<hr>
+<h2 id="statusline">Statusline</h2>
+<pre class="code"><code class="language-lua"><span class="h-c">-- lualine (LazyVim)</span>
+{
+  <span class="h-s">&quot;nvim-lualine/lualine.nvim&quot;</span>,
+  <span class="h-m">optional</span> <span class="h-o">=</span> <span class="h-n">true</span>,
+  <span class="h-f">opts</span> <span class="h-o">=</span> <span class="h-k">function</span>(_, opts)
+    table.<span class="h-f">insert</span>(opts.<span class="h-m">sections</span>.<span class="h-m">lualine_x</span>, <span class="h-n">1</span>, { <span class="h-k">function</span>() <span class="h-k">return</span> <span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">statusline</span>() <span class="h-k">end</span> })
+  <span class="h-k">end</span>,
+}</code></pre>
+<p>While a clock runs, it shows something like <code>⏱ [0:25/1:00] (Write report)</code>,
+followed by the timer (<code>⏲ 0:12:34</code>) when one runs. It's empty otherwise.</p>
+<hr>
+<h2 id="outline-and-breadcrumb-plugins">Outline and breadcrumb plugins</h2>
+<p>Outline windows, breadcrumbs and symbol pickers usually need tree-sitter or
+a language server. org.nvim gives them its own outline instead: headings
+(with TODO, priority and tags), named src blocks and tables.</p>
+<ul>
+<li><a href="https://github.com/stevearc/aerial.nvim">aerial.nvim</a>: <code>backends = { org = { &quot;org&quot; } }</code></li>
+<li><a href="https://github.com/hedyhli/outline.nvim">outline.nvim</a>: add <code>&quot;org&quot;</code> to <code>providers.priority</code></li>
+<li>nvim-navic, dropbar.nvim, trouble.nvim and the snacks / fzf-lua / Telescope
+LSP symbol pickers: enable the <a href="#-extensions"><code>lsp</code> extension</a>, an
+in-process language server</li>
+<li>your own winbar or statusline: <code>require(&quot;org.api&quot;).symbol_path()</code></li>
+</ul>
+<p>See <a href="manual/org-completion.html#org-integrations"><code>:h org-integrations</code></a>.</p>
+<hr>
+<h2 id="image-and-latex-previews">Image and LaTeX previews</h2>
+<p><code>&lt;leader&gt;oxv</code> (<code>C-c C-x C-v</code>) shows image links as images and
+<code>&lt;leader&gt;oxl</code> (<code>C-c C-x C-l</code>) renders LaTeX fragments (see the
+<a href="index.html#images-and-latex-right-in-your-notes">tour</a>). The two GIFs
+there were recorded in a real kitty window
+(<a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/docs/media/kitty"><code>docs/media/kitty</code></a>); VHS can't show Kitty graphics.</p>
+<p>Previews depend on the Neovim version, the terminal, and what sits
+between them. <code>:checkhealth org</code> shows what it found, and
+<a href="manual/org-appearance.html#org-images-troubleshooting"><code>:h org-images-troubleshooting</code></a> has the details.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Setup</th><th>What draws the images</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Neovim 0.13+ in kitty or Ghostty</td><td><code>vim.ui.img</code> (built in)</td><td>Everything works, including <code>:align</code></td></tr>
+<tr><td>Neovim 0.13+ in WezTerm</td><td><code>vim.ui.img</code></td><td>WezTerm's Kitty graphics support is partial</td></tr>
+<tr><td>Neovim 0.11–0.12</td><td>snacks.nvim or image.nvim</td><td><code>vim.ui.img</code> needs 0.13</td></tr>
+<tr><td>Inside <strong>tmux</strong></td><td>snacks.nvim</td><td>tmux drops <code>vim.ui.img</code>'s images. Add <code>set -g allow-passthrough on</code> and install snacks.nvim, or run Neovim outside tmux</td></tr>
+<tr><td>Inside zellij</td><td>nothing</td><td>zellij doesn't pass images through</td></tr>
+<tr><td>Over SSH</td><td><code>vim.ui.img</code> or snacks.nvim</td><td>Images and LaTeX tools must be on the machine running Neovim</td></tr>
+<tr><td>Terminal.app, iTerm2, Alacritty, Windows Terminal, GNU screen</td><td>image.nvim at best</td><td>No Kitty graphics protocol</td></tr>
+</tbody></table></div>
+<p>With snacks.nvim or image.nvim, <code>:align</code> / <code>org-image-align</code> are ignored,
+and when the link has text around it, snacks.nvim draws the image at the
+start of the next line and puts an icon at the link.</p>
+<hr>
+<h2 id="lua-api">Lua API</h2>
+<p><code>require(&quot;org.api&quot;)</code> is a stable, versioned API for plugins and configs:
+read files and headlines as plain data, query them, change them (TODO
+state, tags, priority, properties, dates, clock, refile, archive, IDs),
+run agenda queries without opening the agenda, capture without a window,
+store and resolve links, read what was clocked and done (<code>api.clocks</code>,
+<code>api.completed</code>), and listen to events such as <code>OrgTodoStateChange</code>,
+<code>OrgTagsChanged</code> or <code>OrgRefile</code>. Changes work whether or not the file is
+open, and never prompt unless you pass <code>interactive = true</code> to run one
+like its key (the note and date prompts).</p>
+<pre class="code"><code class="language-lua"><span class="h-k">local</span> api <span class="h-o">=</span> <span class="h-f">require</span>(<span class="h-s">&quot;org.api&quot;</span>)
+<span class="h-k">for</span> _, h <span class="h-k">in</span> <span class="h-f">ipairs</span>(api.<span class="h-f">headlines</span>({ <span class="h-m">match</span> <span class="h-o">=</span> <span class="h-s">&quot;+work&quot;</span>, <span class="h-m">todo</span> <span class="h-o">=</span> <span class="h-s">&quot;WAITING&quot;</span> })) <span class="h-k">do</span>
+  h:<span class="h-f">set_todo</span>(<span class="h-s">&quot;TODO&quot;</span>)
+  h:<span class="h-f">schedule</span>(<span class="h-s">&quot;+1d&quot;</span>)
+<span class="h-k">end</span>
+api.<span class="h-f">capture</span>({ <span class="h-m">template</span> <span class="h-o">=</span> <span class="h-s">&quot;* TODO %^{Task}&quot;</span>, <span class="h-m">target</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/inbox.org&quot;</span>, <span class="h-m">values</span> <span class="h-o">=</span> { <span class="h-m">Task</span> <span class="h-o">=</span> <span class="h-s">&quot;Call the bank&quot;</span> } })
+api.<span class="h-f">on</span>(<span class="h-s">&quot;OrgClockOut&quot;</span>, <span class="h-k">function</span>(data) <span class="h-f">print</span>(data.<span class="h-m">title</span>, data.<span class="h-m">minutes</span>) <span class="h-k">end</span>)</code></pre>
+<p>See <a href="manual/index.html"><a href="manual/org-api.html"><code>:h org-api</code></a></a> for every function, field and event.</p>
+<hr>
+<h2 id="session-server">Session server</h2>
+<p>Capturing from a shell, a browser bookmarklet or a script used to write
+the org file behind the back of the Neovim you have it open in. Turn the
+session server on and they ask that Neovim instead:</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({ <span class="h-m">remote</span> <span class="h-o">=</span> { <span class="h-m">enabled</span> <span class="h-o">=</span> <span class="h-n">true</span> } })</code></pre>
+<p>The first Neovim listens on a well-known socket. The <code>org</code> command line
+(<code>org capture</code>, <code>org clock in</code>, <code>org set todo</code>, <code>org agenda</code>, ...),
+<code>org protocol URL</code> for org-protocol links and <code>api.remote.call()</code> then
+run in it: a capture lands in the open buffer (one <code>u</code> takes it back),
+<code>org clock in</code> starts that Neovim's clock, and files with unsaved changes
+stay unsaved. With no Neovim running they work on the files as before.
+See <a href="manual/index.html"><a href="manual/org-capture.html#org-remote"><code>:h org-remote</code></a></a>.</p>
+<pre class="code"><code class="language-sh"><span class="h-f">org</span> capture -t t <span class="h-s">&quot;Call the bank&quot;</span>   <span class="h-c"># appears in the inbox buffer you have open</span>
+<span class="h-f">org</span> clock in <span class="h-s">&quot;Write release notes&quot;</span> <span class="h-c"># the clock in your statusline starts</span></code></pre>
+<hr>
+<h2 id="differences-from-emacs-org-mode">Differences from Emacs Org mode</h2>
+<p>The goal is Emacs Org 9.8 parity: option defaults are Emacs's (so a fresh
+setup behaves like a fresh Emacs: no agenda files, <code>TODO | DONE</code>, nothing
+logged on DONE, files open expanded), and behaviour is checked against Emacs
+run in batch mode. What can't work the same way is listed with the reason in
+<a href="manual/org-differences.html"><code>:h org-differences</code></a>.</p>
+<p>The <a href="parity/review.html">Org 9.8 review follow-up</a> records concrete
+regressions, implemented parity work, and remaining feature gaps.
+The main differences:</p>
+<ul>
+<li><strong>Emacs Lisp runs outside the editor.</strong> Capture <code>%(sexp)</code>, <code>(eval ...)</code>
+macros, table <code>'(...)</code> formulas, diary sexps and Lisp in header
+arguments run on a built-in Lisp interpreter first; what it can't do runs
+in a separate <code>emacs --batch</code> when Emacs is installed (<code>elisp:</code> links and
+emacs-lisp Babel blocks always do). That Emacs can't see or change the
+editor's buffers and has none of your Emacs configuration unless
+<code>babel.emacs_lisp.args</code> loads it. <code>#+BIND</code> sets the export variables
+that have an org.nvim option. Hooks and functions are Lua functions.</li>
+<li><strong>Emacs applications</strong> (Gnus, mu4e, BBDB, eww, w3m) and Emacs packages
+(CDLaTeX, RefTeX, SLIME, CIDER, TRAMP) have no counterpart. The Emacs
+diary file is read by the agenda, and <code>i</code> adds entries to it.</li>
+<li><strong>Display:</strong> image and LaTeX previews replace the link, but a terminal
+line can't grow, so a tall image continues in virtual lines under it,
+and they need a terminal image backend. Multi-line fragments are drawn
+in place by hiding their other lines (with image.nvim they stay under
+the line). In indent mode, wrapped rows don't get the virtual
+indentation.</li>
+<li><strong>Point vs cursor:</strong> Emacs acts between characters, Normal mode on a
+character, so commands that insert &quot;at point&quot; act at the end of the line
+in Normal mode (at the cursor in Insert mode).</li>
+<li><strong>Prefix arguments</strong> are counts (4 = C-u, 16 = C-u C-u, 64 = C-u C-u C-u).</li>
+<li>Babel sessions send each block to the REPL as one &quot;run this file&quot; line
+(the REPL shows that line, not the code), and Lua blocks run inside Neovim.</li>
+<li>Captures without <code>:unnarrowed</code> are edited in a separate buffer and show
+up in the target file when they are finished (Neovim has no indirect
+buffers).</li>
+</ul>
+<hr>
+<h2 id="-extensions">🧩 Extensions</h2>
+<p>Optional features modelled on popular third-party Emacs Org packages ship
+with org.nvim but stay unloaded until you enable them in <code>extensions</code>:</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({
+  <span class="h-m">extensions</span> <span class="h-o">=</span> {
+    <span class="h-m">present</span> <span class="h-o">=</span> <span class="h-n">true</span>,                  <span class="h-c">-- enable with the defaults</span>
+    <span class="h-m">roam</span> <span class="h-o">=</span> { <span class="h-m">directory</span> <span class="h-o">=</span> <span class="h-s">&quot;~/roam&quot;</span> }, <span class="h-c">-- options are merged over its defaults</span>
+  },
+})</code></pre>
+<p><code>false</code> or <code>{ enabled = false }</code> keeps one off, and <code>:checkhealth org</code> lists
+the enabled ones and checks what each needs. An extension adds its own
+actions, <code>:Org</code> subcommands and default keys, but never replaces a key you
+set. See <a href="manual/org-extensions.html"><code>:h org-extensions</code></a>.</p>
+<p>Each extension is marked ✅ <strong>stable</strong> (used daily, well covered by specs;
+changes to its options or keys are called out in the release notes) or
+🧪 <strong>experimental</strong> (works and is tested, but has seen less real use, so
+its options may still change):</p>
+<div class="table-wrap"><table>
+<thead><tr><th>✅ Stable</th><th>🧪 Experimental</th></tr></thead>
+<tbody>
+<tr><td><code>ql</code>, <code>super_agenda</code>, <code>present</code>, <code>roam</code>, <code>quickadd</code>, <code>ics</code>, <code>kanban</code>, <code>sidebar</code>, <code>merge</code>, <code>transclusion</code>, <code>heatmap</code>, <code>review</code>, <code>pomodoro</code>, <code>drill</code>, <code>cli</code>, <code>diagrams</code>, <code>code</code>, <code>literate</code>, <code>lsp</code>, <code>timeline</code>, <code>hugo</code>, <code>journal</code>, <code>src_lsp</code></td><td><code>caldav</code></td></tr>
+</tbody></table></div>
+<p>An experimental extension is promoted once it meets measurable criteria
+(specs, coverage, docs, releases without a breaking change, no open bugs),
+checked at every release; the release notes say when. The
+<a href="extensions.html">extensions status</a> page shows where
+each one stands.</p>
+<div class="alert alert-note"><p class="alert-title">Note</p><p>🧪 Experimental extensions are prone to change. Their options, commands,
+keys and output can change in any release, so read the release notes
+before you upgrade if a config or a script relies on one.</p></div>
+<ul>
+<li><p>✅ <strong><code>present</code></strong> (<a href="https://github.com/rlister/org-present">org-present</a>):
+<code>:Org present</code> shows the buffer as a slideshow, one top-level heading per
+slide, in its own tab (<a href="manual/org-extensions-present.html"><code>:h org-extensions-present</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/present.gif" alt="Presenting an org file: title slide, content slides with a counter, the whole file on one page, and back to the untouched file" loading="lazy"></p></li>
+<li><p>✅ <strong><code>ql</code></strong> (<a href="https://github.com/alphapapa/org-ql">org-ql</a>): queries such as
+<code>(and (todo &quot;NEXT&quot;) (tags &quot;work&quot;))</code> or <code>todo:NEXT tags:work !done</code>,
+<code>:Org ql_search</code>, named and saved views, <code>ql_find</code>, <code>ql_refile</code>,
+<code>ql_sparse_tree</code>, recent items, <code>org-ql</code> agenda custom commands and
+<code>#+BEGIN: org-ql</code> blocks (<a href="manual/org-extensions-ql.html"><code>:h org-extensions-ql</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/ql.gif" alt="org-ql: a sexp query, changing a result's TODO state, the same search in plain syntax, a saved view sorted by deadline and an org-ql dynamic block" loading="lazy"></p></li>
+<li><p>✅ <strong><code>roam</code></strong> (<a href="https://github.com/org-roam/org-roam">org-roam</a>): org-roam
+v2 notes in the same file format, so a directory can be shared with
+Emacs: find and insert nodes (typing a new title creates one), a
+backlinks, reflinks and unlinked references window, aliases, refs and
+tags, capture templates with org-roam's <code>:target</code> forms, extracting and
+refiling subtrees, daily notes, <code>roam-ref</code> / <code>roam-node</code> org-protocol
+handlers and a Graphviz node graph, over a JSON index that updates
+incrementally. Its keys live under <code>&lt;prefix&gt;m</code> (<code>&lt;prefix&gt;mf</code> finds a
+node, <code>&lt;prefix&gt;mi</code> inserts one, <code>&lt;prefix&gt;ml</code> toggles the backlinks
+window, <code>&lt;prefix&gt;mj</code> captures to today's daily note and <code>&lt;prefix&gt;md…</code>
+goes to the dailies) (<a href="manual/org-extensions-roam.html"><code>:h org-extensions-roam</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/roam.gif" alt="org-roam: find a node, backlinks, insert a link to a new node, daily notes" loading="lazy"></p></li>
+<li><p>✅ <strong><code>super_agenda</code></strong> (<a href="https://github.com/alphapapa/org-super-agenda">org-super-agenda</a>):
+group agenda days and lists (including org-ql results) by time grid,
+deadline, tag, priority, category and more, with auto groups. <code>&lt;Tab&gt;</code> on
+a group header folds the group, and <code>gj</code> / <code>gk</code> move between headers
+(<a href="manual/org-extensions-super-agenda.html"><code>:h org-extensions-super-agenda</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/super-agenda.gif" alt="org-super-agenda: the day agenda in groups, moving between headers with gj and folding groups with Tab, then org-ql results grouped by category" loading="lazy"></p></li>
+<li><p>✅ <strong><code>quickadd</code></strong> (<a href="https://todoist.com/help/articles/use-task-quick-add-in-todoist-va4Lhpzz">Todoist</a>-style
+quick add): <code>:Org quickadd</code> or <code>&lt;prefix&gt;q</code> turns one line such as
+<code>Call Bob fri 3pm #work !A ~30m @Inbox due mon every week</code> into an entry
+with SCHEDULED / DEADLINE, repeater, tags, priority and Effort, filed
+under the best-matching heading, with a live preview while you type.
+Capture templates can use the same syntax with <code>quickadd = true</code>
+(<a href="manual/org-extensions-quickadd.html"><code>:h org-extensions-quickadd</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/quickadd.gif" alt="Quick add: typing a Todoist-style line with a live preview of the parsed entry, which lands under the matching heading with its date, tags, priority and effort" loading="lazy"></p></li>
+<li><p>✅ <strong><code>review</code></strong> (GTD weekly review): <code>:Org review</code> (<code>&lt;prefix&gt;W</code>) steps
+through a weekly review in a float: empty the inbox (refile, schedule,
+set a state, delete or skip each entry), stuck projects, waiting-for,
+overdue, the next two weeks, someday/maybe, last week's clocked time and
+reflection questions, with a progress line, <code>n</code> / <code>p</code> between steps and
+resumable progress. Finishing logs the review in a date tree. Steps can
+be reordered or replaced with your own (<a href="manual/org-extensions-review.html"><code>:h org-extensions-review</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/review.gif" alt="Weekly review: scheduling and deleting inbox entries, stepping through stuck projects, waiting, overdue, upcoming, someday and clocked time, answering a reflection question, and the review logged in a date tree" loading="lazy"></p></li>
+<li><p>✅ <strong><code>pomodoro</code></strong> (<a href="https://github.com/marcinkoziej/org-pomodoro">org-pomodoro</a>):
+<code>&lt;prefix&gt;zs</code> starts a pomodoro on the heading at the cursor and clocks it
+in; when the 25 minutes are up the entry's <code>POMODOROS</code> count goes up, the
+clock stops and a 5-minute break starts (15 minutes after every fourth),
+with notifications and an optional sound. Pause, skip and stop, an
+optional overtime, a session that survives a restart, and a countdown
+in <code>require(&quot;org&quot;).statusline()</code> (<a href="manual/org-extensions-pomodoro.html"><code>:h org-extensions-pomodoro</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/pomodoro.gif" alt="Pomodoro: starting a pomodoro clocks in the task, the statusline counts down, pause and resume, the pomodoro ends with POMODOROS counted, a break and the next pomodoro" loading="lazy"></p></li>
+<li><p>✅ <strong><code>drill</code></strong> (<a href="https://gitlab.com/phillord/org-drill">org-drill</a>):
+flashcards with spaced repetition. Headings tagged <code>:drill:</code> are cards
+(simple, two-sided, multi-sided and cloze deletions such as
+<code>[Nile||river]</code>); <code>:Org drill</code> (<code>&lt;prefix&gt;D</code>) reviews the due ones in a
+floating window, you grade each answer 0-5, and org-drill's SM-5 (or
+SM-2 / Simple8) schedules the next review in its <code>DRILL_*</code> properties,
+so a deck can be shared with Emacs. Leeches, cram mode and org-drill's
+weighted cloze types included (<a href="manual/org-extensions-drill.html"><code>:h org-extensions-drill</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/drill.gif" alt="org-drill: reviewing due cards in a float, showing answers, grading them 0-5, a cloze card, a two-sided card, a failed card coming back, the session summary and the new schedule in the file" loading="lazy"></p></li>
+<li><p>✅ <strong><code>merge</code></strong>: a structural git merge driver for Org files. <code>:Org merge_install</code> registers it for the repository (<code>*.org merge=org</code>), and
+git then merges org files entry by entry: entries matched by <code>ID</code> or
+outline path, refiles followed, properties merged key by key, clocks and
+tags unioned, and a real conflict marked only around the one entry (or
+property) both sides changed. Also usable without org.nvim's setup via
+<code>bin/org-merge</code> (<a href="manual/org-extensions-merge.html"><code>:h org-extensions-merge</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/merge.gif" alt="Structural git merge: two branches edit the same org file, git merge with the Org driver merges tags, properties, clocks and new entries cleanly, and a second merge leaves one conflict around a single headline" loading="lazy"></p></li>
+<li><p>✅ <strong><code>hugo</code></strong> (<a href="https://ox-hugo.scripter.co/">ox-hugo</a>): export posts
+for the Hugo static site generator, one post per file or one per subtree
+with an <code>EXPORT_FILE_NAME</code> (inheriting <code>EXPORT_HUGO_*</code> properties from its
+parents), with TOML or YAML front matter (dates from CLOSED, drafts from
+TODO states, tags and <code>@categories</code>, menus, weights, custom front
+matter), <code>{{&lt; figure &gt;}}</code> for images copied to <code>static/</code> or the page
+bundle, and <code>{{&lt; relref &gt;}}</code> links between posts. <code>&lt;leader&gt;oe H</code> in the
+export dispatcher, like <code>C-c C-e H</code> (<a href="manual/org-extensions-hugo.html"><code>:h org-extensions-hugo</code></a>).</p></li>
+<li><p>✅ <strong><code>ics</code></strong>: subscribe to Google, Outlook or any iCalendar (<code>.ics</code>)
+calendar, a secret URL fetched with curl into a cache or a local file,
+and see its events read-only in the agenda day and week views: times
+converted to your zone, repeating events, exceptions and cancellations.
+<code>ics_import</code> copies an event into an org file and <code>ics_refresh</code> fetches
+the calendars again (<a href="manual/org-extensions-ics.html"><code>:h org-extensions-ics</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/ics.gif" alt="The week agenda with events from two subscribed calendars next to org tasks, then ics_import copying a meeting into inbox.org as a heading" loading="lazy"></p></li>
+<li><p>🧪 <strong><code>caldav</code></strong> (<a href="https://github.com/dengste/org-caldav">org-caldav</a>):
+two-way sync with the calendars of a CalDAV server (the protocol of
+Google Calendar, Nextcloud, Radicale, Fastmail, iCloud and others). A
+calendar's events become headings of an org file, entries with a date
+become events, and <code>:Org caldav_sync</code> carries the changes both ways, a
+field at a time, so attendees and alarms in the calendar and the
+keyword, priority and tags in org are left alone (the text under the
+heading is the event's description, and is sent). Deletions ask first.
+Repeating events, tasks (VTODO) as TODO entries, pull-only or push-only
+calendars, a sync every few minutes (<code>interval</code>) or when a calendar's
+file is opened or saved (<code>sync_on_open</code>, <code>sync_on_save</code>), and
+<code>:Org caldav_discover</code> to find the calendars of an account.</p>
+<pre class="code"><code class="language-lua">extensions <span class="h-o">=</span> {
+  <span class="h-m">caldav</span> <span class="h-o">=</span> {
+    <span class="h-m">calendars</span> <span class="h-o">=</span> {
+      {
+        <span class="h-m">name</span> <span class="h-o">=</span> <span class="h-s">&quot;Personal&quot;</span>,
+        <span class="h-m">url</span> <span class="h-o">=</span> <span class="h-s">&quot;https://cloud.example.com/dav/calendars/me/personal/&quot;</span>,
+        <span class="h-m">user</span> <span class="h-o">=</span> <span class="h-s">&quot;me&quot;</span>,
+        <span class="h-m">password</span> <span class="h-o">=</span> { <span class="h-s">&quot;pass&quot;</span>, <span class="h-s">&quot;show&quot;</span>, <span class="h-s">&quot;cloud/caldav&quot;</span> }, <span class="h-c">-- or a string, or a function</span>
+        <span class="h-m">inbox</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/calendar.org&quot;</span>,
+      },
+    },
+  },
+}</code></pre>
+<p>Tried with Radicale and with Google Calendar. Google only takes OAuth
+tokens: <a href="manual/org-extensions-caldav.html#org-extensions-caldav-google"><code>:h org-extensions-caldav-google</code></a> has the steps and the <code>token</code>
+command. <a href="manual/org-extensions-caldav.html"><code>:h org-extensions-caldav</code></a> starts with a getting-started list
+and explains every message a sync can show
+(<a href="manual/org-extensions-caldav.html#org-extensions-caldav-messages"><code>:h org-extensions-caldav-messages</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/caldav.gif" alt="A sync adds the calendar's events to calendar.org as headings and sends the file's own entry; they show in the week agenda; a changed heading is sent and the event on the server keeps its attendee and alarm; an event moved in another calendar app moves the entry; deleting an entry asks before deleting the event" loading="lazy"></p></li>
+<li><p>✅ <strong><code>cli</code></strong>: an <code>org</code> shell command (<code>bin/org</code>, a headless Neovim) that
+prints the agenda as text, CSV or JSON, captures with a template, clocks
+in and out, reports the running clock (for tmux, SketchyBar or Raycast),
+searches, queries and exports, adds headings under a heading or in a
+file, appends text to an entry, and changes headings (title, TODO
+state, tags, priority, properties, dates, notes, refile, archive)
+without ever prompting, from a config file of its own. With <code>--json</code> every command
+prints a versioned envelope with stable error codes, and <code>org schema</code>
+describes the commands as JSON Schema, so scripts and AI agents can use
+it as a tool (<a href="manual/org-extensions-cli.html"><code>:h org-extensions-cli</code></a>, <a href="manual/org-extensions-cli.html#org-extensions-cli-json"><code>:h org-extensions-cli-json</code></a>).
+<code>org mcp</code> serves the same commands as an MCP server, so Claude Code,
+Claude Desktop and other MCP clients can read your agenda, capture and
+update headings (<code>claude mcp add org -- org mcp</code>; <code>--read-only</code> for
+reading only; <a href="manual/org-extensions-cli.html#org-extensions-cli-mcp"><code>:h org-extensions-cli-mcp</code></a>). Its results are compact
+JSON in which every heading carries a <code>target</code> to pass back, and it
+offers <code>plan_day</code>, <code>weekly_review</code> and <code>triage_inbox</code> prompts. With the
+<a href="#session-server">session server</a> on, its commands run in your open
+Neovim instead of on the files. <code>org lsp --stdio</code> is the <code>lsp</code>
+extension's language server for editors other than Neovim (below).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/org-cli.gif" alt="The org command line: the day agenda as text, the agenda as JSON through jq, capturing a task into the inbox, and clocking in, checking the clock for a status line and clocking out" loading="lazy"></p></li>
+<li><p>✅ <strong><code>diagrams</code></strong> (<a href="https://github.com/arnm/ob-mermaid">ob-mermaid</a>,
+ob-dot, ob-plantuml): <code>mermaid</code> (mmdc) and <code>dot</code> (Graphviz) source
+blocks, plus extras for <code>plantuml</code>: <code>C-c C-c</code> writes the diagram and
+inserts a <code>file:</code> link (a name is generated when there's no <code>:file</code>),
+renders are cached by content hash, the image is previewed inline when an
+image backend is available, and <code>render_on_save</code> re-renders changed
+diagrams on <code>:w</code> (<a href="manual/org-extensions-diagrams.html"><code>:h org-extensions-diagrams</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/diagrams.gif" alt="Diagrams: C-c C-c on a mermaid block inserts a file: link to a real PNG, and saving renders every diagram block, re-rendering only the one that changed" loading="lazy"></p></li>
+<li><p>✅ <strong><code>code</code></strong>: a bridge between code and notes. <code>code_capture</code> turns a
+Visual selection into a <code>#+begin_src</code> block with a link back and the git
+branch; <code>[[code:src/app.lua::M.setup]]</code> links jump to a symbol through
+LSP (else treesitter or a text search); each repository gets an org file
+(<code>.org/tasks.org</code>) with <code>project_open</code>, <code>project_capture</code> and a
+<code>project_agenda</code> that lists the code's <code>TODO:</code> / <code>TODO(org:ID)</code>
+comments; opt-in clocking by git branch. Keys under <code>&lt;prefix&gt;j</code>
+(<a href="manual/org-extensions-code.html"><code>:h org-extensions-code</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/code.gif" alt="code: a Visual selection in a Lua file captured as a src block with a code: link and the branch, the link followed back to the function, and the project agenda with the TODO comments of the repository" loading="lazy"></p></li>
+<li><p>✅ <strong><code>literate</code></strong>: a literate Neovim config. Saving <code>init.org</code> tangles it
+and runs only the Lua blocks you changed, so an option or keymap applies
+at once; errors are diagnostics on the org line. Plus <code>literate_reload</code>,
+<code>literate_run_block</code>, <code>literate_health</code>, a jump from the tangled file
+back to the block, and <code>:Org literate_bootstrap</code> for an init.lua that
+re-tangles a newer init.org on startup (<a href="manual/org-extensions-literate.html"><code>:h org-extensions-literate</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/literate.gif" alt="literate: editing a Lua block of init.org and saving it changes an option live, then a block with an error shows a diagnostic on its org line" loading="lazy"></p></li>
+<li><p>✅ <strong><code>lsp</code></strong>: a language server for org buffers that runs inside Neovim
+(nothing to install), so every LSP feature and plugin works in Org
+files: the outline as document symbols, headlines of all your files as
+workspace symbols, org-lint diagnostics as you type, hover on
+timestamps (&quot;in 3 days, Friday&quot;, repeaters explained), links (a preview
+of the target), clocks and footnotes, go to definition, references, code
+actions (schedule, refile, archive, lint quick fixes) and a rename of a
+headline, CUSTOM_ID, ID or target that rewrites every link to it across
+files, something Emacs can't do (<a href="manual/org-extensions-lsp.html"><code>:h org-extensions-lsp</code></a>).
+Other editors get the same server as a program: <code>org lsp --stdio</code>
+from the <a href="#-extensions"><code>cli</code> extension</a> speaks LSP on stdin and
+stdout, so Helix, Emacs (eglot), VS Code and Zed (through a generic LSP
+client) see your Org files the same way (<a href="manual/org-extensions-cli.html#org-extensions-cli-lsp"><code>:h org-extensions-cli-lsp</code></a>).
+For Helix, in <code>~/.config/helix/languages.toml</code>:</p>
+<pre class="code"><code class="language-toml">[language-server.org]
+command = &quot;org&quot;
+args = [&quot;lsp&quot;, &quot;--stdio&quot;]
+
+[[language]]
+name = &quot;org&quot;
+scope = &quot;source.org&quot;
+file-types = [&quot;org&quot;]
+roots = []
+comment-token = &quot;#&quot;
+language-servers = [&quot;org&quot;]</code></pre>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/lsp.gif" alt="The org language server: org-lint diagnostics inline, the outline as document symbols, hover on a timestamp and on a link, and renaming a CUSTOM_ID updates the links in another file" loading="lazy"></p></li>
+<li><p>✅ <strong><code>src_lsp</code></strong> (like <a href="https://github.com/jmbuhr/otter.nvim">otter.nvim</a>):
+the language servers you set up with <code>vim.lsp.enable()</code> work inside
+<code>#+begin_src</code> blocks of the languages you list. Diagnostics show in the
+block as you type, and go to definition, hover, references, signature
+help and completion inside a block are answered by the block's language
+server; a definition in another block jumps there in the org file
+(<a href="manual/org-extensions-src-lsp.html"><code>:h org-extensions-src-lsp</code></a>).</p></li>
+<li><p>✅ <strong><code>transclusion</code></strong> (<a href="https://github.com/nobiot/org-transclusion">org-transclusion</a>):
+<code>#+transclude: [[file:notes.org::*Heading]] :level 2</code> or
+<code>[[file:main.py]] :lines 10-24 :src python</code> shows that text live, as
+virtual lines under the keyword (the file isn't touched) or inserted into
+the buffer like Emacs and taken out again when it's written. <code>&lt;CR&gt;</code> edits
+the source in a float and <code>:w</code> writes it back and updates every
+transclusion; sources are watched, nested transclusions expand, and
+<code>#+transclude:</code> is expanded on export (<a href="manual/org-extensions-transclusion.html"><code>:h org-extensions-transclusion</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/transclusion.gif" alt="Live transclusion: a heading of another file and lines of a Python file shown under their #+transclude: keywords, the heading edited in a float and written back, the text inserted into the buffer and back to virtual lines, then folded away with their headings" loading="lazy"></p></li>
+<li><p>✅ <strong><code>kanban</code></strong>: a board with a column per TODO keyword (or group of
+keywords, with WIP limits) and a card per heading showing its priority,
+deadline countdown, effort and tags. <code>h</code> / <code>l</code> move a card to the
+previous / next state through the regular TODO code, so logging, CLOSED
+and repeaters work; <code>/</code> filters by tags match or org-ql query, <code>&lt;CR&gt;</code>
+opens the heading. Cards come from the agenda files, a buffer, a subtree
+or a query (<code>:Org kanban</code>, <code>&lt;prefix&gt;Vk</code>, <a href="manual/org-extensions-kanban.html"><code>:h org-extensions-kanban</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/kanban.gif" alt="Kanban board: moving a card to NEXT goes over the WIP limit, filtering by a tag, moving a card to DONE and opening its heading with CLOSED logged" loading="lazy"></p></li>
+<li><p>✅ <strong><code>timeline</code></strong>: a text-mode Gantt chart of the tasks with SCHEDULED,
+DEADLINE or Effort: bars from start to deadline, ◆ deadlines, today's
+column, overdue tasks in red, optional clocked days. <code>+</code> / <code>-</code> zoom
+(day, week, month), <code>[</code> / <code>]</code> pan, <code>S</code> / <code>D</code> reschedule
+(<code>:Org timeline</code>, <code>&lt;prefix&gt;Vt</code>, <a href="manual/org-extensions-timeline.html"><code>:h org-extensions-timeline</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/timeline.gif" alt="Timeline: a Gantt chart of a plan, panning, zooming out to weeks, showing clocked days and moving an overdue deadline with the calendar" loading="lazy"></p></li>
+<li><p>✅ <strong><code>heatmap</code></strong>: a GitHub-style calendar of the time clocked each day,
+the tasks closed or the habits done, shaded from your colorscheme, with
+totals and streaks; the selected day shows its tasks and <code>&lt;CR&gt;</code> opens its
+agenda (<code>:Org heatmap [clock|closed|habit] [tag]</code>, <code>&lt;prefix&gt;Vh</code>,
+<a href="manual/org-extensions-heatmap.html"><code>:h org-extensions-heatmap</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/heatmap.gif" alt="Heatmap: nine months of clocked time, a day's total and tasks, tasks closed per day, one tag only and the agenda of the selected day" loading="lazy"></p></li>
+<li><p>✅ <strong><code>sidebar</code></strong>: a narrow &quot;Today&quot; window with the running clock against
+its effort, the next appointment with a countdown, today's items,
+habits due and the inbox count, kept up to date by a timer and on writes
+(<code>sidebar_toggle</code>, <code>&lt;prefix&gt;Vs</code>, <a href="manual/org-extensions-sidebar.html"><code>:h org-extensions-sidebar</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/sidebar.gif" alt="Today sidebar: clocking in, opening the sidebar, jumping to an overdue task and capturing to the inbox while its count updates" loading="lazy"></p></li>
+<li><p>✅ <strong><code>journal</code></strong> (<a href="https://github.com/bastibe/org-journal">org-journal</a>):
+a dated journal, one file per day, week, month or year in org-journal's
+format. <code>&lt;prefix&gt;Lj</code> adds a timed entry to today, moving yesterday's
+unfinished TODOs over; <code>&lt;prefix&gt;Ln</code> / <code>&lt;prefix&gt;Lp</code> go between days,
+<code>&lt;prefix&gt;Lc</code> opens a calendar with the days that have entries marked,
+<code>&lt;prefix&gt;Ls</code> searches a date range, and future days take scheduled
+entries that the agenda can show (<a href="manual/org-extensions-journal.html"><code>:h org-extensions-journal</code></a>).</p>
+<p><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/journal.gif" alt="Journal: a new entry carrying over yesterday's TODOs, moving between days and picking a day in the calendar" loading="lazy"></p></li>
+</ul>
+<hr>
+<h2 id="-roadmap">🧭 Roadmap</h2>
+<p>The <a href="index.html#-parity-with-emacs-org">parity inventory</a> leaves only two options
+partial (<code>calc_default_modes</code> and Common Lisp's evaluator, which is <code>sbcl</code>
+rather than SLIME/SLY). What's still missing is finer-grained than one
+command or option:</p>
+<ul>
+<li>[ ] Calc's symbolic mode and date format in <code>calc_default_modes</code></li>
+<li>[ ] Calc's rule-based <code>integ</code>, <code>factor</code>, polynomial functions and numeric <code>solve</code>/<code>fsolve</code> for degree 5 and up</li>
+<li>[ ] table.el's cell commands (split, span, justify) and live realignment in <code>C-c '</code></li>
+<li>[ ] Babel sessions for more languages (Julia, SQL engines)</li>
+<li>[ ] Custom <code>diary-date-forms</code> in the Emacs diary file</li>
+<li>[ ] Column view headlines read-only against every kind of edit (Visual, Ex commands, the API)</li>
+<li>[ ] <code>#+BIND</code> for export variables that have no org.nvim option</li>
+<li>[ ] More <a href="#-extensions">extensions</a></li>
+</ul>
+<p>Done in the latest parity round (every command and option of Org 9.8.10
+checked, see the
+<a href="parity/review.html#fifth-round-a-measured-inventory">parity review</a>):
+citations you can insert, follow and highlight, and the CSL processor
+(a port of citeproc-el); KOMA letters and man pages as native export
+back-ends; highlighted source code in HTML and engraved LaTeX; Babel for
+PlantUML, gnuplot, LaTeX, ditaa, LilyPond, Java, C#, Haskell, Clojure,
+Common Lisp, Scheme, Fortran, Julia, OCaml, Groovy, Maxima, Processing and
+screen; ol-bibtex; Org-aware <code>=</code> indentation and <code>gq</code> filling; the agenda's
+remote undo, hour and minute date shifts and <code>i</code> diary entries;
+alphabetical list bullets; the org-goto outline browser; the Org, table and
+agenda menus and org-mouse; clipboard image paste; org-ctags. In all, 163
+commands and 329 options that were missing, partial or thought to need
+Emacs now work like Emacs.
+Since then, the <a href="#-extensions">extensions</a> <code>present</code>, <code>ql</code>, <code>roam</code> and
+<code>super_agenda</code> have landed.
+Sixteen more followed: <code>lsp</code>, <code>kanban</code>, <code>timeline</code>, <code>heatmap</code>,
+<code>sidebar</code>, <code>quickadd</code>, <code>review</code>, <code>pomodoro</code>, <code>drill</code>, <code>code</code>, <code>literate</code>,
+<code>merge</code>, <code>ics</code>, <code>cli</code>, <code>diagrams</code> and <code>transclusion</code>.</p>
+<p>What needs Emacs itself (indirect buffers for narrowed captures, Emacs
+applications such as Gnus and mu4e, Lisp that must change the editor's
+state) isn't planned; see <a href="#differences-from-emacs-org-mode">Differences from Emacs Org mode</a>.</p>
+<p>If there's something you'd like that isn't here,
+<a href="https://github.com/xheisenbugx/org.nvim/issues">open an issue</a>.</p>
+</article>
+
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/docs/guide.md">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>

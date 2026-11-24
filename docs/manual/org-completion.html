@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Completion · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="../assets/site.js" defer></script>
+
+</head>
+<body data-root="../">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="../index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="../index.html">首页</a></li>
+<li class=""><a href="../guide.html">指南</a></li>
+<li class=""><a href="../playground.html">互动教程</a></li>
+<li><details class="group" open><summary>手册</summary><ul>
+<li class=""><a href="../manual/index.html">目录</a></li>
+<li class=""><a href="../manual/org-introduction.html">简介</a></li>
+<li class=""><a href="../manual/org-installation.html">安装</a></li>
+<li class=""><a href="../manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="../manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="../manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="../manual/org-tags.html">标签</a></li>
+<li class=""><a href="../manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="../manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="../manual/org-clock.html">计时和工作量</a></li>
+<li class=""><a href="../manual/org-agenda.html">日程</a></li>
+<li class=""><a href="../manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="../manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="../manual/org-capture.html">捕捉</a></li>
+<li class=""><a href="../manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="../manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="../manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="../manual/org-babel.html">源代码块（Babel）</a></li>
+<li class=""><a href="../manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="../manual/org-export.html">导出</a></li>
+<li class=""><a href="../manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="../manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="../manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="../manual/org-completion.html" aria-current="page">补全</a></li>
+<li class=""><a href="../manual/org-appearance.html">外观和高亮</a></li>
+<li class=""><a href="../manual/org-config.html">配置参考</a></li>
+<li class=""><a href="../manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="../manual/org-commands.html">命令</a></li>
+<li class=""><a href="../manual/org-api.html">Lua API</a></li>
+<li class=""><a href="../manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="../manual/org-lint.html">检查</a></li>
+<li class=""><a href="../manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="../manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="../manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="../manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="../manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="../manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="../manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="../manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="../manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="../manual/org-extensions-drill.html">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="../manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="../manual/org-extensions-hugo.html">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="../manual/org-extensions-caldav.html">CalDAV sync</a></li>
+<li class="sub"><a href="../manual/org-extensions-cli.html">Command line (org)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-code.html">Code and notes (code)</a></li>
+<li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="../manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="../manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="../manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="../examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="../examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="../examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="../examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="../examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="../examples/05-tags.html">标签</a></li>
+<li class=""><a href="../examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="../examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="../examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="../examples/09-agenda.html">日程</a></li>
+<li class=""><a href="../examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="../examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="../examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="../examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="../examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="../examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="../examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="../examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="../examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="../examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="../examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="../examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="../parity/review.html">兼容性审查</a></li>
+<li class=""><a href="../parity/index.html">目录</a></li>
+<li class=""><a href="../parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="../extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content manual">
+<article>
+<h1>补全</h1>
+<div class="tags"><a class="tag" id="org-completion" href="#org-completion">org-completion</a></div>
+<p>Completes (like Emacs <code>org-pcomplete</code>):</p>
+<ul>
+<li>TODO keywords after stars</li>
+<li>tags after <code>:</code> on a headline (not the ones already set) or in <code>#+FILETAGS</code></li>
+<li><code>#+</code> keywords, <code>#+STARTUP</code> and <code>#+OPTIONS</code> values, <code>#+begin_src</code> languages, then header arguments and switches (also on <code>#+HEADER:</code>)</li>
+<li><code>#+BEGIN: clocktable</code> parameters</li>
+<li>entities after <code>\</code> (<code>\alpha</code>)</li>
+<li>in a property drawer, property names the entry doesn't have yet; elsewhere drawer names used in the buffer, after <code>:</code> at line start</li>
+<li>link types, stored links, headlines (<code>[[*</code>) and custom IDs (<code>[[#</code>)</li>
+</ul>
+<p>Omnifunc: <span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-o&gt;</span> (set automatically). blink.cmp:</p>
+<pre class="code"><code class="language-lua">sources <span class="h-o">=</span> {
+  <span class="h-m">per_filetype</span> <span class="h-o">=</span> { <span class="h-m">org</span> <span class="h-o">=</span> { <span class="h-m">inherit_defaults</span> <span class="h-o">=</span> <span class="h-n">true</span>, <span class="h-s">&quot;org&quot;</span> } },
+  <span class="h-m">providers</span> <span class="h-o">=</span> { <span class="h-m">org</span> <span class="h-o">=</span> { <span class="h-m">name</span> <span class="h-o">=</span> <span class="h-s">&quot;Org&quot;</span>, <span class="h-m">module</span> <span class="h-o">=</span> <span class="h-s">&quot;org.completion.blink&quot;</span> } },
+}</code></pre>
+<p>nvim-cmp:</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;cmp&quot;</span>).<span class="h-f">register_source</span>(<span class="h-s">&quot;org&quot;</span>, <span class="h-f">require</span>(<span class="h-s">&quot;org.completion.cmp&quot;</span>).<span class="h-f">new</span>())</code></pre>
+<h3 id="h-pickers">Pickers</h3>
+<div class="tags"><a class="tag" id="org-pickers" href="#org-pickers">org-pickers</a></div>
+<p>The <code>pick_*</code> actions open a fuzzy picker: headlines show their outline path, TODO keyword, priority and tags with the Org highlights, and the preview shows the entry in its file (in its buffer, unsaved changes and all, when the file is loaded). Confirming jumps there (and opens the folds around it). The <code>picker</code> option chooses the picker:</p>
+<table class="defs">
+<tr><td class="term">&quot;auto&quot;</td><td>LazyVim's picker when it is installed (<code>vim.g.lazyvim_picker</code>, or with its &quot;auto&quot; the picker extra enabled in :LazyExtras), else the first installed of the ones below, else &quot;select&quot; (default)</td></tr>
+<tr><td class="term">&quot;snacks&quot;</td><td>snacks.nvim (<code>Snacks.picker</code>)</td></tr>
+<tr><td class="term">&quot;fzf-lua&quot;</td><td>fzf-lua (<code>fzf_exec</code>, the builtin previewer)</td></tr>
+<tr><td class="term">&quot;telescope&quot;</td><td>telescope.nvim</td></tr>
+<tr><td class="term">&quot;mini&quot;</td><td>mini.pick, once <code>require(&quot;mini.pick&quot;).setup()</code> has run</td></tr>
+<tr><td class="term">&quot;select&quot;</td><td><a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=vim.ui.select%28%29">vim.ui.select()</a>: one item, no preview</td></tr>
+</table>
+<p>None of these plugins is required: a picker is looked for (with <code>require</code>) when an action runs, never at startup, and one that isn't installed falls back to &quot;select&quot; with a warning.</p>
+<table class="defs">
+<tr><td class="term">pick_headline</td><td>a headline of this file</td></tr>
+<tr><td class="term">pick_headline_all</td><td>a headline of the agenda files (and this file)</td></tr>
+<tr><td class="term">pick_tag</td><td>a tag of the agenda files (with how many headlines carry it), then a headline with it, its own or inherited</td></tr>
+<tr><td class="term">pick_set_tags</td><td>the tags of the headline at the cursor: the tags chosen (several with multi-select) are toggled, ✓ marks the ones it has; text that matches no tag is added as new tags (<code>a:b</code> adds two). mini.pick lists &quot;+ New tags: <span class="key">&lt;text&gt;</span>&quot; below the matches; with &quot;select&quot;, &quot;+ New tags…&quot; asks for the text.</td></tr>
+<tr><td class="term">pick_agenda</td><td>an entry of today's agenda</td></tr>
+<tr><td class="term">pick_agenda_week</td><td>an entry of the agenda of the next 7 days</td></tr>
+<tr><td class="term">pick_todo</td><td>an open TODO entry (the global TODO list, in the order of its view: <code>agenda.sorting</code>)</td></tr>
+<tr><td class="term">pick_agenda_file</td><td>an agenda file</td></tr>
+<tr><td class="term">pick_capture_template</td><td>a capture template, then capture with it (from the agenda, at the date at the cursor with <code>capture.use_agenda_date</code>, as the capture menu)</td></tr>
+</table>
+<p>Multi-select: <span class="key">&lt;Tab&gt;</span> in snacks.nvim, fzf-lua and telescope, <span class="key">&lt;C-x&gt;</span> then <span class="key">&lt;M-CR&gt;</span> in mini.pick. The actions have no default keys; bind them in any action section (<a class="hl" href="org-keymaps.html">org-keymaps</a>), e.g.</p>
+<pre class="code"><code class="language-lua">mappings <span class="h-o">=</span> {
+  global <span class="h-o">=</span> { <span class="h-m">pick_headline_all</span> <span class="h-o">=</span> <span class="h-s">&quot;&lt;leader&gt;fo&quot;</span>, <span class="h-m">pick_todo</span> <span class="h-o">=</span> <span class="h-s">&quot;&lt;leader&gt;ft&quot;</span> },
+}</code></pre>
+<p>or run <code>:Org pick_todo</code>. telescope.nvim also gets an extension:</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;telescope&quot;</span>).<span class="h-f">load_extension</span>(<span class="h-s">&quot;org&quot;</span>)</code></pre>
+<p>then <code>:Telescope org headlines</code> (also <code>headlines_all</code>, <code>tags</code>, <code>set_tags</code>, <code>agenda</code>, <code>agenda_week</code>, <code>todo</code>, <code>agenda_files</code>, <code>capture_templates</code>; <code>:Telescope org</code> alone is <code>headlines_all</code>). These use telescope whatever <code>picker</code> says. The roam extension's node finder uses the same pickers (<a class="hl" href="org-extensions-roam.html">org-extensions-roam</a>).</p>
+<h3 id="h-opening-in-a-window">Opening in a window</h3>
+<div class="tags"><a class="tag" id="org-picker-keys" href="#org-picker-keys">org-picker-keys</a></div>
+<p>In the pickers that go to a place (<code>pick_headline</code>, <code>pick_headline_all</code>, the headlines of <code>pick_tag</code>, <code>pick_agenda</code>, <code>pick_agenda_week</code>, <code>pick_todo</code>, <code>pick_agenda_file</code>) <span class="key">&lt;C-s&gt;</span> opens it in a split, <span class="key">&lt;C-v&gt;</span> in a vertical split and <span class="key">&lt;C-t&gt;</span> in a new tab page, in every picker but vim.ui.select. <code>picker_keys</code> changes them, in Vim's key notation (fzf-lua gets &quot;ctrl-s&quot; for &quot;<span class="key">&lt;C-s&gt;</span>&quot;, &quot;alt-x&quot; for &quot;<span class="key">&lt;M-x&gt;</span>&quot;); <code>false</code> turns one off:</p>
+<pre class="code"><code class="language-lua">picker_keys <span class="h-o">=</span> { <span class="h-m">split</span> <span class="h-o">=</span> <span class="h-s">&quot;&lt;C-x&gt;&quot;</span>, <span class="h-m">vsplit</span> <span class="h-o">=</span> <span class="h-s">&quot;&lt;C-v&gt;&quot;</span>, <span class="h-m">tab</span> <span class="h-o">=</span> <span class="h-n">false</span> },</code></pre>
+<p>In mini.pick they replace its own choose_in_split / vsplit / tabpage keys there; in telescope its select_horizontal / vertical / tab actions (<span class="key">&lt;C-x&gt;</span>, <span class="key">&lt;C-v&gt;</span>, <span class="key">&lt;C-t&gt;</span>) do the same.</p>
+<div class="tags"><a class="tag" id="org-picker-query" href="#org-picker-query">org-picker-query</a></div>
+<p>A picker that can take a new entry (a roam node, the new tags of <code>pick_set_tags</code>) takes the typed text when <span class="key">&lt;CR&gt;</span> matches nothing. When existing entries match it, <span class="key">&lt;M-CR&gt;</span> (<code>picker_keys</code>' <code>query</code>) takes the typed text instead of the entry under the cursor, like vertico's M-RET (vertico-exit-input) or ivy's C-M-j (ivy-immediate-done) in Emacs: type &quot;Meeting&quot; and press <span class="key">&lt;M-CR&gt;</span> to create a node &quot;Meeting&quot; while &quot;Meeting notes&quot; exists. It works in snacks.nvim, fzf-lua (alt-enter) and telescope. mini.pick keeps <span class="key">&lt;M-CR&gt;</span> (choose_marked) and lists &quot;+ New: <span class="key">&lt;text&gt;</span>&quot; below the matches for this; vim.ui.select has no typed text (use its &quot;+ New&quot; entry). <code>false</code> turns it off.</p>
+<div class="tags"><a class="tag" id="org-picker-qflist" href="#org-picker-qflist">org-picker-qflist</a></div>
+<p>Several entries can be chosen there too (multi-select, above). <span class="key">&lt;CR&gt;</span> puts them in the quickfix list, titled after the picker, and opens it; <span class="key">&lt;C-s&gt;</span>, <span class="key">&lt;C-v&gt;</span> and <span class="key">&lt;C-t&gt;</span> open each in a window of its own. <span class="key">&lt;C-q&gt;</span> (<code>picker_keys</code>' <code>qflist</code>) puts the selected entries in the quickfix list, even just one, or with none selected every entry matching the typed text, like snacks.nvim's own <span class="key">&lt;C-q&gt;</span>. In fzf-lua it takes the selection or the entry under the cursor, like fzf-lua's own alt-q: fzf can't say that nothing is selected. Select every match first with toggle-all (alt-a) there. In telescope its own send_to_qflist (<span class="key">&lt;C-q&gt;</span>) does the same, and send_selected_to_qflist (<span class="key">&lt;M-q&gt;</span>) takes the selection or the entry under the cursor. From there <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Acdo">:cdo</a> / <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Acfdo">:cfdo</a> edit them all, and plugins reading the quickfix list take them: grug-far.nvim searches and replaces in their files with <code>&lt;qflist&gt;</code> as its paths, trouble.nvim and quicker.nvim show them.</p>
+<h3 id="h-picker-options">Picker options</h3>
+<div class="tags"><a class="tag" id="org-picker-opts" href="#org-picker-opts">org-picker-opts</a></div>
+<p><code>picker_opts</code> gives each picker plugin options of your own, merged over the ones org.nvim passes:</p>
+<pre class="code"><code class="language-lua">picker_opts <span class="h-o">=</span> {
+  [<span class="h-s">&quot;fzf-lua&quot;</span>] <span class="h-o">=</span> { <span class="h-m">winopts</span> <span class="h-o">=</span> { <span class="h-m">height</span> <span class="h-o">=</span> <span class="h-n">0.5</span>, <span class="h-m">width</span> <span class="h-o">=</span> <span class="h-n">0.6</span> } },
+  <span class="h-m">snacks</span> <span class="h-o">=</span> { <span class="h-m">layout</span> <span class="h-o">=</span> { <span class="h-m">preset</span> <span class="h-o">=</span> <span class="h-s">&quot;ivy&quot;</span> } },
+  <span class="h-m">telescope</span> <span class="h-o">=</span> <span class="h-f">require</span>(<span class="h-s">&quot;telescope.themes&quot;</span>).<span class="h-f">get_dropdown</span>(),
+  <span class="h-m">mini</span> <span class="h-o">=</span> { <span class="h-m">window</span> <span class="h-o">=</span> { <span class="h-m">config</span> <span class="h-o">=</span> { <span class="h-m">width</span> <span class="h-o">=</span> <span class="h-n">60</span> } } },
+},</code></pre>
+<p>They are fzf-lua's <code>fzf_exec</code> options, <code>Snacks.picker()</code> options, telescope's picker options and <code>MiniPick.start()</code> options. What org.nvim needs to show its items and act on the choice is kept: the items and their format, the preview, the <code>fzf_opts</code> that hide the index of an entry, fzf-lua's <code>actions</code> (use <code>picker_keys</code>), snacks.nvim's <code>confirm</code> and the picker_keys actions, telescope's <code>finder</code>, and the items and functions of mini.pick's <code>source</code>. An <code>on_close</code> of yours (fzf-lua's <code>winopts.on_close</code>, snacks.nvim's <code>on_close</code>) runs too, and a telescope <code>attach_mappings</code> runs after org.nvim's. <code>:Telescope org headlines theme=dropdown</code> and other options on that command line go over <code>picker_opts.telescope</code>.</p>
+<p>Resuming (<code>Snacks.picker.resume()</code>, <code>:FzfLua resume</code>, <code>:Telescope resume</code>, <code>:Pick resume</code>) reopens the last picker as it was left, and choosing there acts again: jumps, toggles the tags, captures. A resumed roam node finder closes without effect.</p>
+<p>From Lua, <code>require(&quot;org.pickers&quot;).pick(spec)</code> shows any list: <code>spec.items</code> are <code>{ display = { { text, hl_group }, ... }, filename?, bufnr?, lnum?, value? }</code> and <code>spec.on_choice(items, query)</code> gets the chosen ones; with <code>spec.split = true</code> the picker keys choose too, and <code>on_choice</code> gets &quot;split&quot;, &quot;vsplit&quot; or &quot;tab&quot; as its third argument, which <code>require(&quot;org.pickers&quot;).jump(item, how)</code> takes; see <code>lua/org/pickers/init.lua</code>.</p>
+<h3 id="h-outline-breadcrumb-and-symbol-plugins">Outline, breadcrumb and symbol plugins</h3>
+<div class="tags"><a class="tag" id="org-integrations" href="#org-integrations">org-integrations</a></div>
+<p>Plugins that show a buffer's structure (outline windows, breadcrumbs, symbol pickers) usually ask tree-sitter or a language server for it. org.nvim has its own parser instead of a tree-sitter one, and gives its outline to them in three ways:</p>
+<ul>
+<li>aerial.nvim and outline.nvim: a backend / provider made from that parser, nothing else to enable (below);</li>
+<li>plugins that speak LSP (nvim-navic, dropbar.nvim, the snacks.nvim, fzf-lua and telescope symbol pickers, trouble.nvim, and the LSP providers of aerial and outline.nvim): the document symbols of the <code>lsp</code> extension, an in-process server (<a class="hl" href="org-extensions-lsp.html">org-extensions-lsp</a>);</li>
+<li>your own code: <code>api.symbols()</code> and <code>api.symbol_path()</code> (<a class="hl" href="org-api.html#org-api-symbols">org-api-symbols</a>).</li>
+</ul>
+<p>All three give the same symbols: every headline, its range the whole subtree and its name the title, with TODO keyword, priority and tags as detail; plain, TODO and done headlines get their own kind (Namespace, Event, Constant). Named src blocks (Function) and named tables (Struct) are children of their entry, <code>&lt;&lt;targets&gt;&gt;</code> (Key) too when asked for.</p>
+<p>aerial.nvim: add the &quot;org&quot; backend for org buffers:</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;aerial&quot;</span>).<span class="h-f">setup</span>({ <span class="h-m">backends</span> <span class="h-o">=</span> { <span class="h-m">org</span> <span class="h-o">=</span> { <span class="h-s">&quot;org&quot;</span> } } })</code></pre>
+<p>It updates <code>update_delay</code> ms (300, aerial's <code>org = { update_delay = N }</code>) after aerial's <code>update_events</code>, and shows every symbol: <code>filter_kind</code> only applies to aerial's LSP and tree-sitter backends. With the &quot;lsp&quot; backend instead, set <code>filter_kind = { org = false }</code> (its own default list leaves out the kinds headlines have).</p>
+<p>outline.nvim: add &quot;org&quot; to the providers:</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;outline&quot;</span>).<span class="h-f">setup</span>({
+  <span class="h-m">providers</span> <span class="h-o">=</span> { <span class="h-m">priority</span> <span class="h-o">=</span> { <span class="h-s">&quot;lsp&quot;</span>, <span class="h-s">&quot;coc&quot;</span>, <span class="h-s">&quot;markdown&quot;</span>, <span class="h-s">&quot;norg&quot;</span>, <span class="h-s">&quot;man&quot;</span>, <span class="h-s">&quot;org&quot;</span> } },
+})</code></pre>
+<p>LSP plugins need the <code>lsp</code> extension. For the outline alone, leave the rest of it off:</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({
+  <span class="h-m">extensions</span> <span class="h-o">=</span> {
+    <span class="h-m">lsp</span> <span class="h-o">=</span> {
+      <span class="h-m">features</span> <span class="h-o">=</span> {
+        <span class="h-m">diagnostics</span> <span class="h-o">=</span> <span class="h-n">false</span>, <span class="h-m">hover</span> <span class="h-o">=</span> <span class="h-n">false</span>, <span class="h-m">definition</span> <span class="h-o">=</span> <span class="h-n">false</span>,
+        <span class="h-m">references</span> <span class="h-o">=</span> <span class="h-n">false</span>, <span class="h-m">rename</span> <span class="h-o">=</span> <span class="h-n">false</span>, <span class="h-m">code_actions</span> <span class="h-o">=</span> <span class="h-n">false</span>,
+        <span class="h-m">document_links</span> <span class="h-o">=</span> <span class="h-n">false</span>,
+      },
+    },
+  },
+})</code></pre>
+<p>Then:</p>
+<table class="defs">
+<tr><td class="term">nvim-navic</td><td>attach it from the extension's <code>on_attach</code> (LazyVim does that for every server with document symbols): <code>on_attach = function(client, bufnr)</code> <code>require(&quot;nvim-navic&quot;).attach(client, bufnr) end</code></td></tr>
+<tr><td class="term">dropbar.nvim</td><td>nothing to do: without a tree-sitter parser its default sources take the LSP symbols.</td></tr>
+<tr><td class="term">pickers</td><td><code>Snacks.picker.lsp_symbols()</code>, <code>:FzfLua lsp_document_symbols</code>, <code>:Telescope lsp_document_symbols</code>, and the workspace symbol pickers for the headlines of every workspace file. Pickers that filter by kind leave TODO and done headlines out: in snacks.nvim set <code>filter = { org = true }</code> for <code>lsp_symbols</code>, in LazyVim <code>kind_filter = { org = false }</code>. org.nvim's own pickers need no server (<a class="hl" href="#org-pickers">org-pickers</a>).</td></tr>
+<tr><td class="term">trouble.nvim</td><td><code>:Trouble symbols</code>.</td></tr>
+</table>
+<p>The extension's <code>symbol_kinds</code> changes the kinds (for icons or filters).</p>
+<p>Breadcrumbs and sticky headings: nvim-treesitter-context needs a tree-sitter parser, so it shows nothing in org buffers; org.nvim's own sticky context (<a class="hl" href="org-appearance.html#org-context">org-context</a>) keeps the headlines above the screen in view. <code>api.symbol_path()</code> gives the headlines around the cursor cheaply enough for a 'winbar':</p>
+<pre class="code"><code class="language-lua"><span class="h-k">function</span> _G.<span class="h-f">org_breadcrumbs</span>()
+  <span class="h-k">local</span> path <span class="h-o">=</span> <span class="h-f">require</span>(<span class="h-s">&quot;org.api&quot;</span>).<span class="h-f">symbol_path</span>({ <span class="h-m">win</span> <span class="h-o">=</span> vim.<span class="h-m">g</span>.<span class="h-m">statusline_winid</span> }) <span class="h-k">or</span> {}
+  <span class="h-k">local</span> names <span class="h-o">=</span> vim.<span class="h-f">tbl_map</span>(<span class="h-k">function</span>(s) <span class="h-k">return</span> s.<span class="h-m">name</span> <span class="h-k">end</span>, path)
+  <span class="h-k">return</span> (table.<span class="h-f">concat</span>(names, <span class="h-s">&quot; &gt; &quot;</span>):<span class="h-f">gsub</span>(<span class="h-s">&quot;%%&quot;</span>, <span class="h-s">&quot;%%%%&quot;</span>))
+<span class="h-k">end</span>
+vim.<span class="h-m">api</span>.<span class="h-f">nvim_create_autocmd</span>(<span class="h-s">&quot;FileType&quot;</span>, {
+  <span class="h-m">pattern</span> <span class="h-o">=</span> <span class="h-s">&quot;org&quot;</span>,
+  <span class="h-f">callback</span> <span class="h-o">=</span> <span class="h-k">function</span>()
+    vim.<span class="h-m">wo</span>.<span class="h-m">winbar</span> <span class="h-o">=</span> <span class="h-s">&quot;%{%v:lua.org_breadcrumbs()%}&quot;</span>
+  <span class="h-k">end</span>,
+})</code></pre>
+<p>Text objects and motions: nvim-treesitter-textobjects needs a parser too. org.nvim's own keys (<a class="hl" href="org-structure.html#org-textobj">org-textobj</a>, <a class="hl" href="org-structure.html#org-elements">org-elements</a>) cover its usual captures:</p>
+<table class="defs">
+<tr><td class="term long"><code>@class.outer</code> / <code>@class.inner</code></td><td><code>ar</code> / <code>ir</code>: the subtree</td></tr>
+<tr><td class="term long"><code>@function.outer</code> / <code>@function.inner</code></td><td><code>ah</code> / <code>ih</code>: the entry without its children</td></tr>
+<tr><td class="term"><code>@block.outer</code></td><td><code>&lt;prefix&gt;v</code> on the block (the element)</td></tr>
+<tr><td class="term long">next / previous <code>@class.outer</code></td><td><code>]]</code> / <code>[[</code> (visible headlines), <code>][</code> / <code>[]</code> (siblings), <code>g{</code> (parent)</td></tr>
+<tr><td class="term long">next / previous <code>@block.outer</code></td><td><code>&lt;C-c&gt;&lt;M-f&gt;</code> / <code>&lt;C-c&gt;&lt;M-b&gt;</code></td></tr>
+</table>
+<p>Folding needs no helper: org.nvim folds org buffers itself (<a class="hl" href="org-folding.html">org-folding</a>), and the <code>lsp</code> extension also answers <code>textDocument/foldingRange</code>.</p>
+<h3 id="h-text-objects-scopes-and-jumps">Text objects, scopes and jumps</h3>
+<div class="tags"><a class="tag" id="org-integrations-ts" href="#org-integrations-ts">org-integrations-ts</a></div>
+<p>mini.ai, snacks.nvim's scopes and flash.nvim's tree-sitter jump ask tree-sitter for the nodes around the cursor. In org buffers they get org.nvim's structure instead: the headline subtrees, the elements around the cursor (<a class="hl" href="org-structure.html#org-elements">org-elements</a>: blocks, drawers, lists and items, tables, paragraphs, ...) and the links, timestamps and emphasis on its line. When an org buffer is set up and the plugin is loaded (or lazy.nvim loads it later), org.nvim hooks itself in; nothing to configure, and a plugin that isn't installed is never loaded. <code>integrations</code> in <code>setup()</code> turns each one off:</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({
+  <span class="h-m">integrations</span> <span class="h-o">=</span> { <span class="h-m">mini_ai</span> <span class="h-o">=</span> <span class="h-n">true</span>, <span class="h-m">snacks_scope</span> <span class="h-o">=</span> <span class="h-n">true</span>, <span class="h-m">flash</span> <span class="h-o">=</span> <span class="h-n">true</span> },
+})</code></pre>
+<div class="tags"><a class="tag" id="org-integrations-mini-ai" href="#org-integrations-mini-ai">org-integrations-mini-ai</a></div>
+<p>mini.ai: org buffers get these <code>custom_textobjects</code> (in <code>vim.b.miniai_config</code>, kept with any the buffer already has):</p>
+<table class="defs">
+<tr><td class="term"><code>h</code></td><td>the headline and its section, up to the first child (<code>ih</code>: the section without the headline line)</td></tr>
+<tr><td class="term"><code>r</code></td><td>the subtree (<code>ir</code>: below the headline line)</td></tr>
+<tr><td class="term"><code>e</code></td><td>the element at the cursor (<code>ie</code>: a block's or drawer's contents)</td></tr>
+<tr><td class="term"><code>B</code></td><td>a <code>#+BEGIN_</code>..<code>#+END_</code> or dynamic block (<code>iB</code>: its contents; mini.ai's <code>b</code> stays the brackets)</td></tr>
+<tr><td class="term"><code>-</code></td><td>a list item and its children (<code>i-</code>: its text after the bullet and checkbox, charwise)</td></tr>
+<tr><td class="term"><code>T</code></td><td>a table (<code>#+TBLFM:</code> lines included)</td></tr>
+<tr><td class="term"><code>L</code></td><td>a link (<code>iL</code>: its description)</td></tr>
+<tr><td class="term"><code>d</code></td><td>a timestamp or range (<code>id</code>: inside its brackets)</td></tr>
+<tr><td class="term"><code>m</code></td><td>emphasis: *bold*, /italic/, _underline_, +strike+, =verbatim=, ~code~ (<code>im</code>: the text inside the markers)</td></tr>
+</table>
+<p>The letters follow org.nvim's own text objects (<a class="hl" href="org-structure.html#org-textobj">org-textobj</a>), whose buffer keys (<code>ah</code>, <code>ir</code>, ...) stay first; mini.ai adds the &quot;next&quot; and &quot;last&quot; variants (<code>anB</code>, <code>ilL</code>), its counts and its <code>g[</code> / <code>g]</code> motions. A table instead of <code>true</code> gives other letters, <code>false</code> leaves one out:</p>
+<pre class="code"><code class="language-lua">integrations <span class="h-o">=</span> { <span class="h-m">mini_ai</span> <span class="h-o">=</span> { <span class="h-m">block</span> <span class="h-o">=</span> <span class="h-s">&quot;o&quot;</span>, <span class="h-m">emphasis</span> <span class="h-o">=</span> <span class="h-n">false</span> } }</code></pre>
+<p>With the option off, add them to mini.ai yourself, for example only for org buffers:</p>
+<pre class="code"><code class="language-lua">vim.<span class="h-m">api</span>.<span class="h-f">nvim_create_autocmd</span>(<span class="h-s">&quot;FileType&quot;</span>, {
+  <span class="h-m">pattern</span> <span class="h-o">=</span> <span class="h-s">&quot;org&quot;</span>,
+  <span class="h-f">callback</span> <span class="h-o">=</span> <span class="h-k">function</span>()
+    vim.<span class="h-m">b</span>.<span class="h-m">miniai_config</span> <span class="h-o">=</span> {
+      <span class="h-m">custom_textobjects</span> <span class="h-o">=</span> <span class="h-f">require</span>(<span class="h-s">&quot;org.integrations.mini_ai&quot;</span>).<span class="h-f">spec</span>({ <span class="h-m">block</span> <span class="h-o">=</span> <span class="h-s">&quot;o&quot;</span> }),
+    }
+  <span class="h-k">end</span>,
+})</code></pre>
+<div class="tags"><a class="tag" id="org-integrations-snacks-scope" href="#org-integrations-snacks-scope">org-integrations-snacks-scope</a></div>
+<p>snacks.nvim: <code>Snacks.scope</code> has no way to plug in another source, so org.nvim wraps <code>Snacks.scope.get</code> for org buffers (other buffers are left to snacks). The scope at the cursor is the innermost element of two lines or more (snacks' <code>min_size</code>), then each enclosing element and subtree, so <code>Snacks.indent</code>'s scope guide, the <code>ii</code> / <code>ai</code> text objects and the <code>[i</code> / <code>]i</code> jumps follow the org structure. <code>ai</code> takes the whole block, item or subtree; <code>ii</code> its contents (inside the <code>#+BEGIN</code> and <code>#+END</code> lines, below the headline or the item's first line); repeating them in Visual mode grows the selection. The guide is drawn at the element's indentation, so it shows only beside indented lines. Nothing to set up beyond snacks' own:</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;snacks&quot;</span>).<span class="h-f">setup</span>({ <span class="h-m">indent</span> <span class="h-o">=</span> { <span class="h-m">enabled</span> <span class="h-o">=</span> <span class="h-n">true</span> }, <span class="h-m">scope</span> <span class="h-o">=</span> { <span class="h-m">enabled</span> <span class="h-o">=</span> <span class="h-n">true</span> } })</code></pre>
+<div class="tags"><a class="tag" id="org-integrations-flash" href="#org-integrations-flash">org-integrations-flash</a></div>
+<p>flash.nvim: in org windows, flash's tree-sitter jump labels the emphasis, link or timestamp at the cursor, the elements around it and the subtrees; a label selects one, or with an operator acts on it (<code>yS</code> + label). The key LazyVim and flash's README bind,</p>
+<pre class="code"><code class="language-lua">vim.<span class="h-m">keymap</span>.<span class="h-f">set</span>({ <span class="h-s">&quot;n&quot;</span>, <span class="h-s">&quot;x&quot;</span>, <span class="h-s">&quot;o&quot;</span> }, <span class="h-s">&quot;S&quot;</span>, <span class="h-k">function</span>() <span class="h-f">require</span>(<span class="h-s">&quot;flash&quot;</span>).<span class="h-f">treesitter</span>() <span class="h-k">end</span>)</code></pre>
+<p>works unchanged. <code>require(&quot;org.integrations.flash&quot;).jump(opts)</code> does the same even with <code>integrations.flash = false</code>, and is flash's own jump outside org buffers. flash's remote tree-sitter search (<code>treesitter_search</code>) still needs a parser.</p>
+</article>
+<nav class="pager"><a class="prev" href="../manual/org-sync.html"><span>上一页</span>手机和同步</a><a class="next" href="../manual/org-appearance.html"><span>下一页</span>外观和高亮</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L6669">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>

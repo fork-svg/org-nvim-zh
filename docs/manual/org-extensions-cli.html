@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Command line (org) · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="../assets/site.js" defer></script>
+
+</head>
+<body data-root="../">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="../index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="../index.html">首页</a></li>
+<li class=""><a href="../guide.html">指南</a></li>
+<li class=""><a href="../playground.html">互动教程</a></li>
+<li><details class="group" open><summary>手册</summary><ul>
+<li class=""><a href="../manual/index.html">目录</a></li>
+<li class=""><a href="../manual/org-introduction.html">简介</a></li>
+<li class=""><a href="../manual/org-installation.html">安装</a></li>
+<li class=""><a href="../manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="../manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="../manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="../manual/org-tags.html">标签</a></li>
+<li class=""><a href="../manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="../manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="../manual/org-clock.html">计时和工作量</a></li>
+<li class=""><a href="../manual/org-agenda.html">日程</a></li>
+<li class=""><a href="../manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="../manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="../manual/org-capture.html">捕捉</a></li>
+<li class=""><a href="../manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="../manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="../manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="../manual/org-babel.html">源代码块（Babel）</a></li>
+<li class=""><a href="../manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="../manual/org-export.html">导出</a></li>
+<li class=""><a href="../manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="../manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="../manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="../manual/org-completion.html">补全</a></li>
+<li class=""><a href="../manual/org-appearance.html">外观和高亮</a></li>
+<li class=""><a href="../manual/org-config.html">配置参考</a></li>
+<li class=""><a href="../manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="../manual/org-commands.html">命令</a></li>
+<li class=""><a href="../manual/org-api.html">Lua API</a></li>
+<li class=""><a href="../manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="../manual/org-lint.html">检查</a></li>
+<li class=""><a href="../manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="../manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="../manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="../manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="../manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="../manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="../manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="../manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="../manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="../manual/org-extensions-drill.html">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="../manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="../manual/org-extensions-hugo.html">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="../manual/org-extensions-caldav.html">CalDAV sync</a></li>
+<li class="sub"><a href="../manual/org-extensions-cli.html" aria-current="page">Command line (org)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-code.html">Code and notes (code)</a></li>
+<li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="../manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="../manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="../manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="../examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="../examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="../examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="../examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="../examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="../examples/05-tags.html">标签</a></li>
+<li class=""><a href="../examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="../examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="../examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="../examples/09-agenda.html">日程</a></li>
+<li class=""><a href="../examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="../examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="../examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="../examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="../examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="../examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="../examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="../examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="../examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="../examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="../examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="../examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="../parity/review.html">兼容性审查</a></li>
+<li class=""><a href="../parity/index.html">目录</a></li>
+<li class=""><a href="../parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="../extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content manual">
+<article>
+<h1>Command line (org)</h1>
+<div class="tags"><a class="tag" id="org-extensions-cli" href="#org-extensions-cli">org-extensions-cli</a></div>
+<p>Stability: stable (<a class="hl" href="org-extensions.html#org-extensions-stability">org-extensions-stability</a>)</p>
+<p><code>bin/org</code> is a shell command that runs org.nvim in a headless Neovim (<code>nvim --headless -l</code>), to print the agenda, capture, clock in and out, query, change and export headings from a terminal, a status bar, cron, a launcher such as Raycast, a script or an AI agent (every command has JSON output, <a class="hl" href="#org-extensions-cli-json">org-extensions-cli-json</a>). Link it onto your $PATH:</p>
+<pre class="code"><code class="language-sh"><span class="h-f">ln</span> -s /path/to/org.nvim/bin/org ~/.local/bin/org</code></pre>
+<p>or enable the extension and run <code>:Org cli_install</code> (or <code>:Org cli_install DIR</code>, directories complete), which asks before linking <code>bin/org</code> into <code>install_dir</code>:</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({ <span class="h-m">extensions</span> <span class="h-o">=</span> { <span class="h-m">cli</span> <span class="h-o">=</span> { <span class="h-m">install_dir</span> <span class="h-o">=</span> <span class="h-s">&quot;~/bin&quot;</span> } } })</code></pre>
+<p>The command itself works without the extension: enabling it only adds <code>cli_install</code>, the options below and a <code>:checkhealth org</code> section (is <code>bin/org</code> executable, is it the <code>org</code> on $PATH, which config it uses). $ORG_NVIM_BIN picks the Neovim binary (default <code>nvim</code>).</p>
+<p>With the session server on in your Neovim (<code>remote.enabled</code>, <a class="hl" href="org-capture.html#org-remote">org-remote</a>), every command but <code>export</code>, <code>schema</code>, <code>version</code>, <code>mcp</code> and <code>lsp</code> runs in that Neovim, on its buffers, its clock and its configuration, and prints the same output: a capture or <code>org set todo</code> edits the open buffer, and <code>org clock in</code> starts its clock. With none running, or with <code>--no-server</code>, <code>--config</code>, <code>--files</code> or <code>--dir</code>, <code>org</code> works on the files itself, as described below. <code>-v</code> says where a command ran.</p>
+<h3 id="h-configuration">Configuration</h3>
+<p><code>nvim -l</code> skips your init.lua, so <code>org</code> loads its own configuration, the first of:</p>
+<ol>
+<li><code>--config FILE</code></li>
+<li><code>$ORG_NVIM_CONFIG</code></li>
+<li><code>stdpath(&quot;config&quot;)/org-cli.lua</code> (<code>~/.config/nvim/org-cli.lua</code>)</li>
+</ol>
+<p>With none of them the defaults are used. The file is Lua: it either returns the table you pass to <code>setup()</code>, or calls <code>require(&quot;org&quot;).setup()</code> itself. Returning a table keeps it independent of your plugin manager:</p>
+<pre class="code"><code class="language-lua"><span class="h-c">-- ~/.config/nvim/org-cli.lua</span>
+<span class="h-k">return</span> {
+  <span class="h-m">org_directory</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org&quot;</span>,
+  <span class="h-m">agenda_files</span> <span class="h-o">=</span> { <span class="h-s">&quot;~/org/*.org&quot;</span> },
+  <span class="h-m">capture</span> <span class="h-o">=</span> { <span class="h-m">templates</span> <span class="h-o">=</span> { <span class="h-m">t</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Task&quot;</span>,
+    <span class="h-m">template</span> <span class="h-o">=</span> <span class="h-s">&quot;* TODO %?\n  %U&quot;</span>, <span class="h-m">target</span> <span class="h-o">=</span> <span class="h-s">&quot;inbox.org&quot;</span> } } },
+  <span class="h-m">clock</span> <span class="h-o">=</span> { <span class="h-m">persist</span> <span class="h-o">=</span> <span class="h-n">true</span> },
+  <span class="h-m">extensions</span> <span class="h-o">=</span> { <span class="h-m">cli</span> <span class="h-o">=</span> {}, <span class="h-m">ql</span> <span class="h-o">=</span> {} },
+}</code></pre>
+<p>Your whole init.lua works as <code>--config</code> too, but then every call loads all your plugins. A file that fails, returns something else than a table, or gives <code>agenda_files</code> or <code>org_directory</code> a value of the wrong type is a <code>config</code> error (exit 2). <code>--files GLOB</code> (repeatable, or comma-separated) replaces <code>agenda_files</code>, and <code>--dir DIR</code> sets <code>org_directory</code>.</p>
+<p>Nothing waits for input: prompts, confirmations and dangling-clock resolution are turned off, and a command that would need to ask (a capture template with <code>%^{...}</code>, say) fails with exit code 3.</p>
+<h3 id="h-commands">命令</h3>
+<p>TARGET, the heading a command works on, is one of:</p>
+<table class="defs">
+<tr><td class="term"><code>id:ID</code> or a bare ID</td><td>the heading with that ID</td></tr>
+<tr><td class="term"><code>FILE:LINE</code></td><td>the entry containing that line of FILE</td></tr>
+<tr><td class="term"><code>FILE::TITLE</code></td><td>a title in FILE (<code>home.org::*Groceries</code>, as in a link)</td></tr>
+<tr><td class="term"><code>FILE::#CUSTOM_ID</code></td><td>the heading with that CUSTOM_ID</td></tr>
+<tr><td class="term">title words</td><td>a heading of the agenda files whose title contains them (ignoring case; an exact title wins), or an org-ql query when the <code>ql</code> extension is enabled</td></tr>
+</table>
+<p>FILE is an agenda file (a path, a file name or a name without <code>.org</code>) or any org file. When several headings match, nothing is changed: the command lists them (in JSON, <code>details.candidates</code>) and <code>--pick N</code> takes the Nth.</p>
+<p>Each argument is one word, except a last one of free text: TEXT, QUERY, DATE, a property VALUE, or a TARGET with nothing after it (<code>show</code>, <code>id</code>, <code>clock in</code>, <code>archive</code>) takes the remaining words. So quote a TARGET of several words that other arguments follow (<code>set</code>, <code>note</code>, <code>refile</code>): <code>org set todo &quot;Buy milk&quot; DONE</code>. A word no argument takes is a usage error (exit 2), never dropped. An option that takes a value is missing it when the next word is an option itself (<code>--todo --json</code>); give a value that looks like an option as <code>--match=-boss</code>.</p>
+<p>Reading:</p>
+<table class="defs">
+<tr><td class="term long"><code>org agenda [VIEW] [--date DATE] [--span N] [--csv]</code></td><td>The agenda as text, like <code>org-batch-agenda</code>. VIEW is <code>day</code>, <code>week</code>, <code>fortnight</code>, <code>month</code>, <code>year</code> (the date agenda with that span), <code>todo [KEYWORD]</code>, <code>tags MATCH</code>, <code>tags-todo MATCH</code> or the key of one of your <code>agenda.custom_commands</code>; without it, the date agenda with your <code>agenda.span</code>. <code>--date</code> takes anything the date prompt reads (<code>2026-10-01</code>, <code>+1</code>, <code>fri</code>). <code>--span</code> takes a number of days or <code>day</code>, <code>week</code>, <code>fortnight</code>, <code>month</code>, <code>year</code>; anything else is a <code>bad_value</code> error (exit code 2). <code>--csv</code> is <code>org-batch-agenda-csv</code>.</td></tr>
+<tr><td class="term long"><code>org search [QUERY...] [--match MATCH] [--limit N]</code></td><td>Headings of the agenda files matching QUERY, as <code>file:line: heading</code>: the agenda search syntax (<a class="hl" href="org-agenda.html#org-agenda-search">org-agenda-search</a>), or org-ql queries when <code>ql</code> is enabled. <code>--match</code> takes a tags/property match (<code>+work-boss</code>, <code>PRIORITY=&quot;A&quot;</code>, <a class="hl" href="org-match-syntax.html">org-match-syntax</a>) instead. As in the agenda, archived and commented subtrees, and files tagged ARCHIVE in their <code>#+FILETAGS:</code>, are left out.</td></tr>
+<tr><td class="term long"><code>org headlines [FILE...] [filters]</code></td><td>(also <code>org query</code>) Headings of the agenda files (or of the FILEs given) passing every filter: <code>--todo KW</code> (a keyword, or <code>any</code>, <code>open</code> for not done, <code>done</code>, <code>none</code>; repeatable), <code>--tag TAG</code> (own or inherited; repeatable, all must match), <code>--property NAME=VALUE</code> (<code>NAME</code> alone: has the property; inherited as <code>use_property_inheritance</code> says, like a property match), <code>--level N</code> or <code>--level 1..2</code>, <code>--scheduled FROM..TO</code> and <code>--deadline FROM..TO</code> (dates as <code>--date</code> reads them, either side optional, a single date for that day, or <code>any</code>, <code>none</code>), <code>--file FILE</code> (one of the agenda files), <code>--match MATCH</code> and <code>--limit N</code>. Archived and commented subtrees, and files tagged ARCHIVE in their <code>#+FILETAGS:</code>, are left out unless <code>--archived</code>. A <code>--todo</code> that is no keyword of the files is a <code>bad_value</code> error, as is a <code>--match</code> (here and in <code>search</code>) with text it can't read: where Emacs ignores the rest of a match from the first thing it can't read (<code>+work +boss</code> is <code>+work</code>), the CLI says so instead of quietly giving other headings.</td></tr>
+<tr><td class="term long"><code>org show TARGET [--children]</code></td><td>A heading with its properties, planning, clocks, plain timestamps and body text; <code>--children</code> adds the child entries (the whole subtree, each entry as the heading is shown).</td></tr>
+<tr><td class="term long"><code>org clock [status] [--short] [--format FMT]</code></td><td>The running clock: the one saved in <code>clock.persist_file</code> (with <code>clock.persist</code>), else the first open CLOCK line in the agenda files. <code>--format</code> expands %e (elapsed), %t (heading), %T (total with earlier clocks), %E (effort), %f (file) and %s (start), and prints nothing without a clock; <code>--short</code> uses <code>status_format</code>.</td></tr>
+<tr><td class="term long"><code>org templates</code>, <code>org files</code>, <code>org tags</code>, <code>org keywords</code></td><td>The capture templates (also <code>org capture --list</code>), the agenda files, the tags used in the agenda files or defined in <code>tags</code>, and the TODO keyword sequences with the priority range.</td></tr>
+<tr><td class="term long"><code>org export FILE BACKEND [-o OUTPUT|--stdout]</code></td><td>Export FILE with a back-end of <code>:Org export</code> (<code>html</code>, <code>md</code>, <code>latex</code>, <code>pdf</code>, <code>ascii</code>, ...) and print the output path, or write the text to stdout. Other formats go through pandoc (to a file only); a BACKEND that is neither is a <code>bad_value</code> error (exit code 2). Code blocks are evaluated as in <code>:Org export</code>, but one that would ask first (<code>babel.confirm_evaluate</code>, <code>:eval query</code>) stops the export with exit code 3 and nothing written, as in Emacs's batch export; <code>babel.confirm_evaluate = false</code> in the CLI's configuration runs them without asking (for files you trust).</td></tr>
+</table>
+<p>Writing (each saves the files it changed):</p>
+<table class="defs">
+<tr><td class="term long"><code>org capture [-t KEY] [--field NAME=VALUE] [--input FILE] [--id] TEXT...</code></td><td>Capture TEXT with template KEY (default: <code>capture_template</code>, else <code>t</code>, else the first). The template finishes at once, the text going where <code>%?</code> is (at the end without one) as if typed there: its first line continues that line and the others are indented as Org indents a new line there. After a heading they start at column 0 (at its level + 1 with <code>adapt_indentation = true</code>), so <code>* %?</code> puts the first line in the heading and the rest in its body, the heading keeping the tags that follow <code>%?</code>; after a list bullet they start after the bullet; else like the line of <code>%?</code>; in a table row each line is a row of its own. A line that would start a heading gets a space before it, as with <code>add --body</code>. A template that uses <code>%i</code> gets the text there instead, the text before <code>%i</code> starting each of its lines as in Emacs. TEXT <code>-</code> reads stdin. On Windows, <code>org.cmd</code> runs through cmd.exe, which cuts an argument at a newline: give text of several lines on stdin (<code>-</code>) or in <code>--input</code>. <code>--field</code> answers a prompt of the template by its name, the text before any <code>|</code>: <code>%^{Title}</code> and <code>%^{Title}p</code> by <code>Title</code>, <code>%^{Size [cm]|10}</code> by <code>Size [cm]</code>, <code>%^g</code> by <code>标签</code>, a date prompt by its name or <code>Date</code> (names ignore case). <code>--input FILE</code> (<code>-</code> for stdin) reads a JSON object <code>{ &quot;template&quot;, &quot;text&quot;, &quot;fields&quot; }</code> instead. <code>--id</code> gives the new entry an ID. When the target can't be saved (a read-only file, say) the capture fails and the target, also a running Neovim's buffer of it, is left as it was: running the command again doesn't store the text twice.</td></tr>
+<tr><td class="term long"><code>org clock in [--pick N] TARGET</code>, <code>org clock out</code>, <code>org clock cancel</code></td><td>Clock in a heading, clock out of the running clock, or cancel it.</td></tr>
+<tr><td class="term long"><code>org add PARENT TITLE [--todo KW] [--priority P] [--tag TAG]...</code></td><td><p><code>[--scheduled DATE] [--deadline DATE] [--property NAME=VALUE]...</code></p>
+<table class="defs">
+<tr><td class="term long"><code>[--body TEXT] [--first]</code></td><td>Add a heading TITLE as the last child of the heading PARENT (a TARGET), or with <code>--first</code> as its first child. A PARENT that is an org file (a path, or an agenda file's name with or without <code>.org</code>) adds a top-level heading at the end of that file; use <code>FILE::TITLE</code> or <code>id:</code> for a heading whose title is also a file's name. The new heading is one level below PARENT (two with <code>odd_levels_only</code>), after the subtree's text and before the blank lines that follow it, with a blank line before it per <code>blank_before_new_entry.heading</code>. KW must be a keyword of the file (a done one is set as <code>set todo</code> would); tags (<code>--tag a,b</code> or repeated), the priority, the dates (read like <code>set scheduled</code>), the properties and the body (split at newlines, indented per <code>adapt_indentation</code>) are written as org.nvim writes them. A body line starting with <code>*</code> at column 0 gets one space before it, so it stays text (a list item) and doesn't start a heading. A property VALUE is one line: one with a newline fails with <code>bad_value</code>.</td></tr>
+</table></td></tr>
+<tr><td class="term"><code>org append TARGET TEXT</code></td><td>Append TEXT to the body of the heading, after its planning, drawers and text and before its first child heading; TEXT <code>-</code> reads stdin. After text already there it starts a new paragraph (a blank line first); a lone timestamp line under the heading (the &quot;created at&quot; line of a capture's <code>%U</code> / <code>%T</code>) is not text, so the first append goes right under it. Lines are indented and a <code>*</code> line is kept as text as with <code>add --body</code>. On Windows, <code>org.cmd</code> runs through cmd.exe, which cuts an argument at a newline: give text of several lines on stdin (<code>-</code>). <code>org mcp</code> passes it whole.</td></tr>
+<tr><td class="term long"><code>org set title TARGET TITLE</code></td><td>Replace the title (one line), keeping the TODO keyword, priority, COMMENT and tags, like <code>edit_headline</code> (<a class="hl" href="org-structure.html">org-structure</a>).</td></tr>
+<tr><td class="term long"><code>org set todo TARGET STATE [--note TEXT]</code></td><td>Set the TODO keyword (<code>none</code> or &quot;&quot; removes it), with org.nvim's logging, blocking and repeaters. A note the change logs gets TEXT, else it is logged without one.</td></tr>
+<tr><td class="term long"><code>org set tags TARGET [TAGS] [--add TAG] [--remove TAG]</code></td><td>Set the tags (<code>a:b</code> or <code>a,b</code>; &quot;&quot; removes them all), or add and remove some. A tag has letters and digits (of any script, <code>café</code>) and <code>_ @ # %</code>, as <code>org-tag-re</code> says.</td></tr>
+<tr><td class="term long"><code>org set priority TARGET PRIORITY</code></td><td><code>A</code>, <code>B</code>, ... (a number with numeric <code>#+PRIORITIES</code>); <code>none</code> removes.</td></tr>
+<tr><td class="term long"><code>org set property TARGET NAME VALUE</code>, <code>org set property TARGET NAME --delete</code></td><td>VALUE is one line (as for <code>add --property</code>): one with a newline fails with <code>bad_value</code>.</td></tr>
+</table>
+<p><code>org set scheduled TARGET DATE [--note TEXT]</code></p>
+<table class="defs">
+<tr><td class="term long"><code>org set deadline TARGET DATE [--note TEXT]</code></td><td>DATE as the date prompt reads it (<code>2026-10-05 14:00</code>, <code>+2d</code>, <code>fri</code>) or a timestamp (<code>&quot;&lt;2026-10-05 Mon +1w&gt;&quot;</code>); <code>none</code> removes the date. As when you schedule in Neovim (<a class="hl" href="org-dates.html">org-dates</a>), the old date's repeater and warning period stay, CLOSED is removed, and the change is logged per <code>log_reschedule</code> / <code>log_redeadline</code>, with the <code>--note</code> text or without a note.</td></tr>
+<tr><td class="term"><code>org note TARGET TEXT</code></td><td>Add a note to the entry's log, like <code>add_note</code> (<a class="hl" href="org-todo.html">org-todo</a>); TEXT <code>-</code> reads stdin.</td></tr>
+<tr><td class="term long"><code>org refile TARGET DESTINATION</code></td><td>Move the subtree under DESTINATION, a TARGET, or to the end of an org file given by its path.</td></tr>
+<tr><td class="term"><code>org archive TARGET</code></td><td>Archive the subtree with <code>archive_default_command</code>.</td></tr>
+<tr><td class="term long"><code>org id TARGET [--create]</code></td><td>The heading's ID; <code>--create</code> makes one when it has none.</td></tr>
+<tr><td class="term long"><code>org protocol URL [--field NAME=VALUE]</code></td><td>An <code>org-protocol://</code> URL (<a class="hl" href="org-capture.html#org-protocol">org-protocol</a>), for a URL handler: the session server handles it (a capture opens its window there). With no Neovim running, a capture is stored at once with its template, as <code>org capture</code> does, and <code>store-link</code> and <code>open-source</code> fail.</td></tr>
+</table>
+<table class="defs">
+<tr><td class="term long"><code>org mcp [--read-only] [--isolated]</code></td><td>Serve the commands to an AI agent as an MCP server, on stdin and stdout (<a class="hl" href="#org-extensions-cli-mcp">org-extensions-cli-mcp</a>).</td></tr>
+<tr><td class="term"><code>org lsp [--stdio]</code></td><td>Serve the language server of the <code>lsp</code> extension to an editor other than Neovim, on stdin and stdout (<a class="hl" href="#org-extensions-cli-lsp">org-extensions-cli-lsp</a>).</td></tr>
+</table>
+<p><code>org schema [COMMAND]</code>, <code>org help [--json]</code>, <code>org version</code></p>
+<p>Every command writes its result to stdout and messages to stderr (<code>-v</code> adds org.nvim's own messages, <code>-q</code> hides warnings). Exit codes: 0 done, 1 failed or nothing found (<code>search</code>, <code>clock out</code> without a clock), 2 bad usage, 3 input needed, 4 the file is busy (unsaved changes in a running Neovim, another <code>org</code> writing) or changed on disk while the command ran.</p>
+<p>A write refuses a file that a running Neovim has unsaved changes in (its swap file says so), and <code>--force</code> writes anyway. Every file a command would write is checked before anything changes, so a refused command leaves all of them as they were (<code>clock in</code> checks the file of the running clock it clocks out of too). Writes go through <code>utils.save_buffer</code>, so the write hooks run: with <code>crypt.encrypt_on_save</code> the entries tagged <code>crypt</code> are encrypted, as when Neovim saves them (<a class="hl" href="org-crypt.html">org-crypt</a>). The hooks of all the files run before any is written; one that needs input, such as the passphrase of symmetric encryption, fails the command with exit code 3 and writes nothing, so give <code>crypt.key</code> (or <code>CRYPTKEY</code>) a public key for writes from the shell. Every write, a capture too, touches the clock stamp file, so a Neovim with the extension enabled rereads the files (see below).</p>
+<p>Write commands run one at a time: each holds a lock (<code>stdpath(&quot;state&quot;)/org/cli-write.lock</code>) while it reads and writes, so parallel calls (a script capturing in a loop, an agent's tools) wait for each other and none loses another's change. One that waits longer than <code>lock_timeout</code> seconds fails with <code>file_busy</code> (exit 4); a lock left by an <code>org</code> that is gone is taken over. A file another program writes while a command changes it (Neovim saving it, a sync tool) is not written over: the command fails with <code>file_changed</code> (exit 4) and you run it again. Without the session server only; with it, the commands run in its Neovim one after the other anyway.</p>
+<div class="tags"><a class="tag" id="org-extensions-cli-json" href="#org-extensions-cli-json">org-extensions-cli-json</a></div>
+<h4>JSON</h4>
+<p><code>--json</code> makes every command print one JSON object, the envelope:</p>
+<pre class="code"><code class="language-json">{ &quot;version&quot;: 1, &quot;ok&quot;: true, &quot;command&quot;: &quot;set todo&quot;,
+  &quot;data&quot;: { ... }, &quot;warnings&quot;: [], &quot;errors&quot;: [] }</code></pre>
+<p><code>version</code> is the version of the JSON output: it changes only when a key is removed or changes meaning (new keys can appear). <code>command</code> is the command's full name (<code>clock status</code>, <code>set tags</code>, ...), or null for an error found before the command is known (an unknown command or option, a flag without its value), <code>data</code> its result, <code>warnings</code> org.nvim's warnings during the command. An error makes <code>ok</code> false, <code>data</code> null and <code>errors</code> one object <code>{ code, message, details }</code>, still on stdout, with the exit code of the error:</p>
+<table class="defs">
+<tr><td class="term"><code>usage</code> (2)</td><td>bad or missing arguments</td></tr>
+<tr><td class="term"><code>unknown_command</code> (2)</td><td>no such command</td></tr>
+<tr><td class="term"><code>unknown_option</code> (2)</td><td>no such option, or not one of this command</td></tr>
+<tr><td class="term"><code>bad_value</code> (2)</td><td>a date, keyword, priority, template, file, match or JSON that cannot be read or names nothing</td></tr>
+<tr><td class="term"><code>config</code> (2)</td><td>the configuration file is missing or fails</td></tr>
+<tr><td class="term"><code>not_found</code> (1)</td><td>no heading matches the target</td></tr>
+<tr><td class="term"><code>ambiguous</code> (1)</td><td>several headings match: <code>details.candidates</code></td></tr>
+<tr><td class="term"><code>no_clock</code> (1)</td><td>no running clock</td></tr>
+<tr><td class="term"><code>failed</code> (1)</td><td>org.nvim refused (<code>details.messages</code> says why)</td></tr>
+<tr><td class="term"><code>internal</code> (1)</td><td>an unexpected error</td></tr>
+<tr><td class="term"><code>input_needed</code> (3)</td><td>the command would have to ask: <code>details.prompt</code> names the question (answer a capture prompt with <code>--field</code>; a confirmation or a passphrase can't be answered)</td></tr>
+<tr><td class="term"><code>file_busy</code> (4)</td><td>unsaved changes in a running Neovim: <code>details.file</code>, <code>details.pid</code>; or another <code>org</code> kept the write lock: <code>details.lock</code></td></tr>
+<tr><td class="term"><code>file_changed</code> (4)</td><td>another program wrote <code>details.file</code> while the command changed it; it was not written, run the command again</td></tr>
+</table>
+<p>In JSON mode stdout holds nothing but that object and stderr stays empty unless <code>-v</code>, so <code>2&gt;&amp;1</code> is safe. A command that finds nothing exits 0 with an empty list. <code>--jsonl</code> prints one result per line instead (the items of <code>agenda</code>, the headings of <code>search</code> and <code>headlines</code>, the entries of <code>templates</code>, <code>files</code> and <code>tags</code>; other commands print their <code>data</code> on one line), and an error as the envelope line.</p>
+<p>The <code>data</code> of each command:</p>
+<table class="defs">
+<tr><td class="term"><code>agenda</code></td><td><code>{ view, key, start, end, items }</code>; an item has <code>date</code>, <code>time</code>, <code>end_time</code>, <code>type</code> (scheduled, deadline, timestamp, todo, tagsmatch, ...), <code>todo</code>, <code>priority</code>, <code>title</code>, <code>tags</code>, <code>category</code>, <code>file</code>, <code>line</code>, <code>id</code>, <code>level</code>, <code>timestamp</code>, <code>extra</code>, <code>done</code> and <code>text</code> (the agenda line)</td></tr>
+<tr><td class="term"><code>search</code>, <code>headlines</code></td><td>a list of headings</td></tr>
+<tr><td class="term"><code>show</code></td><td>an entry: a heading plus <code>properties</code> (an object), <code>effort_minutes</code>, <code>clock</code> (<code>count</code>, <code>running</code>, <code>minutes</code>, <code>total</code>, <code>subtree_minutes</code>, <code>subtree_total</code>, <code>entries</code> of <code>{ start, end, minutes, line }</code>), <code>timestamps</code>, <code>body</code> and <code>children</code> (entries, or null without <code>--children</code>)</td></tr>
+<tr><td class="term"><code>clock ...</code></td><td><code>{ active, title, file, line, id, start, start_iso, minutes, elapsed, total, effort }</code>; <code>clock out</code> and <code>cancel</code>: <code>{ active, title, file, minutes, duration, canceled }</code></td></tr>
+<tr><td class="term"><code>capture</code></td><td><code>{ file, line, template, type, id, headline }</code></td></tr>
+<tr><td class="term"><code>add</code></td><td><code>{ headline, parent }</code> (<code>parent</code> null for a heading added at the top level of a file)</td></tr>
+<tr><td class="term"><code>append</code></td><td><code>{ headline, text }</code></td></tr>
+<tr><td class="term"><code>set ...</code>, <code>note</code></td><td><code>{ headline, field, old, new }</code> (and <code>repeated</code> for <code>set todo</code>, <code>name</code> for <code>set property</code>)</td></tr>
+<tr><td class="term"><code>refile</code></td><td><code>{ headline, from: { file, line } }</code></td></tr>
+<tr><td class="term"><code>archive</code></td><td><code>{ title, from, archive_file, headline }</code></td></tr>
+<tr><td class="term"><code>id</code></td><td><code>{ id, created, headline }</code></td></tr>
+<tr><td class="term"><code>templates</code></td><td>a list of <code>{ key, description, type, target, group }</code></td></tr>
+<tr><td class="term"><code>files</code></td><td>a list of <code>{ file, title, category, headlines }</code></td></tr>
+<tr><td class="term"><code>tags</code></td><td>a list of <code>{ name, count, defined }</code></td></tr>
+<tr><td class="term"><code>keywords</code></td><td><code>{ sequences, todo, done, priority }</code></td></tr>
+<tr><td class="term"><code>export</code></td><td><code>{ file, backend, output, text }</code></td></tr>
+</table>
+<p>A heading is <code>{ file, line, end_line, level, id, custom_id, todo, todo_type (&quot;todo&quot;, &quot;done&quot; or null), priority, title, raw_title, tags (with inherited ones), local_tags, category, outline_path, scheduled, deadline, closed, archived, commented }</code>. A timestamp is <code>{ raw, date, time, end_time, start, end, active, repeater, warning }</code>, where <code>raw</code> is the org text (<code>&lt;2026-10-02 Fri 10:00-11:00 +1w&gt;</code>) and <code>start</code> and <code>end</code> are ISO 8601 in local time (<code>2026-10-02T10:00</code>, <code>2026-10-02</code> without a time). Paths are absolute; a missing value is null.</p>
+<p><code>org schema</code> prints all of this as JSON: every command with its usage, arguments, flags, an <code>input_schema</code> (a JSON Schema of its arguments and flags) and the JSON Schema of its <code>data</code>, the error and exit codes, and the shared types under <code>$defs</code>. <code>org schema set todo</code> describes one command; <code>org help --json</code> (or <code>org COMMAND --help --json</code>) is the same in an envelope.</p>
+<h3 id="h-examples">示例</h3>
+<p>The running clock in the tmux status line (refreshed every 15 seconds):</p>
+<pre class="code"><code class="language-tmux">set -g status-interval 15
+set -g status-right &quot;#(org clock status --format '#[fg=green]%e %t')&quot;</code></pre>
+<p>Today's agenda mailed every morning, and the week written to a file every hour, with cron:</p>
+<pre class="code"><code class="language-crontab">0 7 * * *  org agenda day | mail -s &quot;Agenda&quot; me@example.com
+0 * * * *  org agenda week &gt; ~/public/agenda.txt</code></pre>
+<p>Next three timed items for a status bar (SketchyBar, waybar, ...):</p>
+<pre class="code"><code class="language-sh"><span class="h-f">org</span> agenda --jsonl | jq -r <span class="h-s">'select(.time) | &quot;\(.time) \(.title)&quot;'</span> | head -3</code></pre>
+<p>More jq one-liners:</p>
+<pre class="code"><code class="language-sh"><span class="h-c"># overdue deadlines, oldest first</span>
+<span class="h-f">org</span> headlines --todo open --deadline ..yesterday --json |
+<span class="h-f">  jq</span> -r <span class="h-s">'.data | sort_by(.deadline.start)[] | &quot;\(.deadline.date) \(.title)&quot;'</span>
+<span class="h-c"># minutes clocked on a task</span>
+<span class="h-f">org</span> show id:4f1c... --json | jq <span class="h-s">'.data.clock.subtree_minutes'</span>
+<span class="h-c"># mark the first NEXT of a project done, by its ID</span>
+<span class="h-f">id</span>=$(org headlines --todo NEXT --file projects --limit 1 --json | jq -r <span class="h-s">'.data[0].id'</span>)
+<span class="h-f">org</span> set todo <span class="h-s">&quot;id:$id&quot;</span> DONE
+<span class="h-c"># what failed, and why</span>
+<span class="h-f">org</span> set todo <span class="h-s">&quot;Write report&quot;</span> DONE --json | jq -r <span class="h-s">'.errors[] | &quot;\(.code): \(.message)&quot;'</span></code></pre>
+<p>Capture from a launcher or a shell alias, or with the answers of a template's prompts:</p>
+<pre class="code"><code class="language-sh"><span class="h-f">org</span> capture -t t <span class="h-s">&quot;Call the dentist&quot;</span>
+<span class="h-f">pbpaste</span> | org capture -t n -
+<span class="h-f">org</span> capture -t m --field Who=Ann --field When=fri <span class="h-s">&quot;Talk about the offsite&quot;</span>
+<span class="h-f">echo</span> <span class="h-s">'{&quot;template&quot;:&quot;t&quot;,&quot;text&quot;:&quot;Renew passport&quot;}'</span> | org capture --input - --json</code></pre>
+<h3 id="h-an-agent-tool">An agent tool</h3>
+<p>The CLI makes a small tool interface for an AI agent: the agent runs <code>org ... --json</code>, reads <code>ok</code>, <code>data</code> and <code>errors</code>, and retries an <code>ambiguous</code> target with <code>--pick N</code> or an ID. <code>org schema</code> gives the <code>input_schema</code> of every command, ready to pass as a tool definition, for example to the Anthropic API:</p>
+<pre class="code"><code class="language-json">{
+  &quot;name&quot;: &quot;org_set_todo&quot;,
+  &quot;description&quot;: &quot;Set the TODO keyword of an org heading (org set todo).&quot;,
+  &quot;input_schema&quot;: {
+    &quot;type&quot;: &quot;object&quot;,
+    &quot;properties&quot;: {
+      &quot;target&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;id:ID, FILE:LINE, FILE::TITLE or title words&quot; },
+      &quot;state&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;a TODO keyword, or none&quot; },
+      &quot;note&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;--note: text of a log note&quot; }
+    },
+    &quot;required&quot;: [&quot;target&quot;, &quot;state&quot;]
+  }
+}</code></pre>
+<p>The tool's handler runs <code>org set todo TARGET STATE [--note NOTE] --json</code> (the arguments as separate words, not through a shell) and returns the envelope. To generate one tool per command:</p>
+<pre class="code"><code class="language-sh"><span class="h-f">org</span> schema | jq <span class="h-s">'[.commands[]</span>
+  | select(.name != <span class="h-s">&quot;help&quot;</span> and .name != <span class="h-s">&quot;mcp&quot;</span>) | {
+<span class="h-f">  name</span>: (<span class="h-s">&quot;org_&quot;</span> + (.name | gsub(<span class="h-s">&quot; &quot;</span>; <span class="h-s">&quot;_&quot;</span>))),
+<span class="h-f">  description</span>: .summary, input_schema: .input_schema }]<span class="h-s">'</span></code></pre>
+<p>A read-only agent gets the commands whose <code>writes</code> is false. An agent that speaks MCP needs none of this: <code>org mcp</code> serves the same tools.</p>
+<div class="tags"><a class="tag" id="org-extensions-cli-mcp" href="#org-extensions-cli-mcp">org-extensions-cli-mcp</a></div>
+<h4>MCP server</h4>
+<p><code>org mcp</code> is a Model Context Protocol server for AI agents and the apps that run them (Claude Code, Claude Desktop, editors with an MCP client): it reads JSON-RPC 2.0 messages from stdin, one per line, and writes its answers to stdout, until stdin closes. Add it to a client as a stdio server whose command is <code>org mcp</code>. For Claude Code:</p>
+<pre class="code"><code class="language-sh"><span class="h-f">claude</span> mcp add org -- org mcp</code></pre>
+<p>or, in a project's <code>.mcp.json</code> (Claude Desktop's <code>claude_desktop_config.json</code> takes the same <code>mcpServers</code> object):</p>
+<pre class="code"><code class="language-json">{ &quot;mcpServers&quot;: { &quot;org&quot;: { &quot;command&quot;: &quot;org&quot;, &quot;args&quot;: [&quot;mcp&quot;] } } }</code></pre>
+<p>A desktop app may not see your shell's $PATH: give <code>command</code> the full path of <code>bin/org</code> then. Global options go before <code>mcp</code> and apply to every tool call (<code>&quot;args&quot;: [&quot;--config&quot;, &quot;/path/cfg.lua&quot;, &quot;mcp&quot;]</code>).</p>
+<p>Every command but <code>schema</code>, <code>help</code>, <code>version</code>, <code>protocol</code>, <code>mcp</code> and <code>lsp</code> is a tool, named after it with <code>_</code> for spaces (<code>agenda</code>, <code>headlines</code>, <code>show</code>, <code>capture</code>, <code>clock_in</code>, <code>set_todo</code>, <code>note</code>, <code>refile</code>, <code>export</code>, ...), with a description written for the agent: what the tool is for and when to use it. The server's instructions tell the agent how targets, dates and errors work, and today's date. A tool's input schema is the command's <code>input_schema</code> from <code>org schema</code>, without <code>--force</code> (a file with unsaved changes in Neovim gives <code>file_busy</code>, so the agent asks you to save it), <code>--input</code>, <code>--list</code> and <code>--csv</code>. Arguments the tool doesn't take, or a missing one, are an error result the agent can correct. Text arguments can't be &quot;-&quot;: the server's stdin is the protocol. Each tool is annotated as read-only or not (<code>readOnlyHint</code>), and as replacing what is there (<code>destructiveHint</code>: <code>set_*</code>, <code>refile</code>, <code>archive</code>, <code>clock_cancel</code>, <code>export</code>) or not.</p>
+<p>A tool's result is the command's <code>data</code> (<a class="hl" href="#org-extensions-cli-json">org-extensions-cli-json</a>) as JSON text, made shorter for the agent to read: null fields, empty lists and false flags are left out, a timestamp is its Org text and its ISO <code>start</code> and <code>end</code>, paths under your home directory start with <code>~/</code>, and every heading has a <code>target</code> (<code>id:ID</code>, or <code>FILE:LINE</code>) that a tool taking a heading reads back. A failed call is a result with <code>isError</code> set and the text <code>{ error, message, details }</code>, <code>error</code> being the error code. <code>search</code> and <code>headlines</code> return at most 50 headings when the call gives no <code>limit</code>, and say so when more match. Warnings come as a second text.</p>
+<h3 id="h-prompts">Prompts</h3>
+<p>The server also offers prompts, which a client shows as commands (in Claude Code <code>/mcp__org__plan_day</code>):</p>
+<table class="defs">
+<tr><td class="term"><code>plan_day</code></td><td>today's agenda, deadlines and open tasks, and a plan for the day</td></tr>
+<tr><td class="term"><code>weekly_review</code></td><td>a weekly review: what got done, what is coming, stale tasks, the inbox</td></tr>
+<tr><td class="term"><code>triage_inbox</code></td><td>a proposed action for each captured item (<code>file</code>: the inbox, by default where the templates capture)</td></tr>
+</table>
+<p>Each asks the agent to propose changes and make them once you agree.</p>
+<p>Each call runs <code>org COMMAND ... --json</code> as from a shell: it sees the files as they are on disk and writes them as <code>org</code> does (the swap-file guard, the write hooks); with the session server on (<a class="hl" href="org-capture.html#org-remote">org-remote</a>) the call runs in that Neovim instead, unless <code>--config</code>, <code>--files</code>, <code>--dir</code> or <code>--no-server</code> came before <code>mcp</code>. Otherwise the server runs it in its own Neovim, which loaded the configuration when it started (restart the server after changing it), and then closes what the call opened: the next call reads the files, the running clock and the ID database again, so it sees what Neovim or another <code>org</code> changed meanwhile. A call takes a few milliseconds, the agenda of many files longer. <code>export</code>, which runs code blocks and other programs, runs in a new Neovim. With <code>--isolated</code> (or the <code>mcp.isolated</code> option) every call does: each then takes as long as <code>org</code> from a shell, the configuration is read each time, and a call still running after 10 minutes is stopped, where one that hangs in the server's Neovim holds up the calls after it. Calls are answered in order, one at a time. Nothing but protocol messages goes to stdout; <code>-v</code> copies each call's messages to stderr, which clients log.</p>
+<p><code>--read-only</code> (or the <code>mcp.read_only</code> option) leaves out the tools that change files (every <code>writes</code> command, and <code>export</code>, which writes its output file); calling one anyway gives an error result. The server speaks MCP protocol versions 2025-06-18, 2025-03-26 and 2024-11-05.</p>
+<div class="tags"><a class="tag" id="org-extensions-cli-lsp" href="#org-extensions-cli-lsp">org-extensions-cli-lsp</a></div>
+<h4>Language server for other editors</h4>
+<p><code>org lsp</code> (<code>--stdio</code> is accepted and changes nothing: it is the only transport) runs the language server of <a class="hl" href="org-extensions-lsp.html">org-extensions-lsp</a> as a program, for editors that start one: Helix, VS Code, Zed, Emacs, Kakoune. It speaks LSP on stdin and stdout (<code>Content-Length</code> headers) until the editor sends <code>exit</code> or closes stdin, and exits 0 after a <code>shutdown</code>, 1 without one. Messages go to stderr, which editors log. It takes no <code>--json</code> or <code>--jsonl</code> (the protocol is already JSON), and it doesn't run in a session (<a class="hl" href="org-capture.html#org-remote">org-remote</a>): it always starts its own Neovim.</p>
+<p>It reads the configuration as every <code>org</code> command does (<code>--config</code>, $ORG_NVIM_CONFIG or <code>stdpath(&quot;config&quot;)/org-cli.lua</code>): <code>org_directory</code>, <code>agenda_files</code>, TODO keywords, and the <code>extensions.lsp</code> options if you enable it there. The editor's workspace folders join the workspace files (references, rename, workspace symbols). A document the editor opens is read from what the editor sends, unsaved changes included; other files from disk.</p>
+<p>Everything the server does in Neovim works, with these differences:</p>
+<ul>
+<li>no code lenses, and the code actions are only those that are edits (lint quick fixes, conversions): the commands (TODO state, schedule, refile, ...) run org actions in a Neovim buffer, which the editor wouldn't see;</li>
+<li>a rename's edits are applied by the editor, in open and closed files alike (<code>rename.write_unloaded</code> doesn't apply);</li>
+<li>positions are UTF-8 when the editor offers it (Helix, Neovim), else UTF-16, which every editor takes.</li>
+</ul>
+<p>Helix (<code>~/.config/helix/languages.toml</code>):</p>
+<pre class="code"><code class="language-toml">[language-server.org]
+command = &quot;org&quot;
+args = [&quot;lsp&quot;, &quot;--stdio&quot;]
+
+[[language]]
+name = &quot;org&quot;
+scope = &quot;source.org&quot;
+file-types = [&quot;org&quot;]
+roots = []
+comment-token = &quot;#&quot;
+language-servers = [&quot;org&quot;]</code></pre>
+<p>Emacs (eglot):</p>
+<pre class="code"><code class="language-elisp">(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '(org-mode . (&quot;org&quot; &quot;lsp&quot; &quot;--stdio&quot;))))</code></pre>
+<p>then <code>M-x eglot</code> in an Org buffer. VS Code and Zed start language servers through extensions: use a generic LSP client extension, with the command <code>org</code>, the arguments <code>lsp --stdio</code> and the <code>org</code> language. Give the full path of <code>bin/org</code> when the editor doesn't see your shell's $PATH, and global options before <code>lsp</code> (<code>[&quot;--config&quot;, &quot;/path/cfg.lua&quot;, &quot;lsp&quot;, &quot;--stdio&quot;]</code>).</p>
+<p>Each <code>org lsp</code> is its own Neovim (<code>nvim --headless</code>): it answers <code>initialize</code> within about 0.1 s of starting, then parses the workspace in the background as in Neovim.</p>
+<h3 id="h-options-extensionscli">Options (<code>extensions.cli</code>)</h3>
+<table class="defs">
+<tr><td class="term"><code>install_dir</code></td><td>where <code>cli_install</code> links <code>org</code> (&quot;~/.local/bin&quot;)</td></tr>
+<tr><td class="term"><code>capture_template</code></td><td>template key of <code>org capture</code> without <code>-t</code> (nil)</td></tr>
+<tr><td class="term"><code>status_format</code></td><td>format of <code>org clock status --short</code> (&quot;%e %t&quot;)</td></tr>
+<tr><td class="term"><code>watch_clock</code></td><td>a running Neovim follows the shell's clock (true)</td></tr>
+<tr><td class="term"><code>lock_timeout</code></td><td>seconds a write waits for another <code>org</code> writing before it fails with <code>file_busy</code> (10)</td></tr>
+<tr><td class="term"><code>mcp.read_only</code></td><td><code>org mcp</code> lists only the tools that don't change files, as <code>--read-only</code> (false)</td></tr>
+<tr><td class="term"><code>mcp.isolated</code></td><td><code>org mcp</code> runs each tool call in a new Neovim, as <code>--isolated</code> (false)</td></tr>
+</table>
+<h3 id="h-clock-in-the-shell-and-in-neovim">Clock in the shell and in Neovim</h3>
+<p>Every write (<code>org clock in</code>, <code>out</code> and <code>cancel</code>, <code>capture</code>, <code>set</code>, ...) touches <code>stdpath(&quot;data&quot;)/org/cli-clock.stamp</code>. A Neovim with the extension enabled (and <code>watch_clock</code>) checks that file every two seconds and on <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=FocusGained">FocusGained</a>; when it changed, Neovim rereads changed files (<a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Achecktime">:checktime</a>), drops its running clock when the open CLOCK line is gone, or takes up an open CLOCK line of the agenda files, and says so. <code>org clock status</code> sees a clock started in Neovim, from <code>clock.persist_file</code> or the saved CLOCK line.</p>
+<h3 id="h-limits">Limits</h3>
+<ul>
+<li>Each call starts Neovim and parses the agenda files: about 0.25 s for 200 files of 25 entries each (the agenda itself is most of it, so a parse cache would gain little), fine for a status bar every few seconds, not for a tight loop. <code>org mcp</code> starts Neovim once, and parses again only the files that changed.</li>
+<li>The CLI edits files on disk. A Neovim that has the same file open sees the change as a file changed outside it ('autoread'), at once with the extension enabled (it watches the stamp file). The CLI does not write a file with unsaved changes in a running Neovim (exit 4), but finds those only through the swap file in the default 'directory'; with swap files off, or on Windows, a Neovim buffer with unsaved changes asks as usual.</li>
+</ul>
+</article>
+<nav class="pager"><a class="prev" href="../manual/org-extensions-caldav.html"><span>上一页</span>CalDAV sync</a><a class="next" href="../manual/org-extensions-diagrams.html"><span>下一页</span>Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L12191">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>

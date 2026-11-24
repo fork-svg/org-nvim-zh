@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lua API · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="../assets/site.js" defer></script>
+
+</head>
+<body data-root="../">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="../index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="../index.html">首页</a></li>
+<li class=""><a href="../guide.html">指南</a></li>
+<li class=""><a href="../playground.html">互动教程</a></li>
+<li><details class="group" open><summary>手册</summary><ul>
+<li class=""><a href="../manual/index.html">目录</a></li>
+<li class=""><a href="../manual/org-introduction.html">简介</a></li>
+<li class=""><a href="../manual/org-installation.html">安装</a></li>
+<li class=""><a href="../manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="../manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="../manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="../manual/org-tags.html">标签</a></li>
+<li class=""><a href="../manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="../manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="../manual/org-clock.html">计时和工作量</a></li>
+<li class=""><a href="../manual/org-agenda.html">日程</a></li>
+<li class=""><a href="../manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="../manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="../manual/org-capture.html">捕捉</a></li>
+<li class=""><a href="../manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="../manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="../manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="../manual/org-babel.html">源代码块（Babel）</a></li>
+<li class=""><a href="../manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="../manual/org-export.html">导出</a></li>
+<li class=""><a href="../manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="../manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="../manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="../manual/org-completion.html">补全</a></li>
+<li class=""><a href="../manual/org-appearance.html">外观和高亮</a></li>
+<li class=""><a href="../manual/org-config.html">配置参考</a></li>
+<li class=""><a href="../manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="../manual/org-commands.html">命令</a></li>
+<li class=""><a href="../manual/org-api.html" aria-current="page">Lua API</a></li>
+<li class=""><a href="../manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="../manual/org-lint.html">检查</a></li>
+<li class=""><a href="../manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="../manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="../manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="../manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="../manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="../manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="../manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="../manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="../manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="../manual/org-extensions-drill.html">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="../manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="../manual/org-extensions-hugo.html">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="../manual/org-extensions-caldav.html">CalDAV sync</a></li>
+<li class="sub"><a href="../manual/org-extensions-cli.html">Command line (org)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-code.html">Code and notes (code)</a></li>
+<li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="../manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="../manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="../manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="../examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="../examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="../examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="../examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="../examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="../examples/05-tags.html">标签</a></li>
+<li class=""><a href="../examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="../examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="../examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="../examples/09-agenda.html">日程</a></li>
+<li class=""><a href="../examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="../examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="../examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="../examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="../examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="../examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="../examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="../examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="../examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="../examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="../examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="../examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="../parity/review.html">兼容性审查</a></li>
+<li class=""><a href="../parity/index.html">目录</a></li>
+<li class=""><a href="../parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="../extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content manual">
+<article>
+<h1>Lua API</h1>
+<div class="tags"><a class="tag" id="org-api" href="#org-api">org-api</a></div>
+<p><code>require(&quot;org.api&quot;)</code> is the public Lua API for plugins and configs: files, headlines and their changes, agenda queries, capture, links, the clock and events. Everything it returns is plain data (tables of strings, numbers and booleans) or a headline handle, a plain table with methods.</p>
+<div class="tags"><a class="tag" id="org-api-version" href="#org-api-version">org-api-version</a></div>
+<p><code>api.version</code> is the version of the API, <code>MAJOR.MINOR.PATCH</code>, separate from the plugin's release. Within a major version functions, fields and event payloads are only added (a new MINOR), never removed or changed. <code>api.has(&quot;1.2&quot;)</code> is true when this API provides version 1.2: the same major version, not older. Other modules (<code>org.parser</code>, <code>org.files</code>, <code>org.agenda</code>, ...) are internal: they can change in any release.</p>
+<pre class="code"><code class="language-lua"><span class="h-k">local</span> ok, api <span class="h-o">=</span> <span class="h-f">pcall</span>(require, <span class="h-s">&quot;org.api&quot;</span>)
+<span class="h-k">if</span> ok <span class="h-k">and</span> api.<span class="h-f">has</span>(<span class="h-s">&quot;1.0&quot;</span>) <span class="h-k">then</span> ... <span class="h-k">end</span></code></pre>
+<p>Functions that can fail return nil and an error message. They never prompt: a prompt the change would show (a log note, a date, a choice) answers as if cancelled, so notes are left out and only the time is logged unless you pass <code>note</code>. Org's messages are not shown either. The changes that take <code>opts.interactive</code> (API 1.3: <code>h:set_todo()</code>, <code>h:schedule()</code>, <code>h:set_deadline()</code>) run like their key instead, for a plugin that acts on the user's behalf (a board moving a card): prompts wait for the user and messages are shown, so a change org refused or the user cancelled returns nil without an error (org said why).</p>
+<p>API 1.3 added what views over many entries need (the <code>kanban</code>, <code>timeline</code> and <code>heatmap</code> extensions are built on it): <code>api.today()</code>, <code>api.occurrences()</code>, <code>api.todo_keywords()</code>, <code>api.clocks()</code>, <code>api.completed()</code>, <code>api.agenda.open()</code>, the query keys <code>bufnr</code>, <code>within</code>, <code>agenda</code>, <code>planned</code> and <code>fields</code>, the handle fields <code>effort</code>, <code>priority_value</code> and <code>bufnr</code>, a date's <code>days</code>, <code>h:move_after()</code>, <code>h:move_before()</code> and <code>opts.interactive</code>.</p>
+<p>API 1.4 added the <code>OrgFileWritten</code> event (<a class="hl" href="#org-api-events">org-api-events</a>).</p>
+<p>API 1.5 added <code>api.option()</code> for reading resolved configuration options.</p>
+<p>API 1.6 added <code>api.release</code>, <code>api.lhs_list()</code>, <code>api.priority_value()</code>, and <code>api.format_time()</code>.</p>
+<h3 id="h-files">Files</h3>
+<div class="tags"><a class="tag" id="org-api-files" href="#org-api-files">org-api-files</a></div>
+<table class="defs">
+<tr><td class="term">api.agenda_files()</td><td>Absolute paths of the agenda files.</td></tr>
+<tr><td class="term">api.load([paths])</td><td>Read files: one path returns one file (nil and an error when it can't be read), a list of paths, globs or directories returns a list, and no argument the agenda files. A file loaded in a buffer is read from the buffer, unsaved changes included.</td></tr>
+<tr><td class="term">api.current([bufnr])</td><td>The file of a buffer (default current), nil when it isn't an org buffer.</td></tr>
+<tr><td class="term long">api.todo_keywords([where])</td><td>The TODO keywords in effect <code>{ todo, done, all }</code>: of the <code>todo_keywords</code> option, or with a path or a buffer number (0 the current one) of that file, its <code>#+TODO</code> lines included. <code>all</code> lists them in the order they are defined (org-todo-keywords-1). nil and an error for a file that can't be read or a buffer that isn't org. Since API 1.3.</td></tr>
+<tr><td class="term">api.option(path)</td><td>Read a resolved configuration option by dot-separated <code>path</code> (e.g. <code>&quot;org_directory&quot;</code>, <code>&quot;ui.todo_keyword_faces&quot;</code>, <code>&quot;agenda.save_after_edit&quot;</code>), or nil when a segment does not exist. Returned tables are read-only views and must not be mutated. Since API 1.5.</td></tr>
+<tr><td class="term">api.release</td><td>The org.nvim plugin release string (e.g. <code>&quot;3.6.1&quot;</code>), separate from <code>api.version</code>. Since API 1.6.</td></tr>
+<tr><td class="term">api.lhs_list(value)</td><td>Expand a mapping option (<code>string</code>, <code>string[]</code>, <code>false</code> or <code>nil</code>) into key sequences with <code>&lt;prefix&gt;</code> replaced by <code>mappings.prefix</code>. Since API 1.6.</td></tr>
+<tr><td class="term">api.priority_value(p)</td><td>Numeric rank of a priority cookie (<code>&quot;A&quot;</code> -&gt; 65, <code>&quot;1&quot;</code> -&gt; 1, ...) under the active <code>priority</code> configuration, or nil if invalid. Since API 1.6.</td></tr>
+<tr><td class="term long">api.format_time(fmt, [t])</td><td>Format Unix timestamp <code>t</code> (default now) using Emacs <code>format-time-string</code> directives. Since API 1.6.</td></tr>
+</table>
+<p>A file is <code>{ file, bufnr, title, category, filetags, properties, todo_keywords = { todo, done, all }, headlines }</code>: <code>file</code> is the path (nil for a buffer without one), <code>properties</code> the file-level property drawer and <code>headlines</code> every headline in document order (<code>todo_keywords.all</code> since API 1.3).</p>
+<h3 id="h-headlines">Headlines</h3>
+<div class="tags"><a class="tag" id="org-api-headlines" href="#org-api-headlines">org-api-headlines</a></div>
+<table class="defs">
+<tr><td class="term">api.headlines([query])</td><td><p>Headlines matching every condition of <code>query</code>, in file order (nil and an error for an invalid match string):</p>
+<table class="defs">
+<tr><td class="term">files</td><td>files, globs or directories (default the agenda files)</td></tr>
+<tr><td class="term">match</td><td>a tags/property match as in agenda tag searches (<a class="hl" href="org-match-syntax.html">org-match-syntax</a>): <code>+work-urgent</code>, <code>PRIORITY=&quot;A&quot;</code>, <code>+project/TODO|NEXT</code></td></tr>
+<tr><td class="term">todo</td><td>a keyword or a list of them; true: any not-done keyword; false: no keyword</td></tr>
+<tr><td class="term">done</td><td>in a done state (true) or not (false)</td></tr>
+<tr><td class="term">tags</td><td>a tag or a list, all required, inherited ones included</td></tr>
+<tr><td class="term">property</td><td><code>{ NAME = &quot;value&quot; | true | false | function(value) }</code>: true is set, false unset; inheritance follows <code>use_property_inheritance</code></td></tr>
+<tr><td class="term">level</td><td>a number, or <code>{ min = 2, max = 3 }</code></td></tr>
+<tr><td class="term">title</td><td>text the title contains, ignoring case (<code>été</code> finds <code>ÉTÉ</code>)</td></tr>
+<tr><td class="term">id</td><td>the ID property</td></tr>
+<tr><td class="term">archived</td><td>false skips subtrees tagged ARCHIVE (default: included); the heading's own tag or an ancestor's, as org-in-archived-heading-p: <code>#+FILETAGS: :ARCHIVE:</code> doesn't count (<code>agenda = true</code> skips such a file)</td></tr>
+<tr><td class="term">filter</td><td><code>function(h)</code> returning true to keep the handle</td></tr>
+</table>
+<table class="defs">
+<tr><td class="term">Since API 1.3:</td><td><table class="defs">
+<tr><td class="term">bufnr</td><td>a buffer to read instead of <code>files</code> (also one without a file; 0 the current one); nil and an error when it isn't an org buffer</td></tr>
+<tr><td class="term">within</td><td>a handle: only its subtree, it included (<code>files</code> and <code>bufnr</code> are then ignored)</td></tr>
+<tr><td class="term">agenda</td><td>true: only what the agenda views look at (org-agenda-skip): not in a COMMENT subtree (per <code>agenda.skip_comment_trees</code>), one tagged ARCHIVE or a file tagged ARCHIVE in its <code>#+FILETAGS:</code>, and not skipped by <code>agenda.skip_function_global</code></td></tr>
+<tr><td class="term">planned</td><td>true: with a SCHEDULED or DEADLINE date; false: neither</td></tr>
+<tr><td class="term">fields</td><td>a list of the fields to fill among those that cost a query over many headlines the most: <code>all_tags</code>, <code>properties</code>, <code>scheduled</code>, <code>deadline</code>, <code>closed</code>, <code>effort</code>, <code>category</code>, <code>outline_path</code>, <code>priority_value</code>. The others are always there; <code>filter</code> sees the handle so filled, and a method (<code>h:reload()</code>) fills every field again. Another name is an error. For views over thousands of entries</td></tr>
+</table></td></tr>
+</table></td></tr>
+<tr><td class="term">api.headline_at([opts])</td><td>The headline containing a line: <code>opts.bufnr</code> (default current) and <code>opts.lnum</code> (default the cursor line), or <code>opts.file</code> and <code>opts.lnum</code>. A buffer's cursor is the current window's when it shows the buffer, else that of the first window showing it; a buffer no window shows has none (give <code>lnum</code>, else nil and an error).</td></tr>
+<tr><td class="term">api.find_by_id(id)</td><td>The headline with this ID, found like <code>id:</code> links find it.</td></tr>
+<tr><td class="term">api.date(value)</td><td>A date in the form below, from any value the API accepts as a date.</td></tr>
+<tr><td class="term">api.today()</td><td>The day org considers today (org-today: until <code>extend_today_until</code> o'clock it is still the day before), as a date. Since API 1.3.</td></tr>
+</table>
+<p>api.occurrences(date, from, to)</p>
+<p>The dates a timestamp falls on from day <code>from</code> to day <code>to</code> (dates; both included), as the agenda lists it: the timestamp itself without a repeater, else each repetition (<code>+1w</code>, <code>.+1d</code> and <code>++1m</code> all repeat from it). A range <code>&lt;a&gt;--&lt;b&gt;</code> counts as its start: the days up to its end aren't listed. nil and an error for a value that isn't a date, and past 5,000 dates (ask for fewer days). Since API 1.3.</p>
+<p>A headline handle has these fields, a snapshot taken when it was made:</p>
+<table class="defs">
+<tr><td class="term">title</td><td>text without TODO keyword, priority and tags</td></tr>
+<tr><td class="term">plain_title</td><td><code>title</code> with links shown as their description and statistics cookies removed</td></tr>
+<tr><td class="term">raw</td><td>the whole headline line</td></tr>
+<tr><td class="term">level</td><td>the number of stars</td></tr>
+<tr><td class="term">todo</td><td>the TODO keyword (nil without one)</td></tr>
+<tr><td class="term">todo_type</td><td>&quot;todo&quot;, &quot;done&quot; or nil</td></tr>
+<tr><td class="term">done</td><td>a boolean</td></tr>
+<tr><td class="term">priority</td><td>the priority (nil without a cookie)</td></tr>
+<tr><td class="term">category</td><td>the category</td></tr>
+<tr><td class="term">id</td><td>the ID property</td></tr>
+<tr><td class="term">tags</td><td>own tags</td></tr>
+<tr><td class="term">all_tags</td><td>with inherited and file tags, in org-get-tags order: inherited first, then own (a tag both inherited and set on the headline counts as own)</td></tr>
+<tr><td class="term">properties</td><td>own properties, names upper-cased</td></tr>
+<tr><td class="term long">scheduled, deadline, closed</td><td>dates (nil when not set)</td></tr>
+<tr><td class="term">file</td><td>the path (nil for a buffer without one)</td></tr>
+<tr><td class="term">line</td><td>the headline line</td></tr>
+<tr><td class="term">end_line</td><td>the last line of its subtree</td></tr>
+<tr><td class="term">outline_path</td><td>titles of the ancestors</td></tr>
+<tr><td class="term">archived, commented</td><td>booleans</td></tr>
+</table>
+<table class="defs">
+<tr><td class="term">Since API 1.3:</td><td><table class="defs">
+<tr><td class="term">bufnr</td><td>the buffer it was read from (nil when read from disk)</td></tr>
+<tr><td class="term">effort</td><td>the minutes of its own <code>effort_property</code> (Effort), as the agenda reads it (never inherited); nil without one</td></tr>
+<tr><td class="term">priority_value</td><td>org-get-priority: 1000 × (lowest − priority), the default priority's without a cookie, or what <code>priority_get_priority_function</code> returns; a higher value sorts first, as in the agenda</td></tr>
+</table></td></tr>
+</table>
+<p>A date is <code>{ year, month, day, hour, min, end_hour, end_min, active, repeater, warning, date = &quot;2026-10-02&quot;, time = &quot;09:30&quot;, days, timestamp (Unix time), text (as org writes it), raw (as written in the file) }</code>; for a range <code>&lt;2026-10-02 Fri&gt;--&lt;2026-10-04 Sun&gt;</code> the fields are its start, and <code>text</code> and <code>raw</code> the whole range. <code>days</code> (API 1.3) is the day number, the days from 1970-01-01 to the date's day: subtract one date's <code>days</code> from another's to count the days between them, without time zones. Where the API takes a date it accepts such a table (or any table with year, month, day and optionally hour and min, or since API 1.3 with <code>days</code> instead of year, month and day), a Unix time, or a string: a timestamp (<code>&lt;2026-10-02 Fri 09:30&gt;</code>, <code>2026-10-02</code>) or what the date prompt reads (<code>+2d</code>, <code>fri</code>). Fields out of range roll over like <code>os.time()</code>: day 32 of October is November 1, hour 25 is 1:00 the next day, and so is a timestamp's day its month doesn't have (<code>2026-02-30</code> is March 2). A field that isn't an integer, a year outside 1-9999, an end time outside the day or a repeater or warning that isn't <code>{ type, value, unit }</code> is an error.</p>
+<p>Methods find the headline again, run the same code as the keys, refresh the fields and return the handle (or nil and an error). A handle with an ID finds the entry with that ID wherever it went; when no entry has it, or several do, that's an error, never another entry. While the file is loaded in a buffer (a change loads it), an extmark follows the headline's line through every edit, yours and the API's, so all the handles of a query stay on their entries while you change them one by one (a line replaced by another change, for its keyword, tags or a statistics cookie, stays the handle's while no other headline has its title). A file changed outside Neovim leaves only the text: the one headline with the handle's text. When the headline can't be told apart (its line was deleted, its subtree moved, several headlines have its text), a method returns nil and &quot;the headline moved; get a new handle&quot;. After h:archive() the handle no longer points to an entry.</p>
+<table class="defs">
+<tr><td class="term long">h:set_todo(state, [opts])</td><td>C-c C-t; nil removes the keyword. <code>opts.note</code> is the note the logging asks for, <code>opts.force</code> ignores blocking; <code>opts.interactive</code> (API 1.3) asks for the note as C-c C-t does</td></tr>
+<tr><td class="term">h:set_tags(tags)</td><td>a list or &quot;:a:b:&quot;. A tag is letters and digits (of any script), <code>_</code>, <code>@</code>, <code>#</code> and <code>%</code> (org-tag-re); another name (<code>follow-up</code>) is an error, as org wouldn't read it back as a tag</td></tr>
+<tr><td class="term long">h:add_tag(tag), h:remove_tag(tag)</td><td>add or remove one of the tags the headline has now (also those added after the handle was made), like org-toggle-tag</td></tr>
+<tr><td class="term">h:set_priority(p)</td><td>&quot;A&quot;, &quot;10&quot; or a number; nil removes it. An error (also for nil) when <code>priority_enable_commands</code> is false</td></tr>
+<tr><td class="term long">h:set_property(name, value)</td><td>org-entry-put; nil deletes the property</td></tr>
+<tr><td class="term long">h:get_property(name, [inherit])</td><td>special properties too (<code>ALLTAGS</code>)</td></tr>
+<tr><td class="term">h:schedule(date, [opts])</td><td>C-c C-s, nil removes the date; also h:set_scheduled(date). The old repeater stays unless the date has its own. With <code>opts.interactive</code> (API 1.3) it runs like the key: without a date the date prompt asks for one (and can remove it), and a log note the options call for is asked for, with a date too</td></tr>
+<tr><td class="term long">h:set_deadline(date, [opts])</td><td>C-c C-d (the <code>deadline</code> field holds the date, so the method has another name); <code>opts.interactive</code> as for <code>schedule</code></td></tr>
+<tr><td class="term long">h:move_after(sibling), h:move_before(sibling)</td><td>move the subtree right after or before the subtree of a sibling (a handle of a headline with the same parent and level), as M-down / M-up past the siblings in between move it (org-move-subtree-down / -up with a count); the handle follows it. Since API 1.3</td></tr>
+<tr><td class="term long">h:clock_in(), h:clock_out()</td><td>clock_out returns the minutes</td></tr>
+<tr><td class="term">h:is_clocked_in()</td><td>true while the headline's clock runs</td></tr>
+<tr><td class="term">h:refile(dest, [opts])</td><td>dest: another handle, a file path, or <code>{ file = path, headline = &quot;Title&quot; }</code> (or an outline path list). <code>opts.copy</code> keeps the original, <code>opts.prepend</code> makes it the first child. The handle then points to the moved entry</td></tr>
+<tr><td class="term">h:archive()</td><td>archive per <code>archive_location</code>; returns the archive file</td></tr>
+<tr><td class="term">h:open([opts])</td><td>show it in a window, cursor on it; <code>opts.split</code> &quot;split&quot;, &quot;vsplit&quot; or &quot;tab&quot;. <code>goto</code> is a LuaJIT keyword: <code>h:goto()</code> can't be written, <code>h[&quot;goto&quot;](h)</code> works</td></tr>
+<tr><td class="term">h:add_id()</td><td>the ID, created when missing (alias <code>id_get_or_create</code>); h:get_id() only reads it</td></tr>
+<tr><td class="term">h:parent(), h:children()</td><td>handles of the parent and children</td></tr>
+<tr><td class="term">h:reload()</td><td>read the headline again</td></tr>
+</table>
+<div class="tags"><a class="tag" id="org-api-saving" href="#org-api-saving">org-api-saving</a></div>
+<p>Changes work whether or not the file is loaded: it's loaded in a hidden buffer when needed and written with org's own save (write hooks such as encryption run, <a class="hl" href="org-crypt.html">org-crypt</a>). A change saves every file it touched, all of them or none: the headline's file and each other file it changed (a refile's destination, the archive file whatever <code>archive_subtree_save_file</code> says, the file whose clock <code>h:clock_in()</code> stopped), the headline's file last. By default none of them is saved when one had unsaved changes before the change: your own unsaved edits are never written behind your back, and an entry that moved to another file is never written out of its file while it's only in a buffer there. Every change method takes <code>opts.save</code> (true saves them all, false none). Like <a class="hl" href="org-refile.html">org-refile</a> and <a class="hl" href="org-refile.html#org-archive">org-archive</a>, a refile still saves a destination file that isn't shown in any window, and archiving the archive file when <code>archive_subtree_save_file</code> says so, before the entry leaves its file.</p>
+<pre class="code"><code class="language-lua"><span class="h-k">local</span> api <span class="h-o">=</span> <span class="h-f">require</span>(<span class="h-s">&quot;org.api&quot;</span>)
+<span class="h-k">for</span> _, h <span class="h-k">in</span> <span class="h-f">ipairs</span>(api.<span class="h-f">headlines</span>({ <span class="h-m">match</span> <span class="h-o">=</span> <span class="h-s">&quot;+work&quot;</span>, <span class="h-m">todo</span> <span class="h-o">=</span> <span class="h-s">&quot;WAITING&quot;</span> })) <span class="h-k">do</span>
+  h:<span class="h-f">set_todo</span>(<span class="h-s">&quot;TODO&quot;</span>)
+  h:<span class="h-f">schedule</span>(<span class="h-s">&quot;+1d&quot;</span>)
+<span class="h-k">end</span></code></pre>
+<h3 id="h-symbols">Symbols</h3>
+<div class="tags"><a class="tag" id="org-api-symbols" href="#org-api-symbols">org-api-symbols</a></div>
+<p>The outline of a buffer the way outline, breadcrumb and symbol plugins want it (<a class="hl" href="org-completion.html#org-integrations">org-integrations</a>). Added in API 1.1. api.symbols([bufnr], [opts])</p>
+<p>The outline of an org buffer (default current) as a tree of LSP <code>DocumentSymbol</code>s: 0-based lines, byte columns. nil and an error for a buffer that isn't org.</p>
+<table class="defs">
+<tr><td class="term">api.symbol_path([opts])</td><td>The headline symbols (without children) from the outermost to the innermost one around a line: breadcrumbs. <code>opts.win</code> takes a window's buffer and cursor line (in a 'winbar' expression, <code>vim.g.statusline_winid</code>), else <code>opts.bufnr</code> (current) and <code>opts.lnum</code> (its cursor line). Only the headline's ancestors are built, so it is cheap on every redraw. An empty list before the first headline.</td></tr>
+</table>
+<p>A symbol is <code>{ name, detail, kind, range, selectionRange, children, type, lnum, end_lnum, level }</code>:</p>
+<table class="defs">
+<tr><td class="term"><code>name</code></td><td>a headline's title as shown (links by their description, no statistics cookie), or the name of a src block, table or target</td></tr>
+<tr><td class="term"><code>detail</code></td><td>a headline's TODO keyword, priority and tags (<code>TODO [#A] :work:</code>), else &quot;src block&quot;, &quot;table&quot;, &quot;target&quot; or &quot;radio target&quot;</td></tr>
+<tr><td class="term"><code>kind</code></td><td>a <code>vim.lsp.protocol.SymbolKind</code> value</td></tr>
+<tr><td class="term"><code>range</code></td><td>the whole subtree (block, table, target)</td></tr>
+<tr><td class="term"><code>selectionRange</code></td><td>the title (name)</td></tr>
+<tr><td class="term"><code>type</code></td><td>&quot;headline&quot;, &quot;src_block&quot;, &quot;table&quot;, &quot;target&quot; or &quot;radio_target&quot;</td></tr>
+<tr><td class="term"><code>lnum</code>, <code>end_lnum</code></td><td>first and last line, 1-based</td></tr>
+<tr><td class="term"><code>level</code></td><td>a headline's level</td></tr>
+</table>
+<p>Named src blocks and tables, and with <code>opts.targets</code> <code>&lt;&lt;targets&gt;&gt;</code> and <code>&lt;&lt;&lt;radio targets&gt;&gt;&gt;</code>, are children of their entry, or top-level before the first headline. <code>opts</code>: <code>src_blocks</code> (true), <code>tables</code> (true), <code>targets</code> (false) and <code>kinds</code>, the kind by <code>heading</code>, <code>todo</code>, <code>done</code>, <code>src_block</code>, <code>table</code> and <code>target</code> (names or values; defaults Namespace, Event, Constant, Function, Struct, Key). When the <code>lsp</code> extension is on, its <code>document_symbols</code> and <code>symbol_kinds</code> options are the defaults, so both agree. Text the <code>transclusion</code> extension inserted is left out.</p>
+<h3 id="h-agenda">日程</h3>
+<div class="tags"><a class="tag" id="org-api-agenda" href="#org-api-agenda">org-api-agenda</a></div>
+<p>The entries of the agenda views as data, without opening the agenda (<code>api.agenda.open()</code> opens it).</p>
+<table class="defs">
+<tr><td class="term long">api.agenda.agenda([opts])</td><td>Days of an agenda span: <code>{ { date = &quot;2026-10-05&quot;, day = &lt;date&gt;, items = {...} } }</code>. <code>opts.from</code> (a date, default today), <code>span</code> (&quot;day&quot;, &quot;week&quot;, &quot;fortnight&quot;, &quot;month&quot;, &quot;year&quot; or a number of days; default <code>agenda.span</code>), <code>align</code> (default true: a week starts on <code>agenda.start_on_weekday</code>), <code>include_empty</code> (default true), <code>log</code> (clocked and closed entries, like <code>l</code>), <code>files</code>.</td></tr>
+<tr><td class="term">api.agenda.todo([opts])</td><td>The TODO list; <code>opts.keywords</code> a keyword or a list (&quot;*&quot;: any keyword), <code>opts.files</code>.</td></tr>
+<tr><td class="term long">api.agenda.tags(match, [opts])</td><td>A tags/property match; <code>opts.todo_only</code>.</td></tr>
+<tr><td class="term long">api.agenda.search(query, [opts])</td><td>A search view query (<a class="hl" href="org-agenda.html#org-agenda-search">org-agenda-search</a>); <code>opts.todo_only</code> (like <code>!</code>, also with a leading <code>*</code>).</td></tr>
+<tr><td class="term">api.agenda.open([opts])</td><td>Open the agenda view (<span class="key">&lt;prefix&gt;</span>a) on the day <code>opts.from</code> (a date, default today) for <code>opts.span</code> (as for <code>api.agenda.agenda</code>, default <code>agenda.span</code>). true, or nil and an error for an invalid date or span. Since API 1.3.</td></tr>
+</table>
+<p>Items are sorted like the views (<code>agenda.sorting</code>) and are <code>{ type, kind, title, todo, priority, category, tags, done, day, date, time, end_time, extra, file, line, headline }</code>: <code>type</code> is where the entry comes from (scheduled, deadline, timestamp, range, sexp, closed, clock, todo, tags, search), <code>kind</code> the agenda's finer type (past-scheduled, ...), <code>day</code> the &quot;YYYY-MM-DD&quot; it's listed on, <code>date</code> its timestamp, <code>time</code> / <code>end_time</code> &quot;HH:MM&quot;, <code>extra</code> the leader (&quot;Scheduled: &quot;, &quot;In  3 d.: &quot;) and <code>headline</code> a handle.</p>
+<pre class="code"><code class="language-lua"><span class="h-k">for</span> _, day <span class="h-k">in</span> <span class="h-f">ipairs</span>(<span class="h-f">require</span>(<span class="h-s">&quot;org.api&quot;</span>).<span class="h-m">agenda</span>.<span class="h-f">agenda</span>({ <span class="h-m">span</span> <span class="h-o">=</span> <span class="h-s">&quot;day&quot;</span> })) <span class="h-k">do</span>
+  <span class="h-k">for</span> _, item <span class="h-k">in</span> <span class="h-f">ipairs</span>(day.<span class="h-m">items</span>) <span class="h-k">do</span>
+    <span class="h-f">print</span>(item.<span class="h-m">time</span> <span class="h-k">or</span> <span class="h-s">&quot;&quot;</span>, item.<span class="h-m">todo</span> <span class="h-k">or</span> <span class="h-s">&quot;&quot;</span>, item.<span class="h-m">title</span>)
+  <span class="h-k">end</span>
+<span class="h-k">end</span></code></pre>
+<h3 id="h-capture">捕捉</h3>
+<div class="tags"><a class="tag" id="org-api-capture" href="#org-api-capture">org-api-capture</a></div>
+<table class="defs">
+<tr><td class="term">api.capture(opts)</td><td><p>Capture without a capture window: the template is filled in, stored and saved at once.</p>
+<table class="defs">
+<tr><td class="term">key</td><td>a template key of <code>capture.templates</code>, or</td></tr>
+<tr><td class="term">template</td><td>template text (with <code>target</code>, <code>headline</code>, <code>olp</code>, <code>type</code>, <code>datetree</code> as in <a class="hl" href="org-capture.html#org-capture-templates">org-capture-templates</a>) or a whole template table</td></tr>
+<tr><td class="term">values</td><td>answers to the <code>%^</code> prompts, by label (<code>{ Title = &quot;x&quot; }</code> for <code>%^{Title}</code>, &quot;Tags&quot; for <code>%^g</code>, &quot;Date&quot; for <code>%^t</code>) or by position (<code>{ &quot;x&quot;, &quot;y&quot; }</code>); others take their default. A date prompt takes a date in any form the API takes (<a class="hl" href="#org-api-headlines">org-api-headlines</a>); a Unix time keeps its time of day</td></tr>
+<tr><td class="term">initial</td><td>the text of <code>%i</code></td></tr>
+<tr><td class="term">date</td><td>the capture date (<code>%t</code>, date trees, <code>time_prompt</code>)</td></tr>
+</table></td></tr>
+</table>
+<p>Returns <code>{ file, bufnr, line, headline }</code> (<code>headline</code> for entry templates; <code>bufnr</code> is nil when the template's <code>kill_buffer</code> closed the buffer). <code>OrgCaptureAfterFinalize</code> fires as for any capture.</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org.api&quot;</span>).<span class="h-f">capture</span>({
+  <span class="h-m">template</span> <span class="h-o">=</span> <span class="h-s">&quot;* TODO %^{Task}\n  %U&quot;</span>,
+  <span class="h-m">target</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/inbox.org&quot;</span>,
+  <span class="h-m">values</span> <span class="h-o">=</span> { <span class="h-m">Task</span> <span class="h-o">=</span> <span class="h-s">&quot;Call the bank&quot;</span> },
+})</code></pre>
+<h3 id="h-links">Links</h3>
+<div class="tags"><a class="tag" id="org-api-links" href="#org-api-links">org-api-links</a></div>
+<table class="defs">
+<tr><td class="term long">api.links.store(link, [desc])</td><td>Add to the stored links (<span class="key">&lt;prefix&gt;</span>li).</td></tr>
+<tr><td class="term long">api.links.store_location([where], [opts])</td><td>Store a link to a handle or <code>{ bufnr, lnum }</code> (default the cursor, as for <code>api.headline_at</code>), like <span class="key">&lt;prefix&gt;</span>ls. An ID it creates (<code>links.use_id</code>) is saved like other changes (<a class="hl" href="#org-api-saving">org-api-saving</a>, <code>opts.save</code>).</td></tr>
+<tr><td class="term">api.links.stored()</td><td>The stored links <code>{ link, desc }</code>, newest first.</td></tr>
+<tr><td class="term long">api.links.format(link, [desc])</td><td><code>[[link][desc]]</code>, escaped.</td></tr>
+<tr><td class="term long">api.links.insert(link, [desc], [opts])</td><td>Insert at the cursor, or at <code>opts.bufnr</code>, <code>opts.row</code> (1-based), <code>opts.col</code> (0-based byte), written for that buffer like <span class="key">&lt;prefix&gt;</span>li. What isn't given comes from the buffer's cursor (as for <code>api.headline_at</code>: nil and an error when no window shows the buffer). Returns the inserted text.</td></tr>
+<tr><td class="term long">api.links.resolve(link, [opts])</td><td>What a link (a target or <code>[[...]]</code>) points to, without following it: <code>{ type, path, target, search, file, line, headline, url }</code>. It finds what following the link finds (the searches of <a class="hl" href="org-links.html">org-links</a>, ignoring case and blanks: <code>*heading</code>, <code>#custom-id</code>, <code>(coderef)</code>, a line number, <code>&lt;&lt;target&gt;&gt;</code>, <code>#+NAME:</code>, a headline title, text). Internal links search <code>opts.bufnr</code> (default current). <code>headline</code> is set when the line is a headline. Not resolved: <code>/regexp/</code> searches, BibTeX keys and what <code>links.search_functions</code> or org-ctags answer.</td></tr>
+</table>
+<h3 id="h-clock">Clock</h3>
+<div class="tags"><a class="tag" id="org-api-clock" href="#org-api-clock">org-api-clock</a></div>
+<table class="defs">
+<tr><td class="term">api.clock.status()</td><td>The running clock, or nil: <code>{ title, file, start (a date), minutes, clocked, effort, overrun, headline }</code> (see <a class="hl" href="org-clock.html">org-clock</a>).</td></tr>
+</table>
+<p>api.clock.is_running() api.clock.clock_out([opts]) Stop it wherever it runs; returns the minutes.</p>
+<table class="defs">
+<tr><td class="term">api.clock.cancel([opts])</td><td>Cancel it (<span class="key">&lt;prefix&gt;</span>xq): its CLOCK line is removed.</td></tr>
+</table>
+<p>Both save the file of the CLOCK line (<a class="hl" href="#org-api-saving">org-api-saving</a>, <code>opts.save</code>).</p>
+<p>Since API 1.3, what was clocked and done, for reports, heatmaps and habit trackers. Both take a query as <code>api.headlines</code> does (<a class="hl" href="#org-api-headlines">org-api-headlines</a>) with <code>from</code> and <code>to</code> (dates; default no limit), and return entries in file order with a <code>headline</code> handle, one per entry (filled per the query's <code>fields</code>). An entry can have several of each: count distinct headlines to count tasks.</p>
+<table class="defs">
+<tr><td class="term">api.clocks([query])</td><td>The CLOCK lines of the matching entries (their own, not their children's) that ran on one of the days: <code>{ start, end, minutes, running, line, headline }</code>. <code>end</code> is nil while it runs; <code>minutes</code> is the time between its timestamps (until now while it runs), not its <code>=&gt; H:MM</code> text, as org-clock-sum counts it (0 for one that ends before it starts).</td></tr>
+<tr><td class="term">api.completed([query])</td><td>When the matching entries were marked done, on one of the days (the log lines org-habit reads, plus CLOSED and LAST_REPEAT): <code>{ date, type, headline }</code>, <code>type</code> &quot;closed&quot; (CLOSED), &quot;state&quot; (a <code>- State &quot;DONE&quot; ...</code> log line of a change to a done keyword), &quot;note&quot; (a &quot;done&quot; note line, <code>- CLOSING NOTE [date]</code> or the heading <code>log_note_headings.done</code> sets) or &quot;last_repeat&quot; (the LAST_REPEAT property of a repeating entry). One task marked done can give several (its CLOSED date and its state log line); an entry's CLOSED comes first, then its log lines, then LAST_REPEAT.</td></tr>
+</table>
+<pre class="code"><code class="language-lua"><span class="h-k">local</span> api <span class="h-o">=</span> <span class="h-f">require</span>(<span class="h-s">&quot;org.api&quot;</span>)
+<span class="h-k">local</span> week <span class="h-o">=</span> { <span class="h-m">from</span> <span class="h-o">=</span> <span class="h-s">&quot;-6d&quot;</span>, <span class="h-m">to</span> <span class="h-o">=</span> api.<span class="h-f">today</span>(), <span class="h-m">tags</span> <span class="h-o">=</span> <span class="h-s">&quot;work&quot;</span> }
+<span class="h-k">local</span> minutes <span class="h-o">=</span> <span class="h-n">0</span>
+<span class="h-k">for</span> _, c <span class="h-k">in</span> <span class="h-f">ipairs</span>(api.<span class="h-f">clocks</span>(week)) <span class="h-k">do</span>
+  minutes <span class="h-o">=</span> minutes <span class="h-o">+</span> c.<span class="h-m">minutes</span>
+<span class="h-k">end</span>
+<span class="h-k">local</span> done <span class="h-o">=</span> {}
+<span class="h-k">for</span> _, c <span class="h-k">in</span> <span class="h-f">ipairs</span>(api.<span class="h-f">completed</span>(week)) <span class="h-k">do</span>
+  <span class="h-k">local</span> h <span class="h-o">=</span> c.<span class="h-m">headline</span>
+  done[(h.<span class="h-m">file</span> <span class="h-k">or</span> h.<span class="h-m">bufnr</span>) <span class="h-o">..</span> <span class="h-s">&quot;:&quot;</span> <span class="h-o">..</span> h.<span class="h-m">line</span>] <span class="h-o">=</span> <span class="h-n">true</span>
+<span class="h-k">end</span>
+<span class="h-f">print</span>((<span class="h-s">&quot;%d:%02d clocked, %d tasks done&quot;</span>):<span class="h-f">format</span>(
+  math.<span class="h-f">floor</span>(minutes <span class="h-o">/</span> <span class="h-n">60</span>), minutes <span class="h-o">%</span> <span class="h-n">60</span>, vim.<span class="h-f">tbl_count</span>(done)))</code></pre>
+<h3 id="h-session-server">Session server</h3>
+<div class="tags"><a class="tag" id="org-api-remote" href="#org-api-remote">org-api-remote</a></div>
+<p>Since API 1.2. The session server (<a class="hl" href="org-capture.html#org-remote">org-remote</a>) runs requests of other processes in one Neovim.</p>
+<table class="defs">
+<tr><td class="term">api.remote.address()</td><td>Its address: $ORG_NVIM_SERVER, else <code>remote.address</code>, else <code>org.nvim.sock</code> in the runtime directory.</td></tr>
+<tr><td class="term">api.remote.is_server()</td><td>Is this Neovim the server?</td></tr>
+<tr><td class="term">api.remote.reachable()</td><td>Is a server running, this Neovim or another?</td></tr>
+<tr><td class="term long">api.remote.call(name, ...)</td><td>Call the API function <code>name</code> (<code>&quot;capture&quot;</code>, <code>&quot;clock.status&quot;</code>, <code>&quot;headlines&quot;</code>, ...) in the server and return its results. It runs here when this Neovim is the server, when none runs or when it waits for a key. Arguments and results cross as plain data: a headline handle comes back as its fields, without methods.</td></tr>
+</table>
+<pre class="code"><code class="language-lua"><span class="h-c">-- from a script: `nvim -l capture.lua`</span>
+<span class="h-k">local</span> api <span class="h-o">=</span> <span class="h-f">require</span>(<span class="h-s">&quot;org.api&quot;</span>)
+api.<span class="h-m">remote</span>.<span class="h-f">call</span>(<span class="h-s">&quot;capture&quot;</span>, { <span class="h-m">template</span> <span class="h-o">=</span> <span class="h-s">&quot;* TODO Call Bob&quot;</span>, <span class="h-m">target</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/inbox.org&quot;</span> })</code></pre>
+<h3 id="h-events">Events</h3>
+<div class="tags"><a class="tag" id="org-api-events" href="#org-api-events">org-api-events</a></div>
+<p>Org fires <code>User</code> autocmds with a <code>data</code> table. <code>api.on(name, fn, [opts])</code> calls <code>fn(data, ev)</code> for one (<code>opts.once</code>, <code>opts.group</code>) and returns an id for <code>api.off(id)</code>; <code>api.events</code> maps each name to a short description.</p>
+<table class="defs">
+<tr><td class="term">OrgTodoStateChange</td><td>bufnr, lnum, from, to, state, done, repeated (<a class="hl" href="org-todo.html#org-todo-events">org-todo-events</a>)</td></tr>
+<tr><td class="term">OrgTodoRepeat</td><td>same data, a repeating task moved on</td></tr>
+<tr><td class="term">OrgPriorityChanged</td><td>bufnr, lnum, file, from, to (nil: no cookie)</td></tr>
+<tr><td class="term">OrgTagsChanged</td><td>bufnr, lnum, file, from, to: the own tags of a headline changed, whatever changed them (C-c C-q, the region command, <code>todo_state_tags_triggers</code> once per tag, the ARCHIVE, ORDERED and ATTACH tags, the agenda, the column views, the API, ...; org-after-tags-change-hook)</td></tr>
+<tr><td class="term">OrgPropertyChanged</td><td>bufnr, lnum, name, value</td></tr>
+<tr><td class="term">OrgClockIn</td><td>bufnr, lnum, title</td></tr>
+<tr><td class="term">OrgClockOut</td><td>path, title, minutes, removed</td></tr>
+<tr><td class="term">OrgClockCancel</td><td>path, title</td></tr>
+<tr><td class="term">OrgCaptureAfterFinalize</td><td>bufnr, line (<code>aborted</code> when cancelled)</td></tr>
+<tr><td class="term">OrgRefile</td><td>bufnr, lnum, file (where the entry now is), title, source_bufnr, source_file, copy (org-after-refile-insert-hook). As in Emacs, it fires after the last-refile bookmark is set; a destination not shown in a window is saved after it too, with the handler's edits. Unlike in Emacs, the entry has already left its old place.</td></tr>
+<tr><td class="term">OrgArchive</td><td>bufnr, lnum, title, archive_file (before the subtree leaves its file); OrgArchiveFinalize: the same in the archive buffer</td></tr>
+<tr><td class="term">OrgFileLoaded</td><td>file, bufnr, source (&quot;disk&quot; or &quot;buffer&quot;): a file was read from disk (also by the agenda index in the background, <a class="hl" href="org-agenda.html#org-agenda-index">org-agenda-index</a>), or a buffer parsed for the first time. Fires on the next event loop turn.</td></tr>
+<tr><td class="term">OrgFileWritten</td><td>bufnr, file, source (&quot;write&quot;: <code>:w</code> and the other write commands; &quot;save_buffer&quot;: org's own saves, such as capture, refile and agenda edits, which run no BufWritePost): an org buffer was written. Fires right after the write. Since API 1.4.</td></tr>
+</table>
+<p>Handlers run during the command, like Emacs hooks, and may edit buffers: the command follows its entries where a handler moves them (the region command its headlines; a refile the line it returns, its bookmark and the API handle). An error in a handler doesn't stop the command: Neovim shows it (with the event's name) and <code>:Org log</code> keeps it (<a class="hl" href="org-commands.html#org-log">org-log</a>). When org.nvim can't fire the event at all, it warns and logs that too. Other features fire their own events (clock, capture, agenda, babel, ...; see their sections).</p>
+<pre class="code"><code class="language-lua"><span class="h-k">local</span> api <span class="h-o">=</span> <span class="h-f">require</span>(<span class="h-s">&quot;org.api&quot;</span>)
+api.<span class="h-f">on</span>(<span class="h-s">&quot;OrgTodoStateChange&quot;</span>, <span class="h-k">function</span>(data)
+  <span class="h-k">if</span> data.<span class="h-m">done</span> <span class="h-k">then</span>
+    <span class="h-k">local</span> h <span class="h-o">=</span> api.<span class="h-f">headline_at</span>({ <span class="h-m">bufnr</span> <span class="h-o">=</span> data.<span class="h-m">bufnr</span>, <span class="h-m">lnum</span> <span class="h-o">=</span> data.<span class="h-m">lnum</span> })
+    vim.<span class="h-f">notify</span>(<span class="h-s">&quot;Done: &quot;</span> <span class="h-o">..</span> h.<span class="h-m">title</span>)
+  <span class="h-k">end</span>
+<span class="h-k">end</span>)</code></pre>
+<h3 id="h-other-lua-entry-points">Other Lua entry points</h3>
+<table class="defs">
+<tr><td class="term long">require(&quot;org&quot;).setup({opts})</td><td>configure (see <a class="hl" href="org-config.html">org-config</a>)</td></tr>
+<tr><td class="term long">require(&quot;org&quot;).agenda([key])</td><td>open the dispatcher or a view</td></tr>
+<tr><td class="term long">require(&quot;org&quot;).capture([key])</td><td>capture interactively</td></tr>
+<tr><td class="term long">require(&quot;org&quot;).statusline()</td><td>clock and timer string for statuslines</td></tr>
+<tr><td class="term long">require(&quot;org&quot;).action(name)</td><td>run an action (<a class="hl" href="org-keymaps.html">org-keymaps</a>)</td></tr>
+</table>
+<p>The modules below the API are internal and may change between releases; use them only for what <code>org.api</code> doesn't cover yet:</p>
+<table class="defs">
+<tr><td class="term">org.parser</td><td>parse(lines, filename) → file with headlines, planning, properties, clocks and timestamps</td></tr>
+<tr><td class="term">org.files</td><td>get(path), get_buffer(bufnr), agenda_files()</td></tr>
+<tr><td class="term">org.date</td><td>parse(), read_date(), Date:add(), Date:to_string()</td></tr>
+<tr><td class="term">org.todo</td><td>change_state(target, keyword)</td></tr>
+<tr><td class="term">org.clock</td><td>clock_in(target), clock_out(), active()</td></tr>
+<tr><td class="term">org.agenda.search</td><td>compile(match) → function(headline) → boolean</td></tr>
+<tr><td class="term">org.export</td><td>export(format, opts) → output path; to_string(format)</td></tr>
+<tr><td class="term">org.dblock</td><td>register(name, fn)</td></tr>
+</table>
+<p>Their targets are <code>{ bufnr = n, lnum = l }</code>.</p>
+</article>
+<nav class="pager"><a class="prev" href="../manual/org-commands.html"><span>上一页</span>命令</a><a class="next" href="../manual/org-in-buffer-settings.html"><span>下一页</span>缓冲区内设置</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L8804">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>

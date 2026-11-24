@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code and notes (code) · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="../assets/site.js" defer></script>
+
+</head>
+<body data-root="../">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="../index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="../index.html">首页</a></li>
+<li class=""><a href="../guide.html">指南</a></li>
+<li class=""><a href="../playground.html">互动教程</a></li>
+<li><details class="group" open><summary>手册</summary><ul>
+<li class=""><a href="../manual/index.html">目录</a></li>
+<li class=""><a href="../manual/org-introduction.html">简介</a></li>
+<li class=""><a href="../manual/org-installation.html">安装</a></li>
+<li class=""><a href="../manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="../manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="../manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="../manual/org-tags.html">标签</a></li>
+<li class=""><a href="../manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="../manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="../manual/org-clock.html">计时和工作量</a></li>
+<li class=""><a href="../manual/org-agenda.html">日程</a></li>
+<li class=""><a href="../manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="../manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="../manual/org-capture.html">捕捉</a></li>
+<li class=""><a href="../manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="../manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="../manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="../manual/org-babel.html">源代码块（Babel）</a></li>
+<li class=""><a href="../manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="../manual/org-export.html">导出</a></li>
+<li class=""><a href="../manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="../manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="../manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="../manual/org-completion.html">补全</a></li>
+<li class=""><a href="../manual/org-appearance.html">外观和高亮</a></li>
+<li class=""><a href="../manual/org-config.html">配置参考</a></li>
+<li class=""><a href="../manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="../manual/org-commands.html">命令</a></li>
+<li class=""><a href="../manual/org-api.html">Lua API</a></li>
+<li class=""><a href="../manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="../manual/org-lint.html">检查</a></li>
+<li class=""><a href="../manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="../manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="../manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="../manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="../manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="../manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="../manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="../manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="../manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="../manual/org-extensions-drill.html">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="../manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="../manual/org-extensions-hugo.html">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="../manual/org-extensions-caldav.html">CalDAV sync</a></li>
+<li class="sub"><a href="../manual/org-extensions-cli.html">Command line (org)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-code.html" aria-current="page">Code and notes (code)</a></li>
+<li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="../manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="../manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="../manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="../examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="../examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="../examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="../examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="../examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="../examples/05-tags.html">标签</a></li>
+<li class=""><a href="../examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="../examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="../examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="../examples/09-agenda.html">日程</a></li>
+<li class=""><a href="../examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="../examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="../examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="../examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="../examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="../examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="../examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="../examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="../examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="../examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="../examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="../examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="../parity/review.html">兼容性审查</a></li>
+<li class=""><a href="../parity/index.html">目录</a></li>
+<li class=""><a href="../parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="../extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content manual">
+<article>
+<h1>Code and notes (code)</h1>
+<div class="tags"><a class="tag" id="org-extensions-code" href="#org-extensions-code">org-extensions-code</a></div>
+<p>Stability: stable (<a class="hl" href="org-extensions.html#org-extensions-stability">org-extensions-stability</a>)</p>
+<p><code>code</code> connects the code you edit with your org notes: capture a selection with a link back to it, link to functions by name, keep an org file per git repository, clock in by git branch and see the repository's TODO comments in the agenda.</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({ <span class="h-m">extensions</span> <span class="h-o">=</span> { <span class="h-m">code</span> <span class="h-o">=</span> {} } })</code></pre>
+<h3 id="h-keys-global-under-prefixj">Keys (global, under <code>&lt;prefix&gt;j</code>)</h3>
+<table class="defs">
+<tr><td class="term"><code>&lt;prefix&gt;jc</code></td><td>code_capture (Normal and Visual): capture the selection as a src block, with a link back to it and the git branch</td></tr>
+<tr><td class="term"><code>&lt;prefix&gt;jl</code></td><td>code_store_link: store a <code>code:</code> link to the symbol at the cursor</td></tr>
+<tr><td class="term"><code>&lt;prefix&gt;jp</code></td><td>project_open: open the repository's org file</td></tr>
+<tr><td class="term"><code>&lt;prefix&gt;jn</code></td><td>project_capture: capture a task into it</td></tr>
+<tr><td class="term"><code>&lt;prefix&gt;ja</code></td><td>project_agenda: agenda of that file and the code TODOs</td></tr>
+<tr><td class="term"><code>&lt;prefix&gt;jt</code></td><td>code_todos: the repository's TODO comments in an agenda</td></tr>
+<tr><td class="term"><code>&lt;prefix&gt;jb</code></td><td>code_link_branch (org buffers): set the heading's <code>:BRANCH:</code> to the current git branch</td></tr>
+</table>
+<h3 id="h-capturing-code">Capturing code</h3>
+<p><code>code_capture</code> works in any file that is not org. In Visual mode the selection becomes a src block in the language of the buffer's filetype (<code>lua</code>, <code>python</code>, <code>js</code> for javascript, <code>C++</code> for cpp...; <code>languages</code> adds or changes names); in Normal mode there is no block. The note goes to the repository's project file (below), under <code>project_headline</code>. Outside a repository it goes to <code>fallback_target</code> (default: <code>default_notes_file</code>), under <code>fallback_headline</code> (default: none, at the end of the file); the copy in the capture menu does the same. The template is <code>capture_template</code>; these expansions fill it:</p>
+<table class="defs">
+<tr><td class="term"><code>%(code-block)</code></td><td>the selection as a <code>#+begin_src LANG</code> block (&quot;&quot; in Normal mode); lines starting with <code>*</code> or <code>#+</code> are escaped with a comma</td></tr>
+<tr><td class="term"><code>%(code-link)</code></td><td><code>[[code:PATH::SYMBOL][SYMBOL (file.lua)]]</code>, or <code>::LINE</code> when no symbol is found</td></tr>
+<tr><td class="term"><code>%(code-file-link)</code></td><td><code>[[file:PATH::LINE][file.lua:LINE]]</code></td></tr>
+<tr><td class="term"><code>%(code-file)</code></td><td>the path relative to the repository</td></tr>
+<tr><td class="term"><code>%(code-line)</code></td><td>the line, or <code>first-last</code> of a selection</td></tr>
+<tr><td class="term"><code>%(code-lang)</code></td><td>the Babel language</td></tr>
+<tr><td class="term"><code>%(code-symbol)</code></td><td>the function or class around the cursor</td></tr>
+<tr><td class="term"><code>%(git-repo)</code></td><td>the repository's directory name</td></tr>
+<tr><td class="term"><code>%(git-branch)</code></td><td>the checked out branch (&quot;&quot; when detached)</td></tr>
+<tr><td class="term"><code>%(git-commit)</code></td><td>the short hash of HEAD (needs <code>git</code>)</td></tr>
+<tr><td class="term"><code>%(git-info)</code></td><td><code>repo on branch @ commit</code></td></tr>
+</table>
+<p>They work in every capture template started from a code buffer, so you can use them in your own <code>capture.templates</code>. The extension also adds a copy of <code>capture_template</code> to the capture menu under <code>template_key</code> (&quot;k&quot;) when that key is free (<code>template_key = false</code> to not add it).</p>
+<p>Put <code>%(code-block)</code> at the start of a line: an entry's body is not indented for it. (The expansions are registered in <code>require(&quot;org.capture&quot;).expansions</code>, <code>name -&gt; function(ctx)</code>, which other code can add to the same way.)</p>
+<h3 id="h-code-links"><code>code:</code> links</h3>
+<p><code>[[code:src/app.lua::M.setup]]</code> opens the file and jumps to the symbol, found with the language server's document symbols (<code>textDocument/ documentSymbol</code>; a server that is still starting for the file, from <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=vim.lsp.enable%28%29">vim.lsp.enable()</a> or a FileType autocmd, or a running one that serves the filetype is waited for up to <code>lsp_timeout</code> ms, then up to <code>lsp_timeout</code> ms for its answer), else treesitter definitions, else a text search for <code>function NAME</code>, <code>def NAME</code>, <code>NAME =</code>, then the word. A dotted name (<code>Class.method</code>) matches the symbol in its container. <code>code:PATH::42</code> jumps to line 42. A relative path is looked up from the git root of the org file, then of the working directory, then from the org file's directory, the working directory and the repositories of recent code buffers.</p>
+<p><code>store_link</code> (and <code>code_store_link</code>) in a code buffer stores a <code>code:</code> link to the function or class around the cursor, from the language server or treesitter, else to the line. <code>link_path = &quot;relative&quot;</code> writes the path relative to the git root. Exported, a <code>code:</code> link is its description in code style.</p>
+<p>With the <code>lsp</code> extension (<a class="hl" href="org-extensions-lsp.html">org-extensions-lsp</a>), go to definition on a <code>code:</code> link jumps to its target, and with <code>transclusion</code> (<a class="hl" href="org-extensions-transclusion.html">org-extensions-transclusion</a>) <code>#+transclude: [[code:src/app.lua::M.setup]]</code> shows the whole definition in a src block. Both find the symbol with treesitter, else the text search, without asking a language server (and without loading the file into a buffer).</p>
+<p>The treesitter lookup knows functions, methods, classes, structs, enums, interfaces, traits, modules and type definitions in the usual grammars (checked with Lua, Python, JavaScript, TypeScript, Rust and C), and names bound to a function (<code>const f = () =&gt; {}</code>, <code>M.f = function() end</code>). A method is linked as <code>Class.method</code> (<code>Type.method</code> in a Rust <code>impl</code>). Go methods are linked by their name only.</p>
+<h3 id="h-per-project-org-files">Per-project org files</h3>
+<p><code>project_file</code> names the org file of a repository: a path relative to its root (default <code>.org/tasks.org</code>), or one with <code>&lt;org_directory&gt;</code>, <code>${repo}</code> and <code>${root}</code> replaced, such as <code>&quot;&lt;org_directory&gt;/projects/${repo}.org&quot;</code> to keep notes out of the repository, or a function <code>(root, repo) -&gt; path</code>. The file is created with <code>project_file_header</code> when first used. The repository is the one of the current buffer, else of the last code buffer you were in, else of the working directory.</p>
+<p><code>project_agenda</code> shows <code>project_agenda_blocks</code> restricted to the project file: by default the week, its TODOs and the code TODOs.</p>
+<h3 id="h-code-todos">Code TODOs</h3>
+<p>The <code>code_todos</code> agenda block type lists comments with <code>todo_keywords</code> (TODO, FIXME, HACK, XXX, BUG) after a comment marker (<code>--</code>, <code>//</code>, <code>#</code>, <code>/*</code>, <code>;</code>...):</p>
+<pre class="code"><code class="language-lua"><span class="h-c">-- TODO: handle errors</span>
+<span class="h-c">-- FIXME(bob): wrong value</span>
+<span class="h-c">-- TODO(org:3f2a...): translate the greetings</span></code></pre>
+<p>They are found with <code>git grep</code> (tracked and untracked files, binary files skipped), else <code>rg</code>, else by reading at most <code>todo_max_files</code> files; org files are skipped (<code>todo_exclude</code>). The search runs in the background: the first time the block shows &quot;(scanning...)&quot; and the agenda is redrawn when it is done; later the block shows the last result at once and is redrawn if a new search finds something else. It stops after <code>todo_max_items</code> comments (the count then reads &quot;500+&quot;). <code>&lt;CR&gt;</code>, <code>&lt;Tab&gt;</code> and <code>&lt;Space&gt;</code> on an item open the code line; agenda commands that change org entries (todo state, schedule, tags, clock, refile, archive...) say that they don't apply to a code TODO. A comment naming a heading's ID (<code>TODO(org:ID)</code>, see <code>todo_link_pattern</code>) is listed under an item for that heading. Use the block in custom commands too:</p>
+<pre class="code"><code class="language-lua">agenda <span class="h-o">=</span> { <span class="h-m">custom_commands</span> <span class="h-o">=</span> {
+  <span class="h-m">c</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Code TODOs&quot;</span>, <span class="h-m">type</span> <span class="h-o">=</span> <span class="h-s">&quot;code_todos&quot;</span>, <span class="h-m">root</span> <span class="h-o">=</span> <span class="h-s">&quot;~/app&quot;</span> },
+} }</code></pre>
+<p>Without <code>root</code> the block uses the current repository.</p>
+<h3 id="h-clocking-by-branch">Clocking by branch</h3>
+<p>With <code>branch_clock = true</code>, switching the git branch of the file you work in (noticed on <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=BufEnter">BufEnter</a>, <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=FocusGained">FocusGained</a> and <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=DirChanged">DirChanged</a>) clocks into the heading whose <code>:BRANCH:</code> property is the branch name, or else whose ID, CUSTOM_ID or TICKET property, or title, holds the ticket that <code>branch_ticket_pattern</code> (default <code>&quot;(%u+%-%d+)&quot;</code>, <code>ABC-123</code>) takes from the name. Headings are looked for in the project file and the agenda files. The branch found at startup only clocks in with <code>branch_clock_on_start</code>. <code>code_link_branch</code> sets <code>:BRANCH:</code> on the heading at point. The branch is read from <code>.git/HEAD</code>, so no process runs on BufEnter.</p>
+<h3 id="h-options">Options</h3>
+<table class="defs">
+<tr><td class="term"><code>capture_template</code></td><td>template of <code>code_capture</code> (target &quot;project&quot;)</td></tr>
+<tr><td class="term"><code>template_key</code></td><td>key of its copy in the capture menu (&quot;k&quot;)</td></tr>
+<tr><td class="term"><code>languages</code></td><td>filetype -&gt; Babel language ({})</td></tr>
+<tr><td class="term"><code>link_path</code></td><td>&quot;absolute&quot; or &quot;relative&quot; (&quot;absolute&quot;)</td></tr>
+<tr><td class="term"><code>store_links</code></td><td>store <code>code:</code> links in code buffers (true)</td></tr>
+<tr><td class="term"><code>store_symbol</code></td><td>link to the symbol, not the line (true)</td></tr>
+<tr><td class="term"><code>lsp_timeout</code></td><td>ms to wait for a language server (1000)</td></tr>
+<tr><td class="term"><code>exclude_filetypes</code></td><td>filetypes that are not code buffers</td></tr>
+<tr><td class="term"><code>project_file</code></td><td>&quot;.org/tasks.org&quot;</td></tr>
+<tr><td class="term"><code>project_file_header</code></td><td>&quot;#+title: ${repo}\n&quot;</td></tr>
+<tr><td class="term"><code>project_headline</code></td><td>&quot;Tasks&quot;</td></tr>
+<tr><td class="term"><code>fallback_target</code></td><td>code captures outside a repository (nil: <code>default_notes_file</code>)</td></tr>
+<tr><td class="term"><code>fallback_headline</code></td><td>their headline (nil: the end of the file)</td></tr>
+<tr><td class="term"><code>project_template</code></td><td>template of <code>project_capture</code></td></tr>
+<tr><td class="term"><code>project_agenda_blocks</code></td><td>blocks of <code>project_agenda</code></td></tr>
+<tr><td class="term"><code>branch_clock</code></td><td>clock in by branch (false)</td></tr>
+<tr><td class="term"><code>branch_clock_on_start</code></td><td>also for the branch at startup (false)</td></tr>
+<tr><td class="term"><code>branch_ticket_pattern</code></td><td>Lua pattern of the ticket (&quot;(%u+%-%d+)&quot;)</td></tr>
+<tr><td class="term"><code>todo_keywords</code></td><td>{ &quot;TODO&quot;, &quot;FIXME&quot;, &quot;HACK&quot;, &quot;XXX&quot;, &quot;BUG&quot; }</td></tr>
+<tr><td class="term"><code>todo_link_pattern</code></td><td>&quot;^org:%s*(.-)%s*$&quot;</td></tr>
+<tr><td class="term"><code>todo_require_comment</code></td><td>only after a comment marker (true)</td></tr>
+<tr><td class="term"><code>todo_exclude</code></td><td>Lua patterns of paths to skip</td></tr>
+<tr><td class="term"><code>todo_scanner</code></td><td>&quot;auto&quot;, &quot;git&quot;, &quot;rg&quot; or &quot;lua&quot;</td></tr>
+<tr><td class="term"><code>todo_max_files</code></td><td>2000</td></tr>
+<tr><td class="term"><code>todo_max_items</code></td><td>500</td></tr>
+<tr><td class="term"><code>todo_group_prefix</code></td><td>before the category of grouped TODOs (&quot;↳ &quot;)</td></tr>
+</table>
+</article>
+<nav class="pager"><a class="prev" href="../manual/org-extensions-diagrams.html"><span>上一页</span>Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a><a class="next" href="../manual/org-extensions-literate.html"><span>下一页</span>Literate Neovim config (literate)</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L12928">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>

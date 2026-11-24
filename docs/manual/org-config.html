@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Configuration reference · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="../assets/site.js" defer></script>
+
+</head>
+<body data-root="../">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="../index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="../index.html">首页</a></li>
+<li class=""><a href="../guide.html">指南</a></li>
+<li class=""><a href="../playground.html">互动教程</a></li>
+<li><details class="group" open><summary>手册</summary><ul>
+<li class=""><a href="../manual/index.html">目录</a></li>
+<li class=""><a href="../manual/org-introduction.html">简介</a></li>
+<li class=""><a href="../manual/org-installation.html">安装</a></li>
+<li class=""><a href="../manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="../manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="../manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="../manual/org-tags.html">标签</a></li>
+<li class=""><a href="../manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="../manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="../manual/org-clock.html">计时和工作量</a></li>
+<li class=""><a href="../manual/org-agenda.html">日程</a></li>
+<li class=""><a href="../manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="../manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="../manual/org-capture.html">捕捉</a></li>
+<li class=""><a href="../manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="../manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="../manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="../manual/org-babel.html">源代码块（Babel）</a></li>
+<li class=""><a href="../manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="../manual/org-export.html">导出</a></li>
+<li class=""><a href="../manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="../manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="../manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="../manual/org-completion.html">补全</a></li>
+<li class=""><a href="../manual/org-appearance.html">外观和高亮</a></li>
+<li class=""><a href="../manual/org-config.html" aria-current="page">配置参考</a></li>
+<li class=""><a href="../manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="../manual/org-commands.html">命令</a></li>
+<li class=""><a href="../manual/org-api.html">Lua API</a></li>
+<li class=""><a href="../manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="../manual/org-lint.html">检查</a></li>
+<li class=""><a href="../manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="../manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="../manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="../manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="../manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="../manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="../manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="../manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="../manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="../manual/org-extensions-drill.html">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="../manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="../manual/org-extensions-hugo.html">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="../manual/org-extensions-caldav.html">CalDAV sync</a></li>
+<li class="sub"><a href="../manual/org-extensions-cli.html">Command line (org)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-code.html">Code and notes (code)</a></li>
+<li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="../manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="../manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="../manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="../examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="../examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="../examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="../examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="../examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="../examples/05-tags.html">标签</a></li>
+<li class=""><a href="../examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="../examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="../examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="../examples/09-agenda.html">日程</a></li>
+<li class=""><a href="../examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="../examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="../examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="../examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="../examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="../examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="../examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="../examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="../examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="../examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="../examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="../examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="../parity/review.html">兼容性审查</a></li>
+<li class=""><a href="../parity/index.html">目录</a></li>
+<li class=""><a href="../parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="../extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content manual">
+<article>
+<h1>配置参考</h1>
+<div class="tags"><a class="tag" id="org-config" href="#org-config">org-config</a></div>
+<h3 id="h-recommended-options">Recommended options</h3>
+<div class="tags"><a class="tag" id="org-config-recommended" href="#org-config-recommended">org-config-recommended</a></div>
+<p>The options most setups change, with their defaults. The rest of this chapter lists every option. Unknown top-level options passed to <code>setup()</code> emit a warning with suggestions (<code>:checkhealth org</code> checks nested options and extension options too).</p>
+<table class="defs">
+<tr><td class="term">org_directory = &quot;~/org&quot;</td><td>Base directory: relative paths (capture targets, ...) start here. <a class="hl" href="org-faq.html#org-faq-capture">org-faq-capture</a></td></tr>
+<tr><td class="term">agenda_files = {}</td><td>Files, directories (not recursive) and globs the agenda reads. Empty: the agenda shows nothing. <a class="hl" href="org-agenda.html">org-agenda</a></td></tr>
+<tr><td class="term long">default_notes_file = &quot;~/.notes&quot;</td><td>Where captures without a <code>target</code> go. <a class="hl" href="org-capture.html#org-capture-templates">org-capture-templates</a></td></tr>
+<tr><td class="term long">todo_keywords = { &quot;TODO | DONE&quot; }</td><td>Keyword sequences: { &quot;TODO(t) NEXT(n) | DONE(d) CANCELLED(c)&quot; }. <a class="hl" href="org-todo.html">org-todo</a></td></tr>
+<tr><td class="term">log_done = false</td><td>&quot;time&quot; adds CLOSED: when an entry is done, &quot;note&quot; also asks for a note. <a class="hl" href="org-todo.html">org-todo</a></td></tr>
+<tr><td class="term">log_into_drawer = false</td><td>true puts state changes and notes in a :LOGBOOK: drawer. <a class="hl" href="org-todo.html">org-todo</a></td></tr>
+<tr><td class="term long">startup_folded = &quot;showeverything&quot;</td><td>Folding when a file opens: &quot;overview&quot;, &quot;content&quot;, &quot;show2levels&quot;, ... <a class="hl" href="org-folding.html">org-folding</a></td></tr>
+<tr><td class="term long">mappings.prefix = &quot;<span class="key">&lt;leader&gt;</span>o&quot;</td><td>What <span class="key">&lt;prefix&gt;</span> means in the default keys. <a class="hl" href="org-keymaps.html">org-keymaps</a></td></tr>
+<tr><td class="term">capture.templates = {}</td><td>Capture templates by key; empty: one &quot;Task&quot; template into <code>default_notes_file</code>. <a class="hl" href="org-capture.html#org-capture-templates">org-capture-templates</a></td></tr>
+<tr><td class="term">refile.targets = {}</td><td>Where refile can move entries; empty: the level-1 headlines of the current file (<code>refile.max_level</code> adds the agenda files). <a class="hl" href="org-refile.html">org-refile</a></td></tr>
+<tr><td class="term">agenda.span = &quot;week&quot;</td><td>Days in the agenda: &quot;day&quot;, &quot;week&quot;, &quot;fortnight&quot;, &quot;month&quot;, &quot;year&quot; or a number. <a class="hl" href="org-agenda.html">org-agenda</a></td></tr>
+<tr><td class="term long">agenda.custom_commands = {}</td><td>Your own views in the agenda dispatcher. <a class="hl" href="org-agenda.html#org-agenda-custom-commands">org-agenda-custom-commands</a></td></tr>
+<tr><td class="term long">deadline_warning_days = 14</td><td>Days before a deadline it starts showing in the agenda. <a class="hl" href="org-agenda.html">org-agenda</a></td></tr>
+<tr><td class="term">ui.indent_mode = false</td><td>Virtual indentation of body text (org-indent-mode). <a class="hl" href="org-structure.html#org-indent">org-indent</a></td></tr>
+<tr><td class="term long">ui.hide_emphasis_markers = false</td><td>Hide the *, /, _, =, ~ and + around emphasized text. <a class="hl" href="org-appearance.html">org-appearance</a></td></tr>
+<tr><td class="term">picker = &quot;auto&quot;</td><td>The picker of the pick_* actions: snacks, fzf-lua, telescope, mini or vim.ui.select. <a class="hl" href="org-completion.html#org-pickers">org-pickers</a></td></tr>
+<tr><td class="term long">notifications.enabled = false</td><td>Reminders before entries with a time today. <a class="hl" href="org-timers.html#org-notifications">org-notifications</a></td></tr>
+<tr><td class="term">extensions = {}</td><td>Optional extensions: roam, ql, journal, ... <a class="hl" href="org-extensions.html">org-extensions</a></td></tr>
+</table>
+<p>A setup with the usual changes:</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({
+  <span class="h-m">org_directory</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org&quot;</span>,
+  <span class="h-m">agenda_files</span> <span class="h-o">=</span> { <span class="h-s">&quot;~/org/**/*.org&quot;</span> },
+  <span class="h-m">default_notes_file</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/inbox.org&quot;</span>,
+  <span class="h-m">todo_keywords</span> <span class="h-o">=</span> {
+    <span class="h-s">&quot;TODO(t) NEXT(n) WAITING(w@) | DONE(d) CANCELLED(c@)&quot;</span>,
+  },
+  <span class="h-m">log_done</span> <span class="h-o">=</span> <span class="h-s">&quot;time&quot;</span>,
+  <span class="h-m">log_into_drawer</span> <span class="h-o">=</span> <span class="h-n">true</span>,
+  <span class="h-m">startup_folded</span> <span class="h-o">=</span> <span class="h-s">&quot;content&quot;</span>,
+  <span class="h-m">refile</span> <span class="h-o">=</span> { <span class="h-m">max_level</span> <span class="h-o">=</span> <span class="h-n">2</span> },
+  <span class="h-m">ui</span> <span class="h-o">=</span> { <span class="h-m">indent_mode</span> <span class="h-o">=</span> <span class="h-n">true</span>, <span class="h-m">hide_emphasis_markers</span> <span class="h-o">=</span> <span class="h-n">true</span> },
+  <span class="h-m">notifications</span> <span class="h-o">=</span> { <span class="h-m">enabled</span> <span class="h-o">=</span> <span class="h-n">true</span> },
+  <span class="h-m">capture</span> <span class="h-o">=</span> {
+    <span class="h-m">templates</span> <span class="h-o">=</span> {
+      <span class="h-m">t</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Task&quot;</span>, <span class="h-m">target</span> <span class="h-o">=</span> <span class="h-s">&quot;inbox.org&quot;</span>,
+            <span class="h-m">template</span> <span class="h-o">=</span> <span class="h-s">&quot;* TODO %?\n  %U&quot;</span> },
+      <span class="h-m">n</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Note&quot;</span>, <span class="h-m">target</span> <span class="h-o">=</span> <span class="h-s">&quot;notes.org&quot;</span>,
+            <span class="h-m">headline</span> <span class="h-o">=</span> <span class="h-s">&quot;Notes&quot;</span>, <span class="h-m">template</span> <span class="h-o">=</span> <span class="h-s">&quot;* %?\n  %U&quot;</span> },
+    },
+  },
+})</code></pre>
+<h3 id="h-full-reference">Full reference</h3>
+<p>Every option and its default is listed in <code>lua/org/config/</code>. Lists replace the default, tables are merged, and <code>capture.templates</code> replaces the default template. Summary:</p>
+<h3 id="h-general">General</h3>
+<table class="defs defs3">
+<tr><td class="term">org_directory</td><td class="value"><code>&quot;~/org&quot;</code></td><td>base for relative paths</td></tr>
+<tr><td class="term">agenda_files</td><td class="value"><code>{}</code></td><td><p>files, dirs (not recursive), globs, or a file listing them; globs take</p>
+<ul>
+<li>? [..] {a,b} and **, and a path</li>
+</ul>
+<p>that exists (<code>plan[1].org</code>) is used as written</p></td></tr>
+<tr><td class="term">default_notes_file</td><td class="value"><code>&quot;~/.notes&quot;</code></td><td>capture target without <code>target</code></td></tr>
+<tr><td class="term">win_split_mode</td><td class="value"><code>&quot;float&quot;</code></td><td>special buffers: float|split|vsplit| tab|current</td></tr>
+<tr><td class="term">indirect_buffer_display</td><td class="value"><code>&quot;other-window&quot;</code></td><td><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span>b: &quot;other-window&quot;| &quot;current-window&quot;|&quot;new-frame&quot; (tab)| &quot;dedicated-frame&quot; (one tab)</td></tr>
+<tr><td class="term">win_border</td><td class="value"><code>&quot;rounded&quot;</code></td><td></td></tr>
+</table>
+<h3 id="h-todo-and-logging">TODO and logging</h3>
+<table class="defs defs3">
+<tr><td class="term">todo_keywords</td><td class="value"><code>{ &quot;TODO | DONE&quot; }</code></td><td></td></tr>
+<tr><td class="term">todo_repeat_to_state</td><td class="value"><code>nil</code></td><td>nil (first keyword)|true|&quot;KEYWORD&quot;</td></tr>
+<tr><td class="term">todo_state_tags_triggers</td><td class="value"><code>{}</code></td><td><a class="hl" href="org-todo.html#org-todo-tags-triggers">org-todo-tags-triggers</a></td></tr>
+<tr><td class="term long">enforce_<wbr>todo_<wbr>dependencies</td><td class="value"><code>false</code></td><td></td></tr>
+<tr><td class="term long">enforce_<wbr>todo_<wbr>checkbox_<wbr>dependencies</td><td class="value"><code>false</code></td><td></td></tr>
+<tr><td class="term">todo_blockers</td><td class="value"><code>{}</code></td><td>functions returning false to block</td></tr>
+<tr><td class="term">todo_get_default_hooks</td><td class="value"><code>{}</code></td><td>functions(new, old) -&gt; state</td></tr>
+<tr><td class="term long">after_<wbr>todo_<wbr>statistics_<wbr>hooks</td><td class="value"><code>{}</code></td><td>functions(n_done, n_not_done, target)</td></tr>
+<tr><td class="term">todo_statistics_hooks</td><td class="value"><code>{}</code></td><td>functions(target)</td></tr>
+<tr><td class="term">use_fast_todo_selection</td><td class="value"><code>&quot;auto&quot;</code></td><td>or false (always cycle)</td></tr>
+<tr><td class="term long">treat_<wbr>S_<wbr>cursor_<wbr>todo_<wbr>selection_<wbr>as_<wbr>state_<wbr>change</td><td class="value"><code>true</code></td><td>false: S-arrows neither log nor block</td></tr>
+<tr><td class="term long">treat_<wbr>insert_<wbr>todo_<wbr>heading_<wbr>as_<wbr>state_<wbr>change</td><td class="value"><code>false</code></td><td>log M-S-RET keywords</td></tr>
+<tr><td class="term">provide_todo_statistics</td><td class="value"><code>true</code></td><td><a class="hl" href="org-todo.html#org-todo-statistics">org-todo-statistics</a></td></tr>
+<tr><td class="term long">hierarchical_<wbr>todo_<wbr>statistics</td><td class="value"><code>true</code></td><td></td></tr>
+<tr><td class="term">closed_keep_when_no_todo</td><td class="value"><code>false</code></td><td></td></tr>
+<tr><td class="term">log_done</td><td class="value"><code>false</code></td><td>false|&quot;time&quot;|&quot;note&quot;</td></tr>
+<tr><td class="term">log_done_with_time</td><td class="value"><code>true</code></td><td>false: CLOSED without time</td></tr>
+<tr><td class="term">log_repeat</td><td class="value"><code>&quot;time&quot;</code></td><td></td></tr>
+<tr><td class="term">log_reschedule</td><td class="value"><code>false</code></td><td>false|&quot;time&quot;|&quot;note&quot;</td></tr>
+<tr><td class="term">log_redeadline</td><td class="value"><code>false</code></td><td></td></tr>
+<tr><td class="term">log_note_clock_out</td><td class="value"><code>false</code></td><td>ask for a note on clock out</td></tr>
+<tr><td class="term">log_into_drawer</td><td class="value"><code>false</code></td><td>true (LOGBOOK), a drawer name, false</td></tr>
+<tr><td class="term long">log_<wbr>states_<wbr>order_<wbr>reversed</td><td class="value"><code>true</code></td><td></td></tr>
+<tr><td class="term long">log_<wbr>state_<wbr>notes_<wbr>insert_<wbr>after_<wbr>drawers</td><td class="value"><code>false</code></td><td>notes after clock lines and drawers (no log drawer)</td></tr>
+<tr><td class="term">log_note_headings</td><td class="value"><code>{ done = &quot;CLOSING NOTE %t&quot;, state = ... }</code></td><td></td></tr>
+<tr><td class="term">extend_today_until</td><td class="value"><code>0</code></td><td>hours that still belong to yesterday (agenda today, date prompts, capture dates, repeaters, clock blocks)</td></tr>
+<tr><td class="term">use_effective_time</td><td class="value"><code>false</code></td><td></td></tr>
+<tr><td class="term long">use_<wbr>last_<wbr>clock_<wbr>out_<wbr>time_<wbr>as_<wbr>effective_<wbr>time</td><td class="value"><code>false</code></td><td></td></tr>
+<tr><td class="term long">loop_<wbr>over_<wbr>headlines_<wbr>in_<wbr>active_<wbr>region</td><td class="value"><code>true</code></td><td>true|false|&quot;start-level&quot;| a match string</td></tr>
+</table>
+<h3 id="h-priorities-tags-properties">Priorities, tags, properties</h3>
+<table class="defs defs3">
+<tr><td class="term long">priority_<wbr>highest/lowest/default</td><td class="value"><code>&quot;A&quot; / &quot;C&quot; / &quot;B&quot;</code></td><td></td></tr>
+<tr><td class="term">priority_enable_commands</td><td class="value"><code>true</code></td><td></td></tr>
+<tr><td class="term long">priority_<wbr>start_<wbr>cycle_<wbr>with_<wbr>default</td><td class="value"><code>true</code></td><td></td></tr>
+<tr><td class="term long">priority_<wbr>get_<wbr>priority_<wbr>function</td><td class="value"><code>nil</code></td><td>function(line) -&gt; number</td></tr>
+<tr><td class="term">tags</td><td class="value"><code>{}</code></td><td>e.g. { &quot;work(w)&quot;, &quot;{&quot;, &quot;@a&quot;, &quot;@b&quot;, &quot;}&quot; }</td></tr>
+<tr><td class="term">tags_persistent</td><td class="value"><code>{}</code></td><td>always-defined tags (noptag)</td></tr>
+<tr><td class="term">tags_sort_function</td><td class="value"><code>nil</code></td><td>comparator or list of comparators</td></tr>
+<tr><td class="term">tags_column</td><td class="value"><code>-77</code></td><td></td></tr>
+<tr><td class="term">auto_align_tags</td><td class="value"><code>true</code></td><td></td></tr>
+<tr><td class="term long">track_<wbr>ordered_<wbr>property_<wbr>with_<wbr>tag</td><td class="value"><code>false</code></td><td>true|&quot;TAG&quot;</td></tr>
+<tr><td class="term">use_tag_inheritance</td><td class="value"><code>true</code></td><td>true|false|{ tags }|&quot;regexp&quot;</td></tr>
+<tr><td class="term long">tags_<wbr>exclude_<wbr>from_<wbr>inheritance</td><td class="value"><code>{}</code></td><td></td></tr>
+<tr><td class="term">group_tags</td><td class="value"><code>true</code></td><td><a class="hl" href="org-tags.html#org-tag-groups">org-tag-groups</a></td></tr>
+<tr><td class="term long">fast_<wbr>tag_<wbr>selection_<wbr>single_<wbr>key</td><td class="value"><code>false</code></td><td>true|false|&quot;expert&quot;</td></tr>
+<tr><td class="term long">fast_<wbr>tag_<wbr>selection_<wbr>include_<wbr>todo</td><td class="value"><code>false</code></td><td></td></tr>
+<tr><td class="term">use_fast_tag_selection</td><td class="value"><code>&quot;auto&quot;</code></td><td>true|false|&quot;auto&quot;</td></tr>
+<tr><td class="term long">fast_<wbr>tag_<wbr>selection_<wbr>maximum_<wbr>tags</td><td class="value"><code>56</code></td><td></td></tr>
+<tr><td class="term long">complete_<wbr>tags_<wbr>always_<wbr>offer_<wbr>all_<wbr>agenda_<wbr>tags</td><td class="value"><code>false</code></td><td></td></tr>
+<tr><td class="term">use_property_inheritance</td><td class="value"><code>false</code></td><td>true|false|{ names }|&quot;regexp&quot;</td></tr>
+<tr><td class="term">property_format</td><td class="value"><code>&quot;%-10s %s&quot;</code></td><td></td></tr>
+<tr><td class="term">global_properties</td><td class="value"><code>{}</code></td><td></td></tr>
+<tr><td class="term">properties_postprocess</td><td class="value"><code>{}</code></td><td>{ Name = function(value) ... }</td></tr>
+<tr><td class="term">property_separators</td><td class="value"><code>{}</code></td><td>{ { { &quot;A&quot; } or &quot;regexp&quot;, &quot;, &quot; } }</td></tr>
+<tr><td class="term">custom_properties</td><td class="value"><code>{}</code></td><td>hidden by toggle_custom_properties_visibility</td></tr>
+<tr><td class="term">effort_property</td><td class="value"><code>&quot;Effort&quot;</code></td><td></td></tr>
+<tr><td class="term">duration_format</td><td class="value"><code>&quot;d h:mm&quot;</code></td><td><a class="hl" href="org-clock.html#org-durations">org-durations</a></td></tr>
+<tr><td class="term">duration_units</td><td class="value"><code>{ min = 1, h = 60, d = 1440, ... }</code></td><td><a class="hl" href="org-clock.html#org-durations">org-durations</a></td></tr>
+<tr><td class="term">columns_default_format</td><td class="value"><code>&quot;%25ITEM %TODO %3PRIORITY %TAGS&quot;</code></td><td></td></tr>
+<tr><td class="term">columns_view</td><td class="value"><code>&quot;overlay&quot;</code></td><td>&quot;overlay&quot; (over the headlines) | &quot;table&quot;</td></tr>
+<tr><td class="term">columns_summary_types</td><td class="value"><code>{}</code></td><td>extra summary operators</td></tr>
+<tr><td class="term long">columns_<wbr>modify_<wbr>value_<wbr>for_<wbr>display_<wbr>function</td><td class="value"><code>nil</code></td><td>function(title, value)</td></tr>
+<tr><td class="term">columns_dblock_formatter</td><td class="value"><code>nil</code></td><td>function(rows, params) → lines</td></tr>
+<tr><td class="term long">columns_<wbr>checkbox_<wbr>allowed_<wbr>values</td><td class="value"><code>{ &quot;[ ]&quot;, &quot;[X]&quot; }</code></td><td></td></tr>
+<tr><td class="term">columns_ellipses</td><td class="value"><code>&quot;..&quot;</code></td><td>end of truncated fields</td></tr>
+</table>
+<h3 id="h-tables">Tables</h3>
+<table class="defs defs3">
+<tr><td class="term">table_formula_constants</td><td class="value"><code>{}</code></td><td><code>$name</code> constants for formulas</td></tr>
+<tr><td class="term">table_copy_increment</td><td class="value"><code>true</code></td><td><span class="key">&lt;S-CR&gt;</span> step: true (difference to the field above, else 1), a number, false</td></tr>
+<tr><td class="term long">table_<wbr>formula_<wbr>create_<wbr>columns</td><td class="value"><code>false</code></td><td>field formulas beyond the table: false (error)|true|&quot;warn&quot;|&quot;prompt&quot;</td></tr>
+<tr><td class="term long">table_<wbr>fix_<wbr>formulas_<wbr>confirm</td><td class="value"><code>false</code></td><td>ask before fixing #+TBLFM references</td></tr>
+<tr><td class="term long">table_<wbr>duration_<wbr>custom_<wbr>format</td><td class="value"><code>&quot;hours&quot;</code></td><td><code>t</code> flag: hours|minutes|seconds| days</td></tr>
+<tr><td class="term long">table_<wbr>duration_<wbr>hour_<wbr>zero_<wbr>padding</td><td class="value"><code>true</code></td><td><code>01:30:00</code></td></tr>
+<tr><td class="term long">table_<wbr>formula_<wbr>evaluate_<wbr>inline</td><td class="value"><code>true</code></td><td><code>=formula</code> typed into a field</td></tr>
+<tr><td class="term">table_number_fraction</td><td class="value"><code>0.5</code></td><td>numbers needed to right-align</td></tr>
+<tr><td class="term">table_number_regexp</td><td class="value"><code>(Emacs's)</code></td><td>Emacs regexp of numbers</td></tr>
+<tr><td class="term">table_automatic_realign</td><td class="value"><code>true</code></td><td>realign on <span class="key">&lt;Tab&gt;</span>, <span class="key">&lt;CR&gt;</span>, leaving Insert</td></tr>
+<tr><td class="term long">table_<wbr>tab_<wbr>jumps_<wbr>over_<wbr>hlines</td><td class="value"><code>true</code></td><td>false: <span class="key">&lt;Tab&gt;</span> adds a row before hlines</td></tr>
+<tr><td class="term">table_auto_blank_field</td><td class="value"><code>true</code></td><td>typing after <span class="key">&lt;Tab&gt;</span> replaces the field</td></tr>
+<tr><td class="term long">table_<wbr>allow_<wbr>automatic_<wbr>line_<wbr>recalculation</td><td class="value"><code>true</code></td><td><code>#</code> rows on <span class="key">&lt;Tab&gt;</span>/<span class="key">&lt;CR&gt;</span></td></tr>
+<tr><td class="term">table_default_size</td><td class="value"><code>&quot;5x2&quot;</code></td><td>new table size</td></tr>
+<tr><td class="term long">table_<wbr>convert_<wbr>region_<wbr>max_<wbr>lines</td><td class="value"><code>999</code></td><td>largest region converted</td></tr>
+<tr><td class="term long">table_<wbr>formula_<wbr>field_<wbr>format</td><td class="value"><code>&quot;%s&quot;</code></td><td>format of formula results</td></tr>
+<tr><td class="term long">table_<wbr>formula_<wbr>use_<wbr>constants</td><td class="value"><code>true</code></td><td><code>$name</code> in C-c = / inline formulas</td></tr>
+<tr><td class="term long">table_<wbr>relative_<wbr>ref_<wbr>may_<wbr>cross_<wbr>hline</td><td class="value"><code>true</code></td><td>true|false|&quot;error&quot;</td></tr>
+<tr><td class="term">calc_default_modes</td><td class="value"><code>{ internal_prec = 12, float_format =
+  { &quot;float&quot;, 8 }, angle_mode = &quot;deg&quot;,
+  prefer_frac = false }</code></td><td></td></tr>
+<tr><td class="term">orgtbl_optimized</td><td class="value"><code>true</code></td><td>orgtbl-mode typing keeps alignment</td></tr>
+<tr><td class="term long">table_<wbr>shrunk_<wbr>column_<wbr>indicator</td><td class="value"><code>&quot;…&quot;</code></td><td></td></tr>
+<tr><td class="term long">startup_<wbr>shrink_<wbr>all_<wbr>tables</td><td class="value"><code>false</code></td><td>shrink tables on open (#+STARTUP)</td></tr>
+<tr><td class="term">startup_align_all_tables</td><td class="value"><code>false</code></td><td>align tables on open (#+STARTUP)</td></tr>
+<tr><td class="term">table_header_line_p</td><td class="value"><code>false</code></td><td>header-line mode in every buffer</td></tr>
+<tr><td class="term long">table_<wbr>exit_<wbr>follow_<wbr>field_<wbr>mode_<wbr>when_<wbr>leaving_<wbr>table</td><td class="value"><code>true</code></td><td></td></tr>
+<tr><td class="term long">table_<wbr>use_<wbr>standard_<wbr>references</td><td class="value"><code>&quot;from&quot;</code></td><td>B3 references: &quot;from&quot;|true|false</td></tr>
+<tr><td class="term long">table_<wbr>export_<wbr>default_<wbr>format</td><td class="value"><code>&quot;orgtbl-to-tsv&quot;</code></td><td></td></tr>
+<tr><td class="term long">orgtbl_<wbr>radio_<wbr>table_<wbr>templates</td><td class="value"><code>{ tex, texinfo, html, org }</code></td><td></td></tr>
+<tr><td class="term">plot_gnuplot_program</td><td class="value"><code>&quot;gnuplot&quot;</code></td><td></td></tr>
+<tr><td class="term long">plot_<wbr>gnuplot_<wbr>script_<wbr>preamble</td><td class="value"><code>&quot;&quot;</code></td><td></td></tr>
+<tr><td class="term">plot_gnuplot_term_extra</td><td class="value"><code>&quot;&quot;</code></td><td></td></tr>
+<tr><td class="term">plot_preset_plot_types</td><td class="value"><code>{}</code></td><td>extra plot types (<a class="hl" href="org-tables.html#org-plot">org-plot</a>)</td></tr>
+</table>
+<h3 id="h-buffer">Buffer</h3>
+<table class="defs defs3">
+<tr><td class="term">startup_folded</td><td class="value"><code>&quot;showeverything&quot;</code></td><td>also &quot;overview&quot;, &quot;content&quot;, &quot;showall&quot;, &quot;show2levels&quot;..&quot;show5levels&quot;</td></tr>
+<tr><td class="term">hide_drawer_startup</td><td class="value"><code>true</code></td><td>fold drawers on startup</td></tr>
+<tr><td class="term">hide_block_startup</td><td class="value"><code>false</code></td><td>fold blocks on startup</td></tr>
+<tr><td class="term">reload_on_change</td><td class="value"><code>true</code></td><td>reload unmodified buffers whose file changed on disk <a class="hl" href="org-sync.html#org-reload">org-reload</a></td></tr>
+<tr><td class="term">startup_with_beamer_mode</td><td class="value"><code>false</code></td><td><a class="hl" href="org-export.html#org-beamer-mode">org-beamer-mode</a> on startup</td></tr>
+<tr><td class="term long">cycle_<wbr>open_<wbr>archived_<wbr>trees</td><td class="value"><code>false</code></td><td>let cycling open :ARCHIVE: subtrees</td></tr>
+<tr><td class="term long">sparse_<wbr>tree_<wbr>open_<wbr>archived_<wbr>trees</td><td class="value"><code>false</code></td><td>sparse trees open :ARCHIVE: trees</td></tr>
+<tr><td class="term long">sparse_<wbr>tree_<wbr>default_<wbr>date_<wbr>type</td><td class="value"><code>nil</code></td><td><a class="hl" href="org-sparse-tree.html">org-sparse-tree</a> date types</td></tr>
+<tr><td class="term">footnote_section</td><td class="value"><code>&quot;Footnotes&quot;</code></td><td>heading for definitions, or false</td></tr>
+<tr><td class="term">adapt_indentation</td><td class="value"><code>false</code></td><td>true|false|&quot;headline-data&quot; <a class="hl" href="org-structure.html#org-indent">org-indent</a></td></tr>
+<tr><td class="term">datetree_add_timestamp</td><td class="value"><code>false</code></td><td>&quot;active&quot;|&quot;inactive&quot;: new date tree day nodes get their date</td></tr>
+<tr><td class="term long">edit_<wbr>src_<wbr>content_<wbr>indentation</td><td class="value"><code>2</code></td><td></td></tr>
+<tr><td class="term long">edit_<wbr>src_<wbr>persistent_<wbr>message</td><td class="value"><code>true</code></td><td>exit/abort hint in the edit buffer's winbar (<a class="hl" href="org-babel.html#org-babel-edit-special">org-babel-edit-special</a>)</td></tr>
+<tr><td class="term long">src_<wbr>ask_<wbr>before_<wbr>returning_<wbr>to_<wbr>edit_<wbr>buffer</td><td class="value"><code>true</code></td><td></td></tr>
+<tr><td class="term long">edit_<wbr>src_<wbr>auto_<wbr>save_<wbr>idle_<wbr>delay</td><td class="value"><code>0</code></td><td>write back after N idle seconds</td></tr>
+<tr><td class="term long">edit_<wbr>src_<wbr>turn_<wbr>on_<wbr>auto_<wbr>save</td><td class="value"><code>false</code></td><td>auto-save file of edit buffers</td></tr>
+<tr><td class="term long">edit_<wbr>fixed_<wbr>width_<wbr>region_<wbr>mode</td><td class="value"><code>nil</code></td><td>filetype of <code>: </code> area edit buffers</td></tr>
+<tr><td class="term">src_lang_modes</td><td class="value"><code>{ C = &quot;c&quot;, elisp = &quot;lisp&quot;, shell = &quot;sh&quot;, ... }</code></td><td></td></tr>
+<tr><td class="term">src_tab_acts_natively</td><td class="value"><code>true</code></td><td>TAB indents src block lines for their language</td></tr>
+<tr><td class="term">coderef_label_format</td><td class="value"><code>&quot;(ref:%s)&quot;</code></td><td></td></tr>
+<tr><td class="term">ellipsis</td><td class="value"><code>&quot;...&quot;</code></td><td></td></tr>
+<tr><td class="term">entities_user</td><td class="value"><code>{}</code></td><td>your own entities <a class="hl" href="org-appearance.html#org-entities-user">org-entities-user</a></td></tr>
+<tr><td class="term">blank_before_new_entry</td><td class="value"><code>{ heading = &quot;auto&quot;, plain_list_item = &quot;auto&quot; }</code></td><td></td></tr>
+</table>
+<h3 id="h-structure-and-visibility">Structure and visibility</h3>
+<table class="defs defs3">
+<tr><td class="term">meta_return_split_line</td><td class="value"><code>true</code></td><td>M-RET splits the line (Insert mode); or { headline, item, default }</td></tr>
+<tr><td class="term">clone_delete_id</td><td class="value"><code>false</code></td><td>clones lose their ID (else a new one)</td></tr>
+<tr><td class="term">odd_levels_only</td><td class="value"><code>false</code></td><td>promote / demote by two stars</td></tr>
+<tr><td class="term">sort_functions</td><td class="value"><code>{}</code></td><td>named key functions for sorting (f)</td></tr>
+<tr><td class="term">goto_interface</td><td class="value"><code>&quot;outline&quot;</code></td><td><a class="hl" href="org-structure.html#org-goto">org-goto</a>: &quot;outline&quot;| &quot;outline-path-completion&quot;</td></tr>
+<tr><td class="term">goto_max_level</td><td class="value"><code>5</code></td><td>deepest headlines offered (completion)</td></tr>
+<tr><td class="term">goto_auto_isearch</td><td class="value"><code>true</code></td><td>typing searches the headlines</td></tr>
+<tr><td class="term">picker</td><td class="value"><code>&quot;auto&quot;</code></td><td>picker of the <code>pick_*</code> actions: &quot;auto&quot;|&quot;snacks&quot;|&quot;fzf-lua&quot;| &quot;telescope&quot;|&quot;mini&quot;|&quot;select&quot; (<a class="hl" href="org-completion.html#org-pickers">org-pickers</a>)</td></tr>
+<tr><td class="term">picker_opts</td><td class="value"><code>{}</code></td><td>options for the picker plugin, by picker (<a class="hl" href="org-completion.html#org-picker-opts">org-picker-opts</a>)</td></tr>
+<tr><td class="term">picker_keys</td><td class="value"><code>{ split = &quot;&lt;C-s&gt;&quot;, vsplit = &quot;&lt;C-v&gt;&quot;,
+  tab = &quot;&lt;C-t&gt;&quot;, qflist = &quot;&lt;C-q&gt;&quot;,
+  query = &quot;&lt;M-CR&gt;&quot; }</code></td><td>open a place in a split, vsplit or tab from a picker, or the selection in the quickfix list; take the typed text as a new entry (<a class="hl" href="org-completion.html#org-picker-keys">org-picker-keys</a>, <a class="hl" href="org-completion.html#org-picker-query">org-picker-query</a>)</td></tr>
+<tr><td class="term">bookmark_names</td><td class="value"><code>{ last_capture = &quot;org-capture-last-stored&quot;,
+  last_refile = &quot;org-refile-last-stored&quot;,
+  last_capture_marker =
+    &quot;org-capture-last-stored-marker&quot; }</code></td><td></td></tr>
+<tr><td class="term">sort_function</td><td class="value"><code>&quot;collate&quot;</code></td><td>text order in sorting: &quot;collate&quot; (locale)|&quot;fallback&quot; (codes)|function</td></tr>
+<tr><td class="term">structure_template_alist</td><td class="value"><code>{ a = &quot;export ascii&quot;, c = &quot;center&quot;, ... }</code></td><td></td></tr>
+<tr><td class="term">tempo</td><td class="value"><code>false</code></td><td><code>&lt;s</code> TAB expansion (org-tempo)</td></tr>
+<tr><td class="term">tempo_keywords</td><td class="value"><code>{ L = &quot;latex&quot;, H = &quot;html&quot;, A = &quot;ascii&quot;,
+  i = &quot;index&quot; }</code></td><td></td></tr>
+<tr><td class="term long">cycle_<wbr>include_<wbr>plain_<wbr>lists</td><td class="value"><code>true</code></td><td>TAB folds list items; &quot;integrate&quot;: items are children of the headline</td></tr>
+<tr><td class="term">lists</td><td class="value"><code>{ allow_alphabetical = false,
+  ordered_item_terminator = true (&quot;.&quot;|&quot;)&quot;),
+  demote_modify_bullet = {} (e.g.
+  { [&quot;-&quot;] = &quot;+&quot; }),
+  two_spaces_after_bullet_regexp = nil,
+  indent_offset = 0,
+  automatic_rules = { checkbox = true,
+  use_circular_motion = false,
+  checkbox_hierarchical_statistics = true }</code></td><td>indent = true },</td></tr>
+<tr><td class="term">cycle_emulate_tab</td><td class="value"><code>true</code></td><td>TAB on text: true|&quot;white&quot;| &quot;whitestart&quot;|&quot;exc-hl-bol&quot;|false</td></tr>
+<tr><td class="term">cycle_separator_lines</td><td class="value"><code>2</code></td><td>blank lines kept visible when folded</td></tr>
+<tr><td class="term">catch_invisible_edits</td><td class="value"><code>&quot;smart&quot;</code></td><td>false|&quot;error&quot;|&quot;show&quot;| &quot;show-and-error&quot;|&quot;smart&quot;</td></tr>
+<tr><td class="term long">catch_<wbr>invisible_<wbr>edits_<wbr>commands</td><td class="value"><code>{ self_insert = &quot;insert&quot;, ... }</code></td><td>edits checked, by command</td></tr>
+<tr><td class="term">cycle_global_at_bob</td><td class="value"><code>false</code></td><td>TAB at buffer start cycles globally</td></tr>
+<tr><td class="term">cycle_max_level</td><td class="value"><code>nil</code></td><td>deepest level TAB cycles</td></tr>
+<tr><td class="term long">cycle_<wbr>skip_<wbr>children_<wbr>state_<wbr>if_<wbr>no_<wbr>children</td><td class="value"><code>true</code></td><td></td></tr>
+<tr><td class="term">fold_show_context_detail</td><td class="value"><code>{ agenda = &quot;local&quot;, default = &quot;ancestors&quot;,
+  ... }   see |org-show-context-detail|</code></td><td></td></tr>
+<tr><td class="term">occur_case_fold_search</td><td class="value"><code>true</code></td><td>sparse-tree regexps ignore case: true|false|&quot;smart&quot;</td></tr>
+<tr><td class="term long">remove_<wbr>highlights_<wbr>with_<wbr>change</td><td class="value"><code>true</code></td><td>edits remove sparse-tree and clock_display highlights</td></tr>
+<tr><td class="term">special_ctrl_a_e</td><td class="value"><code>false</code></td><td><a class="hl" href="org-structure.html#org-line-edit">org-line-edit</a>: true|&quot;reversed&quot;| { a, e }</td></tr>
+<tr><td class="term">special_ctrl_k</td><td class="value"><code>false</code></td><td>kill_line up to the tags</td></tr>
+<tr><td class="term">ctrl_k_protect_subtree</td><td class="value"><code>false</code></td><td>kill_line on a fold: false|true|&quot;error&quot;</td></tr>
+<tr><td class="term long">insert_<wbr>heading_<wbr>respect_<wbr>content</td><td class="value"><code>false</code></td><td><span class="key">&lt;M-CR&gt;</span> inserts after the subtree</td></tr>
+<tr><td class="term long">insert_<wbr>mode_<wbr>line_<wbr>in_<wbr>empty_<wbr>file</td><td class="value"><code>false</code></td><td><code>:setf org</code> on an empty file adds <code>#    -*- mode: org -*-</code></td></tr>
+<tr><td class="term long">allow_<wbr>promoting_<wbr>top_<wbr>level_<wbr>subtree</td><td class="value"><code>false</code></td><td>promoting level 1 makes <code># </code></td></tr>
+<tr><td class="term">edit_keep_region</td><td class="value"><code>{ meta_left = true, meta_right = true,
+  meta_up = true, meta_down = true }</code></td><td>keep the Visual selection (or true|false)</td></tr>
+<tr><td class="term">yank_folded_subtrees</td><td class="value"><code>true</code></td><td><code>p</code> folds put subtrees</td></tr>
+<tr><td class="term">yank_adjusted_subtrees</td><td class="value"><code>false</code></td><td><code>p</code> adjusts their level</td></tr>
+<tr><td class="term">use_speed_commands</td><td class="value"><code>false</code></td><td><a class="hl" href="org-structure.html#org-speed-commands">org-speed-commands</a></td></tr>
+<tr><td class="term">speed_commands</td><td class="value"><code>{}</code></td><td>{ key = action | function | false }</td></tr>
+<tr><td class="term">speed_command_hook</td><td class="value"><code>{ &quot;org-speed-command-activate&quot;,
+  &quot;org-babel-speed-command-activate&quot; }</code></td><td></td></tr>
+<tr><td class="term">inlinetask_min_level</td><td class="value"><code>false</code></td><td><a class="hl" href="org-structure.html#org-inlinetask">org-inlinetask</a> (Emacs: 15)</td></tr>
+<tr><td class="term">inlinetask_default_state</td><td class="value"><code>nil</code></td><td></td></tr>
+<tr><td class="term long">inlinetask_<wbr>show_<wbr>first_<wbr>star</td><td class="value"><code>false</code></td><td>show the first star of inline tasks</td></tr>
+<tr><td class="term">footnote_auto_label</td><td class="value"><code>true</code></td><td>true|false|&quot;confirm&quot;|&quot;random&quot;| &quot;plain&quot;|&quot;anonymous&quot;</td></tr>
+<tr><td class="term">footnote_auto_adjust</td><td class="value"><code>false</code></td><td>false|true|&quot;sort&quot;|&quot;renumber&quot;</td></tr>
+<tr><td class="term">footnote_define_inline</td><td class="value"><code>false</code></td><td></td></tr>
+<tr><td class="term long">footnote_<wbr>fill_<wbr>after_<wbr>inline_<wbr>note_<wbr>extraction</td><td class="value"><code>false</code></td><td>normalizing refills the paragraphs of inline notes (at <code>textwidth</code>, 70 when 0)</td></tr>
+<tr><td class="term">deadline_warning_days</td><td class="value"><code>14</code></td><td>0 or negative = also over -Nd cookies</td></tr>
+<tr><td class="term">scheduled_delay_days</td><td class="value"><code>0</code></td><td>negative = also over -Nd cookies</td></tr>
+<tr><td class="term long">time_<wbr>stamp_<wbr>rounding_<wbr>minutes</td><td class="value"><code>{ 0, 5 }</code></td><td>{ now in prompts, CLOSED and notes, S-Up minutes }</td></tr>
+<tr><td class="term">read_date_prefer_future</td><td class="value"><code>true</code></td><td>true|false|&quot;time&quot;</td></tr>
+<tr><td class="term">read_date_popup_calendar</td><td class="value"><code>true</code></td><td>false: a plain prompt <a class="hl" href="org-dates.html#org-calendar">org-calendar</a></td></tr>
+<tr><td class="term">read_date_display_live</td><td class="value"><code>true</code></td><td>show the typed date's meaning</td></tr>
+<tr><td class="term">calendar_to_agenda_key</td><td class="value"><code>&quot;default&quot;</code></td><td>the <code>goto_calendar</code> key showing the agenda of the date: <code>c</code>, a key, false</td></tr>
+<tr><td class="term long">calendar_<wbr>insert_<wbr>diary_<wbr>entry_<wbr>key</td><td class="value"><code>&quot;i&quot;</code></td><td>its key adding a diary entry</td></tr>
+<tr><td class="term long">edit_<wbr>timestamp_<wbr>down_<wbr>means_<wbr>later</td><td class="value"><code>false</code></td><td><span class="key">&lt;S-Down&gt;</span> makes timestamps later</td></tr>
+<tr><td class="term">display_custom_times</td><td class="value"><code>false</code></td><td><a class="hl" href="org-dates.html">org-dates</a></td></tr>
+<tr><td class="term long">time_<wbr>stamp_<wbr>custom_<wbr>formats</td><td class="value"><code>{ &quot;%m/%d/%y %a&quot;, &quot;%m/%d/%y %a %H:%M&quot; }</code></td><td></td></tr>
+<tr><td class="term">archive_location</td><td class="value"><code>&quot;%s_archive::&quot;</code></td><td></td></tr>
+<tr><td class="term long">archive_<wbr>save_<wbr>context_<wbr>info</td><td class="value"><code>{ &quot;time&quot;, &quot;file&quot;, &quot;olpath&quot;, &quot;category&quot;, &quot;todo&quot;,
+  &quot;itags&quot; }</code></td><td></td></tr>
+<tr><td class="term">archive_sibling_heading</td><td class="value"><code>&quot;Archive&quot;</code></td><td></td></tr>
+<tr><td class="term long">archive_<wbr>subtree_<wbr>add_<wbr>inherited_<wbr>tags</td><td class="value"><code>&quot;infile&quot;</code></td><td>true|false|&quot;infile&quot;</td></tr>
+<tr><td class="term">archive_reversed_order</td><td class="value"><code>false</code></td><td></td></tr>
+<tr><td class="term">archive_mark_done</td><td class="value"><code>false</code></td><td>true|&quot;DONEKEYWORD&quot;</td></tr>
+<tr><td class="term">archive_default_command</td><td class="value"><code>&quot;archive_subtree&quot;</code></td><td>&quot;archive_to_sibling&quot;| &quot;set_tag&quot;|function(target)</td></tr>
+<tr><td class="term long">archive_<wbr>subtree_<wbr>save_<wbr>file</td><td class="value"><code>&quot;from_org&quot;</code></td><td>true|false|&quot;from_agenda&quot;</td></tr>
+<tr><td class="term long">archive_<wbr>file_<wbr>header_<wbr>format</td><td class="value"><code>&quot;\nArchived entries from file %s\n\n&quot;</code></td><td></td></tr>
+</table>
+<h3 id="h-agenda">agenda</h3>
+<p>span &quot;week&quot;, start_on_weekday 1, start_day nil (&quot;-3d&quot;), entry_types { &quot;deadline&quot;, &quot;scheduled&quot;, &quot;timestamp&quot;, &quot;sexp&quot; }, include_deadlines true, skip_scheduled_if_done, skip_deadline_if_done, skip_timestamp_if_done, skip_scheduled_if_deadline_is_shown, skip_timestamp_if_deadline_is_shown, skip_scheduled_repeats_after_deadline, skip_additional_timestamps_same_entry, skip_deadline_prewarning_if_scheduled, skip_scheduled_delay_if_deadline, deadline_past_days 10000, scheduled_past_days 10000, prefer_last_repeat false, show_future_repeats (true|false|&quot;next&quot;), show_all_dates true, todo_ignore_scheduled/deadlines/timestamp/with_date, tags_todo_honor_ignore_options false, todo_list_sublevels true, tags_match_list_sublevels true, time_grid { enabled, type, times, separator &quot; ┄┄┄┄┄ &quot;, time_string }, current_time_string, show_current_time_in_grid true, prefix_format { agenda, todo, tags, search }, scheduled_leaders, deadline_leaders, timerange_leaders, inactive_leader &quot;[&quot;, remove_times_when_in_prefix true, search_headline_for_time true, default_appointment_duration nil, time_leading_zero false, timegrid_use_ampm false, format_date nil, weekend_days { 6, 0 }, hide_tags_regexp nil, tags_column &quot;auto&quot;, category_icons {}, show_outline_path true, breadcrumbs_separator &quot;-&gt;&quot;, sorting { agenda, todo, tags, search }, cmp_user_defined nil, sort_notime_is_late true, sort_noeffort_is_high true, max_entries/max_todos/max_tags/max_effort nil, window &quot;split&quot; (&quot;split&quot;|&quot;only&quot;|&quot;other&quot;|&quot;current&quot;|&quot;vsplit&quot;|&quot;tab&quot;|&quot;float&quot;), restore_windows_after_quit false, sticky false, persistent_filter false, auto_exclude_function nil, persistent_marks false, bulk_custom_functions {}, compact_blocks false, log_mode_items, log_mode_add_notes true, clock_consistency_checks { max_duration &quot;10:00&quot;, min_duration 0, max_gap &quot;0:05&quot;, gap_ok_around { &quot;4:00&quot; } }, habits { graph_column 40, preceding_days 21, following_days 7, show_habits, show_habits_only_for_today true, show_all_today, show_done_always_green, scheduled_past_days, today_glyph &quot;!&quot;, completed_glyph &quot;*&quot; }, stuck_projects { match, todo_keywords { &quot;TODO&quot;, &quot;NEXT&quot;, &quot;NEXTACTION&quot; }, tags, text }, save_after_edit false, block_separator, show_inherited_tags, remove_tags, custom_commands, overriding_columns_format, view_columns_initially, columns_show_summaries true, columns_compute_summary_properties true, text_search_extra_files {}, search_view_always_boolean, search_view_force_full_words, search_view_max_outline_level 0, entry_text_maxlines 5, confirm_kill 1, dim_blocked_tasks true (true|false|&quot;invisible&quot;), start_with_log_mode, start_with_follow_mode, start_with_clockreport_mode, start_with_entry_text_mode, calendar_latitude/longitude/location_name nil, calendar_date_style &quot;american&quot; (&quot;european&quot;|&quot;iso&quot;), hebrew_sabbath_candles_minutes 18, include_diary false, diary_file nil, diary_show_holidays true, diary_include_files false, diary_nongregorian {}, holidays (<a class="hl" href="org-agenda.html#org-agenda-holidays">org-agenda-holidays</a>), move_date_from_past_immediately_to_today true, follow_indirect false, mouse_1_follows_link false, skip_comment_trees true, skip_function_global nil, todo_ignore_time_comparison_use_seconds false, entry_text_exclude_regexps {}, entry_text_leaders &quot;    &gt; &quot;, add_entry_text_maxlines 0, before_write_hook nil, export_html_style nil, custom_commands_contexts {}, menu_show_matcher true, menu_two_columns false, todo_keyword_format &quot;%-1s&quot;, fontify_priorities &quot;cookies&quot; (true|false|table), deadline_faces, day_face_function nil, diary_sexp_prefix nil, remove_timeranges_from_blocks false, bulk_mark_char &quot;&gt;&quot;, loop_over_headlines_in_active_region true (false|&quot;start-level&quot;|regexp), start_with_archives_mode false (true|&quot;trees&quot;), diary_entry_file &quot;diary-file&quot; (or an Org file), insert_diary_strategy &quot;date-tree&quot; (&quot;date-tree-last&quot;|&quot;top-level&quot;), insert_diary_extract_time false, skip_unavailable_files false, query_register &quot;o&quot;, restriction_lock_highlight_subtree true, window_frame_fractions { 0.5, 0.75 }, columns_add_appointments_to_effort_sum false, index { enabled true, cache true, background true, start &quot;org_buffer&quot;, threads 2, watch true, max_watchers 32, poll_interval 30 } (<a class="hl" href="org-agenda.html#org-agenda-index">org-agenda-index</a>) (see <a class="hl" href="org-agenda.html">org-agenda</a>, <a class="hl" href="org-agenda.html#org-agenda-diary-file">org-agenda-diary-file</a>)</p>
+<h3 id="h-capture">capture</h3>
+<p>templates {} (<a class="hl" href="org-capture.html#org-capture-templates">org-capture-templates</a>; empty = Emacs's &quot;t&quot; Task template), templates_contexts {} (<a class="hl" href="org-capture.html#org-capture-contexts">org-capture-contexts</a>), window &quot;split&quot;, in_place false (<a class="hl" href="org-capture.html#org-capture-in-place">org-capture-in-place</a>), use_agenda_date false (the global capture key in the agenda uses the date at point, like the agenda's <code>K</code>)</p>
+<h3 id="h-refile">refile</h3>
+<p>targets {} (empty = level-1 headlines of the current buffer), max_level nil, include_current_file nil, use_outline_path false, outline_path_complete_in_steps true, allow_creating_parent_nodes false, active_region_within_subtree false, verify nil, log false, reverse_note_order false, use_cache false</p>
+<h3 id="h-clock">clock</h3>
+<p>out_when_done true, into_drawer true (or a drawer name / number), out_remove_zero_time false, rounding_minutes 0, in_resume false, in_switch_to_state nil (keyword or function(keyword)), out_switch_to_state nil (keyword or function(keyword)), notify_effort true, history_length 5, continuously false, mode_line_total &quot;auto&quot;, string_limit 0, heading_function nil, task_overrun_text nil, sound nil, notification_handler nil, idle_time nil, auto_clockout_timer nil, auto_clock_resolution &quot;when-no-clock-is-running&quot;, report_include_clocking_task false, goto_may_find_recent_task true, goto_before_context 2, display_default_range &quot;thisyear&quot;, ask_before_exiting true, statusline_icon &quot;⏱&quot;, clocktable_default { maxlevel 2, scope, block }, clocktable_default_properties { maxlevel = 2 } (header of a new clock table: <code>:scope</code> first, then <code>:maxlevel</code>, then the others by name; merged with the default, false leaves a key out), clocktable_formatter nil (function(tables, params) -&gt; lines, see <a class="hl" href="org-clock.html#org-clocktable">org-clocktable</a>), total_time_cell_format &quot;*%s*&quot;, file_time_cell_format &quot;*%s*&quot;, resolve_expert false (resolve clocks at a one-line prompt, no help window), x11idle_program_name nil (xprintidle when installed, else x11idle), persist false (true | &quot;clock&quot; | &quot;history&quot;), persist_query_resume true, persist_query_save false (ask on exit whether to keep the running clock for the next session), persist_file</p>
+<h3 id="h-timer">timer</h3>
+<p>format &quot;%s &quot;, default_timer &quot;0&quot;</p>
+<h3 id="h-protocol">protocol</h3>
+<p>default_template_key nil, projects {}, handlers {}, data_separator [[/\+\|?]] (<a class="hl" href="org-capture.html#org-protocol">org-protocol</a>)</p>
+<h3 id="h-remote">remote</h3>
+<p>enabled false (the first Neovim listens for the <code>org</code> command line, org-protocol and <code>api.remote.call</code>), address nil (<code>org.nvim.sock</code> in the runtime directory; $ORG_NVIM_SERVER overrides it) (<a class="hl" href="org-capture.html#org-remote">org-remote</a>)</p>
+<h3 id="h-yank">yank</h3>
+<p>image_save_method &quot;attach&quot;, image_file_name_function nil, dnd_method &quot;ask&quot;, dnd_default_attach_method nil, dnd_paste true (<a class="hl" href="org-links.html#org-yank-media">org-yank-media</a>)</p>
+<h3 id="h-ctags">ctags</h3>
+<p>enabled false, path_to_ctags nil, open_link_functions { &quot;find_tag&quot;, &quot;ask_rebuild_tags_file_then_find_tag&quot;, &quot;ask_append_topic&quot; }, new_topic_template &quot;* &lt;&lt;%t&gt;&gt;\n\n\n\n\n\n&quot;, tag_regexp [[/&lt;&lt;([^&lt;&gt;]+)&gt;&gt;/\1/d,definition/]] (<a class="hl" href="org-capture.html#org-ctags">org-ctags</a>)</p>
+<h3 id="h-feed">feed</h3>
+<p>feeds {}, default_template &quot;\n* %h\n  %U\n  %description\n  %a\n&quot;, drawer &quot;FEEDSTATUS&quot;, save_after_adding true, retrieve_method &quot;curl&quot; (<a class="hl" href="org-capture.html#org-feed">org-feed</a>)</p>
+<h3 id="h-crypt">crypt</h3>
+<p>tag_matcher &quot;crypt&quot;, key &quot;&quot; (or false), encrypt_on_save false, disable_auto_save &quot;ask&quot;, gpg_program &quot;gpg&quot; (<a class="hl" href="org-crypt.html">org-crypt</a>)</p>
+<h3 id="h-links">links</h3>
+<p>abbreviations {}, types {}, confirm_shell true (or a function), shell_skip_confirm_regexp &quot;&quot;, shell_output &quot;buffer&quot; (&quot;terminal&quot;), confirm_elisp true (or a function), elisp_skip_confirm_regexp &quot;&quot;, use_id false (true|&quot;create-if-interactive&quot;| &quot;create-if-interactive-and-no-custom-id&quot;|&quot;use-existing&quot;), file_apps {} (&quot;vim&quot; forces Neovim), context_for_files true (or a number of lines), file_path_type &quot;adaptive&quot; (&quot;relative&quot;|&quot;absolute&quot;|&quot;noabbrev&quot;|function), keep_stored_after_insertion false, search_must_match_exact_headline &quot;query-to-create&quot; (true|false), frame_setup { file = &quot;other-window&quot; } (&quot;current&quot;|&quot;split&quot;|&quot;vsplit&quot;|&quot;tab&quot;| function), make_description nil, doi_server_url &quot;<a href="https://doi.org/">https://doi.org/</a>&quot;, docview_command nil (&quot;cmd --page=%p %s&quot;|function(file, page)|false; <a class="hl" href="org-links.html">org-links</a>), search_functions {}, translation_function nil, mouse_1_follows_link 450 (true|&quot;double&quot;|ms|false), tab_follows_link false, open_directory_means_index_dot_org false, open_non_existing_files false (<a class="hl" href="org-links.html#org-links-mouse">org-links-mouse</a>), info_other_documents { dir, libc, make } (URLs of info manuals)</p>
+<p>resource_download_policy &quot;prompt&quot; (true|&quot;safe&quot;|false), safe_remote_resources {} (<a class="hl" href="org-export.html#org-remote-resources">org-remote-resources</a>)</p>
+<h3 id="h-bibtex">bibtex</h3>
+<p>autogen_keys false, prefix nil, treat_headline_as_title true, headline_format_function nil, export_arbitrary_fields false, key_property &quot;CUSTOM_ID&quot;, tags {}, tags_are_keywords false, no_export_tags {}, inherit_tags false, type_property_name &quot;btype&quot; (<a class="hl" href="org-links.html#org-bibtex">org-bibtex</a>)</p>
+<h3 id="h-id">id</h3>
+<p>locations_file, locations_format &quot;auto&quot;|&quot;json&quot;|&quot;emacs&quot;, locations_file_relative false, method &quot;uuid&quot;|&quot;ts&quot;|&quot;org&quot;, prefix nil, ts_format &quot;%Y%m%dT%H%M%S.%6N&quot;, search_archives true, extra_files {}, link_use_context true, link_consider_parent_id false, include_domain false, completion_targets { { files = &quot;current&quot; }, { files = &quot;id&quot; } }</p>
+<h3 id="h-attach">attach</h3>
+<p>dir &quot;data/&quot;, method &quot;cp&quot;|&quot;mv&quot;|&quot;ln&quot;|&quot;lns&quot;, id_to_path { &quot;uuid&quot;, &quot;ts&quot;, &quot;fallback&quot; }, use_inheritance &quot;selective&quot;, dir_relative false, preferred_new_method &quot;id&quot;, store_link &quot;attached&quot;, sync_delete_empty_dir &quot;query&quot;, archive_delete false, auto_tag &quot;ATTACH&quot;, commands {} (extra dispatcher commands), expert false, git false, git_annex_cutoff 32768, git_annex_auto_get &quot;ask&quot;, git_dir &quot;default&quot; (<a class="hl" href="org-links.html#org-attach-git">org-attach-git</a>)</p>
+<h3 id="h-mobile">mobile</h3>
+<p>directory nil, files { &quot;agenda_files&quot; }, files_exclude_regexp &quot;&quot;, inbox_for_pull &quot;~/org/from-mobile.org&quot;, index_file &quot;index.org&quot;, allpriorities &quot;A B C&quot;, agendas &quot;all&quot;, force_id_on_agenda_items true, force_mobile_change false, use_encryption false, encryption_password &quot;&quot;, checksum_binary nil, action_alist {}, show_flagged true, pre_push_hook, post_push_hook, pre_pull_hook, before_process_capture_hook, post_pull_hook (<a class="hl" href="org-links.html#org-mobile">org-mobile</a>)</p>
+<h3 id="h-babel">babel</h3>
+<p>confirm_evaluate true (or a function), min_lines_for_block_output 10, timeout 30000, async false (<a class="hl" href="org-babel.html#org-babel-async">org-babel-async</a>), spinner (braille frames, or false), spinner_interval 100, live_output 10 (lines of output shown while a block runs, or false; <a class="hl" href="org-babel.html#org-babel-async">org-babel-async</a>), evaluate_on_export true, no_eval_on_ctrl_c_ctrl_c false, default_header_args, default_inline_header_args, default_lob_header_args, results_keyword &quot;RESULTS&quot;, inline_result_wrap &quot;=%s=&quot;, hash_show_time false, noweb_wrap_start &quot;&lt;&lt;&quot;, noweb_wrap_end &quot;&gt;&gt;&quot;, tangle_use_relative_file_links true, tangle_comment_format_beg / _end, tangle_default_file_mode &quot;644&quot;, tangle_lang_exts {}, tangle_save_buffer true, tangle_uncomment_comments false, tangle_remove_file_before_write &quot;auto&quot;, process_comment_text nil, uppercase_example_markers false, exp_code_template, exp_inline_code_template, exp_call_line_template &quot;&quot;, shell_names { &quot;sh&quot;, &quot;bash&quot;, &quot;zsh&quot;, &quot;fish&quot;, &quot;csh&quot;, &quot;ash&quot;, &quot;dash&quot;, &quot;ksh&quot;, &quot;mksh&quot;, &quot;posh&quot; }, shell_results_defaults_to_output true, languages (see <a class="hl" href="org-babel.html">org-babel</a>; the entries of python, ruby, lua and the <a class="hl" href="org-babel.html#org-babel-languages">org-babel-languages</a> ports hold their ob-LANG options, e.g. <code>plantuml = { exec_mode = &quot;jar&quot;, jar_path = &quot;&quot;, executable_path = &quot;plantuml&quot;, args = { &quot;-headless&quot; }, svg_text_to_path = false }</code>, <code>java = { cmd = &quot;java&quot;, compiler = &quot;javac&quot;, hline_to = &quot;null&quot;, null_to = &quot;hline&quot; }</code>, <code>lua = { cmd = &quot;nvim&quot;, hline_to = &quot;None&quot;, None_to = &quot;hline&quot;, multiple_values_separator = &quot;, &quot; }</code>), emacs_lisp { command = &quot;emacs&quot;, args = { &quot;-Q&quot;, &quot;--batch&quot; } }</p>
+<p>src_preserve_indentation false (org-src-preserve-indentation)</p>
+<div class="tags"><a class="tag" id="org-config-export" href="#org-config-export">org-config-export</a></div>
+<p>export ~</p>
+<p>output_dir, open_after_export, and the Emacs org-export-* options: with_toc true, with_section_numbers true, headline_levels 3, with_author, with_date, with_title true, with_email, with_creator false, with_todo_keywords true, with_tags true, with_priority false, with_drawers { not = { &quot;LOGBOOK&quot; } }, with_properties, with_planning, with_clocks false, with_timestamps true, with_tasks true, with_archived_trees &quot;headline&quot;, with_broken_links false, with_smart_quotes false, with_sub_superscripts true, preserve_breaks, timestamp_file true, select_tags { &quot;export&quot; }, exclude_tags { &quot;noexport&quot; }, default_language &quot;en&quot;, author, email, creator, global_macros, allow_bind_keywords false, hooks, filters, initial_scope &quot;buffer&quot;, body_only, visible_only, force_publishing, in_background, async_init_file nil, dispatch_use_expert_ui false, show_temporary_export_buffer true, copy_to_kill_ring false, coding_system nil, process_citations, replace_macros true, smart_quotes_alist nil (<a class="hl" href="org-export.html">org-export</a>); back-end tables html, latex, md, org, ascii, beamer, icalendar, odt, texinfo, koma_letter, man, publish, cite; pandoc { cmd, args }; preview { host, port, open_browser, on_change, debounce, sync_cursor, evaluate_babel, stylesheet } (<a class="hl" href="org-export.html#org-preview">org-preview</a>). See the comments in lua/org/config/export.lua for every key and its Emacs variable. Among them (org-BACKEND-NAME is export.BACKEND.NAME, nil = the Emacs value): html allow_name_attribute_in_anchors, coding_system &quot;utf-8&quot;, datetime_formats { &quot;%F&quot;, &quot;%FT%T&quot; }, indent false, divs, footnotes_section, format_drawer_function, format_headline_function, format_inlinetask_function, home_up_format, infojs_template, inline_image_rules, klipsify_src, klipse_css, klipse_js, klipse_selection_script, mathjax_template, meta_tags, scripts, table_align_individual_fields, table_data_tags, table_header_tags, table_default_attributes, table_row_open_tag, table_row_close_tag, table_use_header_tags_for_first_column, tag_class_prefix, todo_kwd_class_prefix, text_markup_alist, viewport, xml_declaration; latex async_compile true (<a class="hl" href="org-export.html#org-export-stack">org-export-stack</a>), active_timestamp_format, inactive_timestamp_format, diary_timestamp_format, compiler_file_string, known_warnings, custom_lang_environments, default_footnote_command, default_quote_environment, footnote_defined_format, footnote_separator, format_drawer_function, format_headline_function, format_inlinetask_function, image_default_scale, image_default_height, image_default_option, inline_image_rules, inputenc_alist, link_with_unknown_path_format, listings_langs, listings_options, listings_src_omit_language, logfiles_extensions, minted_langs, minted_options, engraved_options, engraved_preamble, engraved_theme, subtitle_format, subtitle_separate, table_scientific_notation, text_markup_alist, toc_include_unnumbered; texinfo logfiles_extensions, active_timestamp_format, inactive_timestamp_format, diary_timestamp_format, link_with_unknown_path_format, tables_verbatim, table_scientific_notation, text_markup_alist, format_headline_function, format_drawer_function, format_inlinetask_function; odt async_convert true (<a class="hl" href="org-export.html#org-export-stack">org-export-stack</a>). cite also has the buffer options (<a class="hl" href="org-footnotes.html#org-cite">org-cite</a>): activate_processor, follow_processor, insert_processor &quot;basic&quot;, basic_max_key_distance 2, basic_author_column_end 25, basic_column_separator &quot;  &quot;, basic_complete_key_crm_separator nil, basic_mouse_over_key_face &quot;highlight&quot; (OrgCiteMouseOver; false = none).</p>
+<h3 id="h-mouse">mouse</h3>
+<p>org_mouse false, features { &quot;context-menu&quot;, &quot;yank-link&quot;, &quot;activate-stars&quot;, &quot;activate-bullets&quot;, &quot;activate-checkboxes&quot; } (<a class="hl" href="org-commands.html#org-mouse">org-mouse</a>)</p>
+<h3 id="h-integrations">integrations</h3>
+<p>mini_ai true, snacks_scope true, flash true (<a class="hl" href="org-completion.html#org-integrations">org-integrations</a>)</p>
+<h3 id="h-notifications">notifications</h3>
+<p>enabled false, reminder_time { 12, 9, 6, 3, 0 }, check_interval 60, system_notification true, single_instance true, notifier nil</p>
+<h3 id="h-ui">ui</h3>
+<p>See <a class="hl" href="org-appearance.html">org-appearance</a>.</p>
+<h3 id="h-mappings">mappings</h3>
+<p>See <a class="hl" href="org-keymaps.html">org-keymaps</a>.</p>
+</article>
+<nav class="pager"><a class="prev" href="../manual/org-appearance.html"><span>上一页</span>外观和高亮</a><a class="next" href="../manual/org-keymaps.html"><span>下一页</span>按键映射参考</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L7597">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>

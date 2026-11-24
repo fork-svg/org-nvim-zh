@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agenda · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="../assets/site.js" defer></script>
+
+</head>
+<body data-root="../">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="../index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="../index.html">首页</a></li>
+<li class=""><a href="../guide.html">指南</a></li>
+<li class=""><a href="../playground.html">互动教程</a></li>
+<li><details class="group" open><summary>手册</summary><ul>
+<li class=""><a href="../manual/index.html">目录</a></li>
+<li class=""><a href="../manual/org-introduction.html">简介</a></li>
+<li class=""><a href="../manual/org-installation.html">安装</a></li>
+<li class=""><a href="../manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="../manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="../manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="../manual/org-tags.html">标签</a></li>
+<li class=""><a href="../manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="../manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="../manual/org-clock.html">计时和工作量</a></li>
+<li class=""><a href="../manual/org-agenda.html" aria-current="page">日程</a></li>
+<li class=""><a href="../manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="../manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="../manual/org-capture.html">捕捉</a></li>
+<li class=""><a href="../manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="../manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="../manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="../manual/org-babel.html">源代码块（Babel）</a></li>
+<li class=""><a href="../manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="../manual/org-export.html">导出</a></li>
+<li class=""><a href="../manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="../manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="../manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="../manual/org-completion.html">补全</a></li>
+<li class=""><a href="../manual/org-appearance.html">外观和高亮</a></li>
+<li class=""><a href="../manual/org-config.html">配置参考</a></li>
+<li class=""><a href="../manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="../manual/org-commands.html">命令</a></li>
+<li class=""><a href="../manual/org-api.html">Lua API</a></li>
+<li class=""><a href="../manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="../manual/org-lint.html">检查</a></li>
+<li class=""><a href="../manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="../manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="../manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="../manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="../manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="../manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="../manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="../manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="../manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="../manual/org-extensions-drill.html">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="../manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="../manual/org-extensions-hugo.html">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="../manual/org-extensions-caldav.html">CalDAV sync</a></li>
+<li class="sub"><a href="../manual/org-extensions-cli.html">Command line (org)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-code.html">Code and notes (code)</a></li>
+<li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="../manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="../manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="../manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="../examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="../examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="../examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="../examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="../examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="../examples/05-tags.html">标签</a></li>
+<li class=""><a href="../examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="../examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="../examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="../examples/09-agenda.html">日程</a></li>
+<li class=""><a href="../examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="../examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="../examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="../examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="../examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="../examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="../examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="../examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="../examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="../examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="../examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="../examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="../parity/review.html">兼容性审查</a></li>
+<li class=""><a href="../parity/index.html">目录</a></li>
+<li class=""><a href="../parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="../extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content manual">
+<article>
+<h1>日程</h1>
+<div class="tags"><a class="tag" id="org-agenda" href="#org-agenda">org-agenda</a></div>
+<p>The agenda follows Emacs Org 9.8: the same entries, line layout, sorting and default options (the Emacs variable is named next to each option in <code>lua/org/config/agenda.lua</code> and <a class="hl" href="org-config.html">org-config</a>).</p>
+<p><span class="key">&lt;prefix&gt;</span>a opens the dispatcher (org-agenda):</p>
+<table class="defs">
+<tr><td class="term">a</td><td>agenda for the current week (or <code>agenda.span</code>)</td></tr>
+<tr><td class="term">t</td><td>global TODO list</td></tr>
+<tr><td class="term">T</td><td>TODO list for one keyword</td></tr>
+<tr><td class="term">m</td><td>tags/property match</td></tr>
+<tr><td class="term">M</td><td>match, TODO entries only</td></tr>
+<tr><td class="term">s</td><td>search for words or a regexp</td></tr>
+<tr><td class="term">S</td><td>like s, TODO entries only</td></tr>
+<tr><td class="term">n</td><td>agenda and all TODOs</td></tr>
+<tr><td class="term">#</td><td>stuck projects</td></tr>
+<tr><td class="term">/</td><td>multi-occur: a regexp in all agenda files and <code>agenda.text_search_extra_files</code> (org-agenda-multi-occur-extra-files), into the quickfix list</td></tr>
+<tr><td class="term">&lt;</td><td>restrict to the current file / subtree (press again to cycle)</td></tr>
+<tr><td class="term">&gt;</td><td>remove the restriction and the restriction lock</td></tr>
+<tr><td class="term">e</td><td>export the agenda views of custom commands (<a class="hl" href="#org-agenda-export">org-agenda-export</a>)</td></tr>
+</table>
+<ul>
+<li>toggle sticky agenda buffers (<code>agenda.sticky</code>)</li>
+</ul>
+<table class="defs">
+<tr><td class="term">?</td><td>the :FLAGGED: entries of MobileOrg (<a class="hl" href="org-links.html#org-mobile">org-mobile</a>)</td></tr>
+<tr><td class="term">...</td><td>custom commands from <code>agenda.custom_commands</code>: the description (or a name for the type) and &quot;: MATCH&quot; (<code>agenda.menu_show_matcher</code>, org-agenda-menu-show-matcher); <code>agenda.menu_two_columns</code> lists them in two columns (org-agenda-menu-two-columns)</td></tr>
+</table>
+<p>The same from the command line:</p>
+<pre class="code"><code class="language-vim">:<span class="h-f">Org</span> agenda a|t [KW|KW]|T KW|m MATCH|M MATCH|s TEXT|S TEXT|n|#|/ REGEXP|
+            <span class="h-o">*</span>|&gt;|?|e|export FILE|day|week|fortnight|month|year|<span class="h-t">N|&lt;key&gt;|DATE</span></code></pre>
+<p>Restriction lock (org-agenda-set-restriction-lock):</p>
+<table class="defs">
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span>&lt;</td><td>lock every agenda command to the current subtree (to the file when not under a headline, or with a count); also in the agenda, from the entry at point</td></tr>
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span>&gt;</td><td>remove the lock</td></tr>
+</table>
+<p>The locked subtree is highlighted with OrgAgendaRestrictionLock (only its headline with <code>agenda.restriction_lock_highlight_subtree = false</code>, org-agenda-restriction-lock-highlight-subtree). Other keys in org buffers:</p>
+<table class="defs">
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span>[ <span class="key">&lt;C-c&gt;</span>]</td><td>add the current file to / remove it from the agenda files (org-agenda-file-to-front, org-remove-file); a count (C-u) adds or moves it to the end instead of the front</td></tr>
+<tr><td class="term">&lt;C-'&gt; &lt;C-,&gt;</td><td>visit the next agenda file (org-cycle-agenda-files)</td></tr>
+<tr><td class="term long">:Org edit_agenda_file_list</td><td>edit the list: the list file when <code>agenda_files</code> names one, else a buffer with the list; <code>:w</code> installs it (org-edit-agenda-file-list)</td></tr>
+</table>
+<p>Like Emacs, these changes are saved: when <code>agenda_files</code> is the name of a file listing the agenda files, that file is rewritten; otherwise the new list (directories and globs expanded to their files) is saved in stdpath(&quot;data&quot;)/org/agenda-files.json and replaces the configured list at startup for as long as <code>agenda_files</code> in setup() keeps the value it was made from (Emacs saves it with Customize).</p>
+<p>With the default <code>agenda_files = {}</code> (Emacs org-agenda-files nil) the agenda is empty, like in Emacs, until files are added with <span class="key">&lt;C-c&gt;</span>[ or the option is set. A listed file that does not exist is asked about when an agenda is built: <code>r</code> removes it from the list (for the session), any other key aborts (org-check-agenda-file); <code>agenda.skip_unavailable_files = true</code> skips such files silently (org-agenda-skip-unavailable-files).</p>
+<div class="tags"><a class="tag" id="org-agenda-index" href="#org-agenda-index">org-agenda-index</a></div>
+<h4>Agenda index</h4>
+<p>With many agenda files, most of the time of the first agenda view goes into parsing them. Emacs has nothing like it; it changes when the files are parsed, never what a view shows. Options under <code>agenda.index</code>:</p>
+<table class="defs defs3">
+<tr><td class="term">enabled</td><td class="value"><code>true</code></td><td>false: agenda files are parsed when a view needs them, as without an index.</td></tr>
+<tr><td class="term">cache</td><td class="value"><code>true</code></td><td>keep what the parse found (the parts of each headline and its section) in stdpath(&quot;cache&quot;)/org/agenda-index.bin, so that the next session only reads the files and finds their outline. Needs LuaJIT (Neovim's usual build); without it nothing is kept on disk.</td></tr>
+<tr><td class="term">background</td><td class="value"><code>true</code></td><td>from the first org buffer (or the first agenda view), parse the agenda files in the background, a few milliseconds at a time, so that the first view finds them parsed. false: files are parsed (and added to the index) when a view needs them.</td></tr>
+<tr><td class="term">start</td><td class="value"><code>&quot;org_buffer&quot;</code></td><td>when that background parse starts: &quot;org_buffer&quot; (the first org buffer or agenda view), or &quot;startup&quot;: half a second after Neovim starts, for an agenda opened before any org file (a dashboard key, <code>nvim +&quot;Org agenda&quot;</code>). Not the default: a Neovim started for other work (a commit message, a quick edit) would read every agenda file for nothing.</td></tr>
+<tr><td class="term">threads</td><td class="value"><code>2</code></td><td>worker threads for that background parse: each file's outline is found in Neovim's main loop, the rest of it (headline parts, planning, properties, drawers, clocks, timestamps) in a worker, so typing doesn't wait for it and a parse of many files uses more than one core. The workers run on libuv's thread pool (4 threads unless $UV_THREADPOOL_SIZE says more), which file reads share. 0: parse in the main loop, a few milliseconds at a time. A file is parsed in the main loop when <code>property_separators</code> has a regexp (no <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=vim.regex%28%29">vim.regex()</a> in a worker); after a worker fails, all are, until <code>:Org agenda_index_rebuild</code>.</td></tr>
+<tr><td class="term">watch</td><td class="value"><code>true</code></td><td>after that, watch the directories of the agenda files and parse a changed file again in the background.</td></tr>
+<tr><td class="term">max_watchers</td><td class="value"><code>32</code></td><td>directories watched at most; the others, and those whose watcher fails (some network file systems), are polled ...</td></tr>
+<tr><td class="term">poll_interval</td><td class="value"><code>30</code></td><td>... every this many seconds (0: never).</td></tr>
+</table>
+<p>A view built before the background is done is still complete: it parses what is left itself, taking what it can from the index, and the text of the files the background has read already. The index is only used for the same file: same modification and change time, same size, same lines, under the same options (<code>todo_keywords</code>, <code>log_into_drawer</code>, <code>inlinetask_min_level</code>, <code>property_separators</code>) and version of org.nvim; anything else is parsed again. A file loaded in a buffer is always taken from the buffer, with its unsaved changes. Watchers only save time: a view checks every file itself. A broken or partly written index file is ignored and replaced; entries of files no agenda used for 30 days are dropped.</p>
+<table class="defs">
+<tr><td class="term long">:Org agenda_index_rebuild</td><td>delete the index and parse the agenda files again (in the background with <code>background</code>).</td></tr>
+</table>
+<p><code>:checkhealth org</code> shows the index file, its size and what the background is doing. It is written when the background is done, a little after a view added files to it, and when Neovim exits.</p>
+<p>How long it takes, over 200 files of 250 headlines (50,000, 8.8 MB; <code>make bench</code> in the repository generates them and times the views, see &quot;Performance budgets&quot; in CONTRIBUTING.md), on an Apple M1 Ultra:</p>
+<table class="defs">
+<tr><td class="term long">week agenda, no index (every file read and parsed)</td><td>about 2.3 s</td></tr>
+<tr><td class="term long">week agenda from the index (a new session)</td><td>about 0.5 s</td></tr>
+<tr><td class="term long">week agenda again (the files in memory)</td><td>about 0.12 s</td></tr>
+<tr><td class="term long">the week after editing and saving one file</td><td>about 0.14 s</td></tr>
+<tr><td class="term long">tags match, TODO list (17,900 entries)</td><td>0.12 s, 0.34 s</td></tr>
+</table>
+<div class="tags"><a class="tag" id="org-agenda-contents" href="#org-agenda-contents">org-agenda-contents</a></div>
+<h4>Agenda contents</h4>
+<p>For each day, per file, in this order (org-agenda-get-day-entries):</p>
+<ul>
+<li>Deadlines, on their day (<code>Deadline:</code>) and in today's agenda from <code>deadline_warning_days</code> (or the <code>-Nd</code> warning) before (<code>In N d.:</code>) and after (<code>N d. ago:</code>, for <code>agenda.deadline_past_days</code>). Done entries show on their day only.</li>
+<li>Scheduled entries on their day (<code>Scheduled:</code>) and, while not done, in today's agenda (<code>Sched.Nx:</code>, for <code>agenda.scheduled_past_days</code>). A delay (<code>-2d</code>) hides the entry until it is over; <code>scheduled_delay_days</code> (org-scheduled-delay-days, 0) is the delay of entries without one, and a negative value applies to all of them.</li>
+<li>Date ranges on each of their days (<code>(2/3):</code>), with the start time on the first day and the end time on the last. A range on a SCHEDULED or DEADLINE line shows this way too, next to its planning entry. As in Emacs, a range starts at the first timestamp before it on its line: <code>SCHEDULED: &lt;a&gt; DEADLINE: &lt;b&gt;--&lt;c&gt;</code> runs from a to c. A range in a comment, example or export block or a fixed-width line shows too (only src blocks and comment lines hide one), but can't be changed from the agenda.</li>
+<li>Active timestamps. Repeaters show on every repeat up to today and, after today, per <code>agenda.show_future_repeats</code> (true, false, &quot;next&quot;); <code>agenda.prefer_last_repeat</code> shows the last repeat instead of the base date.</li>
+<li>Diary sexps, <code>&lt;%%(...)&gt;</code> timestamps and <code>%%(...)</code> lines (<a class="hl" href="#org-agenda-diary-sexp">org-agenda-diary-sexp</a>), including holidays (<a class="hl" href="#org-agenda-holidays">org-agenda-holidays</a>).</li>
+<li>With <code>agenda.include_diary</code>, the entries of the Emacs diary file (<a class="hl" href="#org-agenda-diary-file">org-agenda-diary-file</a>).</li>
+<li>Habits (<code>:STYLE: habit</code> and a repeater) in today's agenda, without a leader, with a consistency graph from column <code>agenda.habits.graph_column</code> (40) that overwrites the end of the line (org-habit). A habit is done on the days of its changes to a done keyword and of its &quot;done&quot; notes, read with the heading <code>log_note_headings.done</code> sets (<code>CLOSING NOTE %t</code> by default); at most <code>preceding_days + following_days</code> of them, the first ones under the heading (the last ones with <code>log_states_order_reversed = false</code>), as org-habit-parse-todo reads them.</li>
+<li>A time grid (<code>agenda.time_grid</code>, org-agenda-time-grid) with the current time; the <code>remove-match</code> flag hides grid lines at the time of an entry.</li>
+<li>Entries under ARCHIVE-tagged or COMMENT headlines are excluded (<code>agenda.skip_comment_trees = false</code> keeps COMMENT trees). A file tagged ARCHIVE in its <code>#+FILETAGS:</code> is left out whole, from every view (org-agenda-skip). <code>va</code> / <code>vA</code> bring both back. <code>agenda.skip_function_global(headline)</code> returning true leaves an entry out of every view, built-in ones included (org-agenda-skip-function-global).</li>
+</ul>
+<p><code>agenda.entry_types</code> selects the kinds (&quot;deadline&quot;, &quot;scheduled&quot;, &quot;timestamp&quot;, &quot;sexp&quot;; &quot;deadline*&quot; / &quot;scheduled*&quot; keep only timed ones). Skipping: <code>skip_scheduled_if_done</code>, <code>skip_deadline_if_done</code>, <code>skip_timestamp_if_done</code>, <code>skip_scheduled_if_deadline_is_shown</code> (true or &quot;not-today&quot;), <code>skip_timestamp_if_deadline_is_shown</code>, <code>skip_scheduled_repeats_after_deadline</code>, <code>skip_additional_timestamps_same_entry</code>, <code>skip_deadline_prewarning_if_scheduled</code> (true: no pre-warning when the entry is scheduled; N: warn N days before; &quot;pre-scheduled&quot;: not before the scheduled date), <code>skip_scheduled_delay_if_deadline</code>. <code>show_all_dates = false</code> hides days without entries.</p>
+<div class="tags"><a class="tag" id="org-agenda-prefix" href="#org-agenda-prefix">org-agenda-prefix</a></div>
+<h4>Line format</h4>
+<p>Each line is <code>agenda.prefix_format</code> (org-agenda-prefix-format) followed by the headline and its tags. The defaults:</p>
+<table class="defs">
+<tr><td class="term">agenda</td><td><code>&quot; %i %-12:c%?-12t% s&quot;</code></td></tr>
+<tr><td class="term">todo, tags, search</td><td><code>&quot; %i %-12:c&quot;</code></td></tr>
+</table>
+<p>The fields:</p>
+<table class="defs">
+<tr><td class="term">%c</td><td>category</td></tr>
+<tr><td class="term">%i</td><td>icon (<code>agenda.category_icons</code>)</td></tr>
+<tr><td class="term">%t</td><td>time of day</td></tr>
+<tr><td class="term">%s</td><td>leader (Scheduled:, In 3 d., ...)</td></tr>
+<tr><td class="term">%e</td><td>effort</td></tr>
+<tr><td class="term">%l</td><td>level (spaces)</td></tr>
+<tr><td class="term">%b</td><td>breadcrumbs (outline path + <code>breadcrumbs_separator</code>)</td></tr>
+<tr><td class="term">%T</td><td>last tag</td></tr>
+<tr><td class="term">%(expr)</td><td>a Lua expression, with <code>item</code> and <code>hl</code></td></tr>
+</table>
+<p>A width like <code>%-12</code> pads (no truncation), <code>%-12.10</code> also truncates, <code>%?</code> omits an empty field with its padding, and a character after the width (<code>:</code> in <code>%-12:c</code>) is added after a non-empty value. The leaders are <code>scheduled_leaders</code>, <code>deadline_leaders</code>, <code>timerange_leaders</code> and <code>inactive_leader</code>. A time of day in the headline (&quot;Call Bob 10:00&quot;, &quot;8pm&quot;) is used when the timestamp has none (<code>search_headline_for_time</code>) and removed from the text (<code>remove_times_when_in_prefix</code>, true or &quot;beg&quot;). Times: <code>time_leading_zero</code>, <code>timegrid_use_ampm</code>, <code>default_appointment_duration</code> (minutes). The grid separator (<code>time_grid.separator</code>) follows the time of timed entries without an end. Tags show inherited tags first, then &quot;::&quot; and the entry's own tags (&quot;:ft::work:&quot;); <code>hide_tags_regexp</code> (a Vim regexp) hides some, <code>remove_tags</code> removes them (true, or &quot;prefix&quot; when %T is used), <code>tags_column</code> places them (&quot;auto&quot; = right edge of the window, 0 = one space after the entry text); <code>ui.todo_keyword_faces</code> and <code>ui.tag_faces</code> apply here too. In the clock report, links show as their description. Day headers use <code>format_date</code> (a strftime format or a function) and show the ISO week on Mondays; <code>weekend_days</code> (0 = Sunday) get the weekend highlight, and <code>day_face_function(date)</code> may return another highlight group (org-agenda-day-face-function). <code>todo_keyword_format</code> (&quot;%-1s&quot;; &quot;%-12s&quot; aligns the keywords, &quot;&quot; hides them) formats the TODO keyword (org-agenda-todo-keyword-format). <code>fontify_priorities</code> (org-agenda-fontify-priorities): &quot;cookies&quot; (default) highlights the cookie, the highest priority bold (OrgAgendaPriorityHighest) and the lowest italic (OrgAgendaPriorityLowest), or with <code>ui.priority_faces</code>; true does so from the cookie to the end of the line; a table <code>{ A = face, ... }</code> (faces as in <code>ui.priority_faces</code>) sets the faces; false turns it off. <code>deadline_faces</code> (org-agenda-deadline-faces) picks the highlight of a deadline line by the part of its warning period that has passed: <code>{ { 1.0, &quot;OrgAgendaDeadline&quot; }, { 0.5, &quot;OrgAgendaDeadlineUpcoming&quot; }, { 0.0, &quot;OrgAgendaDeadlineDistant&quot; } }</code>. <code>remove_timeranges_from_blocks</code> removes a <code>&lt;...&gt;--&lt;...&gt;</code> range from the headline text of its entries (org-agenda-remove-timeranges-from-blocks).</p>
+<div class="tags"><a class="tag" id="org-agenda-sorting" href="#org-agenda-sorting">org-agenda-sorting</a></div>
+<h4>Sorting</h4>
+<p><code>agenda.sorting</code> (org-agenda-sorting-strategy) per view:</p>
+<table class="defs">
+<tr><td class="term">agenda</td><td>{ &quot;habit-down&quot;, &quot;time-up&quot;, &quot;urgency-down&quot;, &quot;category-keep&quot; }</td></tr>
+<tr><td class="term">todo, tags</td><td>{ &quot;urgency-down&quot;, &quot;category-keep&quot; }</td></tr>
+<tr><td class="term">search</td><td>{ &quot;category-keep&quot; }</td></tr>
+</table>
+<p>Strategies: time-, urgency-, priority-, category-, todo-state-, alpha-, habit-, tag-, effort-, stats-, deadline-, scheduled-, timestamp-, ts-, tsia-, user-defined- (each -up or -down), and category-keep. Urgency is Emacs's: 99 + days late + priority for scheduled entries, priority + days overdue (minus days left) for deadlines in today's agenda, the priority for other entries (A = 2000, B = 1000, C = 0 with the default range) and org-habit-get-urgency for habits. &quot;user-defined-*&quot; call <code>agenda.cmp_user_defined(a, b)</code>, which returns -1, 1 or nil. An unknown strategy is an error. <code>sort_notime_is_late</code> and <code>sort_noeffort_is_high</code> place entries without a time or an effort.</p>
+<div class="tags"><a class="tag" id="org-agenda-keys" href="#org-agenda-keys">org-agenda-keys</a></div>
+<h4>Agenda keys</h4>
+<p>All configurable under <code>mappings.agenda</code>:</p>
+<table class="defs">
+<tr><td class="term">f / b / .</td><td>later / earlier / today (<code>.</code> moves to today when the view shows it, else shows the span holding today: the week from <code>start_on_weekday</code>, the month from the 1st, the year from January 1st)</td></tr>
+<tr><td class="term">vd vw vt vm vy</td><td>day / week / fortnight / month / year view (the span starts at the day, week, month or year at point)</td></tr>
+<tr><td class="term">v<span class="key">&lt;Space&gt;</span></td><td>reset the span to the default</td></tr>
+<tr><td class="term">gd</td><td>go to a date (Emacs j)</td></tr>
+<tr><td class="term">c</td><td>calendar: pick a date and go there</td></tr>
+<tr><td class="term">gC M S H</td><td>the date at point in other calendars / phases of the moon / sunrise and sunset / holidays (<a class="hl" href="#org-agenda-calendar-keys">org-agenda-calendar-keys</a>; Emacs C M S H)</td></tr>
+<tr><td class="term">r</td><td>rebuild the view; with a count N in a TODO list, the Nth keyword of the hint line (<code>0r</code>, or a count past the last one, = ALL: Vim reads a leading 0 as a motion, so the agenda maps <code>0r</code> itself); with a count in a tags or search view, edit the query (Emacs C-u r)</td></tr>
+<tr><td class="term">gr</td><td>rebuild all agenda buffers (Emacs g)</td></tr>
+<tr><td class="term"><span class="key">&lt;CR&gt;</span> <span class="key">&lt;Tab&gt;</span></td><td>open the entry here / in another window</td></tr>
+<tr><td class="term"><span class="key">&lt;Space&gt;</span> <span class="key">&lt;BS&gt;</span></td><td>show the entry (its drawers open; with a count they stay folded), keeping focus in the agenda; <span class="key">&lt;Space&gt;</span> again scrolls that window a page forward, <span class="key">&lt;BS&gt;</span> a page back (org-agenda-show-and-scroll-up / -show-scroll-down). An agenda key that starts a global mapping or is your leader (<span class="key">&lt;Space&gt;</span>, \ or , as 'mapleader' or 'maplocalleader') waits 'timeoutlen' so the longer keys still work</td></tr>
+<tr><td class="term">cycle_show</td><td>(no default key) show the entry; again right away, cycle it through children, subtree, folded; a count is the level of <code>show_1</code> (org-agenda-cycle-show)</td></tr>
+<tr><td class="term">show_1</td><td>(no default key) show the entry with the detail of the count: 1 the entry, 2 its children, 3 its subtree, 4 also the drawers (org-agenda-show-1; level 0, fold, has no count form: <code>require(&quot;org.agenda.view&quot;).show_1(0)</code>)</td></tr>
+<tr><td class="term"><span class="key">&lt;MiddleMouse&gt;</span></td><td>go to the entry clicked (org-agenda-goto-mouse); with <code>agenda.mouse_1_follows_link</code> also a short <span class="key">&lt;LeftMouse&gt;</span> click without a drag (a longer one only moves the cursor; the limit is <code>links.mouse_1_follows_link</code> ms when that is a number, else 450)</td></tr>
+<tr><td class="term"><span class="key">&lt;RightMouse&gt;</span></td><td>show the entry clicked (org-agenda-show-mouse)</td></tr>
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span>b</td><td>edit the entry's subtree in the other window (the subtree edit buffer of <a class="hl" href="org-structure.html#org-narrow">org-narrow</a>, since Neovim has no indirect buffers; org-agenda-tree-to-indirect-buffer). The previous one is closed unless modified. A count N takes the subtree of the ancestor at level N. <code>agenda.follow_indirect</code> makes follow mode show it</td></tr>
+<tr><td class="term">L</td><td>show the entry and recenter its window</td></tr>
+<tr><td class="term">o</td><td>close the other windows</td></tr>
+<tr><td class="term">F</td><td>follow mode (also vf)</td></tr>
+<tr><td class="term">n / p</td><td>next / previous item</td></tr>
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span>&lt;C-n/p&gt;</td><td>next / previous date line</td></tr>
+<tr><td class="term">&lt;C-Down/Up&gt;</td><td>next / previous block</td></tr>
+<tr><td class="term">&lt;M-Down/Up&gt;</td><td>move the line down / up (the agenda text only)</td></tr>
+<tr><td class="term">t</td><td>change TODO state; &lt;C-S-Right/Left&gt; cycle it</td></tr>
+<tr><td class="term">todo_yesterday</td><td>(no default key) like t, but the change is logged at 23:59 of yesterday (org-agenda-todo-yesterday)</td></tr>
+<tr><td class="term">, + -</td><td>set / raise / lower priority (also &lt;S-Up/Down&gt;)</td></tr>
+<tr><td class="term">: / T</td><td>set tags / show tags</td></tr>
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span>p</td><td>set a property</td></tr>
+<tr><td class="term">s / d</td><td>schedule / deadline</td></tr>
+<tr><td class="term">&lt;S-Right/Left&gt;</td><td>move the date of the entry +1 / -1 day (a count moves more): the timestamp the line comes from; one step on a past date moves it to today (<code>agenda.move_date_from_past_immediately_to_today</code>). A count of 4 (C-u) moves the time one hour, 16 (C-u C-u) one <code>time_stamp_rounding_minutes</code> step; the keys keep that unit when pressed again without moving the cursor. The actions <code>date_later_hours</code>, <code>date_earlier_hours</code>, <code>date_later_minutes</code> and <code>date_earlier_minutes</code> (no default keys) take a count</td></tr>
+<tr><td class="term">&gt;</td><td>prompt for a new date for that timestamp (the time is kept)</td></tr>
+<tr><td class="term">e</td><td>set effort</td></tr>
+<tr><td class="term">I O X J</td><td>clock in / out / cancel / go to clocked entry</td></tr>
+<tr><td class="term">;</td><td>start a countdown timer; <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span>_ stops the timer</td></tr>
+<tr><td class="term">R</td><td>refile</td></tr>
+<tr><td class="term">$</td><td>archive (also <span class="key">&lt;C-c&gt;</span>$, <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-s&gt;</span>)</td></tr>
+<tr><td class="term">a</td><td>archive with <code>archive_default_command</code> after confirmation (&quot;archive_subtree&quot;, &quot;archive_to_sibling&quot;, &quot;set_tag&quot; or a function; org-archive-default- command); <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-a&gt;</span> without confirmation</td></tr>
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span>A</td><td>move to the Archive sibling</td></tr>
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span>a</td><td>toggle the ARCHIVE tag</td></tr>
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-a&gt;</span></td><td>attach (org-attach on the entry)</td></tr>
+<tr><td class="term"><span class="key">&lt;C-k&gt;</span></td><td>delete the entry in its file (asks when it is longer than <code>agenda.confirm_kill</code> lines); on a %%(sexp) diary line, only that line</td></tr>
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-o&gt;</span></td><td>open a link of the entry (choose when there are several)</td></tr>
+<tr><td class="term">z</td><td>add a note</td></tr>
+<tr><td class="term">K</td><td>capture, with the date at point as default date (Emacs k)</td></tr>
+<tr><td class="term">A</td><td>append another view to this one</td></tr>
+<tr><td class="term">l</td><td>log mode: closed items and clocks (also vl); 1l also shows state changes, 2l only log items; vL all log items</td></tr>
+<tr><td class="term">C</td><td>clock report mode (also vR): a clock table of the agenda files for the shown days (<code>agenda.clockreport_parameters</code>)</td></tr>
+<tr><td class="term">vc</td><td>clock check: only clocked entries, with their issues (gaps, overlaps, too long / short, no end time; <code>agenda.clock_consistency_checks</code>)</td></tr>
+<tr><td class="term">E</td><td>entry text mode: show the first body lines of each entry (<code>agenda.entry_text_maxlines</code>; a count N shows N lines) (also vE), after <code>entry_text_leaders</code>, without drawers, planning and CLOCK lines and the matches of <code>entry_text_exclude_regexps</code> (Emacs regexps)</td></tr>
+<tr><td class="term">vG</td><td>toggle the time grid (Emacs G, kept free for motion)</td></tr>
+<tr><td class="term">!</td><td>show / hide deadlines (also v!)</td></tr>
+<tr><td class="term">D</td><td>include / leave out the Emacs diary file (<a class="hl" href="#org-agenda-diary-file">org-agenda-diary-file</a>)</td></tr>
+<tr><td class="term">i</td><td>add a diary entry for the date at point (org-agenda-diary-entry). With <code>agenda.diary_entry_file</code> = &quot;diary-file&quot; (default, org-agenda-diary-file) a line of the Emacs diary file (<code>agenda.diary_file</code>) is started, like the calendar's i commands: [d]ay [w]eekly [m]onthly [y]early [a]nniversary [b]lock [c]yclic, in <code>calendar_date_style</code>; a count makes it non-marking (&quot;&amp;&quot;); type the text there. With an Org file: [d]ay (a headline with the date, placed by <code>insert_diary_strategy</code>: &quot;date-tree&quot;, &quot;date-tree-last&quot; or &quot;top-level&quot;; <code>insert_diary_extract_time</code> moves a leading &quot;10:30-11:00&quot; into the timestamp), [a]nniversary (an org-anniversary line under &quot;* Anniversaries&quot;), [b]lock, [j]ump to the date tree. A block spans the days at both ends of a Visual selection (Emacs: point and mark)</td></tr>
+<tr><td class="term">vh</td><td>turn habits off / on (<code>agenda.habits.show_habits</code>); with a count, toggle whether today shows every habit, due or not (<code>habits.show_all_today</code>) (org-habit-toggle-display-in-agenda, Emacs K / C-u K); the action <code>toggle_habits</code> (no default key) never takes the count</td></tr>
+<tr><td class="term">#</td><td>toggle dimming of blocked TODOs (<code>agenda.dim_blocked_tasks</code>: true, false or &quot;invisible&quot;; needs <code>enforce_todo_dependencies</code> or <code>enforce_todo_checkbox_dependencies</code>)</td></tr>
+<tr><td class="term">va / vA</td><td>include archived trees (and files tagged ARCHIVE in their <code>#+FILETAGS:</code>) / also the archive files (<code>agenda.start_with_archives_mode</code>: &quot;trees&quot; or true turns them on in new agendas)</td></tr>
+<tr><td class="term">v[</td><td>include inactive timestamps (<code>[</code> leader)</td></tr>
+<tr><td class="term">/ \ &lt; = _ ^ |</td><td>filters (<a class="hl" href="#org-agenda-filter">org-agenda-filter</a>)</td></tr>
+<tr><td class="term">~</td><td>limit the number of entries (<a class="hl" href="#org-agenda-limits">org-agenda-limits</a>)</td></tr>
+<tr><td class="term">[ ] { }</td><td>search view: add a +word / -word / +{regexp} / -{regexp} term, the new query also going to register <code>o</code> (<code>agenda.query_register</code>, org-agenda-query-register) (tags views: a +tag / -tag term); date agenda: include inactive timestamps</td></tr>
+<tr><td class="term">m u U</td><td>mark / unmark / unmark all</td></tr>
+<tr><td class="term"><span class="key">&lt;M-m&gt;</span> * &lt;M-*&gt;</td><td>toggle mark / mark all / toggle all marks</td></tr>
+<tr><td class="term">%</td><td>mark entries matching a regexp</td></tr>
+<tr><td class="term">B</td><td>bulk action (<a class="hl" href="#org-agenda-bulk">org-agenda-bulk</a>)</td></tr>
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-c&gt;</span></td><td>column view (<a class="hl" href="#org-agenda-columns">org-agenda-columns</a>)</td></tr>
+<tr><td class="term"><span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-s&gt;</span></td><td>save all modified org buffers</td></tr>
+<tr><td class="term">&lt;C-_&gt; &lt;C-/&gt; <span class="key">&lt;C-x&gt;</span>u</td><td>undo the last edit made from the agenda in its file and rebuild the view; again for the edit before (org-agenda-undo). <code>r</code> forgets the edits, like Emacs; an edit is only undone while its file has not changed since (Emacs undoes the file's last change regardless), and an undone edit is dropped (a later undo that is not a repetition does not redo it)</td></tr>
+<tr><td class="term"><span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-w&gt;</span></td><td>write the agenda to a file (<a class="hl" href="#org-agenda-export">org-agenda-export</a>)</td></tr>
+<tr><td class="term">q</td><td>quit</td></tr>
+<tr><td class="term">Q</td><td>quit and delete the agenda buffer</td></tr>
+<tr><td class="term">x</td><td>quit, delete the agenda buffers and the unmodified buffers the agenda loaded</td></tr>
+</table>
+<p>A file the agenda (or refile, capture, the clock, ...) loads to make an edit stays out of the buffer list (<a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=unlisted-buffer">unlisted-buffer</a>), so it doesn't show up in <code>:ls</code> or a buffer tabline; it's listed once you open it in a window. <code>:wall</code> still saves it and <code>:qall</code> still warns about unsaved changes.</p>
+<table class="defs">
+<tr><td class="term">g?</td><td>help</td></tr>
+<tr><td class="term">?</td><td>show the MobileOrg flagging note of the entry; again to remove the FLAGGED tag and the note (<a class="hl" href="org-links.html#org-mobile">org-mobile</a>)</td></tr>
+<tr><td class="term long"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span><span class="key">&lt;CR&gt;</span>g / <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span><span class="key">&lt;CR&gt;</span>p</td><td>MobileOrg pull / push</td></tr>
+</table>
+<p>Emacs-style aliases: <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-t&gt;</span> todo, <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-q&gt;</span> and <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-c&gt;</span> tags, <span class="key">&lt;C-c&gt;</span>, priority, <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span>e effort, <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-z&gt;</span> note, <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-i&gt;</span> <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-o&gt;</span> <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-x&gt;</span> <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-j&gt;</span> clock in / out / cancel / goto, <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span>&lt;Right/Left&gt; date later / earlier. A count stands for Emacs's prefix argument: 1 = C-u, 2 = C-u C-u, 3 = C-u C-u C-u.</p>
+<p>In Visual mode, schedule, deadline, <code>&gt;</code>, the TODO state, the archive commands, <span class="key">&lt;C-k&gt;</span>, set property and set effort act on every entry of the selection (org-agenda-loop-over-headlines-in-active-region: <code>agenda.loop_over_headlines_in_active_region</code> true, false, &quot;start-level&quot; or an Emacs regexp the lines must match). The one-letter keys that are Visual motions (<code>t</code>, <code>$</code>, <code>e</code>, <code>a</code>) keep their Vim meaning there; use their <span class="key">&lt;C-c&gt;</span> forms.</p>
+<p>A line acts on its entry wherever the entry moved since the agenda was built: like Emacs's markers, an extmark follows each entry in its buffer (set when the agenda is built, or when its file is loaded later and still holds the entry), so text added or removed around it, or another headline with the same text, don't send a command to the wrong entry. Without one (a file changed on disk), the entry is found again by its headline text.</p>
+<p>Like Emacs, edits made from the agenda leave the source buffers modified (<code>agenda.save_after_edit = false</code>); save them with <span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-s&gt;</span> or :wall. Buffers are listed, so :qa asks before losing changes. Set <code>save_after_edit = true</code> to write them after every edit.</p>
+<p>Like Emacs (org-agenda-change-all-lines), changing the TODO state, the priority, tags, effort or a property, adding a note and clocking in or out re-format only the lines of that entry, in place: a DONE entry stays in the TODO list until the next <code>r</code>, and a line the filters now hide is removed. A repeating entry marked done on today's line shows DONE there. Date changes (S-Right, S-Left, <code>&gt;</code>, schedule, deadline) show the new date at the right edge of the line, &quot; =&gt; <span class="key">&lt;date&gt;</span>&quot; (&quot; S =&gt; &quot; / &quot; D =&gt; &quot; for schedule and deadline, highlight OrgAgendaNewTime), and the entry moves at the next <code>r</code> (org-agenda-show-new-time). Refile, archive, kill, bulk actions and the entry-text mode (<code>E</code>) rebuild the view.</p>
+<p>Options: <code>agenda.start_with_log_mode</code> (true, &quot;all&quot; or &quot;clockcheck&quot;), <code>start_with_follow_mode</code>, <code>start_with_clockreport_mode</code>, <code>start_with_entry_text_mode</code>, <code>show_outline_path</code> (after a line motion, echo the file name and parent headings of the entry at point, as in <code>a.org/Project/Phase one</code>; <code>&quot;title&quot;</code> puts the file's <code>#+TITLE</code> in place of its name).</p>
+<p>User autocmds (the Emacs hooks): <code>OrgAgendaFinalize</code> after the agenda buffer is built or rebuilt (org-agenda-finalize-hook), <code>OrgAgendaFilter</code> after a filter changed (org-agenda-filter-hook), with <code>data.buf</code>, <code>data.filters</code> and <code>data.filter</code> (the filter text of the window bar); <code>OrgAgendaBeforeWrite</code> before a written agenda (<a class="hl" href="#org-agenda-export">org-agenda-export</a>). <code>OrgAgendaFinalize</code> also fires after the lines of an edited entry were re-formatted, with <code>data.lines</code> (the agenda lines that changed), like Emacs runs the hook on each of them.</p>
+<pre class="code"><code class="language-lua">vim.<span class="h-m">api</span>.<span class="h-f">nvim_create_autocmd</span>(<span class="h-s">&quot;User&quot;</span>, {
+  <span class="h-m">pattern</span> <span class="h-o">=</span> <span class="h-s">&quot;OrgAgendaFinalize&quot;</span>,
+  <span class="h-f">callback</span> <span class="h-o">=</span> <span class="h-k">function</span>(ev) vim.<span class="h-m">bo</span>[ev.<span class="h-m">data</span>.<span class="h-m">buf</span>].<span class="h-m">textwidth</span> <span class="h-o">=</span> <span class="h-n">0</span> <span class="h-k">end</span>,
+})</code></pre>
+<div class="tags"><a class="tag" id="org-agenda-window" href="#org-agenda-window">org-agenda-window</a></div>
+<h4>Windows and buffers</h4>
+<p><code>agenda.window</code> (org-agenda-window-setup): &quot;split&quot; (default, Emacs reorganize-frame: the current window and the agenda below it), &quot;only&quot; (only-window), &quot;other&quot; (other-window), &quot;current&quot;, &quot;vsplit&quot;, &quot;tab&quot; (other-tab), &quot;float&quot;. The &quot;split&quot; window fits its lines, between <code>window_frame_fractions</code> ({ 0.5, 0.75 } of the editor height, org-agenda-window-frame-fractions; { 1.0, 1.0 } = the only window), when it is built and when it is redone. Like org-fit-window-to-buffer, it keeps its height when it is beside another window (not the full width of the editor) and when it is the only window (floating windows don't count). <code>restore_windows_after_quit</code> restores the previous window layout on q. With <code>agenda.sticky</code> (org-agenda-sticky, <code>*</code> in the dispatcher) every command has its own buffer (<code>org://agenda(KEY)</code>), shown as it is when the command is run again (press r to refresh); toggling it deletes the agenda buffers, like <code>:Org agenda_kill_all_buffers</code> (org-agenda-kill-all-agenda-buffers).</p>
+<div class="tags"><a class="tag" id="org-agenda-filter" href="#org-agenda-filter">org-agenda-filter</a></div>
+<h4>Filtering</h4>
+<p>Filters hide lines without rebuilding the view; they show in the window bar (Emacs shows them in the mode line).</p>
+<table class="defs">
+<tr><td class="term">/</td><td>org-agenda-filter: a combined filter such as <code>+work-John&lt;0:10-/plot/</code>: +/- a tag or category (tags win), an effort comparison (&lt; means at most, &gt; at least), a /regexp/ (Emacs syntax). An empty answer removes the filters; a leading <code>+</code> (<code>++work</code>) or a count of 2 adds to the current ones; a count of 1 negates the whole filter; a count of 3 runs <code>agenda.auto_exclude_function</code></td></tr>
+<tr><td class="term">\</td><td>filter by one tag: its selection key (#+TAGS / <code>tags</code> <code>(k)</code> keys of the files the view was built from, so a view restricted to one file offers that file's keys), <span class="key">&lt;Tab&gt;</span> to type a tag, <span class="key">&lt;Space&gt;</span> any tag, <code>?</code> untagged, <code>.</code> the tags of the entry at point, <code>-</code> / <code>+</code> exclude / include the next tag, <span class="key">&lt;CR&gt;</span> <code>auto_exclude_function</code>, <code>\</code> removes the tag filter, <span class="key">&lt;Esc&gt;</span> quits (and <code>q</code>, unless a tag uses it as its key). With <code>group_tags</code> on, a group tag (<code>#+TAGS: [ Work : Lab ]</code>, <a class="hl" href="org-tags.html#org-tag-groups">org-tag-groups</a>) keeps the entries with the group tag or any of its members, recursively (<code>-Work</code> hides them all); <span class="key">&lt;Tab&gt;</span> and <code>/</code> offer the group tags too (org-agenda-filter-expand-tags)</td></tr>
+<tr><td class="term">&lt;</td><td>keep the category of the entry at point (again to clear); with a count, hide that category</td></tr>
+<tr><td class="term">=</td><td>keep entries matching an Emacs regexp; with a count 1, hide them; again to clear. <code>:Org agenda_filter_regexp [-]{regexp}</code> adds the filter on top of the active ones (<code>-</code> hides the matches); while you type it, the entries it would hide are dimmed (<a class="hl" href="org-commands.html#org-command-preview">org-command-preview</a>)</td></tr>
+<tr><td class="term">_</td><td>effort: <code>&lt;</code>, <code>&gt;</code> or <code>=</code>, then a digit selecting a value of <code>global_properties.Effort_ALL</code> (default &quot;0 0:10 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00&quot;); <code>_</code> again clears. Entries without an effort count as infinitely long (<code>sort_noeffort_is_high</code>)</td></tr>
+<tr><td class="term">^</td><td>keep the entries under the top headline of the entry at point</td></tr>
+<tr><td class="term">|</td><td>remove all filters</td></tr>
+</table>
+<p><code>agenda.auto_exclude_function(tag)</code> returns &quot;+tag&quot;, &quot;-tag&quot; or nil (org-agenda-auto-exclude-function). Custom commands may preset filters that stay on: <code>tag_filter_preset</code>, <code>category_filter_preset</code>, <code>regexp_filter_preset</code>, <code>effort_filter_preset</code> (lists like { &quot;+work&quot; }). <code>agenda.persistent_filter</code> keeps the filters when another agenda is built.</p>
+<div class="tags"><a class="tag" id="org-agenda-limits" href="#org-agenda-limits">org-agenda-limits</a></div>
+<h4>Limits</h4>
+<p><code>agenda.max_entries</code>, <code>max_todos</code>, <code>max_tags</code> and <code>max_effort</code> (minutes) limit each day or list, as a number or per view type ({ agenda = 5, todo = 10 }); a negative number keeps the entries without the property. <code>~</code> sets one interactively (e entries, t TODOs, T tags, E effort); with a count it removes them. Like Emacs, lines without the property (time grid lines too) are dropped while a limit is on.</p>
+<div class="tags"><a class="tag" id="org-agenda-bulk" href="#org-agenda-bulk">org-agenda-bulk</a></div>
+<h4>Bulk actions</h4>
+<p>B acts on the marked entries, or on the entry at point without marks (org-agenda-bulk-action):</p>
+<table class="defs">
+<tr><td class="term">$</td><td>archive</td></tr>
+<tr><td class="term">A</td><td>archive to the Archive sibling</td></tr>
+<tr><td class="term">t</td><td>TODO state: no entry is blocked (<a class="hl" href="org-todo.html#org-todo-dependencies">org-todo-dependencies</a>), and a state that takes a note records its time instead</td></tr>
+<tr><td class="term">+ / -</td><td>add / remove a tag</td></tr>
+<tr><td class="term">r</td><td>refile</td></tr>
+<tr><td class="term">s / d</td><td>(re)schedule / set the deadline: a date, or <code>++2d</code> to shift each entry's own date; an empty answer opens the calendar. Like C-c C-s, a new date keeps the old repeater and warning period; a change is logged with a time, never a note</td></tr>
+<tr><td class="term">S</td><td>scatter: schedule each entry on a random day of the next N days (with a count, weekend days are skipped), keeping its repeater; with <code>log_reschedule = &quot;note&quot;</code> each entry asks for its note</td></tr>
+<tr><td class="term">f</td><td>apply a Lua function (<code>function(target, item) ... end</code>)</td></tr>
+<tr><td class="term">p</td><td>toggle persistent marks (<code>agenda.persistent_marks</code>: keep the marks after the action), then choose the action</td></tr>
+<tr><td class="term">custom</td><td>keys of <code>agenda.bulk_custom_functions</code>: { x = { fn = function(target, item, ...) end, desc = &quot;...&quot;, args = function() return { ... } end } }</td></tr>
+</table>
+<p>Marked lines show <code>agenda.bulk_mark_char</code> (&quot;&gt;&quot;, org-agenda-bulk-mark-char). The entries are acted on in buffer order, parents before children, each found where the earlier ones left it (the refile target too). A marked entry refiled or archived with its parent's subtree is skipped.</p>
+<div class="tags"><a class="tag" id="org-agenda-columns" href="#org-agenda-columns">org-agenda-columns</a></div>
+<h4>Column view</h4>
+<p><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-c&gt;</span> in the agenda shows each entry as columns, like column view in an org buffer. The format is <code>overriding_columns_format</code> of the custom command's <code>settings</code> (org-overriding-columns-format, see <a class="hl" href="#org-agenda-command-columns">org-agenda-command-columns</a>), else <code>agenda.overriding_columns_format</code> (org-columns-default-format-for-agenda), else the COLUMNS property or #+COLUMNS of the entry at point (or of the first entry), else <code>columns_default_format</code>. An entry whose children have values shows their summary, computed in its file with the file's own format when that file's column for the property has the same summary operator (<code>agenda.columns_compute_summary_properties</code>, default true, org-agenda-columns-compute-summary-properties); as in Emacs, the summary is also written to the entry's property when it has one (in the file's buffer when it is loaded, not saved). Date lines and block headers show the summaries of the entries below them, the parents' summaries included as in Emacs (<code>agenda.columns_show_summaries</code>); with <code>agenda.columns_add_appointments_to_effort_sum</code>, an appointment without an effort counts its duration (org-agenda-columns-add-appointments-to- effort-sum). Values show as in column view (org-columns--displayed-value): SCHEDULED, DEADLINE and TIMESTAMP as inactive timestamps, a column's printf format applied, ITEM with links shown as their description, and <code>columns_modify_value_for_display_function</code> called first (see <span class="key">&lt;prefix&gt;</span>C in <a class="hl" href="org-properties.html#org-columns">org-columns</a> for a relative due-date example). While it is on: <code>q</code> turns it off, <code>e</code> edits the real value under the cursor (on a SCHEDULED or DEADLINE cell it opens the date prompt of <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-s&gt;</span> / <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-d&gt;</span>; computed columns such as CLOCKSUM can't be edited), <code>n</code>/<code>p</code> (<span class="key">&lt;S-Right&gt;</span>/<span class="key">&lt;S-Left&gt;</span>) switch to the next/previous allowed value, <code>v</code> shows the full value. As in Emacs, an agenda line shorter than its row is padded with spaces while the view is on, so the cursor reaches every cell; the padding goes when the view does and is not written by <a class="hl" href="#org-agenda-export">org-agenda-export</a>. The column titles are in the window's winbar (Emacs header-line). Other agenda commands keep working on the entry at point. <code>agenda.view_columns_initially</code> turns it on for every new agenda, and <code>r</code> turns it on again after it was turned off, as Emacs does.</p>
+<div class="tags"><a class="tag" id="org-agenda-command-columns" href="#org-agenda-command-columns">org-agenda-command-columns</a></div>
+<p>Column view for one custom command: set <code>overriding_columns_format</code> and <code>view_columns_initially</code> in the command's <code>settings</code>, as Emacs sets org-overriding-columns-format and org-agenda-view-columns-initially in the command's options. The agenda of that command opens in column view with that format; it keeps the format when it is refreshed (<code>r</code>) and when column view is turned off and on again, and other agendas don't see it.</p>
+<pre class="code"><code class="language-lua">custom_commands <span class="h-o">=</span> {
+  <span class="h-m">r</span> <span class="h-o">=</span> {
+    <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Reading list&quot;</span>,
+    <span class="h-m">types</span> <span class="h-o">=</span> { { <span class="h-m">type</span> <span class="h-o">=</span> <span class="h-s">&quot;todo&quot;</span>, <span class="h-m">match</span> <span class="h-o">=</span> <span class="h-s">&quot;TODO&quot;</span> } },
+    <span class="h-m">settings</span> <span class="h-o">=</span> {
+      <span class="h-m">overriding_columns_format</span> <span class="h-o">=</span> <span class="h-s">&quot;%40ITEM %DEADLINE&quot;</span>,
+      <span class="h-m">view_columns_initially</span> <span class="h-o">=</span> <span class="h-n">true</span>,
+    },
+  },
+}</code></pre>
+<p>A single-block command (<code>type = ...</code>) takes them in its <code>settings</code> too. In a block of a composite command (inside <code>types</code> / <code>blocks</code>) they have no effect, as in Emacs, which reads them once per agenda: put them in the command's <code>settings</code>. <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Acheckhealth">:checkhealth</a> org warns about them there. The same holds for <code>start_with_log_mode</code>, <code>start_with_clockreport_mode</code>, <code>start_with_entry_text_mode</code>, <code>start_with_follow_mode</code>, <code>start_with_archives_mode</code> and <code>dim_blocked_tasks</code>: a command's <code>settings</code> set them for its agenda, a block's are ignored.</p>
+<div class="tags"><a class="tag" id="org-agenda-export" href="#org-agenda-export">org-agenda-export</a></div>
+<h4>Exporting agenda views</h4>
+<p><span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-w&gt;</span> in the agenda, or <code>:Org agenda export FILE</code>, writes the current view (org-agenda-write). The extension picks the format:</p>
+<table class="defs">
+<tr><td class="term">.txt</td><td>the agenda text</td></tr>
+<tr><td class="term">.html .htm</td><td>the agenda with its colours, as a <span class="key">&lt;pre&gt;</span> block</td></tr>
+<tr><td class="term">.org</td><td>the subtrees of the entries in the view, as level-1 trees</td></tr>
+<tr><td class="term">.ics</td><td>iCalendar: an event per timestamp (deadlines of non-TODO entries too), a VTODO per TODO entry</td></tr>
+<tr><td class="term">.ps .pdf</td><td>the agenda printed like Emacs's ps-print: Courier text with the highlight colours and bold/italic, paged, with a header box (&quot;Agenda View&quot;, page n/m and the date) on every page</td></tr>
+</table>
+<p>The text of entry text mode (<code>E</code>) is not written, like Emacs's overlays; <code>agenda.add_entry_text_maxlines</code> (org-agenda-add-entry-text-maxlines, default 0) adds that many body lines under each entry (&quot;    &gt; ...&quot;). <code>agenda.before_write_hook(lines, path)</code> can then change the lines (or return new ones) and the User autocmd <code>OrgAgendaBeforeWrite</code> fires (org-agenda-before-write-hook); when the lines change, HTML and PostScript lose their colours. <code>agenda.export_html_style</code> replaces the <span class="key">&lt;style&gt;</span> section of HTML files (org-agenda-export-html-style).</p>
+<p>PostScript and PDF are written by Neovim itself, no external program is needed. The layout is ps-print's (letter paper, 8.5 pt text, 72 lines of 97 columns per page; long lines wrap), so pages break where Emacs breaks them. Characters outside Latin-1 are replaced (box drawing by <code>-</code>/<code>|</code>/<code>+</code>, typographic dashes and quotes by ASCII ones, others by <code>?</code>).</p>
+<p><code>agenda.exporter_settings</code> (org-agenda-exporter-settings) applies when views are written: ps-print variables (<code>-</code> may be written <code>_</code>) set up the printout, other keys are agenda options for the views that org-store-agenda-views builds. A custom command's <code>settings</code> may hold ps-print variables for its own files.</p>
+<pre class="code"><code class="language-lua">agenda <span class="h-o">=</span> {
+  <span class="h-m">exporter_settings</span> <span class="h-o">=</span> {
+    <span class="h-m">ps_paper_type</span> <span class="h-o">=</span> <span class="h-s">&quot;a4&quot;</span>,           <span class="h-c">-- letter legal a3 a4small b4 b5 ...</span>
+    <span class="h-m">ps_landscape_mode</span> <span class="h-o">=</span> <span class="h-n">false</span>,
+    <span class="h-m">ps_number_of_columns</span> <span class="h-o">=</span> <span class="h-n">1</span>,       <span class="h-c">-- columns per sheet</span>
+    <span class="h-m">ps_font_size</span> <span class="h-o">=</span> { <span class="h-n">7</span>, <span class="h-n">8.5</span> },      <span class="h-c">-- { landscape, portrait } or a number</span>
+    <span class="h-m">ps_print_header</span> <span class="h-o">=</span> <span class="h-n">true</span>,         <span class="h-c">-- the header box</span>
+    <span class="h-m">ps_print_header_frame</span> <span class="h-o">=</span> <span class="h-n">true</span>,
+    <span class="h-m">ps_print_color_p</span> <span class="h-o">=</span> <span class="h-n">true</span>,        <span class="h-c">-- false/&quot;black-white&quot;: no colours</span>
+    <span class="h-m">ps2pdf</span> <span class="h-o">=</span> <span class="h-n">false</span>,                 <span class="h-c">-- make .pdf with ps2pdf, like Emacs</span>
+  },
+}</code></pre>
+<p>Also: ps_header_font_size, ps_header_title_font_size, ps_header_lines, ps_left_header and ps_right_header (lists of strings or functions (page, pages)), ps_show_n_of_n, and the margins ps_left_margin, ps_right_margin, ps_top_margin, ps_bottom_margin, ps_header_offset and ps_inter_column (points). With <code>ps2pdf = true</code> and ps2pdf installed, the .pdf is made from the PostScript by ps2pdf, as in Emacs.</p>
+<p>Custom commands with <code>export_files = { &quot;~/today.html&quot;, &quot;~/today.txt&quot; }</code> are written all at once by <code>e</code> in the dispatcher or <code>:Org agenda e</code> (org-store-agenda-views). From the shell (org-batch-agenda and org-batch-agenda-csv):</p>
+<pre class="code"><code class="language-sh"><span class="h-f">nvim</span> --headless -c <span class="h-s">&quot;lua require('org.agenda.export').batch('a',</span>
+  { span = <span class="h-s">'day'</span> })<span class="h-s">&quot; -c q</span>
+<span class="h-f">nvim</span> --headless -c <span class="h-s">&quot;lua require('org.agenda.export').batch_csv('t')&quot;</span> -c q</code></pre>
+<p>The first argument is a custom command key, a dispatcher key, or a match string; the second one sets agenda options for the run. CSV records have Emacs's fields: category,head,type,todo,tags,date,time,extra,priority-l, priority-n,agenda-day.</p>
+<div class="tags"><a class="tag" id="org-agenda-custom-commands" href="#org-agenda-custom-commands">org-agenda-custom-commands</a></div>
+<h4>Custom commands</h4>
+<pre class="code"><code class="language-lua">agenda <span class="h-o">=</span> {
+  <span class="h-m">custom_commands</span> <span class="h-o">=</span> {
+    <span class="h-m">w</span> <span class="h-o">=</span> {
+      <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Work overview&quot;</span>,
+      <span class="h-m">types</span> <span class="h-o">=</span> {
+        { <span class="h-m">type</span> <span class="h-o">=</span> <span class="h-s">&quot;agenda&quot;</span>, <span class="h-m">span</span> <span class="h-o">=</span> <span class="h-s">&quot;day&quot;</span>, <span class="h-m">header</span> <span class="h-o">=</span> <span class="h-s">&quot;Today&quot;</span> },
+        { <span class="h-m">type</span> <span class="h-o">=</span> <span class="h-s">&quot;tags_todo&quot;</span>, <span class="h-m">match</span> <span class="h-o">=</span> <span class="h-s">&quot;+work/!&quot;</span>, <span class="h-m">header</span> <span class="h-o">=</span> <span class="h-s">&quot;Work&quot;</span> },
+        { <span class="h-m">type</span> <span class="h-o">=</span> <span class="h-s">&quot;todo&quot;</span>, <span class="h-m">match</span> <span class="h-o">=</span> <span class="h-s">&quot;WAITING&quot;</span> },
+      },
+      <span class="h-m">settings</span> <span class="h-o">=</span> { <span class="h-m">prefix_format</span> <span class="h-o">=</span> <span class="h-s">&quot; %-12:c %s&quot;</span> },
+      <span class="h-m">export_files</span> <span class="h-o">=</span> { <span class="h-s">&quot;~/work.html&quot;</span> },
+    },
+    <span class="h-m">u</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Urgent&quot;</span>, <span class="h-m">type</span> <span class="h-o">=</span> <span class="h-s">&quot;tags&quot;</span>, <span class="h-m">match</span> <span class="h-o">=</span> <span class="h-s">&quot;+urgent&quot;</span> },
+    <span class="h-m">p</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Projects&quot;</span>, <span class="h-m">type</span> <span class="h-o">=</span> <span class="h-s">&quot;tags-tree&quot;</span>,
+          <span class="h-m">match</span> <span class="h-o">=</span> <span class="h-s">&quot;project&quot;</span> },
+  },
+}</code></pre>
+<p>Block types: <code>agenda</code>, <code>todo</code>, <code>tags</code>, <code>tags_todo</code>, <code>search</code>, <code>stuck</code>. <code>tags-tree</code>, <code>todo-tree</code> and <code>occur-tree</code> make a sparse tree of the current org buffer instead (tags match, TODO keyword, Emacs regexp); they cannot be blocks of a composite command. A composite command (<code>types</code> / <code>blocks</code>) shows its blocks one after the other, separated by a blank line and <code>agenda.block_separator</code> (none with <code>compact_blocks</code>, which also drops the date agenda header). <code>settings</code> (Emacs's options list) applies to every block unless the block sets the option itself. Options read once for the whole agenda (the column view, the <code>start_with_*</code> modes, <code>dim_blocked_tasks</code>) are taken from <code>settings</code> only, not from a block: see <a class="hl" href="#org-agenda-command-columns">org-agenda-command-columns</a>. Block options:</p>
+<table class="defs">
+<tr><td class="term">match</td><td>match string (see <a class="hl" href="org-match-syntax.html">org-match-syntax</a>), TODO keywords for <code>todo</code>, or text for <code>search</code></td></tr>
+<tr><td class="term">header</td><td>heading shown above the block; &quot;&quot; for none; a function returning it (also <code>org_agenda_overriding_header</code>)</td></tr>
+<tr><td class="term">span</td><td>span for <code>agenda</code> blocks</td></tr>
+<tr><td class="term">start_day</td><td>first day for <code>agenda</code> blocks</td></tr>
+<tr><td class="term">files</td><td>files to use instead of <code>agenda_files</code></td></tr>
+<tr><td class="term">skip</td><td><p>function(headline) that returns true to skip an entry (also <code>org_agenda_skip_function</code>). Helpers like Emacs' org-agenda-skip-entry-if / -subtree-if:</p>
+<pre class="help">  local agenda = require(&quot;org.agenda&quot;)
+  skip = agenda.skip_entry_if(&quot;scheduled&quot;, &quot;deadline&quot;)</pre>
+<p>skip = agenda.skip_subtree_if(&quot;regexp&quot;, &quot;:someday:&quot;)</p>
+<p>Conditions: scheduled, notscheduled, deadline, notdeadline, timestamp, nottimestamp, regexp RE, notregexp RE, todo KWS, nottodo KWS (KWS: a list of keywords, or &quot;todo&quot;, &quot;done&quot;, &quot;any&quot;). Only active SCHEDULED/DEADLINE stamps count. <code>skip_subtree_if</code> checks each condition over the whole subtree and skips it all; like Emacs it is asked about the entries the block lists (TODO entries of a <code>todo</code> block, ...), so a heading the block would not list hides nothing.</p></td></tr>
+<tr><td class="term">filter</td><td>function(item) that returns true to keep an item. Where <code>skip</code> drops a whole entry, <code>filter</code> sees each line of the block: an entry scheduled on one day with a deadline on another is two items, and <code>filter</code> can keep one. <code>item</code> is shaped as in <a class="hl" href="org-api.html#org-api-agenda">org-api-agenda</a> (<code>type</code>, <code>kind</code>, <code>day</code>, <code>date</code>, <code>headline</code>, ...). It applies on top of the agenda filters (<a class="hl" href="#org-agenda-filter">org-agenda-filter</a>). To list an entry on its scheduled day only, and on its deadline day when it has no scheduled date:</td></tr>
+</table>
+<pre class="code"><code class="language-lua"><span class="h-f">filter</span> <span class="h-o">=</span> <span class="h-k">function</span>(item)
+  <span class="h-k">return</span> <span class="h-k">not</span> (item.<span class="h-m">type</span> <span class="h-o">==</span> <span class="h-s">&quot;deadline&quot;</span>
+    <span class="h-k">and</span> item.<span class="h-m">headline</span> <span class="h-k">and</span> item.<span class="h-m">headline</span>.<span class="h-m">scheduled</span>)
+<span class="h-k">end</span></code></pre>
+<table class="defs">
+<tr><td class="term">sorting</td><td>sorting strategies of this block</td></tr>
+<tr><td class="term">*_filter_preset</td><td>filters that stay on (<a class="hl" href="#org-agenda-filter">org-agenda-filter</a>)</td></tr>
+</table>
+<p>any other <code>agenda</code> option (<code>prefix_format</code>, <code>entry_types</code>, <code>todo_ignore_*</code>, <code>show_future_repeats</code>, <code>max_entries</code>, ...), also with Emacs names: <code>org_agenda_entry_types</code>, <code>org_agenda_prefix_format</code>, ...</p>
+<p>Keys may be several characters long; a string entry (<code>w = &quot;Work&quot;</code>) only labels the group.</p>
+<p><code>agenda.custom_commands_contexts</code> (org-agenda-custom-commands-contexts) offers commands only in some buffers, with the rules of <a class="hl" href="org-capture.html#org-capture-contexts">org-capture-contexts</a>: <code>{ &quot;p&quot;, { { in_mode = &quot;org&quot; } } }</code> keeps <code>p</code> only in org buffers, <code>{ &quot;p&quot;, &quot;r&quot;, { rules } }</code> runs the command of <code>r</code> under <code>p</code> where a rule holds (and hides <code>r</code>). It applies to the dispatcher, <code>:Org agenda KEY</code> and <code>A</code>.</p>
+<p>TODO lists: <code>todo_ignore_scheduled</code> (&quot;all&quot;, &quot;future&quot;, &quot;past&quot; or days), <code>todo_ignore_deadlines</code> (true = &quot;near&quot;: within the warning period, &quot;far&quot;, &quot;all&quot;, &quot;future&quot;, &quot;past&quot; or days), <code>todo_ignore_timestamp</code>, <code>todo_ignore_with_date</code> hide dated entries (org-agenda-todo-ignore-*; they compare dates in days, or with the current time in seconds with <code>todo_ignore_time_comparison_use_seconds</code>); tags-todo (M) views honour them only with <code>tags_todo_honor_ignore_options</code>. <code>todo_list_sublevels = false</code> skips the children of a listed TODO; <code>tags_match_list_sublevels = false</code> those of a match.</p>
+<div class="tags"><a class="tag" id="org-stuck-projects" href="#org-stuck-projects">org-stuck-projects</a></div>
+<h4>Stuck projects</h4>
+<p><code>agenda.stuck_projects</code> (org-stuck-projects): projects matching <code>match</code> (&quot;+LEVEL=2/-DONE&quot;) are stuck unless a heading of their subtree, the project heading included (inline tasks too), starts with one of <code>todo_keywords</code> ({ &quot;TODO&quot;, &quot;NEXT&quot;, &quot;NEXTACTION&quot; }; &quot;*&quot; = any not-done keyword of the agenda files) or has one of <code>tags</code> (&quot;*&quot; = any tag), or the subtree text matches the Vim regexp <code>text</code>. Like Emacs, the keywords are words on the heading line: one that isn't a TODO keyword in that file counts too.</p>
+<div class="tags"><a class="tag" id="org-agenda-search" href="#org-agenda-search">org-agenda-search</a></div>
+<h4>Search view</h4>
+<p>A plain query is a phrase whose spaces match any whitespace, newlines included (&quot;banana split&quot; finds &quot;banana\n  split&quot;). A query starting with <code>+</code>, <code>-</code> or <code>{</code> is boolean: <code>+word</code> must and <code>-word</code> must not occur, &quot;a phrase&quot; in double quotes counts as one word, <code>{regexp}</code> is an Emacs regexp, and <code>word\ word</code> joins two words. A leading <code>*</code> searches headlines only, <code>!</code> TODO entries only, <code>:</code> makes words match whole words. Matching ignores case.</p>
+<table class="defs">
+<tr><td class="term long">agenda.search_<wbr>view_<wbr>always_<wbr>boolean</td><td>treat every query as boolean</td></tr>
+<tr><td class="term long">agenda.search_<wbr>view_<wbr>force_<wbr>full_<wbr>words</td><td>words match whole words only</td></tr>
+<tr><td class="term long">agenda.search_<wbr>view_<wbr>max_<wbr>outline_<wbr>level</td><td>entries below this level are searched as part of their ancestor (0 = no limit)</td></tr>
+<tr><td class="term long">agenda.text_<wbr>search_<wbr>extra_<wbr>files</td><td>more files to search; include &quot;agenda-archives&quot; for the archive files</td></tr>
+</table>
+<div class="tags"><a class="tag" id="org-agenda-diary-sexp" href="#org-agenda-diary-sexp">org-agenda-diary-sexp</a></div>
+<h4>Diary sexp entries</h4>
+<p>Emacs lets you put diary s-expressions in timestamps, <code>&lt;%%(diary-float t 4 2)&gt;</code> (with a time after the sexp, <code>&lt;%%(diary-float t 4 2) 22:00-23:00&gt;</code>, in SCHEDULED and DEADLINE too), and on lines of their own at the start of a line, <code>%%(org-anniversary 1990 5 17) Birthday of Joe (%d)</code>. <code>agenda.diary_sexp_prefix</code> (an Emacs regexp, org-agenda-diary-sexp-prefix) moves its match in the text of a <code>%%(...)</code> line to the leader (<code>%s</code>). Emacs evaluates them as Emacs Lisp. Neovim has no Lisp interpreter, so they are read with a small, safe s-expression reader and the common calendar functions are emulated, with the same results as Emacs:</p>
+<ul>
+<li><code>org-anniversary Y M D</code>, <code>diary-anniversary M D [Y]</code></li>
+<li><code>org-cyclic N Y M D</code>, <code>diary-cyclic N M D Y</code></li>
+<li><code>org-block Y1 M1 D1 Y2 M2 D2</code>, <code>diary-block M1 D1 Y1 M2 D2 Y2</code></li>
+<li><code>org-date Y M D</code>, <code>diary-date M D Y</code></li>
+<li><code>diary-float MONTH DAYNAME N [DAY]</code></li>
+<li><code>org-class Y1 M1 D1 Y2 M2 D2 DAYNAME [ISO-WEEKS...]</code></li>
+<li><code>diary-remind SEXP DAYS [MARKING]</code>, <code>diary-offset SEXP DAYS</code></li>
+<li><code>diary-hebrew-date</code>, <code>diary-islamic-date</code>, <code>diary-bahai-date</code>, <code>diary-chinese-date</code>, <code>diary-julian-date</code>, <code>diary-iso-date</code>, <code>diary-astro-day-number</code>, <code>diary-french-date</code>, <code>diary-mayan-date</code>, <code>diary-coptic-date</code>, <code>diary-ethiopic-date</code>, <code>diary-persian-date</code>, <code>diary-day-of-year</code>, <code>diary-lunar-phases</code>, <code>diary-sunrise-sunset</code></li>
+<li><code>diary-hebrew-birthday M D Y [AFTER-SUNSET]</code>, <code>diary-hebrew-yahrzeit M D Y [MARK AFTER-SUNSET]</code></li>
+<li><code>diary-hebrew-omer</code>, <code>diary-hebrew-parasha</code>, <code>diary-hebrew-rosh-hodesh</code>, <code>diary-hebrew-sabbath-candles</code>, <code>diary-chinese-anniversary M D [Y]</code></li>
+<li><code>and</code>, <code>or</code>, <code>not</code>, <code>list</code>, <code>quote</code></li>
+</ul>
+<p>Sexps can also combine these with a side-effect-free subset of Emacs Lisp, evaluated like Emacs with <code>date</code> bound to <code>(MONTH DAY YEAR)</code> and <code>entry</code> to the text after the sexp:</p>
+<ul>
+<li>control: <code>if</code> <code>when</code> <code>unless</code> <code>cond</code> <code>let</code> <code>let*</code> <code>progn</code></li>
+<li>comparison: <code>=</code> <code>/=</code> <code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code> <code>eq</code> <code>eql</code> <code>equal</code> <code>memq</code> <code>memql</code> <code>member</code> <code>null</code> <code>not</code> <code>zerop</code></li>
+<li>arithmetic: <code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>%</code> <code>mod</code> <code>1+</code> <code>1-</code> <code>abs</code> <code>max</code> <code>min</code></li>
+<li>lists: <code>car</code> <code>cdr</code> <code>cadr</code> <code>nth</code> <code>length</code></li>
+<li>strings and types: <code>concat</code> <code>format</code> <code>number-to-string</code> <code>string=</code> <code>integerp</code> <code>numberp</code> <code>stringp</code></li>
+<li>calendar: <code>calendar-day-of-week</code>, <code>calendar-extract-month/-day/-year</code>, <code>calendar-absolute-from-gregorian</code>, <code>calendar-gregorian-from-absolute</code>, <code>calendar-iso-from-absolute</code>, <code>calendar-nth-named-day</code>, <code>calendar-last-day-of-month</code>, <code>calendar-leap-year-p</code>, <code>calendar-day-number</code></li>
+</ul>
+<pre class="code"><code class="language-org"><span class="h-h">* Gym</span>
+%%(when (memq (calendar-day-of-week date) '(1 2 4 5)) &quot;18:00 Gym&quot;)
+<span class="h-h">* Payday</span>
+%%(= 0 (mod (- (calendar-absolute-from-gregorian date) (calendar-absolute-from-gregorian '(9 4 2026))) 14))</code></pre>
+<p>A string result replaces the entry text (the first example shows &quot;18:00 Gym&quot; at 18:00), a list of strings gives one line each, and any other non-nil value shows the text after the sexp. There are no loops, <code>lambda</code> or assignments, so every sexp finishes and changes nothing.</p>
+<p>A sexp beyond this subset (other Lisp functions, <code>cl-*</code>, ...) is evaluated in a separate <code>emacs --batch</code> when there is one (<code>babel.emacs_lisp</code>), like org-diary-sexp-entry: <code>(let ((entry ENTRY) (date '(M D Y))) SEXP)</code> with Org and diary-lib loaded. One Emacs runs per sexp and agenda span (all the days at once, under half a second), and the results are kept for the session. Without Emacs the entry is skipped with a message.</p>
+<p>The <code>diary-*</code> functions take their arguments in the order of <code>agenda.calendar_date_style</code> (calendar-date-style): &quot;american&quot; (month day year, the default), &quot;european&quot; (day month year) or &quot;iso&quot; (year month day). The <code>org-*</code> variants always use ISO order (year month day). In <code>diary-date</code>/<code>org-date</code>, <code>t</code> matches any value and a list <code>'(1 2)</code> matches any of its elements. In <code>diary-float</code>, MONTH may be <code>t</code> or a list, DAYNAME is 0 (Sunday) to 6, and a negative N counts from the end of the month. The entry text of anniversaries and cycles may contain <code>%d</code> (years or repetitions) and <code>%s</code> (its ordinal suffix, &quot;st&quot;, &quot;nd&quot;, ...); a result with &quot;; &quot; gives several agenda lines.</p>
+<p><code>diary-remind</code> shows the entry of a quoted SEXP on its day and &quot;Reminder: Only N days until ENTRY&quot; DAYS days before (&quot;2 weeks&quot; for whole weeks; DAYS may be a list, or -N for 1 to N days); MARKING only matters for the Emacs calendar and is ignored. <code>diary-offset</code> shows SEXP's entry DAYS days later (earlier when negative):</p>
+<pre class="code"><code class="language-org"><span class="h-h">* Taxes</span>
+%%(diary-remind '(diary-date 4 15 t) -7) File the taxes
+<span class="h-h">* Retro</span>
+%%(diary-offset '(diary-float t 4 -1) 1) Retro, the day after</code></pre>
+<p>The <code>diary-*-date</code> functions show the day in another calendar, e.g. &quot;Hebrew date (until sunset): Tishri 16, 5787&quot;, like Emacs (in the date form of <code>agenda.calendar_date_style</code>: &quot;16 Tishri 5787&quot; in european style, &quot;5787-07-16&quot; in iso style). <code>diary-lunar-phases</code> shows the phases of the moon and <code>diary-sunrise-sunset</code> sunrise and sunset at <code>agenda.calendar_latitude</code> and <code>agenda.calendar_longitude</code> (<a class="hl" href="#org-agenda-calendar-keys">org-agenda-calendar-keys</a>; without them the sexp is skipped with a message), in the system time zone.</p>
+<p>The entries of the Hebrew calendar are Emacs's (cal-hebrew.el): <code>diary-hebrew-birthday</code> (&quot;Joe's 13th Hebrew birthday&quot;, and &quot; (evening)&quot; the day before; the entry text is the name) and <code>diary-hebrew-yahrzeit</code> (&quot;Yahrzeit of Joe: 5th anniversary&quot;) take the civil date of birth or death, the day after with AFTER-SUNSET; <code>diary-hebrew-omer</code> counts the Omer, <code>diary-hebrew-parasha</code> names the weekly parasha on Saturdays (with the Israel and diaspora readings when they differ), <code>diary-hebrew-rosh-hodesh</code> shows Rosh Hodesh, Erev Rosh Hodesh and Shabbat Mevarchim, and <code>diary-hebrew-sabbath-candles</code> the candle lighting time on Fridays, <code>agenda.hebrew_sabbath_candles_minutes</code> (18) before sunset at the calendar location. <code>diary-chinese-anniversary</code> is <code>diary-anniversary</code> for a date of the Chinese calendar, with the year written CYCLE * 100 + YEAR (7843 for year 43 of cycle 78):</p>
+<pre class="code"><code class="language-org">%%(diary-hebrew-yahrzeit 11 25 1990) Grandpa
+%%(diary-chinese-anniversary 8 15 7840) Moon cake %d%s</code></pre>
+<p>Like Emacs, <code>%%(...)</code> lines are found in the whole file: lines before the first heading give entries with the file's category and FILETAGS. They have no heading, so <span class="key">&lt;Tab&gt;</span>/<span class="key">&lt;CR&gt;</span> jump to the line and commands that change an entry (<code>t</code>, <code>s</code>, <code>:</code>, ...) report &quot;Before first headline&quot;. (Org 9.8.10 itself stops the agenda with that error when such a line matches.)</p>
+<div class="tags"><a class="tag" id="org-agenda-holidays" href="#org-agenda-holidays">org-agenda-holidays</a></div>
+<h4>Holidays</h4>
+<p>A <code>%%(org-calendar-holiday)</code> line shows the day's holidays, like Emacs's <code>calendar-check-holidays</code>: several on one day give several agenda lines.</p>
+<pre class="code"><code class="language-org"><span class="h-h">* Holidays</span>
+<span class="h-m">  :PROPERTIES:</span>
+<span class="h-m">  :CATEGORY:</span> Holiday
+<span class="h-m">  :END:</span>
+%%(org-calendar-holiday)</code></pre>
+<p>The holidays come from <code>agenda.holidays</code> (calendar-holidays), with the Emacs defaults: one list per <code>holiday-*-holidays</code> variable (<code>general</code> (the United States), <code>local</code>, <code>other</code>, <code>christian</code>, <code>hebrew</code>, <code>islamic</code>, <code>bahai</code>, <code>oriental</code> and <code>solar</code>), and the flags <code>christian_all</code>, <code>hebrew_all</code>, <code>islamic_all</code>, <code>bahai_all</code> and <code>chinese_all</code> (calendar-*-all-holidays-flag, false). Set a group to <code>{}</code> to drop it; list replaces the default. Items are Emacs's holiday forms written as Lua lists, or Lua functions:</p>
+<pre class="code"><code class="language-lua">agenda <span class="h-o">=</span> {
+  <span class="h-m">holidays</span> <span class="h-o">=</span> {
+    <span class="h-m">general</span> <span class="h-o">=</span> {},  <span class="h-c">-- no US holidays</span>
+    <span class="h-m">christian</span> <span class="h-o">=</span> {  <span class="h-c">-- only Christmas and Easter Sunday</span>
+      { <span class="h-s">&quot;holiday-fixed&quot;</span>, <span class="h-n">12</span>, <span class="h-n">25</span>, <span class="h-s">&quot;Christmas&quot;</span> },
+      { <span class="h-s">&quot;holiday-easter-etc&quot;</span>, <span class="h-n">0</span>, <span class="h-s">&quot;Easter Sunday&quot;</span> },
+    },
+    [<span class="h-s">&quot;local&quot;</span>] <span class="h-o">=</span> {
+      { <span class="h-s">&quot;holiday-fixed&quot;</span>, <span class="h-n">9</span>, <span class="h-n">16</span>, <span class="h-s">&quot;Independence Day&quot;</span> },
+      { <span class="h-s">&quot;holiday-float&quot;</span>, <span class="h-n">11</span>, <span class="h-n">1</span>, <span class="h-n">3</span>, <span class="h-s">&quot;Revolution Day&quot;</span> },  <span class="h-c">-- 3rd Monday</span>
+      <span class="h-k">function</span>(year)  <span class="h-c">-- holiday-sexp: { MONTH, DAY, NAME } per year</span>
+        <span class="h-k">return</span> { { <span class="h-n">2</span>, <span class="h-n">5</span>, <span class="h-s">&quot;Constitution Day &quot;</span> <span class="h-o">..</span> (year <span class="h-o">-</span> <span class="h-n">1917</span>) } }
+      <span class="h-k">end</span>,
+    },
+  },
+}</code></pre>
+<p>The items:</p>
+<ul>
+<li><code>{ &quot;holiday-fixed&quot;, MONTH, DAY, NAME }</code></li>
+<li><code>{ &quot;holiday-float&quot;, MONTH, DAYNAME, N, NAME [, DAY] }</code> (the Nth DAYNAME, 0 = Sunday, from DAY; negative N counts backwards)</li>
+<li><code>{ &quot;holiday-easter-etc&quot; [, N, NAME] }</code>, <code>{ &quot;holiday-advent&quot; [, N, NAME] }</code>, <code>{ &quot;holiday-greek-orthodox-easter&quot; [, N, NAME] }</code> (N days from Easter, Advent Sunday or Pascha; without arguments the default holidays)</li>
+<li><code>{ &quot;holiday-julian&quot; | &quot;holiday-hebrew&quot; | &quot;holiday-islamic&quot; | &quot;holiday-bahai&quot; | &quot;holiday-chinese&quot;, MONTH, DAY, NAME }</code> (a date of that calendar)</li>
+<li><code>{ &quot;holiday-hebrew-passover&quot; }</code>, <code>-rosh-hashanah</code>, <code>-hanukkah</code>, <code>-tisha-b-av</code>, <code>-misc</code>, <code>{ &quot;holiday-islamic-new-year&quot; }</code>, <code>{ &quot;holiday-bahai-new-year&quot; }</code>, <code>-ridvan</code>, <code>-twin-holy-birthdays</code>, <code>{ &quot;holiday-chinese-new-year&quot; }</code>, <code>-qingming</code>, <code>-winter-solstice</code>, <code>{ &quot;solar-equinoxes-solstices&quot; }</code> and <code>{ &quot;holiday-daylight-saving&quot; }</code> (the Emacs functions of the same names)</li>
+<li><code>{ &quot;if&quot;, FLAG, ITEM... }</code> (the items when <code>holidays[FLAG]</code> is true)</li>
+</ul>
+<p>Equinox, solstice and daylight saving times use the system time zone, like Emacs's calendar-time-zone. A bad item is reported once and skipped. Differences: Emacs evaluates each item as Lisp (<code>holiday-sexp</code> and other Lisp forms become Lua functions here).</p>
+<div class="tags"><a class="tag" id="org-agenda-calendar-keys" href="#org-agenda-calendar-keys">org-agenda-calendar-keys</a></div>
+<h4>Calendar commands</h4>
+<p>Emacs's calendar commands on the date at point of a date agenda (a date line or an item of that day):</p>
+<table class="defs">
+<tr><td class="term">gC</td><td>the date in other calendars (org-agenda-convert-date, Emacs C): Gregorian, ISO week, day of the year, Julian, astronomical day number, Hebrew, Islamic, French Revolutionary, Bahá’í, Mayan, Coptic, Ethiopic, Persian and Chinese</td></tr>
+<tr><td class="term">M</td><td>the phases of the moon in the three months around the date, with possible eclipses (org-agenda-phases-of-moon)</td></tr>
+<tr><td class="term">S</td><td>sunrise, sunset and hours of daylight on the date (org-agenda-sunrise-sunset); with a count, ask for the location</td></tr>
+<tr><td class="term">H</td><td>the holidays of the three months around the date, from <code>agenda.holidays</code> (org-agenda-holidays)</td></tr>
+</table>
+<p><code>gC</code>, <code>M</code> and <code>H</code> show a float (q closes it), <code>S</code> a message. Sunrise and sunset need a location:</p>
+<pre class="code"><code class="language-lua">agenda <span class="h-o">=</span> {
+  <span class="h-m">calendar_latitude</span> <span class="h-o">=</span> <span class="h-n">40.7</span>,    <span class="h-c">-- calendar-latitude, north positive</span>
+  <span class="h-m">calendar_longitude</span> <span class="h-o">=</span> <span class="h-o">-</span><span class="h-n">74.0</span>,  <span class="h-c">-- calendar-longitude, east positive</span>
+  <span class="h-m">calendar_location_name</span> <span class="h-o">=</span> <span class="h-s">&quot;New York&quot;</span>,  <span class="h-c">-- default &quot;40.7N, 74.0W&quot;</span>
+}</code></pre>
+<p>When they are unset, <code>S</code> asks for them (Emacs's solar-setup) and keeps the answers for the session. Times use the system time zone and its daylight saving rules, like Emacs's calendar-time-zone. The strings are Emacs's, with the default <code>calendar-date-display-form</code> of <code>agenda.calendar_date_style</code> (american &quot;Sunday, September 27, 2026&quot;, european &quot;Sunday, 27 September 2026&quot;, iso &quot;2026-09-27&quot;); <code>calendar-date-display-form</code> itself, <code>lunar-phase-names</code> and <code>calendar-time-display-form</code> are not configurable.</p>
+<div class="tags"><a class="tag" id="org-agenda-diary-file" href="#org-agenda-diary-file">org-agenda-diary-file</a></div>
+<h4>The Emacs diary file</h4>
+<p>With <code>agenda.include_diary</code> (org-agenda-include-diary), or after <code>D</code> in the agenda, each day of a date agenda also lists the entries of the Emacs diary file for that day, with category &quot;Diary&quot;, like Emacs:</p>
+<pre class="code"><code class="language-lua">agenda <span class="h-o">=</span> {
+  <span class="h-m">include_diary</span> <span class="h-o">=</span> <span class="h-n">true</span>,
+  <span class="h-m">diary_file</span> <span class="h-o">=</span> <span class="h-s">&quot;~/.emacs.d/diary&quot;</span>,  <span class="h-c">-- default: ~/diary if it exists,</span>
+                                    <span class="h-c">-- else the Emacs user directory's</span>
+  <span class="h-m">calendar_date_style</span> <span class="h-o">=</span> <span class="h-s">&quot;american&quot;</span>, <span class="h-c">-- &quot;european&quot;, &quot;iso&quot;</span>
+  <span class="h-m">diary_show_holidays</span> <span class="h-o">=</span> <span class="h-n">true</span>,       <span class="h-c">-- diary-show-holidays-flag</span>
+  <span class="h-m">diary_include_files</span> <span class="h-o">=</span> <span class="h-n">false</span>,      <span class="h-c">-- read #include &quot;FILE&quot; lines</span>
+  <span class="h-m">diary_nongregorian</span> <span class="h-o">=</span> {},          <span class="h-c">-- &quot;hebrew&quot;, &quot;islamic&quot;, &quot;bahai&quot;,</span>
+                                    <span class="h-c">-- &quot;chinese&quot; (H, I, B, C entries)</span>
+}</code></pre>
+<p>The file is read the way Emacs's <code>diary-list-entries</code> reads it: an entry starts at the beginning of a line with a date in one of the forms of <code>calendar_date_style</code> (diary-date-forms), followed by its text; indented lines below continue it:</p>
+<pre class="code"><code>9/27 Weekly review            MONTH/DAY
+9/27/2026 Dentist 10:30       MONTH/DAY/YEAR (or a two-digit year)
+Sep 27 Birthday               MONTHNAME DAY (full or three letters,
+September 27, 2026 Party        with or without a period)
+                              MONTHNAME DAY, YEAR
+Tuesday 10am Meeting          DAYNAME (full or abbreviated): weekly
+* 15 Pay day                  `*` matches any day, month or year
+&amp;10/3 Not marked              the `&amp;` (non-marking) prefix
+10/4                          a date alone: the indented lines are
+  Trip to Boston                the entry
+  2pm Meeting
+%%(diary-float t 4 -1) Last Thursday   a sexp entry</code></pre>
+<p>European style reads DAY/MONTH, DAY/MONTH/YEAR, DAY MONTHNAME and DAY MONTHNAME YEAR; iso style MONTH/DAY, YEAR-MONTH-DAY (or /), MONTHNAME DAY and YEAR MONTHNAME DAY. The diary <code>%%(...)</code> sexps use the same functions as Org's, evaluated with <code>date</code> and <code>entry</code> bound.</p>
+<p>The agenda lines are Emacs's: the day's holidays (<code>agenda.holidays</code>, unless <code>diary_show_holidays</code> is false) come first, then the sexp entries, then the dated entries (one date form after the other), the entries of other calendars and the included files; the lines of an entry are joined with &quot;; &quot; except the lines starting with a time, which become entries of their own. A time at the start of a line (&quot;10:30&quot;, &quot;2pm&quot;, &quot;8:30-9:15&quot;) goes to the time column and the time grid; face attributes such as <code>[foreground:red]</code> are removed. <code>D</code> toggles the diary for the current agenda (org-agenda-toggle-diary); a block of <code>agenda.custom_commands</code> can set <code>include_diary</code> too. <span class="key">&lt;Tab&gt;</span> and <span class="key">&lt;CR&gt;</span> on a diary line jump to the line of the diary file (the last line of the entry, like Emacs); the commands that change an Org entry (<code>t</code>, <code>s</code>, <code>:</code>, ...) report &quot;Command not allowed in this line&quot;, as do jumps from a holiday line.</p>
+<p>With <code>diary_include_files</code>, <code>#include &quot;FILE&quot;</code> lines (relative to the diary file's directory) add the entries of other diary files, recursively (Emacs: diary-include-other-diary-files in diary-list-entries-hook). With <code>diary_nongregorian</code>, entries prefixed with H, I, B or C are dates of the Hebrew, Islamic, Bahá’í or Chinese calendar, in the same forms with that calendar's month names (not abbreviated): <code>HTishri 16 Sukkot</code>, <code>IRamadan 1 Fast</code>, <code>C8/15 Mid-autumn</code> (diary-nongregorian-listing-hook). Differences: customized <code>diary-date-forms</code>, <code>diary-comment-start</code>, <code>diary-list-include-blanks</code> and <code>diary-face-attrs</code> are not supported, and a missing or recursive include is skipped with a message (Emacs stops with an error).</p>
+<div class="tags"><a class="tag" id="org-agenda-unsupported" href="#org-agenda-unsupported">org-agenda-unsupported</a></div>
+<h4>Not supported in the agenda</h4>
+<ul>
+<li>Without an Emacs executable, Emacs Lisp beyond the subset above (loops, <code>lambda</code>, <code>defun</code>, assignments, other libraries) and the <code>holidays</code> argument of <code>org-class</code>: an unsupported sexp is skipped with a message (once per session). With one, they run in a separate Emacs that has none of your session's state (variables, functions you defined; <code>calendar-date-style</code> is set from <code>agenda.calendar_date_style</code>) unless <code>babel.emacs_lisp.args</code> loads it. Holidays (<a class="hl" href="#org-agenda-holidays">org-agenda-holidays</a>) and the entries of other calendars (<a class="hl" href="#org-agenda-diary-sexp">org-agenda-diary-sexp</a>) are supported.</li>
+<li>The Customize keys (<code>C</code>, <code>!</code> in the dispatcher): there is no Customize.</li>
+<li>Keys that differ on purpose, to keep Vim motions: <code>n</code>/<code>p</code> move by item (Emacs: by line; N/P by item), <code>j</code> and <code>k</code> are motions (go to date is <code>gd</code>, capture <code>K</code>), <code>g</code> is a Vim prefix (redo all is <code>gr</code>), <code>s</code>/<code>d</code> schedule and set deadlines (Emacs: save and day view; views are <code>vd</code>, <code>vw</code>, <code>vt</code>, <code>vm</code>, <code>vy</code>), <code>R</code> refiles (the clock report is <code>C</code> / <code>vR</code>, so the calendar conversion is <code>gC</code>), and habits are toggled with <code>vh</code> (Emacs <code>K</code>, which is capture here).</li>
+</ul>
+</article>
+<nav class="pager"><a class="prev" href="../manual/org-clock.html"><span>上一页</span>计时和工作量</a><a class="next" href="../manual/org-match-syntax.html"><span>下一页</span>匹配语法（标签/属性）</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L1987">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>

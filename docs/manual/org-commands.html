@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commands · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="../assets/site.js" defer></script>
+
+</head>
+<body data-root="../">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="../index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="../index.html">首页</a></li>
+<li class=""><a href="../guide.html">指南</a></li>
+<li class=""><a href="../playground.html">互动教程</a></li>
+<li><details class="group" open><summary>手册</summary><ul>
+<li class=""><a href="../manual/index.html">目录</a></li>
+<li class=""><a href="../manual/org-introduction.html">简介</a></li>
+<li class=""><a href="../manual/org-installation.html">安装</a></li>
+<li class=""><a href="../manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="../manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="../manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="../manual/org-tags.html">标签</a></li>
+<li class=""><a href="../manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="../manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="../manual/org-clock.html">计时和工作量</a></li>
+<li class=""><a href="../manual/org-agenda.html">日程</a></li>
+<li class=""><a href="../manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="../manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="../manual/org-capture.html">捕捉</a></li>
+<li class=""><a href="../manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="../manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="../manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="../manual/org-babel.html">源代码块（Babel）</a></li>
+<li class=""><a href="../manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="../manual/org-export.html">导出</a></li>
+<li class=""><a href="../manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="../manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="../manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="../manual/org-completion.html">补全</a></li>
+<li class=""><a href="../manual/org-appearance.html">外观和高亮</a></li>
+<li class=""><a href="../manual/org-config.html">配置参考</a></li>
+<li class=""><a href="../manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="../manual/org-commands.html" aria-current="page">命令</a></li>
+<li class=""><a href="../manual/org-api.html">Lua API</a></li>
+<li class=""><a href="../manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="../manual/org-lint.html">检查</a></li>
+<li class=""><a href="../manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="../manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="../manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="../manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="../manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="../manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="../manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="../manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="../manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="../manual/org-extensions-drill.html">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="../manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="../manual/org-extensions-hugo.html">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="../manual/org-extensions-caldav.html">CalDAV sync</a></li>
+<li class="sub"><a href="../manual/org-extensions-cli.html">Command line (org)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-code.html">Code and notes (code)</a></li>
+<li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="../manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="../manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="../manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="../examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="../examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="../examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="../examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="../examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="../examples/05-tags.html">标签</a></li>
+<li class=""><a href="../examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="../examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="../examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="../examples/09-agenda.html">日程</a></li>
+<li class=""><a href="../examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="../examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="../examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="../examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="../examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="../examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="../examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="../examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="../examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="../examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="../examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="../examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="../parity/review.html">兼容性审查</a></li>
+<li class=""><a href="../parity/index.html">目录</a></li>
+<li class=""><a href="../parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="../extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content manual">
+<article>
+<h1>命令</h1>
+<div class="tags"><a class="tag" id="org-commands" href="#org-commands">org-commands</a></div>
+<div class="tags"><a class="tag" id=":Org" href="#%3AOrg">:Org</a></div>
+<table class="defs">
+<tr><td class="term">:Org {action} [args]</td><td>Run any action by name (the names are those in <a class="hl" href="org-keymaps.html">org-keymaps</a>). Without arguments, shows a picker.</td></tr>
+</table>
+<p>Additional subcommands:</p>
+<ul>
+<li><code>:Org agenda [key|view]</code>, <code>:Org capture [key]</code></li>
+<li><code>:Org export [format] [subtree] [body] [visible] [buffer] [open]</code></li>
+<li><code>:Org publish [project|file|current|all] [force]</code></li>
+<li><code>:Org tangle</code>, <code>:Org detangle [file]</code>, <code>:Org tangle_jump</code>, <code>:Org tangle_clean</code>, <code>:Org babel_load_file [file]</code></li>
+<li><code>:Org search {text}</code>, <code>:Org tags_search {match}</code>, <code>:Org todo_list [KEYWORD]</code></li>
+<li><code>:Org clock_in_last</code>, <code>:Org refile_goto</code></li>
+<li><code>:Org show_all</code>, <code>overview</code>, <code>content</code>, <code>show_everything</code>, <code>set_startup_visibility</code>, <code>force_cycle_archived</code></li>
+<li><code>:Org delete_property_globally</code>, <code>:Org tags_sparse_tree [match]</code>, <code>:Org occur [regexp]</code>, <code>:Org align_tags</code>, <code>:Org id_update_locations</code></li>
+<li><code>:Org table_formula [formula]</code> (<a class="hl" href="org-tables.html#org-table-formulas">org-table-formulas</a>), <code>:Org agenda_filter_regexp [-]regexp</code> (<a class="hl" href="org-agenda.html#org-agenda-filter">org-agenda-filter</a>)</li>
+<li><code>:Org timer_start</code>, <code>timer_stop</code>, <code>timer_pause</code>, <code>timer_insert</code>, <code>timer_countdown [min]</code>, <code>timer_remaining</code></li>
+<li><code>:Org toggle_timestamp_type</code></li>
+<li><code>:Org notifications_start</code>, <code>notifications_stop</code></li>
+<li><code>:Org lint [checker ...]</code> (<a class="hl" href="org-lint.html">org-lint</a>)</li>
+<li><code>:Org tutor [lesson] [reset]</code> (without a lesson: the lesson list), <code>:Org tutor_hint</code> (<a class="hl" href="org-introduction.html#org-tutor">org-tutor</a>)</li>
+<li><code>:Org feed_update [name]</code>, <code>feed_update_all</code>, <code>feed_goto_inbox [name]</code>, <code>feed_show_raw [name]</code> (<a class="hl" href="org-capture.html#org-feed">org-feed</a>)</li>
+<li><code>:Org mobile_push</code>, <code>mobile_pull</code>, <code>mobile_apply</code>, <code>mobile_goto_inbox</code>, <code>mobile_flagged</code> (<a class="hl" href="org-links.html#org-mobile">org-mobile</a>)</li>
+<li><code>:Org migrate_config [file]</code>: an nvim-orgmode setup as org.nvim's (<a class="hl" href="org-migrate.html#org-migrate-config">org-migrate-config</a>)</li>
+</ul>
+<div class="tags"><a class="tag" id="org-command-preview" href="#org-command-preview">org-command-preview</a></div>
+<h4>Live previews</h4>
+<p>Some subcommands show what they will do while you type them, before <span class="key">&lt;CR&gt;</span>, like <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Asubstitute">:substitute</a> does with 'inccommand' (<a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Acommand-preview">:command-preview</a>):</p>
+<table class="defs">
+<tr><td class="term long"><code>:Org table_formula {formula}</code></td><td>the table recalculated with the formula; the fields it changes and the formula in <code>#+TBLFM</code> are highlighted</td></tr>
+<tr><td class="term"><code>:Org occur {regexp}</code></td><td>the matches highlighted</td></tr>
+<tr><td class="term long"><code>:Org tags_sparse_tree {match}</code></td><td>the matching headlines highlighted</td></tr>
+<tr><td class="term long"><code>:Org agenda_filter_regexp {re}</code></td><td>in the agenda, the entries the filter would hide dimmed</td></tr>
+</table>
+<p>The preview follows 'inccommand': nothing is shown when it is empty; &quot;nosplit&quot; (Neovim's default) shows it in the buffer, &quot;split&quot; also lists the changed table or the matching lines in the preview window. A formula or match that is not complete yet (or has an error) shows nothing, and tables of more than 20,000 fields get no preview. Nothing is folded or written until you press <span class="key">&lt;CR&gt;</span>; <span class="key">&lt;Esc&gt;</span> leaves the buffer as it was (the preview is no change, and leaves no undo step). The highlight is <code>OrgCommandPreview</code> (linked to <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=hl-Substitute">hl-Substitute</a>); sparse-tree matches use <code>OrgSparseMatch</code>, as after <span class="key">&lt;CR&gt;</span>.</p>
+<div class="tags"><a class="tag" id="org-menus" href="#org-menus">org-menus</a></div>
+<h4>Menus</h4>
+<p>Emacs's Org menus are Neovim menus (<a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Amenu">:menu</a>): &quot;Org&quot; and &quot;Table&quot; in org buffers (org-org-menu, org-tbl-menu), &quot;Agenda&quot; in the agenda (org-agenda-menu), &quot;Column&quot; in column view (org-columns-menu), &quot;Edit-Formulas&quot; in the formula editor (org-table-fedit-menu) and &quot;OrgTbl&quot; where orgtbl-mode is on (orgtbl-mode-menu), with Emacs's entries in Emacs's order, each running the action that does the same (its key is shown next to it, unless <code>mappings.disable_all</code> leaves it unbound; the agenda buffer's keys stay bound). Neovim menus are global, so they are added when a buffer they belong to is entered and removed when another one is. GUIs show them in the menu bar; anywhere, run an entry with <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Aemenu">:emenu</a> (<code>:emenu Org.&lt;Tab&gt;</code> completes) or pop a menu up with <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Apopup">:popup</a> (<code>:popup Org</code>). Entries Emacs greys out at point are disabled before a popup and refuse to run otherwise. The menus are built the first time they can be used: when a GUI is attached, or when a menu command (<a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Aemenu">:emenu</a>, <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Apopup">:popup</a>, <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Amenu">:menu</a>, ...) is typed or run from the command line. A mapping that runs <code>&lt;Cmd&gt;popup Org&lt;CR&gt;</code> (no command line) should call <code>require(&quot;org.menu&quot;).popup(&quot;Org&quot;)</code> instead, which builds them first. &quot;File List for Agenda&quot; and &quot;Agenda Files&quot; list the agenda files. <code>ui.menus = false</code> turns the menus off (Emacs has no option for them).</p>
+<div class="tags"><a class="tag" id="org-key-menus" href="#org-key-menus">org-key-menus</a></div>
+<h4>Key menus and choice lists</h4>
+<p>Commands that ask for one key (the export dispatcher, the agenda dispatcher, capture templates, sorting, …) show a floating menu: each row is a key, then what it does; a toggle's value is shown on the right (&quot;on&quot; in green, &quot;off&quot; dimmed) and <code>›</code> marks a submenu. Press a key to choose, <span class="key">&lt;BS&gt;</span> to go back from a submenu, <span class="key">&lt;Esc&gt;</span> to quit. <code>q</code> quits too, unless an entry of the menu uses it as its key: a TODO keyword, tag, capture template, agenda command or export backend you gave the key <code>q</code> is chosen with it, and only <span class="key">&lt;Esc&gt;</span> quits that menu. The same holds for the expert export prompt, the agenda's tag filter, the attachment prompt and the date prompt's calendar keys.</p>
+<p>A menu taller than the screen (the export dispatcher on a 24-line screen) drops its blank lines first, then scrolls: the footer shows <code>↓</code> when more entries are below and <code>↑</code> when more are above, with the key that scrolls each way. Every entry's key works whether it is shown or not. A scroll key that an entry of the menu uses chooses the entry instead (the footer then names another key).</p>
+<table class="defs">
+<tr><td class="term"><span class="key">&lt;Space&gt;</span> <span class="key">&lt;PageDown&gt;</span></td><td>a screen down</td></tr>
+<tr><td class="term"><span class="key">&lt;BS&gt;</span> <span class="key">&lt;PageUp&gt;</span></td><td>a screen up; at the top of a submenu, back</td></tr>
+<tr><td class="term"><span class="key">&lt;C-d&gt;</span> <span class="key">&lt;C-u&gt;</span></td><td>half a screen down / up</td></tr>
+<tr><td class="term"><span class="key">&lt;C-n&gt;</span> <span class="key">&lt;C-p&gt;</span> <span class="key">&lt;Down&gt;</span> <span class="key">&lt;Up&gt;</span></td><td>a line down / up</td></tr>
+<tr><td class="term">mouse wheel</td><td>three lines</td></tr>
+</table>
+<p>These are the export dispatcher's scroll keys in Emacs (org-export-dispatch: SPC, DEL, C-n, C-p and the arrows), in every menu. A choice list closes with <code>q</code> or <span class="key">&lt;Esc&gt;</span>.</p>
+<div class="tags"><a class="tag" id="org-choice-list" href="#org-choice-list">org-choice-list</a></div>
+<p>Commands that ask for one of a fixed set of values (Emacs's completing-read) show a floating list instead: the table export format (<code>:Org table_export</code>), the export template category, the publishing project, the ODT conversion format, a column's summary type, the dynamic block type, the BibTeX entry type and the state to switch to on clock out.</p>
+<table class="defs">
+<tr><td class="term long">j k <span class="key">&lt;Down&gt;</span> <span class="key">&lt;Up&gt;</span> <span class="key">&lt;C-n&gt;</span> <span class="key">&lt;C-p&gt;</span></td><td>move</td></tr>
+<tr><td class="term">g G</td><td>first / last</td></tr>
+<tr><td class="term"><span class="key">&lt;CR&gt;</span></td><td>choose</td></tr>
+<tr><td class="term">1-9 a-z</td><td>choose that row</td></tr>
+<tr><td class="term">e</td><td>edit the value at the cursor in the command line first (where the value can take arguments, like a table export format: <code>orgtbl-to-latex :splice t</code>)</td></tr>
+<tr><td class="term"><span class="key">&lt;Esc&gt;</span> q</td><td>cancel</td></tr>
+</table>
+<p>With <code>ui.choice_prompt = &quot;input&quot;</code> these prompts are the command line with <span class="key">&lt;Tab&gt;</span> completion, as in Emacs.</p>
+<div class="tags"><a class="tag" id="org-clock-menu" href="#org-clock-menu">org-clock-menu</a></div>
+<table class="defs">
+<tr><td class="term">:Org clock_menu</td><td>Pop up the clock menu: clock out, change the effort estimate, go to the clocked task, switch task (org-clock-menu). Emacs shows it on a click on the clock in the mode line; for the same in a statusline use the click handler:</td></tr>
+</table>
+<pre class="code"><code class="language-vim"><span class="h-k">set</span> <span class="h-b">statusline</span><span class="h-o">+=</span>%@v:lua.require'org.menu'.clock_click@%{v:lua.require'org'.statusline()}%X</code></pre>
+<p>A left click pops the menu up, a middle click goes to the clocked task.</p>
+<div class="tags"><a class="tag" id="org-customize" href="#org-customize">org-customize</a></div>
+<table class="defs">
+<tr><td class="term">:Org customize</td><td>A buffer listing every option with its value, in the order and sections of lua/org/config/ (org-customize); &quot;[changed]&quot; marks values that differ from the default. <span class="key">&lt;CR&gt;</span> or K shows the option's documentation with its default and value, <code>c</code> sets it for this session (a Lua expression), <code>R</code> resets it to its default, <code>q</code> closes the buffer. Put changes in <code>setup()</code> to keep them.</td></tr>
+<tr><td class="term">:Org customize_menu</td><td>Put every option into the Org menu's Customize submenu (org-create-customize-menu); an entry opens the options buffer on it.</td></tr>
+</table>
+<div class="tags"><a class="tag" id="org-bug-report" href="#org-bug-report">org-bug-report</a></div>
+<table class="defs">
+<tr><td class="term">:Org bug_report</td><td>Report a bug (org-submit-bug-report): after a notice about privacy, asks whether to include your options (those that differ from the defaults) and for a subject, puts the report (Neovim, org.nvim and OS versions, the options) in a buffer and opens a new GitHub issue titled &quot;[BUG] <span class="key">&lt;subject&gt;</span> [<span class="key">&lt;version&gt;</span>]&quot; prefilled with it (<a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=vim.ui.open%28%29">vim.ui.open()</a>). A report too long for a URL is left for you to paste (it is also in the + register). When <code>:Org log</code> has errors or warnings, the report says how many.</td></tr>
+</table>
+<div class="tags"><a class="tag" id="org-log" href="#org-log">org-log</a></div>
+<table class="defs">
+<tr><td class="term">:Org log</td><td>Show the session log in a scratch buffer: the org.nvim version (as <code>:Org version</code> says it), the Neovim version and OS, then what org.nvim caught and went on from this session, newest last, each with its time, where it happened, the error and its stack traceback. These are failures that would otherwise pass without a word: a statistics cookie that couldn't be updated after a capture or archive, a state file that couldn't be written, an error in a function of your config (<code>notifications.notifier</code>, a hook) or in a handler of a User autocmd org.nvim fires (<a class="hl" href="org-api.html#org-api-events">org-api-events</a>). Add it to a bug report. It is kept in memory only (the last 200 entries; the same failure again counts up the last entry). <code>q</code> or <span class="key">&lt;Esc&gt;</span> closes the buffer. <code>:checkhealth org</code> says how many errors were logged (<a class="hl" href="org-installation.html#org-health">org-health</a>).</td></tr>
+</table>
+<div class="tags"><a class="tag" id="org-mouse" href="#org-mouse">org-mouse</a></div>
+<h4>org-mouse</h4>
+<p><code>mouse.org_mouse = true</code> loads org-mouse (Emacs: (require 'org-mouse)); it is off by default. <code>mouse.features</code> (org-mouse-features) picks its parts, by default all but &quot;move-tree&quot;:</p>
+<table class="defs">
+<tr><td class="term">&quot;context-menu&quot;</td><td><span class="key">&lt;RightMouse&gt;</span> pops up a menu for what is under the mouse (org-mouse-show-context-menu, also <code>:Org mouse_context_menu</code> at the cursor): a TODO keyword (switch it, TODO trees and lists), SCHEDULED:/DEADLINE: (switch or remove it), a priority cookie (set or remove it), a link (open, copy, cut), a tag (agenda, sparse tree, toggle tags), a timestamp (show the day, change, delete, set for today/tomorrow/in a week..., shift by a day/week/month), a checkbox (toggle, remove, all clear/set/toggle/remove), a table (and its special first-column marks), a <code>#+STARTUP:</code> line (toggle each option), a headline (priority, tags, TODO state, new heading, deadline, schedule, timestamp, archive, cut, copy, paste, sort children), the Visual selection (sparse tree, find, grep, convert to link, insert the last yank as a link), elsewhere a general menu (overview, headlines, deadlines, TODOs, tags, agenda views, custom agenda commands, blank lines, checkboxes, list to outline). Items that are radio buttons or toggles in Emacs show &quot;(*)&quot; / &quot;[X]&quot; when selected. In the agenda the menu of an entry is its headline's menu, run in the entry's buffer (the agenda is rebuilt), elsewhere an agenda menu; &lt;C-ScrollWheelUp/Down&gt; and a horizontal right drag go to earlier / later dates. <span class="key">&lt;C-LeftMouse&gt;</span> dragged moves a subtree (see below).</td></tr>
+<tr><td class="term">&quot;move-tree&quot;</td><td>A right drag moves a subtree.</td></tr>
+<tr><td class="term">&quot;yank-link&quot;</td><td><span class="key">&lt;S-MiddleMouse&gt;</span>, or a right drag, inserts the last yank as &quot; [[...]] &quot; where the mouse is (org-mouse-yank-link).</td></tr>
+<tr><td class="term long">&quot;activate-stars&quot;, &quot;activate-bullets&quot;, &quot;activate-checkboxes&quot;</td><td>A click on headline stars cycles the subtree, on a bullet cycles the item, on a checkbox toggles it (<span class="key">&lt;MiddleMouse&gt;</span>, and <span class="key">&lt;LeftMouse&gt;</span> with <code>links.mouse_1_follows_link</code>). With org-mouse, <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-o&gt;</span> on them does the same.</td></tr>
+</table>
+<p>With org-mouse a click inside the Visual selection keeps it (org-mouse-down-mouse), so that a right click there shows its menu. Dragging a subtree (org-mouse-move-tree): drop it on its own headline to demote it (drag right) or promote it (drag left), on another headline's stars to put it before that headline, at its level, further right or on the text below a headline to make it that headline's last child. Commands of org-mouse, also as actions: mouse_insert_heading (a heading before the line when at its start, else before the next heading), mouse_insert_checkbox, mouse_end_headline, mouse_show_headlines, mouse_show_overview, mouse_timestamp_today, mouse_transform_to_outline (the list items of the entry become subheadings), mouse_move_tree_start.</p>
+</article>
+<nav class="pager"><a class="prev" href="../manual/org-keymaps.html"><span>上一页</span>按键映射参考</a><a class="next" href="../manual/org-api.html"><span>下一页</span>Lua API</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L8580">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>

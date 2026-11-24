@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagrams (ob-mermaid, ob-dot, ob-plantuml) · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="../assets/site.js" defer></script>
+
+</head>
+<body data-root="../">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="../index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="../index.html">首页</a></li>
+<li class=""><a href="../guide.html">指南</a></li>
+<li class=""><a href="../playground.html">互动教程</a></li>
+<li><details class="group" open><summary>手册</summary><ul>
+<li class=""><a href="../manual/index.html">目录</a></li>
+<li class=""><a href="../manual/org-introduction.html">简介</a></li>
+<li class=""><a href="../manual/org-installation.html">安装</a></li>
+<li class=""><a href="../manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="../manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="../manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="../manual/org-tags.html">标签</a></li>
+<li class=""><a href="../manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="../manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="../manual/org-clock.html">计时和工作量</a></li>
+<li class=""><a href="../manual/org-agenda.html">日程</a></li>
+<li class=""><a href="../manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="../manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="../manual/org-capture.html">捕捉</a></li>
+<li class=""><a href="../manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="../manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="../manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="../manual/org-babel.html">源代码块（Babel）</a></li>
+<li class=""><a href="../manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="../manual/org-export.html">导出</a></li>
+<li class=""><a href="../manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="../manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="../manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="../manual/org-completion.html">补全</a></li>
+<li class=""><a href="../manual/org-appearance.html">外观和高亮</a></li>
+<li class=""><a href="../manual/org-config.html">配置参考</a></li>
+<li class=""><a href="../manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="../manual/org-commands.html">命令</a></li>
+<li class=""><a href="../manual/org-api.html">Lua API</a></li>
+<li class=""><a href="../manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="../manual/org-lint.html">检查</a></li>
+<li class=""><a href="../manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="../manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="../manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="../manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="../manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="../manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="../manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="../manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="../manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="../manual/org-extensions-drill.html">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="../manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="../manual/org-extensions-hugo.html">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="../manual/org-extensions-caldav.html">CalDAV sync</a></li>
+<li class="sub"><a href="../manual/org-extensions-cli.html">Command line (org)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html" aria-current="page">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-code.html">Code and notes (code)</a></li>
+<li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="../manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="../manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="../manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="../examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="../examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="../examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="../examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="../examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="../examples/05-tags.html">标签</a></li>
+<li class=""><a href="../examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="../examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="../examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="../examples/09-agenda.html">日程</a></li>
+<li class=""><a href="../examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="../examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="../examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="../examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="../examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="../examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="../examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="../examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="../examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="../examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="../examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="../examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="../parity/review.html">兼容性审查</a></li>
+<li class=""><a href="../parity/index.html">目录</a></li>
+<li class=""><a href="../parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="../extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content manual">
+<article>
+<h1>Diagrams (ob-mermaid, ob-dot, ob-plantuml)</h1>
+<div class="tags"><a class="tag" id="org-extensions-diagrams" href="#org-extensions-diagrams">org-extensions-diagrams</a></div>
+<p>Stability: stable (<a class="hl" href="org-extensions.html#org-extensions-stability">org-extensions-stability</a>)</p>
+<p><code>diagrams</code> renders diagram source blocks to images: <code>mermaid</code> (with mermaid-cli's <code>mmdc</code>, like the third-party ob-mermaid), <code>dot</code> (Graphviz, like Emacs's ob-dot) and the built-in <code>plantuml</code> port (<a class="hl" href="org-babel.html#org-babel-languages">org-babel-languages</a>):</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({
+  <span class="h-m">extensions</span> <span class="h-o">=</span> { <span class="h-m">diagrams</span> <span class="h-o">=</span> { <span class="h-m">render_on_save</span> <span class="h-o">=</span> <span class="h-n">true</span> } },
+})</code></pre>
+<p><code>C-c C-c</code> on a block writes the diagram to its <code>:file</code> and inserts a <code>[[file:...]]</code> result, as for any babel language (both languages default to <code>:results file :exports results</code>):</p>
+<pre class="code"><code class="language-org"><span class="h-k">#+begin_src</span> mermaid :file flow.png :theme dark
+flowchart LR
+  A --&gt; B
+<span class="h-k">#+end_src</span>
+
+<span class="h-k">#+begin_src</span> dot :file deps.svg :var color=&quot;red&quot;
+digraph { a [color=$color]; a -&gt; b }
+<span class="h-k">#+end_src</span></code></pre>
+<p>mermaid takes ob-mermaid's header arguments <code>:theme</code>, <code>:background-color</code>, <code>:width</code>, <code>:height</code>, <code>:scale</code>, <code>:mermaid-config-file</code>, <code>:css-file</code> and <code>:puppeteer-config-file</code> (ob-mermaid's spelling <code>:pupeteer-config-file</code> also works). dot runs <code>CMD IN CMDLINE -o OUT</code> like ob-dot: <code>:cmd</code> (default <code>dot</code>), <code>:cmdline</code> (default <code>-T</code> plus the extension of <code>:file</code>) and <code>$NAME</code> replaced by <code>:var NAME</code>. plantuml keeps its own options in <code>babel.languages.plantuml</code>; when no <code>jar_path</code> is set but a <code>plantuml</code> command is installed, that command is used.</p>
+<h3 id="h-beyond-emacs">Beyond Emacs</h3>
+<ul>
+<li>A block without <code>:file</code> gets <code>output_dir/LANG-HASH8.EXT</code> (HASH8 starts the content hash; EXT is <code>:file-ext</code> or <code>format</code>), relative to the org file's directory or <code>:dir</code>. Emacs errors instead; set <code>auto_file = false</code> for that.</li>
+<li>Rendered diagrams are cached in <code>cache_dir</code> by a hash of the language, the command and options, the output format and the expanded body. An unchanged diagram is copied from the cache instead of being rendered again. For plantuml the key also covers the files the text pulls in with <code>!include</code> (<code>!include_once</code>, <code>!include_many</code>, <code>!includesub</code>; local files, four levels deep), so editing one renders again. <code>:Org diagrams_rerender</code> renders the block at point without the cache and <code>:Org diagrams_clear_cache</code> empties it. At startup the cache drops entries unused for <code>cache_max_age</code> days, then the least recently used beyond <code>cache_max_size</code> megabytes. Both only touch cache entries (files named by the hash); other files in <code>cache_dir</code> are left alone.</li>
+<li>With <code>auto_preview</code> (the default) the result image is shown inline after the block runs, when an image backend is available (<a class="hl" href="org-appearance.html#org-images">org-images</a>; SVG needs ImageMagick).</li>
+<li>With <code>render_on_save</code> every diagram block of an org buffer is rendered after the buffer is written, one block after another in the background, so Neovim stays responsive while mmdc or dot run. When they are done and nothing but the results changed, the buffer is written again, so the file on disk has the new results; when you edited it meanwhile, the buffer is left modified for you to save. Blocks run without the evaluation prompt, except those with <code>:eval no</code>, <code>never</code> or <code>query</code>, which are skipped. Unchanged diagrams come from the cache at once.</li>
+<li><code>:Org diagrams_clean</code> deletes the generated files (<code>LANG-HASH8.EXT</code>) in the current file's <code>output_dir</code> that no org file of that directory links to or names (open buffers count with their unsaved text), after asking; <code>:Org diagrams_clean dry</code> only lists them. Files you named yourself with <code>:file</code> are never touched.</li>
+<li>The tools run without a shell (an argument list) unless the command is a shell fragment (a string of several words) or the block sets <code>:cmd</code> or <code>:cmdline</code>, which are shell text as in ob-dot.</li>
+</ul>
+<h3 id="h-actions">Actions</h3>
+<table class="defs">
+<tr><td class="term"><code>diagrams_render</code></td><td>render the diagram block at point (what <code>C-c C-c</code> does there); not applicable elsewhere</td></tr>
+<tr><td class="term"><code>diagrams_rerender</code></td><td>the same, ignoring the cache</td></tr>
+<tr><td class="term"><code>diagrams_render_buffer</code></td><td>render every diagram block of the buffer</td></tr>
+<tr><td class="term"><code>diagrams_clear_cache</code></td><td>delete the cached renders</td></tr>
+<tr><td class="term"><code>diagrams_clean</code></td><td>delete generated diagrams nothing links to</td></tr>
+</table>
+<p>No default keys; use <code>:Org &lt;action&gt;</code> or bind them in <code>mappings.org</code>.</p>
+<h3 id="h-options-defaults-in-parentheses">Options (defaults in parentheses)</h3>
+<table class="defs">
+<tr><td class="term"><code>languages</code></td><td>handled languages ({ &quot;mermaid&quot;, &quot;dot&quot;, &quot;plantuml&quot; }); a language left out keeps its core behaviour</td></tr>
+<tr><td class="term"><code>mermaid</code></td><td>{ <code>command</code> (&quot;mmdc&quot;; a string runs through the shell, so &quot;npx -y @mermaid-js/mermaid-cli&quot; works, or a list of words), <code>args</code> ({}), <code>theme</code>, <code>background</code>, <code>config_file</code>, <code>puppeteer_config</code> } (defaults for the header arguments above)</td></tr>
+<tr><td class="term"><code>dot</code></td><td>{ <code>command</code> (&quot;dot&quot;), <code>args</code> ({}) }</td></tr>
+<tr><td class="term"><code>auto_file</code></td><td>generate a <code>:file</code> when there is none (true)</td></tr>
+<tr><td class="term"><code>output_dir</code></td><td>directory of generated names (&quot;diagrams&quot;)</td></tr>
+<tr><td class="term"><code>format</code></td><td>extension of generated names (&quot;png&quot;)</td></tr>
+<tr><td class="term"><code>cache</code></td><td>use the cache (true)</td></tr>
+<tr><td class="term"><code>cache_dir</code></td><td>stdpath(&quot;cache&quot;) .. &quot;/org/diagrams&quot;</td></tr>
+<tr><td class="term"><code>auto_preview</code></td><td>preview the result image (true)</td></tr>
+<tr><td class="term"><code>render_on_save</code></td><td>render diagram blocks after writing (false)</td></tr>
+<tr><td class="term"><code>cache_max_age</code></td><td>days an unused cache entry is kept (90; false: ever)</td></tr>
+<tr><td class="term"><code>cache_max_size</code></td><td>megabytes the cache is pruned to (200; false: no limit)</td></tr>
+</table>
+<p><code>:checkhealth org</code> shows which renderers (mmdc, dot, plantuml or the jar and java) are installed, whether results can be previewed, and the cache directory. None of the tools is needed to load the extension; a block whose tool is missing reports it and inserts no result.</p>
+<h3 id="h-limits">Limits</h3>
+<ul>
+<li>Generated names change with the body, so an edited diagram leaves its old file behind in <code>output_dir</code> until <code>diagrams_clean</code>.</li>
+<li>Only plantuml includes are followed: a mermaid config or CSS file, and dot's <code>image=</code> or <code>imagepath</code> files, are not part of the cache key; use <code>diagrams_rerender</code> after changing them.</li>
+<li>Without Graphviz installed only fake tools were run in the tests; the argument order follows ob-dot (<code>dot IN -TEXT [args] -o OUT</code>).</li>
+<li>Only file results are cached. plantuml's text output (<code>:results verbatim</code>, no <code>:file</code>) is left to the core port.</li>
+</ul>
+</article>
+<nav class="pager"><a class="prev" href="../manual/org-extensions-cli.html"><span>上一页</span>Command line (org)</a><a class="next" href="../manual/org-extensions-code.html"><span>下一页</span>Code and notes (code)</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L12812">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>

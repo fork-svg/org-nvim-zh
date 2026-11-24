@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Appearance and highlights · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="../assets/site.js" defer></script>
+
+</head>
+<body data-root="../">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="../index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="../index.html">首页</a></li>
+<li class=""><a href="../guide.html">指南</a></li>
+<li class=""><a href="../playground.html">互动教程</a></li>
+<li><details class="group" open><summary>手册</summary><ul>
+<li class=""><a href="../manual/index.html">目录</a></li>
+<li class=""><a href="../manual/org-introduction.html">简介</a></li>
+<li class=""><a href="../manual/org-installation.html">安装</a></li>
+<li class=""><a href="../manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="../manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="../manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="../manual/org-tags.html">标签</a></li>
+<li class=""><a href="../manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="../manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="../manual/org-clock.html">计时和工作量</a></li>
+<li class=""><a href="../manual/org-agenda.html">日程</a></li>
+<li class=""><a href="../manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="../manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="../manual/org-capture.html">捕捉</a></li>
+<li class=""><a href="../manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="../manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="../manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="../manual/org-babel.html">源代码块（Babel）</a></li>
+<li class=""><a href="../manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="../manual/org-export.html">导出</a></li>
+<li class=""><a href="../manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="../manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="../manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="../manual/org-completion.html">补全</a></li>
+<li class=""><a href="../manual/org-appearance.html" aria-current="page">外观和高亮</a></li>
+<li class=""><a href="../manual/org-config.html">配置参考</a></li>
+<li class=""><a href="../manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="../manual/org-commands.html">命令</a></li>
+<li class=""><a href="../manual/org-api.html">Lua API</a></li>
+<li class=""><a href="../manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="../manual/org-lint.html">检查</a></li>
+<li class=""><a href="../manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="../manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="../manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="../manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="../manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="../manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="../manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="../manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="../manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="../manual/org-extensions-drill.html">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="../manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="../manual/org-extensions-hugo.html">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="../manual/org-extensions-caldav.html">CalDAV sync</a></li>
+<li class="sub"><a href="../manual/org-extensions-cli.html">Command line (org)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-code.html">Code and notes (code)</a></li>
+<li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="../manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="../manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="../manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="../examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="../examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="../examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="../examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="../examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="../examples/05-tags.html">标签</a></li>
+<li class=""><a href="../examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="../examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="../examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="../examples/09-agenda.html">日程</a></li>
+<li class=""><a href="../examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="../examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="../examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="../examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="../examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="../examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="../examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="../examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="../examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="../examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="../examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="../examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="../parity/review.html">兼容性审查</a></li>
+<li class=""><a href="../parity/index.html">目录</a></li>
+<li class=""><a href="../parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="../extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content manual">
+<article>
+<h1>外观和高亮</h1>
+<div class="tags"><a class="tag" id="org-appearance" href="#org-appearance">org-appearance</a></div>
+<p>Options under <code>ui</code>:</p>
+<table class="defs">
+<tr><td class="term">menus</td><td>the Org menus (<a class="hl" href="org-commands.html#org-menus">org-menus</a>), default true</td></tr>
+<tr><td class="term">choice_prompt</td><td>&quot;float&quot; (default): pick one of a fixed set of values from a floating list (<a class="hl" href="org-commands.html#org-choice-list">org-choice-list</a>); &quot;input&quot;: the command line with <span class="key">&lt;Tab&gt;</span> completion</td></tr>
+<tr><td class="term">imenu_depth</td><td>headline levels of <code>imenu</code> (gO), default 2</td></tr>
+<tr><td class="term">context</td><td>the sticky headline context (<a class="hl" href="#org-context">org-context</a>): { enabled = false, max_lines = 3, trim_scope = &quot;outer&quot;, line_numbers = true, zindex = 20 }</td></tr>
+<tr><td class="term">conceal_links</td><td>show only link descriptions (conceallevel=2)</td></tr>
+<tr><td class="term">hide_emphasis_markers</td><td>hide * / _ = ~ + around emphasized text</td></tr>
+<tr><td class="term">hide_leading_stars</td><td>show only the last star of each headline (#+STARTUP: hidestars / showstars)</td></tr>
+<tr><td class="term">bullets</td><td>list of symbols replacing the stars, per level</td></tr>
+<tr><td class="term">checkboxes</td><td>{ unchecked, partial, checked } icons</td></tr>
+<tr><td class="term">tutor_marks</td><td>marks of the exercises of <a class="hl" href="org-introduction.html#org-tutor">org-tutor</a> done and not yet: { done = &quot;✓&quot;, todo = &quot;✗&quot; }</td></tr>
+<tr><td class="term">indent_mode</td><td>virtual indentation like org-indent-mode: the text of a level-n entry starts at column 2n and headlines get n-1 columns of prefix; turns on hide_leading_stars (#+STARTUP: indent / noindent)</td></tr>
+<tr><td class="term long">indent_<wbr>mode_<wbr>turns_<wbr>off_<wbr>adapt_<wbr>indentation</td><td>adapt_indentation is off in buffers with indent_mode (true)</td></tr>
+<tr><td class="term long">indent_<wbr>indentation_<wbr>per_<wbr>level</td><td>columns per level of indent_mode (2): the text of a level-n entry starts after n + (per - 1)(n - 1) + 1 columns, headlines after (per - 1)(n - 1); 0 = no indentation</td></tr>
+<tr><td class="term">pretty_entities</td><td><code>\alpha</code> → α for every entity of Emacs' org-entities (#+STARTUP: entitiespretty / entitiesplain); <code>x^2</code> → x², <code>a_{ij}</code> → aᵢⱼ (pretty_entities_include_sub_superscripts, and use_sub_superscripts = true | &quot;{}&quot; | false): Unicode super/subscript characters when all the characters have one, else the script is highlighted with OrgSuperscript / OrgSubscript and only the markers are hidden (Neovim cannot raise text). Entities are shown everywhere but in comment lines and src, example, export and comment blocks (<a class="hl" href="org-differences.html">org-differences</a>); scripts not in keyword lines, code, verbatim or links.</td></tr>
+<tr><td class="term">num</td><td>number headlines with virtual text like org-num-mode (#+STARTUP: num / nonum); num_max_level, num_skip_commented, num_skip_footnotes, num_skip_tags, num_skip_unnumbered and num_format_function(numbers) -&gt; text follow the org-num options</td></tr>
+<tr><td class="term">fontify_done_headline</td><td>dim DONE headlines</td></tr>
+<tr><td class="term">fontify_todo_headline</td><td>highlight the text of TODO headlines with OrgHeadlineTodo (org-fontify-todo-headline)</td></tr>
+<tr><td class="term long">fontify_<wbr>quote_<wbr>and_<wbr>verse_<wbr>blocks</td><td>the bodies of quote and verse blocks on OrgQuoteBlock / OrgVerseBlock, under their Org text (org-fontify-quote-and-verse-blocks); false by default like Emacs: Org text only</td></tr>
+<tr><td class="term">level_color_stars_only</td><td>the level color on the stars only (org-level-color-stars-only)</td></tr>
+<tr><td class="term">hidden_keywords</td><td>keywords shown without their &quot;#+KEYWORD:&quot; part: { &quot;title&quot;, &quot;subtitle&quot;, &quot;author&quot;, &quot;date&quot;, &quot;email&quot; } (org-hidden-keywords)</td></tr>
+<tr><td class="term">hide_macro_markers</td><td>hide the {{{ }}} of macro calls (org-hide-macro-markers)</td></tr>
+<tr><td class="term long">highlight_<wbr>latex_<wbr>and_<wbr>related</td><td>what LaTeX-related syntax is highlighted (org-highlight-latex-and-related), none by default like Emacs: &quot;latex&quot; (fragments $..$, \(..\), \[..\], $$..$$ and \begin{..} environments, OrgLatex), &quot;native&quot; (the same drawn by Vim's tex syntax, with the entities and scripts listed; <a class="hl" href="#org-highlighter-latex">org-highlighter-latex</a>), &quot;script&quot; (x^2, a_{i}), &quot;entities&quot; (\alpha)</td></tr>
+<tr><td class="term">src_highlight</td><td>highlight src blocks in their language (org-src-fontify-natively); false: plain text</td></tr>
+<tr><td class="term">src_highlight_engine</td><td>&quot;auto&quot; (default): with tree-sitter when Neovim has a parser and a highlights query for the language, else with its Vim syntax; &quot;treesitter&quot;: tree-sitter only (other languages stay plain); &quot;syntax&quot;: the Vim syntax only. See <a class="hl" href="org-babel.html#org-src-highlight">org-src-highlight</a>.</td></tr>
+<tr><td class="term">src_block_faces</td><td>face of src block bodies by language, like todo_keyword_faces: { python = { bg = &quot;#e5ffb8&quot; } } (&quot;&quot; = blocks without a language) (org-src-block-faces)</td></tr>
+<tr><td class="term">todo_keyword_faces</td><td>{ WAITING = &quot;:foreground #e0af68 :weight bold&quot; }, or a highlight table, or a group name</td></tr>
+<tr><td class="term">priority_faces</td><td>the same per priority (org-priority-faces): { A = &quot;ErrorMsg&quot;, [&quot;10&quot;] = { fg = &quot;gray&quot; } }</td></tr>
+<tr><td class="term">tag_faces</td><td>the same per tag (org-tag-faces)</td></tr>
+</table>
+<table class="defs">
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span>\</td><td>Toggle pretty entities in the buffer (org-toggle-pretty-entities, toggle_pretty_entities).</td></tr>
+<tr><td class="term">:Org entities_help</td><td>List every entity with its LaTeX and HTML code (org-entities-help).</td></tr>
+</table>
+<div class="tags"><a class="tag" id="org-entities-user" href="#org-entities-user">org-entities-user</a></div>
+<p><code>entities_user</code> (org-entities-user) adds entities of your own, or replaces built-in ones, for display, completion and export:</p>
+<pre class="code"><code class="language-lua">entities_user <span class="h-o">=</span> {
+  <span class="h-c">-- name, LaTeX, LaTeX needs math mode, HTML, ASCII, Latin-1, UTF-8</span>
+  { <span class="h-s">&quot;snowman&quot;</span>, <span class="h-s">&quot;\\diamond&quot;</span>, <span class="h-n">true</span>, <span class="h-s">&quot;&amp;#9731;&quot;</span>, <span class="h-s">&quot;[snow]&quot;</span>, <span class="h-s">&quot;[snow]&quot;</span>, <span class="h-s">&quot;☃&quot;</span> },
+}</code></pre>
+<div class="tags"><a class="tag" id="org-context" href="#org-context">org-context</a></div>
+<h4>Sticky headline context</h4>
+<p>Like nvim-treesitter-context, a floating window over the top rows of an org window shows the headlines the first line on screen is under, so you know where you are in a long, deeply nested document. The lines are drawn as in the buffer: stars or bullets, TODO keywords, priorities, tags, concealed links. It is off by default, since it covers lines of the window; turn it on with <code>ui.context.enabled = true</code> or <code>:Org context_toggle</code>. Options under <code>ui.context</code>:</p>
+<table class="defs">
+<tr><td class="term">enabled</td><td>show it in every org window (false)</td></tr>
+<tr><td class="term">max_lines</td><td>most headlines shown (3); a window keeps at least one line of its own</td></tr>
+<tr><td class="term">trim_scope</td><td>with more headlines than that, drop the &quot;outer&quot; (outermost, default) or the &quot;inner&quot; ones</td></tr>
+<tr><td class="term">line_numbers</td><td>the headlines' line numbers in the gutter of windows with 'number' or 'relativenumber' (true)</td></tr>
+<tr><td class="term">zindex</td><td>of the floats (20)</td></tr>
+</table>
+<p>What counts is the line under the float: when the lines it covers end the entry, the context gets shorter. A closed fold is one line. Each window has its own context, which follows scrolling, resizing, folding and edits; it is closed when the window shows a buffer that isn't an org buffer, or closes. The cursor can be under the float, as with nvim-treesitter-context: a 'scrolloff' of at least <code>max_lines</code> keeps it in view. Set <code>vim.w.org_context</code> or <code>vim.b.org_context</code> to false to leave a window or a buffer without one.</p>
+<p>With nvim-treesitter-context installed nothing needs doing: it draws nothing in org buffers, which have no tree-sitter parser. When Neovim does have an <code>org</code> parser and nvim-treesitter-context is on, org buffers are left to it, so the two floats never cover each other (<code>vim.b.org_context = true</code> asks for org.nvim's).</p>
+<table class="defs">
+<tr><td class="term">:Org context_toggle</td><td>Turn the sticky context on or off in every window.</td></tr>
+<tr><td class="term">:Org context_goto</td><td>Go to the innermost headline of the context; with a count, to the one that many levels out (<a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=m%27">m'</a> is set).</td></tr>
+</table>
+<p>Neither has a default key; map them with <code>mappings.org</code>. Highlight groups: <code>OrgContext</code> (the float, linked to NormalFloat), <code>OrgContextLineNumber</code> (LineNr) and <code>OrgContextBottom</code> (its last line, underlined).</p>
+<table class="defs">
+<tr><td class="term">:Org num_mode</td><td>Toggle headline numbering in the buffer (org-num-mode).</td></tr>
+<tr><td class="term">:Org indent_mode</td><td>Toggle virtual indentation in the buffer (org-indent-mode).</td></tr>
+</table>
+<div class="tags"><a class="tag" id="OrgIndentMode" href="#OrgIndentMode">OrgIndentMode</a></div>
+<div class="tags"><a class="tag" id="OrgNumMode" href="#OrgNumMode">OrgNumMode</a></div>
+<p>Turning indent mode or numbering on or off, also when a buffer starts with them, runs the User autocmd <code>OrgIndentMode</code> or <code>OrgNumMode</code> (org-indent-mode-hook, org-num-mode-hook), <code>data.enabled</code> telling which.</p>
+<div class="tags"><a class="tag" id="org-images" href="#org-images">org-images</a></div>
+<h4>图片和 LaTeX 预览</h4>
+<p>Image links and LaTeX fragments can be shown as images in place of their text, like Emacs (org-link-preview, org-latex-preview). A backend draws them, chosen with <code>ui.images.backend</code>:</p>
+<table class="defs">
+<tr><td class="term">&quot;native&quot;</td><td><code>vim.ui.img</code>, Neovim 0.13+, in a terminal with the Kitty graphics protocol (kitty, Ghostty, WezTerm...). Support is checked once by asking the terminal. Not through tmux.</td></tr>
+<tr><td class="term">&quot;snacks&quot;</td><td>Snacks.image from snacks.nvim (also inside tmux, with <code>allow-passthrough on</code>). For Neovim before 0.13.</td></tr>
+<tr><td class="term">&quot;image.nvim&quot;</td><td>3rd/image.nvim.</td></tr>
+<tr><td class="term">&quot;auto&quot;</td><td>(default) the first of these that works; <code>false</code> turns previews off. <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Acheckhealth">:checkhealth</a> org tells which one is used.</td></tr>
+</table>
+<p>With the native backend, the text of the link is concealed behind blank inline text as wide as the image, virtual lines keep the rows the image needs under the line free, and the images are placed on the screen after every redraw, so they follow scrolling, folding, window splits and resizes, also in floating windows. Images are sized for each window and sized again when it is resized; in a window too narrow for an image the image is not drawn. When a line wraps after an image, the image is drawn under the line and the link text stays visible; on the first line of a closed fold, an image taller than one row shows its link text. An image is shown once all of it fits in the window, and hidden under floating windows and the popup menu. Only PNG can be sent to the terminal: other formats are converted with ImageMagick (<code>magick</code>). Sizes come from the terminal's cell size in pixels. Editing a previewed link or fragment removes its preview.</p>
+<p>Placement, <code>ui.images.placement</code>:</p>
+<table class="defs">
+<tr><td class="term">&quot;inline&quot;</td><td>(default) the image replaces the link or fragment: its top row is on the line, at the link's column, and the text after the link moves right to make room. The rows under the line are shared by the images of that line (side by side). An image is at most as wide as the columns left after the text before it. On the cursor line of the current window the text shows again, in every mode, with the image under the line, so it can be edited; moving off the line puts the image back in place. The windows showing the buffer get 'conceallevel' 2. Inline math (<code>$x$</code>, <code>\(x\)</code>) is scaled to one row, as tall as the text; other fragments keep their size. A fragment or environment over several lines is drawn in place too (Neovim 0.11+): its other lines are hidden (<code>conceal_lines</code>), the image starts on its first line and the text after it on its last line follows the image; the cursor on any of its lines shows the text again, with the image under its last line. Before 0.11 such fragments use &quot;below&quot;, and image.nvim always does.</td></tr>
+<tr><td class="term">&quot;below&quot;</td><td>under the line, at the link's column, the text left as it is (images of one line are stacked).</td></tr>
+</table>
+<table class="defs">
+<tr><td class="term long"><span class="key">&lt;prefix&gt;</span>xv, <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-v&gt;</span></td><td>org-link-preview (link_preview): on a link, toggle its preview; else preview the links of the current entry, or of the Visual selection, again when called again. A count like the Emacs prefix: 4 hides the preview at the cursor, else the entry's (or the selection's); 16 previews the whole buffer, 64 hides them all; 1 also previews links with a description (entry, link or selection), 11 in the whole buffer, any other count in the whole buffer too.</td></tr>
+<tr><td class="term long"><span class="key">&lt;prefix&gt;</span>xV, <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-M-v&gt;</span></td><td>org-link-preview-refresh (link_preview_refresh): preview every image link of the buffer again.</td></tr>
+<tr><td class="term long"><span class="key">&lt;prefix&gt;</span>xl, <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span><span class="key">&lt;C-l&gt;</span></td><td>org-latex-preview (latex_preview): on a fragment, toggle its preview; else render the fragments of the current entry (or of the Visual selection). 4 hides the entry's (or selection's) previews, 16 previews the whole buffer, 64 hides them all. Rendering runs in the background.</td></tr>
+</table>
+<p>The same as ex commands; a range limits them, a number is the count:</p>
+<ul>
+<li><code>:[range]Org link_preview [N]</code></li>
+<li><code>:[range]Org latex_preview [N]</code></li>
+<li><code>:[range]Org link_preview_region [linked]</code> (org-link-preview-region)</li>
+<li><code>:[range]Org link_preview_clear</code> (org-link-preview-clear)</li>
+<li><code>:Org link_preview_refresh</code></li>
+<li><code>:[range]Org clear_latex_preview</code> (org-clear-latex-preview)</li>
+</ul>
+<p>Without a range the last three act on the whole buffer. The obsolete Emacs names work too: toggle_inline_images, remove_inline_images, redisplay_inline_images, toggle_latex_fragment, preview_latex_fragment.</p>
+<p>Which links: links of a type with a preview function (org-link-set-parameters :preview), with no description, or whose description is a sole plain or angle link of such a type (<code>[[https://example.com][file:thumb.png]]</code> shows thumb.png); with a count of 1 (or <code>linked</code>) the links with a description are previewed by their own target. Built in: <code>file:</code> and <code>attachment:</code> links (bracket, plain or angle) to an existing file whose extension is in <code>ui.images.extensions</code>, and http(s) links to such a file name when <code>ui.images.remote</code> allows. Links in src, example, export and comment blocks, comments, fixed-width lines and property drawers are left alone, like Emacs.</p>
+<p>Preview functions (org-link-set-parameters :preview) come from <code>links.types.&lt;type&gt;.preview</code>, else from <a class="hl" href="#org.ui.images.set_preview%28%29">org.ui.images.set_preview()</a>:</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org.ui.images&quot;</span>).<span class="h-f">set_preview</span>(<span class="h-s">&quot;thumb&quot;</span>, <span class="h-k">function</span>(path, ctx)
+  <span class="h-k">return</span> vim.<span class="h-m">fn</span>.<span class="h-f">expand</span>(<span class="h-s">&quot;~/thumbs/&quot;</span> <span class="h-o">..</span> path <span class="h-o">..</span> <span class="h-s">&quot;.png&quot;</span>)
+<span class="h-k">end</span>)</code></pre>
+<p>The function gets the link's path and a context { bufnr, row (1-based), col, end_col (0-based), type, link, refresh, callback } and returns the image file to show, nil or false for none, or true when it calls <code>ctx.callback(file)</code> later (after a download, say). A type org.nvim does not know becomes a link type (<code>links.types</code>), and a function registered for <code>file</code> or <code>attachment</code> replaces the built-in one.</p>
+<div class="tags"><a class="tag" id="org.ui.images.set_preview()" href="#org.ui.images.set_preview%28%29">org.ui.images.set_preview()</a></div>
+<p>set_preview({type}, {fn}) registers {fn} for {type} links, or removes it when {fn} is nil.</p>
+<p>Remote images (org-display-remote-inline-images), <code>ui.images.remote</code>:</p>
+<table class="defs">
+<tr><td class="term">&quot;skip&quot;</td><td>(default) http(s) links are not previewed;</td></tr>
+<tr><td class="term">&quot;download&quot;</td><td>the image is fetched with curl on every preview;</td></tr>
+<tr><td class="term">&quot;cache&quot;</td><td>fetched once into <code>stdpath(&quot;cache&quot;)/org/remote-images</code>, and again by link_preview_refresh.</td></tr>
+</table>
+<p>Emacs applies this to TRAMP files; org.nvim has no TRAMP and uses it for http(s) image links instead.</p>
+<p>Batches (org-link-preview-batch-size, org-link-preview-delay): the first <code>ui.images.batch_size</code> links (6) are previewed at once, the others in batches of that size every <code>ui.images.preview_delay</code> seconds (0.05), so a long file stays responsive; 0 previews all at once. Clearing previews (or editing the link) drops the links still waiting.</p>
+<p>Size (org-display-inline-image--width): <code>ui.images.actual_width</code> is</p>
+<table class="defs">
+<tr><td class="term">true</td><td>(default) the image's own size;</td></tr>
+<tr><td class="term">a number</td><td>that many pixels;</td></tr>
+<tr><td class="term">false, { n }</td><td>the <code>:width</code> of the paragraph's #+ATTR_ORG, else of another #+ATTR_x with a readable width, else n pixels (or the own size). <code>:width</code> is pixels (300, 300px), a percentage (50%) or a fraction from 0 to 2 (0.5, 0.7\linewidth) of the text width ('textwidth', else the window), or t (own size).</td></tr>
+</table>
+<p>An ORG-IMAGE-ACTUAL-WIDTH property (inherited: t, nil, a number or (n)) overrides it. <code>ui.images.max_width</code> (org-image-max-width) caps the width: &quot;fill-column&quot; ('textwidth', else 70 columns), &quot;window&quot;, a number of pixels or a fraction of the window. <code>ui.images.max_height</code> caps the rows. The own size is read from the file: PNG, JPEG, GIF, BMP and WebP with every backend, other formats (SVG, TIFF, ...) only with the native one, which draws a PNG copy; snacks and image.nvim get those in a box as wide as the cap and 10 rows high, and fit the image into it.</p>
+<p>Alignment (org-image-align): an image link alone in its paragraph is drawn at <code>ui.images.align</code> (&quot;left&quot;, &quot;center&quot; or &quot;right&quot;), or as its #+ATTR_ORG (else #+ATTR_x) says with <code>:align center|right|left</code> or <code>:center t</code>. Native backend only.</p>
+<p>TAB cycling (org-cycle-link-previews-display): with <code>ui.images.cycle_display</code>, showing an entry's children previews its own links, showing the subtree previews all of them, and folding it removes them.</p>
+<p>At startup: <code>#+STARTUP: linkpreviews</code> (<code>inlineimages</code>) and <code>latexpreview</code> preview a file when it opens, like <code>ui.images.startup</code> and <code>ui.latex_preview.startup</code>; the <code>no...</code> words turn that off, and the last word of a pair wins.</p>
+<p>LaTeX fragments are those org-latex-preview renders: <code>$x$</code> (no blank after the opening or before the closing dollar, no <code>$</code> before it, a blank, punctuation or line end after it), <code>$$x$$</code>, <code>\(x\)</code> and <code>\[x\]</code>, which may span lines of a paragraph, and <code>\begin{env}</code> ... <code>\end{env}</code> environments with the <code>\end</code> alone on its line. Fragments in verbatim or code markup, link targets, blocks other than quote/verse/special blocks, and keywords other than TITLE, CAPTION, AUTHOR and DATE are skipped.</p>
+<p>Rendering follows org-create-formula-image with the process named by <code>ui.latex_preview.process</code> (org-preview-latex-default-process), from <code>processes</code> (org-preview-latex-process-alist):</p>
+<table class="defs">
+<tr><td class="term">&quot;dvipng&quot;</td><td>latex + dvipng (the Emacs default)</td></tr>
+<tr><td class="term">&quot;dvisvgm&quot;</td><td>latex + dvisvgm (SVG, converted to PNG for vim.ui.img)</td></tr>
+<tr><td class="term">&quot;xelatex&quot;</td><td>xelatex + dvisvgm</td></tr>
+<tr><td class="term">&quot;imagemagick&quot;</td><td>pdflatex + convert</td></tr>
+<tr><td class="term">&quot;tectonic&quot;</td><td>tectonic + pdftocairo (org.nvim)</td></tr>
+<tr><td class="term">&quot;pdflatex&quot;</td><td>pdflatex + pdftocairo (org.nvim)</td></tr>
+</table>
+<p>&quot;auto&quot; (default) uses the first of dvipng, dvisvgm, tectonic, pdflatex, imagemagick that is installed. A process is a table with <code>programs</code>, <code>message</code>, <code>image_input_type</code>, <code>image_output_type</code>, <code>image_size_adjust</code> ({ buffer, html }), <code>latex_header</code>, <code>latex_compiler</code>, <code>image_converter</code> and <code>transparent_image_converter</code>; commands run in a shell in a temporary directory, with %f (input file), %F (its full path), %b (base name), %o (output directory), %O (output file), %D (DPI) and %S (scale, DPI / 140). <code>processes</code> adds or replaces entries.</p>
+<p>The document is <code>ui.latex_preview.header</code> (org-format-latex-header, the Emacs header by default) with [DEFAULT-PACKAGES] and [PACKAGES] filled from <code>export.latex</code> and the file's #+LATEX_HEADER lines (SETUPFILE too), like org-latex-make-preamble for snippets. <code>foreground</code> is &quot;default&quot; (the Normal text), &quot;auto&quot; (the text at the fragment) or a color; <code>background</code> is &quot;default&quot; (Normal), &quot;Transparent&quot; or a color (:foreground, :background). Formulas are about as tall as a text line times <code>scale</code>. Images are written to <code>ui.latex_preview.image_directory</code> (org-preview-latex-image-directory, &quot;ltximg/&quot; next to the file; buffers without a file use <code>stdpath(&quot;cache&quot;)/org/ltximg</code>), or to <code>cache_dir</code> when set. When a step fails, its output is in the *Org Preview LaTeX Output* buffer.</p>
+<div class="tags"><a class="tag" id="org-images-troubleshooting" href="#org-images-troubleshooting">org-images-troubleshooting</a></div>
+<h4>Where images work</h4>
+<p>Previews depend on three things outside org.nvim: the Neovim version, the terminal, and what sits between them (tmux, zellij, SSH). <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Acheckhealth">:checkhealth</a> org shows what it found and which backend it uses.</p>
+<p>Which backend draws the images (&quot;auto&quot;):</p>
+<ol>
+<li>&quot;native&quot; (<code>vim.ui.img</code>) when Neovim is 0.13 or newer AND the terminal answers the Kitty graphics query. The query is asked once, the first time a preview is made, and waits up to 1 s when nothing answers.</li>
+<li>else &quot;snacks&quot; when snacks.nvim is installed with its image module and the terminal supports it with unicode placeholders;</li>
+<li>else &quot;image.nvim&quot; when it is installed;</li>
+<li>else no previews, with a message saying why.</li>
+</ol>
+<p>Set <code>ui.images.backend</code> to a name to skip the others (and the 1 s wait).</p>
+<p>Setups:</p>
+<table class="defs">
+<tr><td class="term long">kitty, Ghostty (Neovim 0.13+)</td><td>native: everything below works.</td></tr>
+<tr><td class="term">WezTerm (Neovim 0.13+)</td><td>native. WezTerm's Kitty graphics support is partial; snacks.nvim can't draw in it (no unicode placeholders): with an older Neovim use image.nvim.</td></tr>
+<tr><td class="term">Neovim 0.11 and 0.12</td><td>no <code>vim.ui.img</code>: snacks.nvim or image.nvim, in a terminal they support.</td></tr>
+<tr><td class="term">tmux</td><td><code>vim.ui.img</code> writes straight to the terminal and tmux drops it, so its query gets no answer (the 1 s wait) and &quot;auto&quot; falls back to snacks.nvim. It needs <code>set -g allow-passthrough on</code> in tmux.conf (snacks.nvim tries to set it). Or run Neovim outside tmux.</td></tr>
+<tr><td class="term">zellij</td><td>no passthrough: no backend can draw.</td></tr>
+<tr><td class="term">SSH</td><td>native and snacks.nvim send the image data through the connection. Images, ImageMagick and the LaTeX programs must be on the machine running Neovim.</td></tr>
+<tr><td class="term long">Terminal.app, iTerm2, Alacritty, Windows Terminal, GNU screen</td><td>no Kitty graphics protocol: no native or snacks.nvim previews. image.nvim may still work there (e.g. with ueberzug on Linux).</td></tr>
+</table>
+<p>What each backend does:</p>
+<table class="grid">
+<thead><tr><th></th>
+<th>native</th>
+<th>snacks</th>
+<th>image.nvim</th>
+</tr></thead><tbody>
+<tr><td>image in place of its link</td><td>yes</td><td>yes (5)</td><td>no (below)</td></tr>
+<tr><td>image under its link</td><td>yes</td><td>yes (1)</td><td>yes</td></tr>
+<tr><td>:align / org-image-align</td><td>yes</td><td>no</td><td>no</td></tr>
+<tr><td>follows scrolling and folds</td><td>yes</td><td>yes</td><td>yes</td></tr>
+<tr><td>under floating windows, menus</td><td>hidden (2)</td><td>covered (4)</td><td>its backend</td></tr>
+<tr><td>partly visible images</td><td>hidden (3)</td><td>cut</td><td>cut</td></tr>
+<tr><td>several windows on one buffer</td><td>yes</td><td>yes</td><td>first only</td></tr>
+</tbody></table>
+<table class="defs">
+<tr><td class="term">(1)</td><td>A link alone on its line gets its image at the link's column. With text around the link, snacks.nvim draws the image at the start of the next line and puts an icon at the link.</td></tr>
+<tr><td class="term">(2)</td><td>So they don't cover menus; they come back when the float closes.</td></tr>
+<tr><td class="term">(3)</td><td><code>vim.ui.img</code> can't crop: an image is drawn once all of it fits.</td></tr>
+<tr><td class="term">(4)</td><td>snacks.nvim draws images as text (unicode placeholders), so floats cover them like any text.</td></tr>
+<tr><td class="term">(5)</td><td>snacks.nvim conceals the text itself; an image with text after it on a line may go under the line with an icon at the link.</td></tr>
+</table>
+<p>When it goes wrong:</p>
+<table class="defs">
+<tr><td class="term long">&quot;no image backend&quot; or &quot;does not support the Kitty graphics protocol&quot;</td><td>Neovim is older than 0.13, the terminal lacks the protocol, or tmux or zellij is in between (see above). Install snacks.nvim or image.nvim, run Neovim outside tmux, or use another terminal.</td></tr>
+<tr><td class="term long">Nothing happens for a second on the first preview</td><td>The terminal query waiting for an answer (tmux, unsupported terminals). Set <code>ui.images.backend</code>.</td></tr>
+<tr><td class="term long">Blank rows under the link (or a blank gap in place of it) but no image</td><td>The native backend reserved the rows but the image is not fully visible, a float covers it, or the terminal ignored it. Scroll it into view; check <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Acheckhealth">:checkhealth</a> org.</td></tr>
+<tr><td class="term long">An image is not where the link is, or everything looks centered</td><td><code>:align</code> and <code>org-image-align</code> only work with the native backend; with snacks.nvim see (1) above. Images starting where the link text ends was a bug fixed in org.nvim (update).</td></tr>
+<tr><td class="term long">&quot;can't convert ... to PNG&quot;</td><td>The native backend only sends PNG: install ImageMagick (<code>magick</code>) for JPEG, SVG and the rest.</td></tr>
+<tr><td class="term long">An image vanished (the terminal was cleared or reset)</td><td><code>&lt;prefix&gt;xV</code> (link_preview_refresh) draws them again.</td></tr>
+<tr><td class="term long">Images the wrong size after changing the font size</td><td>Sizes come from the terminal's cell size, read again when Neovim is resized; <code>&lt;prefix&gt;xV</code> redraws them.</td></tr>
+<tr><td class="term long">LaTeX: &quot;no LaTeX renderer found&quot; / &quot;you need to install the programs&quot;</td><td>Install latex and dvipng (or tectonic and poppler for pdftocairo). When a render fails, its output is in *Org Preview LaTeX Output*.</td></tr>
+</table>
+<p>Emphasis follows org-emphasis-regexp-components: the markers need a space, <code>(</code>, <code>'</code>, <code>&quot;</code>, <code>{</code> or <code>-</code> (or the line start) before them, may span one line break, and bold, italic, underline and strike-through can nest.</p>
+<div class="tags"><a class="tag" id="org-highlighter" href="#org-highlighter">org-highlighter</a></div>
+<p>Org buffers are drawn by the parser highlighter: the decoration provider, from a scan of the lines on screen (org.ui.highlight and its parts, emphasis and hidden link parts in org.ui.emphasis). Vim <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Asyntax">:syntax</a> only draws the languages of src and export blocks that tree-sitter doesn't (<a class="hl" href="org-babel.html#org-src-highlight">org-src-highlight</a>), as regions over their bodies.</p>
+<p>It ports Emacs's own fontification (org-set-font-lock-defaults: org-fontify-meta-lines-and-blocks, org-do-emphasis-faces, org-activate-links, ...). On the example files and the fixtures of hard cases (26,503 lines), it draws the faces Emacs Org 9.8.12 draws on every byte of all but 9 lines, each a known difference with its reason (tests/spec/emacs_faces_*_spec.lua, against tests/fixtures/emacs/faces/). Every marker that can open emphasis is tried on its own, so markup may overlap the way it does in Emacs (<code>*a /b* c/</code> is bold and italic), nested and overlapping faces combine (bold inside a headline keeps the headline's color), markup in link descriptions, macros, property values and comment blocks is drawn, and verbatim and code show the link brackets and markers inside them. Its scan takes time linear in the length of a line, so it has none of the limits of syntax regions: everything is drawn past 'synmaxcol' and markup over two lines however long the first is, a long line full of markers can't run out of 'maxmempattern' (E363) and turn highlighting off, and an emphasis or block whose end can't be found never runs on over the lines below. Typing computes again only the rows an edit inside a line can change (an edit of a headline's text too, not of its stars), however much of the file was drawn before. Loading it sets LuaJIT's <code>sizemcode</code> (the size of each machine code area) to 256 KB: on arm64, a new area of the default size often couldn't be placed once a large file was open, and every compiled trace was thrown away each time.</p>
+<p>It draws with the highlight groups below (<code>OrgBold</code>, <code>OrgVerbatim</code>, ..., and the <code>org...</code> group names linked to them, such as <code>orgBoldDelimiter</code>, so a colorscheme that sets either keeps working) and follows <code>ui.hide_emphasis_markers</code>, <code>ui.conceal_links</code>, toggle_link_display and the cursor rules of <a class="hl" href="org-links.html#org-conceal-cursor">org-conceal-cursor</a>. What it draws isn't a syntax group, so <code>synID()</code>, <code>synstack()</code> and <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3AInspect">:Inspect</a> don't report it (plugins that ask the syntax what is under the cursor see plain text there; <code>:Org inspect</code> lists it). Only once a src block's language is drawn by its Vim syntax do the bodies of src, export, example and comment blocks get syntax regions: the language's, and <code>orgBlockRaw</code> (no colour) keeping the others raw text. A buffer that sets 'syntax' to org without being an org buffer, like the drill window, is drawn by it too, until its 'syntax' changes. What isn't prose (verbatim, code, links, timestamps, ...) is left out of spell checking with extmarks (<a class="hl" href="#org-highlighter-spell">org-highlighter-spell</a>), and <code>ui.highlight_latex_and_related</code> &quot;native&quot; draws fragments with marks of Vim's tex groups (<a class="hl" href="#org-highlighter-latex">org-highlighter-latex</a>). Calling <code>setup()</code> again draws the org buffers already open with the new options. An error raised while drawing (a bug: please report it) is shown once, and the window it happened in is drawn without the highlighting while the error lasts.</p>
+<div class="tags"><a class="tag" id="org-highlighter-spell" href="#org-highlighter-spell">org-highlighter-spell</a></div>
+<p>With 'spell' set, <code>]s</code>, <code>[s</code>, <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=z%3D">z=</a> and <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=spellbadword%28%29">spellbadword()</a> skip what the screen leaves out. Checked: paragraphs, headline titles, list items, comments, quote and verse blocks, the text of bold, italic, underline and strike-through (in table rows too, where nothing else is checked). Not checked: the TODO keyword, priority and tags of a headline, keywords (<code>#+TITLE:</code> and the like, the keyword and its value), block delimiter lines, src, example and export blocks (but what the language's syntax checks, such as its comments), tables, drawer lines and properties, planning and clock lines, timestamps, links (their description too: Emacs removes flyspell's marks from links), footnote labels, targets, macros, inline src blocks, export snippets, LaTeX, verbatim and code. It follows what Emacs's flyspell checks (org-mode-flyspell-verify, which asks org-element): it checks the body of comment blocks and the text of <code>#+CAPTION:</code> (not its links and timestamps), and the footnotes, targets and inline src blocks of a comment; it doesn't check the emphasis in a list item's tag, a link over two lines, or keyword and block lines in a quote block; and verbatim is what org-element finds, left to right, so <code>=a &quot;b&quot;=, the rest=</code> checks &quot;, the rest&quot; (font-lock, which tries every marker, draws it as verbatim too).</p>
+<div class="tags"><a class="tag" id="org-highlighter-latex" href="#org-highlighter-latex">org-highlighter-latex</a></div>
+<p>With <code>ui.highlight_latex_and_related = { &quot;native&quot; }</code>, the parser highlighter draws what it finds (<code>$x$</code>, <code>\(..\)</code>, <code>\[..\]</code>, <code>$$..$$</code> and <code>\begin{..}</code> environments, and the entities and scripts when listed too) the way Emacs's org-do-latex-and-related does then: the text is drawn as a TeX file of its own would be, with the groups of Vim's tex syntax (texMathZoneX, texStatement, ...), over <code>orgSrcBlock</code> (org-block, as the body of a src block drawn by its language), and in place of <code>OrgLatex</code>. It is shown as typed: tex's concealing and its error groups are left out. Without a tex syntax on 'runtimepath', fragments get <code>OrgBlock</code> alone. Like Emacs, nothing is drawn where the byte after the start of the match is verbatim, code, underline or a special keyword. The tex groups are marks, not syntax: <code>synstack()</code> and <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3AInspect">:Inspect</a> don't list them (<code>:Org inspect</code> does). A fragment seen first while the screen is drawn gets its colours right after, on the next redraw. Difference: Emacs takes the faces of bold, italic and the like off a fragment drawn natively; here the tex groups only go over them.</p>
+<p><code>:Org inspect</code> (no default key) shows what is drawn under the cursor, like <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3AInspect">:Inspect</a> but with the marks it doesn't see: the decorations and the parser highlighter's groups (drawn anew on each redraw, ephemeral extmarks) and citations, each with its priority, whether it is spell checked and whether it hides the text, then the syntax groups, tree-sitter captures and extmarks <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3AInspect">:Inspect</a> lists.</p>
+<p>Quote and verse block contents are highlighted as ordinary Org (lists, tables, timestamps, markup), on top of OrgQuoteBlock (quote) and OrgVerseBlock (verse, linked to OrgQuoteBlock) only with <code>ui.fontify_quote_and_verse_blocks</code> (off by default, as Emacs's org-fontify-quote-and-verse-blocks); center, special (<code>#+begin_note</code>...) and dynamic (<code>#+BEGIN:</code>) blocks highlight only their delimiter lines. Every block ends at the next headline, whether or not it has its <code>#+end</code> line. <code>#+begin_export LANG</code> blocks get LANG's syntax, as <code>#+begin_src LANG</code> blocks do. A buffer's <code>#+OPTIONS: ^:t</code>, <code>^:{}</code> or <code>^:nil</code> overrides <code>ui.use_sub_superscripts</code>, for pretty entities and for the &quot;script&quot; LaTeX highlighting (<code>^:nil</code> displays like <code>^:{}</code>, as in Emacs). Complete statistics cookies ([2/2], [100%]) use OrgStatisticDone, others OrgStatistic (org-checkbox-statistics-done/-todo); OrgSexpDate is diary sexps (<code>&lt;%%(...)&gt;</code>, <code>%%(...)</code> lines) and OrgArchived the text of headlines tagged ARCHIVE.</p>
+<p>The body of a <code>#+begin_src org</code> block (and of <code>#+begin_export org</code> and <code>#+begin_example org</code>, as Emacs fontifies them too) is drawn as Org text on OrgBlock, the way Emacs's org-src-fontify-natively draws it: as if the body were a buffer of its own (keywords, comments, lists, tables, drawers, timestamps, footnotes, links and markup, and blocks that open and close in it), from the lines around the rows on screen like the rest of the buffer. As in Emacs, the lines are taken as typed: a line escaped with a comma (<code>,* Heading</code>, <code>,#+TITLE:</code>) is no headline or keyword there, and nothing in the body is hidden (emphasis markers and link brackets show, the markers without the emphasis face when <code>ui.hide_emphasis_markers</code> is on). The language is matched as Emacs does, case and all, through <code>src_lang_modes</code> (a language mapped to &quot;org&quot; is drawn the same); <code>ui.src_highlight = false</code> leaves the body plain OrgBlock. The body is never drawn with a tree-sitter org parser or a Vim syntax for org, even when one is installed: this drawing wins.</p>
+<p>An inline src block (<code>src_LANG{BODY}</code>) is drawn wherever its text is, as Emacs's org-fontify-inline-src-blocks does: in a headline, a table, a list term, a link description, a comment, a keyword line, or the body of a block. Its braces and body don't take the face of what they are in (OrgInlineSrcMarker and OrgInlineSrc alone, no headline, table, link or OrgBlock colour under them), while <code>src_LANG</code> and <code>[HEADERS]</code> keep it under their own. What a link hides stays hidden. In the body of a src or export block, the language's Vim syntax still draws under the braces (a decoration can't take a syntax group's attributes off, so <code>&lt;b&gt;src_sh{x}&lt;/b&gt;</code> in an html export block keeps its bold).</p>
+<div class="tags"><a class="tag" id="org-highlights" href="#org-highlights">org-highlights</a></div>
+<p>Highlight groups (all <code>default</code>, override with <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl%28%29">nvim_set_hl()</a>): The parser highlighter (<a class="hl" href="#org-highlighter">org-highlighter</a>) draws these and the <code>org...</code> group names linked to them (<code>orgBoldDelimiter</code>, <code>orgLinkPlain</code>, ...; group names ignore case, so <code>orgTodo</code> is <code>OrgTodo</code>), as decorations, not syntax groups.</p>
+<ul>
+<li><code>OrgHeadlineLevel1..8</code> (linked to the colorscheme's markdown headings)</li>
+<li><code>OrgTodo</code>, <code>OrgDone</code>, <code>OrgHeadlineTodo</code>, <code>OrgHeadlineDone</code>, <code>OrgHeadlineComment</code>, <code>OrgPriority</code>, <code>OrgPriorityA</code>, <code>OrgPriorityB</code>, <code>OrgPriorityC</code>, <code>OrgTags</code>, <code>OrgTimestamp</code>, <code>OrgTimestampInactive</code>, <code>OrgPlanning</code>, <code>OrgClockDuration</code>, <code>OrgClockSum</code>, <code>OrgDrawer</code>, <code>OrgPropertyKey</code>, <code>OrgPropertyValue</code>, <code>OrgKeyword</code>, <code>OrgKeywordValue</code>, <code>OrgTitle</code>, <code>OrgComment</code>, <code>OrgBlock</code>, <code>OrgQuoteBlock</code>, <code>OrgVerseBlock</code>, <code>OrgBlockDelimiter</code>, <code>OrgBold</code>, <code>OrgItalic</code>, <code>OrgUnderline</code>, <code>OrgStrikethrough</code>, <code>OrgVerbatim</code>, <code>OrgCode</code>, <code>OrgLink</code>, <code>OrgListBullet</code>, <code>OrgListTerm</code>, <code>OrgCheckbox</code>, <code>OrgCheckboxChecked</code>, <code>OrgCheckboxPartial</code>, <code>OrgStatistic</code>, <code>OrgStatisticDone</code>, <code>OrgTable</code>, <code>OrgTableSeparator</code>, <code>OrgTableFormula</code>, <code>OrgSexpDate</code>, <code>OrgArchived</code>, <code>OrgInlineSrc</code>, <code>OrgInlineSrcMarker</code>, <code>OrgInlineSrcLang</code>, <code>OrgExportSnippetMarker</code>, <code>OrgExportSnippetBackend</code>, <code>OrgFootnote</code>, <code>OrgTarget</code>, <code>OrgLatex</code>, <code>OrgHorizontalRule</code>, <code>OrgMacro</code>, <code>OrgHiddenStars</code>, <code>OrgSuperscript</code>, <code>OrgSubscript</code>, <code>OrgInlinetask</code>, <code>OrgInlinetaskFirstStar</code>, <code>OrgSparseMatch</code>, <code>OrgBabelRunning</code>, <code>OrgBabelOutput</code>, <code>OrgCommandPreview</code></li>
+<li><code>OrgContext</code>, <code>OrgContextLineNumber</code>, <code>OrgContextBottom</code> (<a class="hl" href="#org-context">org-context</a>)</li>
+<li><code>OrgMenuKey</code>, <code>OrgMenuHeading</code>, <code>OrgMenuDesc</code>, <code>OrgMenuMore</code>, <code>OrgMenuOn</code>, <code>OrgMenuOff</code>, <code>OrgMenuValue</code>, <code>OrgMenuSelected</code> (<a class="hl" href="org-commands.html#org-key-menus">org-key-menus</a>, <a class="hl" href="org-commands.html#org-choice-list">org-choice-list</a>)</li>
+<li><code>OrgTutorDone</code>, <code>OrgTutorTodo</code>, <code>OrgTutorProgress</code> (<a class="hl" href="org-introduction.html#org-tutor">org-tutor</a>)</li>
+<li><code>OrgAgenda*</code></li>
+</ul>
+</article>
+<nav class="pager"><a class="prev" href="../manual/org-completion.html"><span>上一页</span>补全</a><a class="next" href="../manual/org-config.html"><span>下一页</span>配置参考</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L6993">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>

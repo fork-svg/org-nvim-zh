@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capture · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="../assets/site.js" defer></script>
+
+</head>
+<body data-root="../">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="../index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="../index.html">首页</a></li>
+<li class=""><a href="../guide.html">指南</a></li>
+<li class=""><a href="../playground.html">互动教程</a></li>
+<li><details class="group" open><summary>手册</summary><ul>
+<li class=""><a href="../manual/index.html">目录</a></li>
+<li class=""><a href="../manual/org-introduction.html">简介</a></li>
+<li class=""><a href="../manual/org-installation.html">安装</a></li>
+<li class=""><a href="../manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="../manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="../manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="../manual/org-tags.html">标签</a></li>
+<li class=""><a href="../manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="../manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="../manual/org-clock.html">计时和工作量</a></li>
+<li class=""><a href="../manual/org-agenda.html">日程</a></li>
+<li class=""><a href="../manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="../manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="../manual/org-capture.html" aria-current="page">捕捉</a></li>
+<li class=""><a href="../manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="../manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="../manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="../manual/org-babel.html">源代码块（Babel）</a></li>
+<li class=""><a href="../manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="../manual/org-export.html">导出</a></li>
+<li class=""><a href="../manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="../manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="../manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="../manual/org-completion.html">补全</a></li>
+<li class=""><a href="../manual/org-appearance.html">外观和高亮</a></li>
+<li class=""><a href="../manual/org-config.html">配置参考</a></li>
+<li class=""><a href="../manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="../manual/org-commands.html">命令</a></li>
+<li class=""><a href="../manual/org-api.html">Lua API</a></li>
+<li class=""><a href="../manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="../manual/org-lint.html">检查</a></li>
+<li class=""><a href="../manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="../manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="../manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="../manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="../manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="../manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="../manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="../manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="../manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="../manual/org-extensions-drill.html">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="../manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="../manual/org-extensions-hugo.html">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="../manual/org-extensions-caldav.html">CalDAV sync</a></li>
+<li class="sub"><a href="../manual/org-extensions-cli.html">Command line (org)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-code.html">Code and notes (code)</a></li>
+<li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="../manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="../manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="../manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="../examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="../examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="../examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="../examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="../examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="../examples/05-tags.html">标签</a></li>
+<li class=""><a href="../examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="../examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="../examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="../examples/09-agenda.html">日程</a></li>
+<li class=""><a href="../examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="../examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="../examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="../examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="../examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="../examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="../examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="../examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="../examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="../examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="../examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="../examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="../parity/review.html">兼容性审查</a></li>
+<li class=""><a href="../parity/index.html">目录</a></li>
+<li class=""><a href="../parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="../extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content manual">
+<article>
+<h1>捕捉</h1>
+<div class="tags"><a class="tag" id="org-capture" href="#org-capture">org-capture</a></div>
+<p><span class="key">&lt;prefix&gt;</span>c opens the template menu. <code>:Org capture KEY</code> selects a template directly. In Visual mode the selection becomes the template's <code>%i</code>, like the active region in Emacs. A count works like Emacs's prefix argument: <code>4&lt;prefix&gt;c</code> (C-u) jumps to a template's target, <code>16&lt;prefix&gt;c</code> (C-u C-u) to the last stored entry and <code>1&lt;prefix&gt;c</code> (C-1) asks for the date of a date tree entry. <code>:Org capture_here</code> (C-0 C-c c) inserts the template at the cursor: an entry becomes a sibling of the headline there, other types go on the cursor line (before it at column 0, else after it).</p>
+<p>The target is resolved when the capture starts, like Emacs: missing file+headline headlines and date tree nodes are created then, and the location is remembered even if the file changes (or the clock moves to another task) while you type. When the target is gone at the end (its headline was deleted), nothing is lost: the capture stays open. By default the text is edited in a separate capture buffer and stored at the target when the capture is finished. With <code>capture.in_place = true</code> the expanded template goes into the target buffer right away and is edited there, like Emacs, in a capture window that shows only the new entry (<a class="hl" href="#org-capture-in-place">org-capture-in-place</a>); with <code>unnarrowed</code>, the capture window shows the whole target file (see <a class="hl" href="#org-capture-unnarrowed">org-capture-unnarrowed</a>).</p>
+<p>Capture dates follow <code>extend_today_until</code> like Emacs: before that hour, %t %T %u %U and %&lt;...&gt; use 23:59 of the previous day and the date tree files under the previous day. A capture date without a time (the agenda day) is taken at <code>extend_today_until</code> o'clock; a <code>time_prompt</code> date keeps the current time when it is today and starts at that hour otherwise.</p>
+<div class="tags"><a class="tag" id="org-capture-templates" href="#org-capture-templates">org-capture-templates</a></div>
+<pre class="code"><code class="language-lua">capture <span class="h-o">=</span> {
+  <span class="h-m">templates</span> <span class="h-o">=</span> {
+    <span class="h-m">t</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Task&quot;</span>, <span class="h-m">template</span> <span class="h-o">=</span> <span class="h-s">&quot;* TODO %?\n  %u&quot;</span>, <span class="h-m">target</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/refile.org&quot;</span> },
+    <span class="h-m">w</span> <span class="h-o">=</span> <span class="h-s">&quot;Work&quot;</span>,   <span class="h-c">-- group label for keys starting with w</span>
+    <span class="h-m">wt</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Work task&quot;</span>, <span class="h-m">template</span> <span class="h-o">=</span> <span class="h-s">&quot;* TODO %?&quot;</span>, <span class="h-m">target</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/work.org&quot;</span>, <span class="h-m">headline</span> <span class="h-o">=</span> <span class="h-s">&quot;Inbox&quot;</span> },
+    <span class="h-m">j</span> <span class="h-o">=</span> { <span class="h-m">description</span> <span class="h-o">=</span> <span class="h-s">&quot;Journal&quot;</span>, <span class="h-m">template</span> <span class="h-o">=</span> <span class="h-s">&quot;* %&lt;%H:%M&gt; %?&quot;</span>, <span class="h-m">target</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/journal.org&quot;</span>, <span class="h-m">datetree</span> <span class="h-o">=</span> <span class="h-n">true</span> },
+  },
+  <span class="h-m">window</span> <span class="h-o">=</span> <span class="h-s">&quot;split&quot;</span>,
+}</code></pre>
+<p>When <code>templates</code> is empty (the default), Emacs's fallback is used: <code>t = { description = &quot;Task&quot;, target = &quot;&quot;, headline = &quot;Tasks&quot;, template = &quot;* TODO %?\n  %u\n  %a&quot; }</code>, which files under &quot;Tasks&quot; in <code>default_notes_file</code>.</p>
+<p>Template fields:</p>
+<table class="defs">
+<tr><td class="term">description</td><td>menu label</td></tr>
+<tr><td class="term">template</td><td>string, list of lines, <code>{ file = &quot;path&quot; }</code> (read from that file, relative to <code>org_directory</code>) or a function returning a string. When empty: &quot;* %?\n  %a&quot; for entries, &quot;- %?&quot; for items, &quot;- [ ] %?&quot; for checkitems, &quot;| %? |&quot; for table lines</td></tr>
+<tr><td class="term">type</td><td>&quot;entry&quot; (default), &quot;item&quot;, &quot;checkitem&quot;, &quot;table-line&quot;, &quot;plain&quot;</td></tr>
+<tr><td class="term">target</td><td>file (relative to <code>org_directory</code>, &quot;&quot; = <code>default_notes_file</code>), &quot;clock&quot;, or a function returning either; defaults to <code>default_notes_file</code></td></tr>
+<tr><td class="term">headline</td><td>file+headline: under the first headline with this title (TODO keyword, priority and tags ignored), created at the end of the file when missing</td></tr>
+<tr><td class="term">olp</td><td>file+olp: outline path, e.g. { &quot;Projects&quot;, &quot;Neovim&quot; } or &quot;Projects/Neovim&quot;; every node must exist</td></tr>
+<tr><td class="term">datetree</td><td>file+olp+datetree: true or { tree_type = ..., reversed = ... }, under <code>olp</code>/<code>headline</code> when given. The date is the capture date (agenda day, <code>time_prompt</code>, C-1) or today. Existing nodes are recognized by their date (&quot;2026-09 Sept&quot; is the September node). Nodes are kept oldest first, as in Emacs; <code>reversed = true</code> keeps them newest first (a new node goes before the first earlier one, as the org-reverse-datetree package does). <code>prepend</code> only places the entry inside its day's node</td></tr>
+<tr><td class="term">tree_type</td><td>&quot;day&quot; (default), &quot;week&quot;, &quot;month&quot;, a list of &quot;year&quot;, &quot;quarter&quot;, &quot;month&quot;, &quot;week&quot;, &quot;day&quot;, or a function(date) returning { { title, compare } ... } (:tree-type)</td></tr>
+<tr><td class="term">regexp</td><td>file+regexp: Vim regexp; the text goes where the first match ends (starts, with <code>prepend</code>); an entry becomes a child when the match is on a headline</td></tr>
+<tr><td class="term">func / function</td><td>file+function: function(bufnr) returning the line (and column) of the location, or moving the cursor there; a headline line means &quot;under this headline&quot;</td></tr>
+<tr><td class="term">location</td><td>the (function f) target: function() returning the buffer, line and column, or nothing for the cursor position in the current buffer</td></tr>
+<tr><td class="term">id</td><td>insert under the entry with this ID (file+id)</td></tr>
+<tr><td class="term">target = &quot;clock&quot;</td><td>insert under the currently clocked task (clock)</td></tr>
+<tr><td class="term">prepend</td><td>insert as the first child instead of the last</td></tr>
+<tr><td class="term">empty_lines</td><td>blank lines around the text, replacing the blank lines already there (also empty_lines_before / empty_lines_after; items in an existing list get at most one)</td></tr>
+<tr><td class="term">table_line_pos</td><td>where a table line goes, e.g. &quot;II-3&quot; (3 lines before the 2nd hline) or &quot;I+1&quot; (right after the 1st). A table is created when there is none</td></tr>
+<tr><td class="term">properties</td><td>table of properties added to the entry</td></tr>
+<tr><td class="term">immediate_finish</td><td>finish without opening the capture window; when the target can't be saved, the text stays in its buffer, unsaved (not for <code>org capture</code>, which fails and leaves the target as it was)</td></tr>
+<tr><td class="term">jump_to_captured</td><td>jump to the entry after finishing</td></tr>
+<tr><td class="term">kill_buffer</td><td>unload the target file afterwards when the capture loaded it</td></tr>
+<tr><td class="term">refile_targets</td><td><code>refile.targets</code> used when refiling from the capture buffer</td></tr>
+<tr><td class="term">clock_in</td><td>clock the entry while capturing (stops the running clock); the time is logged when the capture ends</td></tr>
+<tr><td class="term">clock_keep</td><td>with clock_in, keep the clock running afterwards</td></tr>
+<tr><td class="term">clock_resume</td><td>with clock_in, clock the interrupted task in again when the capture ends or is aborted</td></tr>
+<tr><td class="term">time_prompt</td><td>ask for the date used by %t/%T/%u/%U and the datetree</td></tr>
+<tr><td class="term">no_save</td><td>don't save the target file after capturing</td></tr>
+<tr><td class="term">allow_empty</td><td>finishing with no text still saves the target (by default an empty capture is refused)</td></tr>
+<tr><td class="term">hook</td><td>function(capture_bufnr) run when the capture window opens (not with immediate_finish); in place, the target buffer</td></tr>
+<tr><td class="term">prepare_finalize</td><td>function(capture_bufnr), before the text is read</td></tr>
+<tr><td class="term">before_finalize</td><td>function(bufnr, lnum) in the target, before saving</td></tr>
+<tr><td class="term">after_finalize</td><td>function(bufnr, lnum) when the capture is done</td></tr>
+<tr><td class="term">on_abort</td><td>function(target_bufnr) when the capture is aborted (every hook may also be a list of functions)</td></tr>
+<tr><td class="term">unnarrowed</td><td>edit the text in the target file itself, showing the whole file (<a class="hl" href="#org-capture-unnarrowed">org-capture-unnarrowed</a>)</td></tr>
+</table>
+<p>An entry template without stars gets &quot;* &quot;, item templates get &quot;- &quot; (and continuation lines are indented under the bullet); in an existing list the item takes the list's indentation and bullet style. Items and table lines go into the first list / table of the target entry (of the file for a plain file target); &quot;plain&quot; text goes at the end of the entry's text, before its children (after its planning, properties and drawers with <code>prepend</code>), or at the end (top) of a file.</p>
+<div class="tags"><a class="tag" id="org-capture-contexts" href="#org-capture-contexts">org-capture-contexts</a></div>
+<p><code>capture.templates_contexts</code> (org-capture-templates-contexts) makes templates available only in some buffers. Each rule is <code>{ key, rules }</code>, or <code>{ key, other_key, rules }</code> to use <code>other_key</code>'s template for <code>key</code> there (the other key is then hidden). A template is shown when any of its rules holds; rules are tables with one of <code>in_file</code>, <code>not_in_file</code>, <code>in_mode</code> (filetype), <code>not_in_mode</code>, <code>in_buffer</code>, <code>not_in_buffer</code> (Vim regexps) or functions:</p>
+<pre class="code"><code class="language-lua">capture <span class="h-o">=</span> { <span class="h-m">templates_contexts</span> <span class="h-o">=</span> {
+  { <span class="h-s">&quot;m&quot;</span>, { { <span class="h-m">in_mode</span> <span class="h-o">=</span> <span class="h-s">&quot;^mail$&quot;</span> } } },
+  { <span class="h-s">&quot;t&quot;</span>, <span class="h-s">&quot;p&quot;</span>, { { <span class="h-m">in_file</span> <span class="h-o">=</span> <span class="h-s">&quot;project&quot;</span> } } },
+} }</code></pre>
+<div class="tags"><a class="tag" id="org-capture-expansions" href="#org-capture-expansions">org-capture-expansions</a></div>
+<p>Template expansions:</p>
+<table class="defs">
+<tr><td class="term">%?</td><td>cursor position</td></tr>
+<tr><td class="term">%t %T</td><td>active date / date and time</td></tr>
+<tr><td class="term">%u %U</td><td>inactive date / date and time</td></tr>
+<tr><td class="term">%^t %^T %^u %^U</td><td>the same, asking with the calendar</td></tr>
+<tr><td class="term">%<span class="key">&lt;fmt&gt;</span></td><td>strftime format, e.g. %&lt;%Y-%m-%d&gt;</td></tr>
+<tr><td class="term">%a</td><td>annotation: a link to the location capture was started from</td></tr>
+<tr><td class="term">%A</td><td>the same, asking for a description</td></tr>
+<tr><td class="term">%l</td><td>the link without a description</td></tr>
+<tr><td class="term">%L</td><td>the bare link target</td></tr>
+<tr><td class="term">%i</td><td>initial content (the visual selection); the text before %i on its line is repeated on every line</td></tr>
+<tr><td class="term">%x</td><td>clipboard (the <code>*</code> register, else <code>+</code>)</td></tr>
+<tr><td class="term">%c</td><td>last yank</td></tr>
+<tr><td class="term">%f %F</td><td>origin file name / full path</td></tr>
+<tr><td class="term">%n</td><td>your full name (like Emacs's <code>user-full-name</code>)</td></tr>
+<tr><td class="term">%k %K</td><td>the clocked task's title / a link to it</td></tr>
+<tr><td class="term">%^{Prompt}</td><td>ask; <code>%^{Prompt|default|opt1|opt2}</code> offers opt1 and opt2 and uses the default for an empty answer</td></tr>
+<tr><td class="term">%^C %^L</td><td>ask for a clipboard value (%^L makes it a link)</td></tr>
+<tr><td class="term">%\1 ...</td><td>the answer to the Nth %^{...} prompt</td></tr>
+<tr><td class="term">%\*1 ...</td><td>the answer to the Nth prompt of any kind (%^t, %^g, ...)</td></tr>
+<tr><td class="term">%^g %^G</td><td>tags prompt, completing the target file's / all agenda files' tags; tags on a headline are aligned</td></tr>
+<tr><td class="term">%^{PROP}p</td><td>property prompt (offers the PROP_ALL values of the target); the property goes on the entry, or above the text of a &quot;plain&quot; template without a headline (a property drawer). Item, checkitem and table-line templates ask for it but don't store it (<a class="hl" href="org-differences.html">org-differences</a>)</td></tr>
+<tr><td class="term">%:keyword</td><td>link information: %:link, %:description, %:annotation, %:initial, %:type</td></tr>
+<tr><td class="term">%[file]</td><td>the contents of a file</td></tr>
+<tr><td class="term">%(sexp)</td><td>an Emacs Lisp form, e.g. %(format-time-string &quot;%Y&quot;), %(upcase &quot;%i&quot;); or a Lua expression, %(os.getenv(&quot;HOST&quot;))</td></tr>
+</table>
+<p>Like Emacs, <code>%%</code> is not an escape: write <code>\%</code> for a literal &quot;%&quot; before an expansion character (<code>\%t</code>). Leading blank lines and trailing whitespace of the expanded text are removed.</p>
+<p><code>%(sexp)</code> is evaluated like Emacs's org-capture-expand-embedded-elisp, after the other escapes (inside it, <code>%i</code>, <code>%:subject</code>, ... are quoted for a Lisp string): a string result is inserted, nil inserts nothing and an error inserts <code>%![Error: (void-function f)]</code>. It runs on the Lisp interpreter of table formulas (<a class="hl" href="org-tables.html#org-table-calc">org-table-calc</a>, which also knows <code>format-time-string</code>, <code>user-full-name</code>, <code>getenv</code>, <code>file-name-*</code>, <code>string-replace</code> and <code>replace-regexp-in-string</code>) and, for other functions, in a separate <code>emacs --batch</code> with Org loaded (<code>babel.emacs_lisp</code>; nothing of your Emacs session exists there, and it cannot prompt: no <code>org-read-date</code>). A form whose first word is not a Lisp function the interpreter knows but that compiles as Lua is a Lua expression (the older org.nvim syntax); Lisp is tried when the Lua fails.</p>
+<p>Capture window: <code>&lt;C-c&gt;&lt;C-c&gt;</code> finalizes (with a count, C-u C-c C-c, it then jumps to the entry; in a separate capture buffer, <code>:w</code> does too), <code>&lt;C-c&gt;&lt;C-k&gt;</code> aborts (unchanged text created for the target is dropped, preserving unrelated edits and generated headings with user-added content) and <code>&lt;C-c&gt;&lt;C-w&gt;</code> finalizes and refiles the entry (entry templates only; also <code>&lt;prefix&gt;w</code>, <code>&lt;prefix&gt;k</code>, <code>&lt;prefix&gt;r</code>). As in Emacs, the Ctrl keys work while typing too: they are mapped in Insert mode as well as Normal mode (a capture starts in Insert mode at <code>%?</code>); the <code>&lt;prefix&gt;</code> keys only in Normal mode. In Insert mode <code>&lt;C-c&gt;</code> waits for the next key however long 'timeoutlen' is, and a key that completes no capture key is given back (<code>&lt;C-c&gt;</code> then leaves Insert mode as usual). The window splits the screen like Emacs (<code>capture.window</code>: &quot;split&quot;, &quot;float&quot;, &quot;vsplit&quot;, &quot;tab&quot; or &quot;current&quot;). If saving the target fails, the capture stays open and can be retried without inserting a duplicate entry. Clock/bookmark finalization waits until the captured text is stored.</p>
+<div class="tags"><a class="tag" id="org-capture-in-place" href="#org-capture-in-place">org-capture-in-place</a></div>
+<p>With <code>capture.in_place = true</code> (default false) a capture inserts the expanded template into the target buffer when it starts, like Emacs, and the capture window shows that buffer with everything but the new entry hidden, like Emacs's capture buffer narrowed to the inserted text: other windows showing the file see the entry appear and grow as you type. The cursor stays inside the entry, and lines added at its end (<code>o</code> on its last line) belong to it. <code>&lt;C-c&gt;&lt;C-c&gt;</code> saves the file, <code>&lt;C-c&gt;&lt;C-k&gt;</code> removes exactly the lines the capture inserted (as edited since) and the headlines created for it, keeping other edits, and gives the buffer back its modified state; <code>&lt;C-c&gt;&lt;C-w&gt;</code> finalizes and refiles. <code>:w</code> just writes the file, with the entry in it. All template types, date trees, <code>prepend</code>, <code>kill_buffer</code> and <code>clock_in</code> work as with a capture buffer; <code>immediate_finish</code> opens no window either way. A second capture into a file that a capture is editing in place gets a separate capture buffer. Hiding the rest of the file needs <code>conceal_lines</code> in window-scoped namespaces, which Neovim 0.12.3+ draws in that window only (older versions hide some lines in the other windows on the file too); there the capture window shows the whole file, as with <code>unnarrowed</code>. Closing the capture window ends the capture and leaves the text in the (unsaved) buffer.</p>
+<div class="tags"><a class="tag" id="org-capture-unnarrowed" href="#org-capture-unnarrowed">org-capture-unnarrowed</a></div>
+<p>An <code>unnarrowed</code> capture inserts the expanded template into the target buffer when it starts, like Emacs, and opens the target buffer itself in the capture window, with the cursor at <code>%?</code>. The capture keys work in that window (in other windows showing the file, the file's own mappings keep working); <code>:w</code> just writes the file. Finalizing saves the file; aborting restores exactly the lines the capture inserted or changed (with whatever was typed into them), keeping edits elsewhere in the file, and drops headlines created for it. Closing the capture window ends the capture and leaves the text in the (unsaved) buffer. Only one unnarrowed capture can edit a file at a time.</p>
+<table class="defs">
+<tr><td class="term">:Org capture_goto_target</td><td>choose a template and jump to its target (C-u C-c c in Emacs)</td></tr>
+<tr><td class="term">:Org capture_goto_last</td><td>jump to the last captured entry, or to where it went when refiled from the capture buffer (C-u C-u C-c c). A later plain refile does not change it.</td></tr>
+<tr><td class="term">:Org capture_string</td><td>ask for a string and capture it as the initial text <code>%i</code> (org-capture-string)</td></tr>
+<tr><td class="term">:Org bookmark_jump</td><td>jump to a bookmark: capture and refile save the last location as the bookmarks named in <code>bookmark_names</code> (org-bookmark-names-plist: &quot;org-capture-last-stored&quot;, &quot;org-refile-last-stored&quot;), in stdpath(&quot;data&quot;)/org/bookmarks.json, so the jumps above also work in a later session</td></tr>
+</table>
+<p>From the agenda, <code>K</code> captures with the date at point as the default date (with a count of 1, C-1, at the time of the item at point or now). With <code>capture.use_agenda_date</code>, the global capture key does the same there.</p>
+<div class="tags"><a class="tag" id="org-capture-hooks" href="#org-capture-hooks">org-capture-hooks</a></div>
+<p>Besides the templates' <code>prepare_finalize</code>, <code>before_finalize</code> and <code>after_finalize</code> functions, every capture fires User autocmds, after the template's function, like Emacs's global hooks:</p>
+<table class="defs">
+<tr><td class="term long">OrgCapturePrepareFinalize</td><td>capture buffer still open; data <code>{ buf }</code> (<code>{ immediate = true }</code> for <code>immediate_finish</code> templates, which have no capture buffer) (org-capture-prepare-finalize-hook)</td></tr>
+<tr><td class="term">OrgCaptureBeforeFinalize</td><td>entry stored, target not yet saved; data <code>{ bufnr, line }</code> (org-capture-before-finalize-hook)</td></tr>
+<tr><td class="term">OrgCaptureAfterFinalize</td><td>capture done; data <code>{ bufnr, line }</code> (org-capture-after-finalize-hook)</td></tr>
+</table>
+<p>Aborting (<span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-k&gt;</span>) fires the prepare and after events with <code>aborted = true</code>, but not the before event, like org-capture-kill.</p>
+<pre class="code"><code class="language-lua">vim.<span class="h-m">api</span>.<span class="h-f">nvim_create_autocmd</span>(<span class="h-s">&quot;User&quot;</span>, {
+  <span class="h-m">pattern</span> <span class="h-o">=</span> <span class="h-s">&quot;OrgCaptureAfterFinalize&quot;</span>,
+  <span class="h-f">callback</span> <span class="h-o">=</span> <span class="h-k">function</span>(ev)
+    <span class="h-k">if</span> <span class="h-k">not</span> ev.<span class="h-m">data</span>.<span class="h-m">aborted</span> <span class="h-k">then</span> vim.<span class="h-f">notify</span>(<span class="h-s">&quot;captured&quot;</span>) <span class="h-k">end</span>
+  <span class="h-k">end</span>,
+})</code></pre>
+<div class="tags"><a class="tag" id="org-protocol" href="#org-protocol">org-protocol</a></div>
+<h4>org-protocol</h4>
+<p><code>org-protocol://</code> URLs from a browser or another program capture, store links and open files in a running Neovim, like Emacs <code>org-protocol.el</code>:</p>
+<table class="defs">
+<tr><td class="term long">org-protocol://capture?template=KEY&amp;url=URL&amp;title=TITLE&amp;body=TEXT</td><td>capture with template KEY (<code>protocol.default_template_key</code>, else choose); <code>%:link</code>, <code>%:description</code>, <code>%a</code>, <code>%i</code> (body) and <code>%:&lt;param&gt;</code> come from the URL</td></tr>
+<tr><td class="term long">org-protocol://store-link?url=URL&amp;title=TITLE</td><td>store the link for <a class="hl" href="org-links.html#org-insert-link">org-insert-link</a> and yank the URL</td></tr>
+<tr><td class="term long">org-protocol://open-source?url=URL</td><td>open the local file behind a published URL (<code>protocol.projects</code>, like org-protocol-project-alist: base_url, working_directory, online_suffix, working_suffix, rewrites)</td></tr>
+</table>
+<p>Old-style URLs (<code>capture://KEY/URL/TITLE/BODY</code>) work too, their data split on <code>protocol.data_separator</code> (a Vim regex, <code>/+</code> or <code>?</code> by default; org-protocol-data-separator), and <code>protocol.handlers</code> adds sub-protocols. Call it from Lua with <code>require(&quot;org.protocol&quot;).handle(url)</code> or <code>:Org protocol &lt;url&gt;</code>.</p>
+<table class="defs">
+<tr><td class="term">:Org protocol_create</td><td>ask for a base URL, working directory and suffixes and add a <code>protocol.projects</code> entry (org-protocol-create). It lasts for the session; the Lua to add to your setup() is shown (Emacs saves it to the custom file).</td></tr>
+<tr><td class="term long">:Org protocol_create_for_org</td><td>the same with the defaults of the publishing project of the current file (org-protocol-create-for-org)</td></tr>
+</table>
+<p>The OS must send <code>org-protocol:</code> URLs to a handler that forwards them to a running Neovim. With the session server on (<code>remote.enabled</code>, <a class="hl" href="#org-remote">org-remote</a>) the <code>org</code> command line (<a class="hl" href="org-extensions-cli.html">org-extensions-cli</a>) does that: <code>org protocol URL</code> hands the URL to your Neovim, and with no Neovim running stores a capture at once in its file. On Linux, a desktop file with <code>MimeType=x-scheme-handler/org-protocol;</code> and:</p>
+<pre class="code"><code class="language-sh"><span class="h-f">Exec</span>=org protocol %u</code></pre>
+<p>then <code>xdg-mime default org-protocol.desktop x-scheme-handler/org-protocol</code>. Without the command line, any Neovim listening on a socket (<code>nvim --listen ~/.cache/nvim/org.sock</code>, <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=v%3Aservername">v:servername</a>) takes them:</p>
+<pre class="code"><code class="language-sh"><span class="h-f">Exec</span>=nvim --server ~/.cache/nvim/org.sock --remote-expr <span class="h-s">&quot;v:lua.require'org.protocol'.handle('%u')&quot;</span></code></pre>
+<p>On macOS register the scheme with a small app bundle (an AppleScript <code>on open location</code> handler running the same command). On Windows the registry command is <code>&quot;C:\path\to\org.cmd&quot; protocol &quot;%1&quot;</code>: keep <code>%1</code> in quotes, or cmd.exe ends the command at the first <code>&amp;</code> of the URL. A bookmarklet:</p>
+<pre class="code"><code class="language-js">javascript:location.href='org-protocol://capture?'+new URLSearchParams({
+  template:'p', url:location.href, title:document.title,
+  body:window.getSelection()});void(0)</code></pre>
+<p>Emacs's emacsclient integration (<code>server-visit-files</code> advice, <code>:kill-client</code>) has no counterpart: the handler command above plays that role.</p>
+<div class="tags"><a class="tag" id="org-remote" href="#org-remote">org-remote</a></div>
+<h4>Session server</h4>
+<p>Programs outside Neovim that change your org files (the <code>org</code> command line, org-protocol URLs, scripts) would otherwise write the files behind the back of a Neovim that has them open: its buffers go stale, its undo history doesn't know the change, and a clock started from the shell isn't its clock. Turn the session server on and they ask that Neovim instead:</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({ <span class="h-m">remote</span> <span class="h-o">=</span> { <span class="h-m">enabled</span> <span class="h-o">=</span> <span class="h-n">true</span> } })</code></pre>
+<p>The first Neovim that sets org up then listens on a well-known address (<code>remote.address</code>; by default <code>org.nvim.sock</code> in your runtime directory, $XDG_RUNTIME_DIR or Neovim's <code>nvim.&lt;user&gt;</code> directory under the temp directory, and the named pipe <code>\\.\pipe\org.nvim.&lt;user&gt;</code> on Windows). Only one Neovim owns it: another one started later leaves it alone without an error, and takes it over when it gets the focus after the first one has quit. A socket file left by a Neovim that crashed is removed. <code>$ORG_NVIM_SERVER</code> overrides the address for the server and its clients, and <code>ORG_NVIM_SERVER=none</code> turns it off.</p>
+<p>What goes there:</p>
+<ul>
+<li>every command of the <code>org</code> command line but <code>export</code>, <code>schema</code>, <code>version</code>, <code>mcp</code> and <code>lsp</code> (<a class="hl" href="org-extensions-cli.html">org-extensions-cli</a>): a capture lands in the open buffer (one undo step takes it back), <code>org clock in</code> starts that Neovim's clock, <code>org set todo</code> changes the buffer, <code>org agenda</code> sees unsaved changes. A file with unsaved changes there is changed in its buffer but not saved; other files are saved as before. Agendas are built aside: your agenda windows stay as they are. <code>--no-server</code>, <code>--config</code>, <code>--files</code> and <code>--dir</code> run the command in its own process instead.</li>
+<li><code>org protocol URL</code>: the URL is handled as <code>:Org protocol</code> would, so a capture opens its capture window there (<a class="hl" href="#org-protocol">org-protocol</a>).</li>
+<li><code>require(&quot;org.api&quot;).remote.call(name, ...)</code> from Lua (<a class="hl" href="org-api.html#org-api-remote">org-api-remote</a>).</li>
+</ul>
+<p>When nothing listens (or that Neovim waits for a key), they work on the files as before. Plain <code>nvim --server</code> works too when you give the address yourself (<code>remote.address = &quot;~/.cache/nvim/org.sock&quot;</code>):</p>
+<pre class="code"><code class="language-sh"><span class="h-f">nvim</span> --server ~/.cache/nvim/org.sock --remote-expr \
+  <span class="h-s">&quot;luaeval('vim.inspect(require([[org.api]]).clock.status())')&quot;</span></code></pre>
+<p>Requests run in that Neovim with its configuration, not the command line's. <code>:checkhealth org</code> says whether this Neovim is the server. An address it can't listen on (a socket path longer than the system allows, 103 bytes on macOS, 107 on Linux) is a warning at startup and in <code>:checkhealth org</code>; set a shorter <code>remote.address</code>.</p>
+<div class="tags"><a class="tag" id="org-ctags" href="#org-ctags">org-ctags</a></div>
+<h4>Plain links through tags files</h4>
+<p>Like Emacs org-ctags, <code>&lt;&lt;targets&gt;&gt;</code> in Org files can be tags: with <code>ctags.enabled = true</code> (Emacs: org-ctags-enable), a plain link <code>[[foo]]</code> (also <code>[[#id]]</code>, <code>[[*heading]]</code>, <code>[[(ref)]]</code>) first goes through <code>ctags.open_link_functions</code>, tried in order until one handles it:</p>
+<table class="defs">
+<tr><td class="term">&quot;find_tag&quot;</td><td>jump to the tag with <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=%3Atag">:tag</a> (CTRL-T goes back)</td></tr>
+<tr><td class="term long">&quot;ask_rebuild_tags_file_then_find_tag&quot;</td><td>ask, rebuild the tags file, then look again (also without asking: &quot;rebuild_tags_file_then_find_tag&quot;)</td></tr>
+<tr><td class="term">&quot;ask_append_topic&quot;</td><td>ask, then append a new topic <code>* &lt;&lt;Foo&gt;&gt;</code> to the buffer (<code>ctags.new_topic_template</code>, <code>%t</code> = the capitalized name; &quot;append_topic&quot; does not ask)</td></tr>
+<tr><td class="term long">&quot;ask_visit_buffer_or_file&quot; / &quot;visit_buffer_or_file&quot;</td><td>visit NAME.org (asking to create it)</td></tr>
+<tr><td class="term">&quot;fail_silently&quot;</td><td>stop here (no search in the buffer)</td></tr>
+</table>
+<p>or functions of the link text. When none handles it, the link is searched in the buffer as usual. Tags come from Neovim's 'tags' option (by default the <code>tags</code> file next to the file or above it); Emacs uses <code>TAGS</code> files.</p>
+<table class="defs">
+<tr><td class="term">:Org ctags_create_tags</td><td>run <code>ctags.path_to_ctags</code> (Exuberant or Universal ctags) on the file's directory, writing its <code>tags</code> file with the Org targets (<code>ctags.tag_regexp</code>)</td></tr>
+<tr><td class="term long">:Org ctags_find_tag_interactive</td><td>choose a tag (completed) and jump to it; an unknown one goes through the functions above (org-ctags-find-tag-interactive)</td></tr>
+</table>
+<p>:Org ctags_find_tag, ctags_get_filename_for_tag, ctags_all_tags, ctags_open_file, ctags_visit_buffer_or_file, ctags_append_topic</p>
+<p>the other org-ctags commands, asking for their argument</p>
+<div class="tags"><a class="tag" id="org-feed" href="#org-feed">org-feed</a></div>
+<h4>RSS and Atom feeds</h4>
+<p>Items of RSS 2.0 and Atom feeds are added as children of an inbox headline (org-feed.el). List the feeds in <code>feed.feeds</code> (org-feed-alist):</p>
+<pre class="code"><code class="language-lua">feed <span class="h-o">=</span> {
+  <span class="h-m">feeds</span> <span class="h-o">=</span> {
+    { <span class="h-m">name</span> <span class="h-o">=</span> <span class="h-s">&quot;Slashdot&quot;</span>, <span class="h-m">url</span> <span class="h-o">=</span> <span class="h-s">&quot;https://rss.slashdot.org/Slashdot/slashdot&quot;</span>,
+      <span class="h-m">file</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/feeds.org&quot;</span>, <span class="h-m">headline</span> <span class="h-o">=</span> <span class="h-s">&quot;Slashdot Entries&quot;</span> },
+    <span class="h-c">-- the positional Emacs form works too</span>
+    { <span class="h-s">&quot;Local&quot;</span>, <span class="h-s">&quot;file:///home/me/feed.xml&quot;</span>, <span class="h-s">&quot;~/org/feeds.org&quot;</span>, <span class="h-s">&quot;Local&quot;</span> },
+  },
+}</code></pre>
+<p><code>file</code> defaults to the current buffer's file; the <code>headline</code> (any level, tags allowed) is created at the end of the file when missing. Each update adds the items not seen before, one level below the inbox and after its last child, and records every item's GUID, a &quot;handled&quot; flag and a SHA-1 of the item in the <code>:FEEDSTATUS:</code> drawer of the inbox, as the Lisp list Emacs writes, so Emacs and Neovim can update the same file. Items removed from the feed are dropped from the drawer.</p>
+<p>Per-feed options (Emacs keyword in parentheses):</p>
+<table class="defs">
+<tr><td class="term">template</td><td>item template, default <code>feed.default_template</code> (:template)</td></tr>
+<tr><td class="term">formatter</td><td>function(entry) returning the Org text of the item, instead of the template (:formatter)</td></tr>
+<tr><td class="term">filter</td><td>function(entry) returning the entry (possibly modified) or nil to skip it; skipped items stay unhandled (:filter)</td></tr>
+<tr><td class="term">new_handler</td><td>function(entries, ctx) called with the new items instead of adding them; the cursor is on the inbox headline and <code>ctx</code> is { bufnr, lnum, feed } (:new-handler)</td></tr>
+<tr><td class="term">changed_handler</td><td>function(entries, ctx) called with handled items whose text changed (:changed-handler)</td></tr>
+<tr><td class="term">parse_feed</td><td>&quot;rss&quot;, &quot;atom&quot; or function(text) returning entries with <code>guid</code> and <code>item_full_text</code> (:parse-feed)</td></tr>
+<tr><td class="term">parse_entry</td><td>&quot;rss&quot;, &quot;atom&quot; or function(entry) adding the fields (:parse-entry)</td></tr>
+<tr><td class="term">drawer</td><td>status drawer, default <code>feed.drawer</code> (:drawer)</td></tr>
+<tr><td class="term">retrieve_method</td><td>like <code>feed.retrieve_method</code>, for this feed</td></tr>
+</table>
+<p>Without <code>parse_feed</code>, a feed with a <code>&lt;feed&gt;</code> root and no <code>&lt;item&gt;</code> is read as Atom, anything else as RSS. An entry is a table: RSS items have a field per <code>&lt;tag&gt;value&lt;/tag&gt;</code> (<code>title</code>, <code>link</code>, <code>description</code>, <code>pubDate</code>, ..., entities decoded and CDATA unwrapped) and <code>guid_permalink</code>; Atom entries have <code>title</code>, <code>link</code> (the first <code>&lt;link href&gt;</code>), <code>description</code> (from <code>&lt;content&gt;</code>, else <code>&lt;summary&gt;</code>; xhtml content as markup), <code>id</code>, <code>updated</code>, <code>published</code> and <code>summary</code>. Both have <code>guid</code>, <code>item_full_text</code> and <code>handled</code>.</p>
+<p>Template escapes (org-feed-default-template, &quot;\n* %h\n  %U\n  %description\n  %a\n&quot;):</p>
+<table class="defs">
+<tr><td class="term">%h</td><td>the title, else the first line of the description</td></tr>
+<tr><td class="term">%t %T</td><td>date, date and time, from <code>pubDate</code> (else now), active</td></tr>
+<tr><td class="term">%u %U</td><td>the same, inactive</td></tr>
+<tr><td class="term">%a</td><td><code>[[link]]</code> from the guid when it is a permalink, else <code>link</code></td></tr>
+<tr><td class="term">%name</td><td>any field of the entry: <code>%title</code>, <code>%description</code>, <code>%pubDate</code>...; alone on its line, its later lines get the same indentation</td></tr>
+<tr><td class="term">%(expr)</td><td>a Lua expression (the entry is <code>entry</code>), after the escapes above; <code>\%</code> keeps a literal <code>%</code></td></tr>
+</table>
+<p>Options: <code>feed.default_template</code>, <code>feed.drawer</code> (&quot;FEEDSTATUS&quot;), <code>feed.save_after_adding</code> (true) and <code>feed.retrieve_method</code> (&quot;curl&quot;, &quot;wget&quot; or a function(url) returning the text; <code>file://</code> URLs and local paths are read directly). User autocmds <code>OrgFeedBeforeAdding</code> and <code>OrgFeedAfterAdding</code> (org-feed-before/after-adding-hook) fire around the changes with <code>data = { feed, file, bufnr, count? }</code>.</p>
+<table class="defs">
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span>g</td><td>update every feed (org-feed-update-all, <code>:Org feed_update_all</code>)</td></tr>
+<tr><td class="term">:Org feed_update [name]</td><td>update one feed (org-feed-update)</td></tr>
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-x&gt;</span>G</td><td>go to a feed's inbox (<code>:Org feed_goto_inbox [name]</code>)</td></tr>
+<tr><td class="term long">:Org feed_show_raw [name]</td><td>show the feed's XML</td></tr>
+</table>
+<p>Without a name these prompt (goto_inbox and show_raw take the only feed when there is one). Retrieval is synchronous, like Emacs.</p>
+</article>
+<nav class="pager"><a class="prev" href="../manual/org-sparse-tree.html"><span>上一页</span>稀疏树</a><a class="next" href="../manual/org-refile.html"><span>下一页</span>整理和归档</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L3231">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CalDAV sync · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="../assets/site.js" defer></script>
+
+</head>
+<body data-root="../">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="../index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="../index.html">首页</a></li>
+<li class=""><a href="../guide.html">指南</a></li>
+<li class=""><a href="../playground.html">互动教程</a></li>
+<li><details class="group" open><summary>手册</summary><ul>
+<li class=""><a href="../manual/index.html">目录</a></li>
+<li class=""><a href="../manual/org-introduction.html">简介</a></li>
+<li class=""><a href="../manual/org-installation.html">安装</a></li>
+<li class=""><a href="../manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="../manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="../manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="../manual/org-tags.html">标签</a></li>
+<li class=""><a href="../manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="../manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="../manual/org-clock.html">计时和工作量</a></li>
+<li class=""><a href="../manual/org-agenda.html">日程</a></li>
+<li class=""><a href="../manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="../manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="../manual/org-capture.html">捕捉</a></li>
+<li class=""><a href="../manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="../manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="../manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="../manual/org-babel.html">源代码块（Babel）</a></li>
+<li class=""><a href="../manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="../manual/org-export.html">导出</a></li>
+<li class=""><a href="../manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="../manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="../manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="../manual/org-completion.html">补全</a></li>
+<li class=""><a href="../manual/org-appearance.html">外观和高亮</a></li>
+<li class=""><a href="../manual/org-config.html">配置参考</a></li>
+<li class=""><a href="../manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="../manual/org-commands.html">命令</a></li>
+<li class=""><a href="../manual/org-api.html">Lua API</a></li>
+<li class=""><a href="../manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="../manual/org-lint.html">检查</a></li>
+<li class=""><a href="../manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="../manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="../manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="../manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="../manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="../manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="../manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="../manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="../manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="../manual/org-extensions-drill.html">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="../manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="../manual/org-extensions-hugo.html">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="../manual/org-extensions-caldav.html" aria-current="page">CalDAV sync</a></li>
+<li class="sub"><a href="../manual/org-extensions-cli.html">Command line (org)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-code.html">Code and notes (code)</a></li>
+<li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="../manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="../manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="../manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="../examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="../examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="../examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="../examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="../examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="../examples/05-tags.html">标签</a></li>
+<li class=""><a href="../examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="../examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="../examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="../examples/09-agenda.html">日程</a></li>
+<li class=""><a href="../examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="../examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="../examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="../examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="../examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="../examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="../examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="../examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="../examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="../examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="../examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="../examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="../parity/review.html">兼容性审查</a></li>
+<li class=""><a href="../parity/index.html">目录</a></li>
+<li class=""><a href="../parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="../extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content manual">
+<article>
+<h1>CalDAV sync</h1>
+<div class="tags"><a class="tag" id="org-extensions-caldav" href="#org-extensions-caldav">org-extensions-caldav</a></div>
+<p>Stability: experimental (<a class="hl" href="org-extensions.html#org-extensions-stability">org-extensions-stability</a>)</p>
+<p><code>caldav</code> keeps a calendar of a CalDAV server and org files in step, both ways, like Emacs's org-caldav: the calendar's events become headings of an org file, entries with a date become events, and what changes on one side is carried to the other by <code>:Org caldav_sync</code>. With <code>todos</code>, entries with a TODO keyword sync as the calendar's tasks. (To only see a calendar in the agenda, <a class="hl" href="org-extensions-ics.html">org-extensions-ics</a> is simpler: it needs no account.)</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({
+  <span class="h-m">agenda_files</span> <span class="h-o">=</span> { <span class="h-s">&quot;~/org/calendar.org&quot;</span> },
+  <span class="h-m">extensions</span> <span class="h-o">=</span> {
+    <span class="h-m">caldav</span> <span class="h-o">=</span> {
+      <span class="h-m">calendars</span> <span class="h-o">=</span> {
+        {
+          <span class="h-m">name</span> <span class="h-o">=</span> <span class="h-s">&quot;Personal&quot;</span>,
+          <span class="h-m">url</span> <span class="h-o">=</span> <span class="h-s">&quot;https://cloud.example.com/dav/calendars/me/personal/&quot;</span>,
+          <span class="h-m">user</span> <span class="h-o">=</span> <span class="h-s">&quot;me&quot;</span>,
+          <span class="h-m">password</span> <span class="h-o">=</span> { <span class="h-s">&quot;pass&quot;</span>, <span class="h-s">&quot;show&quot;</span>, <span class="h-s">&quot;cloud/caldav&quot;</span> },
+          <span class="h-m">inbox</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/calendar.org&quot;</span>,
+        },
+      },
+    },
+  },
+})</code></pre>
+<h3 id="h-getting-started">Getting started</h3>
+<ol>
+<li>Put the calendar in <code>calendars</code> as above, with the address your provider gives for CalDAV as <code>url</code> and your <code>user</code> and <code>password</code> (or a <code>token</code>; for Google see <a class="hl" href="#org-extensions-caldav-google">org-extensions-caldav-google</a>).</li>
+<li><code>:checkhealth org</code> says what is missing or misspelt.</li>
+<li><code>:Org caldav_discover</code> lists the calendars of the account. Copy the <code>url</code> of the one you want into the calendar.</li>
+<li>For a first look, give it <code>direction = &quot;pull&quot;</code> and an <code>inbox</code> that is a new file: nothing is sent to the calendar or deleted there.</li>
+<li><code>:Org caldav_sync</code>. Its message says what it did, such as <code>caldav: Personal: 12 from the calendar</code> (<a class="hl" href="#org-extensions-caldav-messages">org-extensions-caldav-messages</a>).</li>
+<li>Take <code>direction</code> out to sync both ways, and list the file in <code>agenda_files</code> to see the events in the agenda.</li>
+</ol>
+<p>To sync with a key, or every 15 minutes by itself:</p>
+<pre class="code"><code class="language-lua">mappings <span class="h-o">=</span> { global <span class="h-o">=</span> { <span class="h-m">caldav_sync</span> <span class="h-o">=</span> <span class="h-s">&quot;&lt;leader&gt;cs&quot;</span> } },
+<span class="h-f">extensions</span> <span class="h-o">=</span> { <span class="h-m">caldav</span> <span class="h-o">=</span> { <span class="h-m">interval</span> <span class="h-o">=</span> <span class="h-n">15</span>, <span class="h-m">calendars</span> <span class="h-o">=</span> { ... } } },</code></pre>
+<h3 id="h-calendars">Calendars</h3>
+<p>Each calendar takes:</p>
+<table class="defs">
+<tr><td class="term"><code>name</code></td><td>shown in messages and <code>:checkhealth org</code> (<code>calendar1</code>, ... when left out)</td></tr>
+<tr><td class="term"><code>url</code></td><td>the address of the calendar itself (a collection, ending in <code>/</code>). <code>:Org caldav_discover</code> lists the calendars of an account with their addresses: set <code>url</code> to the address your provider gives for CalDAV, run it, and copy the one you want</td></tr>
+<tr><td class="term"><code>user</code>, <code>password</code></td><td>the account. <code>password</code> is a string, a function returning one, or a command (a list) whose first line of output is used, such as <code>{ &quot;pass&quot;, &quot;show&quot;, &quot;dav&quot; }</code>, so the password need not be in your config. Where the provider has app passwords, use one</td></tr>
+<tr><td class="term"><code>token</code></td><td>instead of user and password: a bearer token, in the same three forms. A token function or command, and a password command, are called again when the server refuses what they gave</td></tr>
+<tr><td class="term"><code>auth</code></td><td>&quot;basic&quot; (the default), &quot;digest&quot; or &quot;any&quot;</td></tr>
+<tr><td class="term"><code>headers</code></td><td>extra request headers, <code>{ Name = &quot;value&quot; }</code></td></tr>
+<tr><td class="term"><code>inbox</code></td><td>the org file new events of the calendar are added to, at the top level; or <code>{ file = ..., headline = &quot;Calendar&quot; }</code> to add them under that heading (made when missing). Its entries are sent too</td></tr>
+<tr><td class="term"><code>files</code></td><td>more org files whose entries are sent to the calendar</td></tr>
+</table>
+<p>and may set <code>direction</code>, <code>conflict</code>, <code>delete_local</code>, <code>delete_remote</code>, <code>todos</code>, <code>past_days</code>, <code>sync_on_open</code> and <code>sync_on_save</code> for itself. A calendar needs an <code>inbox</code> or <code>files</code>; with <code>files</code> only, the calendar's new events are not added anywhere (the sync says how many). A file belongs to one calendar. List the files in <code>agenda_files</code> to see the events in the agenda.</p>
+<h3 id="h-entries-and-events">Entries and events</h3>
+<p>An entry and an event belong together when the entry's ID property is the event's UID, as with org-caldav (files synced with it carry over). An event of the calendar is written as:</p>
+<pre class="code"><code>* Design review
+:PROPERTIES:
+:ID:       6f1e9c0a-41d7-4a57-9d0e-2f6c1b7a9e11
+:LOCATION: Room 4
+:END:
+&lt;2026-11-12 Thu 15:00-16:00&gt;
+Bring the mockups</code></pre>
+<table class="defs">
+<tr><td class="term">title</td><td>the heading; its keyword, priority and tags are yours</td></tr>
+<tr><td class="term">time</td><td>the timestamp line below the drawers. In an entry you wrote, also the first active timestamp of the heading or its text, else SCHEDULED or DEADLINE (in an entry without a TODO keyword only, as in <a class="hl" href="org-export.html#org-export-icalendar">org-export-icalendar</a>). All-day events, several days (<code>&lt;a&gt;--&lt;b&gt;</code>) and end times are kept. Of several timestamp lines you wrote, the first is the event's</td></tr>
+<tr><td class="term">location</td><td>the LOCATION property</td></tr>
+<tr><td class="term">description</td><td>the text below the timestamp line: all of it is sent, so keep private notes out of an entry of a shared calendar. When the calendar changes the text of an entry whose time is a timestamp in that text, and the new text doesn't hold it, the timestamp moves to a line of its own above it</td></tr>
+</table>
+<p>An entry of the calendar's files that has an active timestamp, and no ID the calendar knows, is sent as a new event and gets an ID. Entries without a date are never sent, nor are new COMMENT entries, inline tasks and entries in a subtree tagged ARCHIVE (one that is synced already stays synced when it gets the tag or the keyword). The keyword, the priority, the tags, the drawers and the subheadings stay in org; attendees, alarms and everything else an event holds stay in the calendar: a change is sent by replacing only the changed properties of the event the server has.</p>
+<p>Timestamps are in the system's zone, or in <code>timezone</code>. A changed time is sent in the zone the event has. A new event's time is sent in UTC; one that repeats is sent in your zone when its name is known (<code>timezone</code>, <code>$TZ</code> or what <code>/etc/localtime</code> links to), so that it keeps its hour across clock changes. On Windows the name is only known from <code>timezone</code>: set it there, or such an event drifts an hour at a clock change in other calendar programs (<code>:checkhealth org</code> says when the name isn't known).</p>
+<h3 id="h-the-sync">The sync</h3>
+<p><code>:Org caldav_sync</code> asks the server what changed since the last sync and compares each entry with its event, a field at a time:</p>
+<ul>
+<li>what changed in the calendar is written into the entry, what changed in the entry is sent; changes of different fields are both kept;</li>
+<li>when the same field changed on both sides the org one is kept, as org-caldav does (<code>conflict = &quot;remote&quot;</code>: the calendar's), and the message says so;</li>
+<li>new events are added to the inbox, new entries are sent;</li>
+<li>for an event deleted in the calendar, <code>delete_local</code> says what happens to its entry: &quot;ask&quot; (the default), &quot;always&quot; delete it, or &quot;never&quot;. An entry that is kept is asked about again at the next sync, and is sent again as an event once you change it. An entry with subheadings is never deleted;</li>
+<li>for an entry deleted in org (or archived to another file, or moved to a file that is not the calendar's), <code>delete_remote</code> says what happens to its event, in the same three ways;</li>
+<li>on either side, when everything a calendar had (two entries or more) would be deleted at once, it asks even with &quot;always&quot;: that looks like a lost file or another calendar;</li>
+<li>an event deleted on one side and changed on the other comes back (except an entry whose dates follow a rule of the calendar, below: <code>delete_local</code> decides).</li>
+</ul>
+<p>Events that ended more than <code>past_days</code> days ago are not picked up, on either side; one that is synced stays synced as it grows older. With <code>todos</code>, open tasks are always picked up, and done ones unless they were closed that long ago. The org files a sync changed are saved (<code>save</code>).</p>
+<p><code>direction = &quot;pull&quot;</code> only brings the calendar's changes to org: nothing is sent or deleted there, the calendar's value wins a conflict, and an entry you delete in org is added again by the next sync (<code>delete_remote</code> is not asked). <code>direction = &quot;push&quot;</code> only sends org's: the entries are not changed, new events are not added, org's value wins, and an event deleted in the calendar is sent again (<code>delete_local</code> is not asked).</p>
+<p>What was synced is kept in <code>state_dir</code>, one file per calendar. Without it (a new machine) entries and events are matched by ID again: nothing is duplicated; a field one side lacks is filled from the other, and where both have different values <code>conflict</code> decides. A change that could not be sent is sent at the next sync.</p>
+<p>With <code>interval</code>, a sync also runs every that many minutes. It asks no questions (deletions that need an answer wait for <code>:Org caldav_sync</code>) and reports only changes and failures.</p>
+<div class="tags"><a class="tag" id="org-extensions-caldav-triggers" href="#org-extensions-caldav-triggers">org-extensions-caldav-triggers</a></div>
+<p>Two more syncs that ask nothing and report the same way, off by default:</p>
+<table class="defs">
+<tr><td class="term"><code>sync_on_open</code></td><td>syncs a calendar when one of its files is shown in a window (opened, or gone back to), unless the calendar was synced less than <code>open_interval</code> minutes ago (5). It brings the calendar's changes, so it does nothing for a calendar with <code>direction = &quot;push&quot;</code>.</td></tr>
+<tr><td class="term"><code>sync_on_save</code></td><td>syncs a calendar a moment after one of its files is saved: by <code>:w</code>, and by org's own saves (capture, refile, agenda edits). Saves close together, such as <code>:wa</code>, make one sync, and a save while a sync runs is synced when it ends. It sends org's changes, so it does nothing for a calendar with <code>direction = &quot;pull&quot;</code>. The sync's own saves start no other.</td></tr>
+</table>
+<p>Either syncs the whole calendar of the file, which sends and fetches only what changed. Expect the buffer to change after a save: a new entry with a date gets its ID property (the sync saves the file again, with <code>save</code>), and the calendar's changes come in. Both can be set per calendar:</p>
+<pre class="code"><code class="language-lua">extensions <span class="h-o">=</span> { <span class="h-m">caldav</span> <span class="h-o">=</span> { <span class="h-m">sync_on_open</span> <span class="h-o">=</span> <span class="h-n">true</span>, <span class="h-m">calendars</span> <span class="h-o">=</span> {
+  { <span class="h-m">name</span> <span class="h-o">=</span> <span class="h-s">&quot;Work&quot;</span>, <span class="h-m">url</span> <span class="h-o">=</span> <span class="h-s">&quot;...&quot;</span>, <span class="h-m">inbox</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/work.org&quot;</span>,
+    <span class="h-m">sync_on_save</span> <span class="h-o">=</span> <span class="h-n">true</span> },
+} } },</code></pre>
+<h3 id="h-repeating-events">Repeating events</h3>
+<p>A rule a repeater can say is written as one (<code>FREQ=WEEKLY</code> is <code>+1w</code>), and a repeater of yours is sent as a rule. An event every week on several days (its first day among them) is written as one timestamp a day, each with <code>+1w</code>. Any other rule (a count or an end date, exceptions, moved or cancelled instances, every other week on several days, &quot;the second Tuesday&quot;, an event that runs past midnight) is written as the timestamps of its occurrences, from <code>past_days</code> ago (30 days when it is <code>false</code>) to <code>recurrence_days</code> ahead, brought up to date by each sync. The dates of those two kinds follow the calendar: change them there (a change in org is put back). Their title, location and description sync both ways as usual.</p>
+<h3 id="h-tasks">Tasks</h3>
+<p>With <code>todos = true</code>, entries with a TODO keyword sync as tasks (VTODO), with or without a date, instead of as events: SCHEDULED is the task's start and DEADLINE its due date, a done keyword completes it (CLOSED is when), a done keyword starting with CANCEL cancels it, and the priority cookie is its priority (1-4 the highest, 5-8 the default, 9 the lowest, as in org-caldav). A task completed in the calendar gets the file's first done keyword that doesn't start with CANCEL, a cancelled one the first that does (else the first done keyword), a reopened one the first TODO keyword. The calendar must be one that holds tasks; <code>:Org caldav_discover</code> shows what each holds. Whether an entry is an event or a task is settled when it is first synced. <code>todos</code> is off by default, so a calendar that holds only tasks (a Radicale task list, say) needs <code>todos = true</code>; without it nothing syncs, and <code>:Org caldav_sync</code> says how many tasks it left out. Tasks synced while <code>todos</code> was on keep syncing after it is turned off.</p>
+<h3 id="h-servers">Servers</h3>
+<p>Any server that speaks CalDAV (RFC 4791) and takes a password (basic or digest) or a bearer token. Radicale and Google Calendar are the ones it was tried with; reports about others are welcome.</p>
+<div class="tags"><a class="tag" id="org-extensions-caldav-google" href="#org-extensions-caldav-google">org-extensions-caldav-google</a></div>
+<h3 id="h-google-calendar">Google Calendar</h3>
+<p>Google takes OAuth tokens only, so it needs <code>token</code> set to a command that prints one, such as Google's <code>oauth2l</code>:</p>
+<pre class="code"><code class="language-lua">{
+  <span class="h-m">name</span> <span class="h-o">=</span> <span class="h-s">&quot;Google&quot;</span>,
+  <span class="h-m">url</span> <span class="h-o">=</span> <span class="h-s">&quot;https://apidata.googleusercontent.com/caldav/v2/&quot;</span>
+    <span class="h-o">..</span> <span class="h-s">&quot;you@gmail.com&quot;</span> <span class="h-o">..</span> <span class="h-s">&quot;/events/&quot;</span>,
+  <span class="h-m">token</span> <span class="h-o">=</span> {
+    <span class="h-s">&quot;oauth2l&quot;</span>, <span class="h-s">&quot;fetch&quot;</span>, <span class="h-s">&quot;--type&quot;</span>, <span class="h-s">&quot;oauth&quot;</span>, <span class="h-s">&quot;--refresh&quot;</span>,
+    <span class="h-s">&quot;--credentials&quot;</span>, vim.<span class="h-m">fn</span>.<span class="h-f">expand</span>(<span class="h-s">&quot;~/client_secret.json&quot;</span>),
+    <span class="h-s">&quot;--scope&quot;</span>, <span class="h-s">&quot;https://www.googleapis.com/auth/calendar&quot;</span>,
+  },
+  <span class="h-m">inbox</span> <span class="h-o">=</span> <span class="h-s">&quot;~/org/google.org&quot;</span>,
+}</code></pre>
+<p>The address holds the calendar's ID: your address for the main calendar, else the &quot;Calendar ID&quot; under &quot;Integrate calendar&quot; in the calendar's settings. <code>:Org caldav_discover</code> also works, from <code>https://apidata.googleusercontent.com/caldav/v2/CALENDAR_ID/user</code>.</p>
+<p>For the token, once, in the Google Cloud console:</p>
+<ol>
+<li>make a project and enable the &quot;CalDAV API&quot; in it;</li>
+<li>under Google Auth Platform, make an OAuth client ID of the type &quot;Desktop app&quot; and download it as <code>client_secret.json</code>;</li>
+<li>under Audience &gt; Test users, add your own address. Without it the sign-in stops at &quot;Access blocked ... Error 403: access_denied&quot;;</li>
+<li>run the <code>oauth2l</code> command of the example in a terminal (it comes from <code>brew install oauth2l</code>, or its binaries): it opens the browser to sign in, then prints the token. It keeps it in <code>~/.oauth2l</code> and renews it.</li>
+</ol>
+<p>Google's CalDAV holds no tasks (leave <code>todos</code> off), and Google Tasks are not on CalDAV at all. A new repeating entry is sent in your time zone, or in UTC when the zone has no clock changes.</p>
+<h3 id="h-actions">Actions</h3>
+<table class="defs">
+<tr><td class="term"><code>caldav_sync</code></td><td>sync every calendar now; <code>:Org caldav_sync NAME</code> syncs one (names complete)</td></tr>
+<tr><td class="term"><code>caldav_discover</code></td><td>list the calendars of the account of each configured calendar, with their addresses and what they hold, in a window (<code>q</code> closes it); <code>:Org caldav_discover NAME</code> for one, <code>:Org caldav_discover URL</code> for another address, asked with the credentials of the first calendar on that server</td></tr>
+</table>
+<p>Neither has a default key; map them in <code>mappings</code> or run them with <code>:Org</code>.</p>
+<div class="tags"><a class="tag" id="org-extensions-caldav-messages" href="#org-extensions-caldav-messages">org-extensions-caldav-messages</a></div>
+<h3 id="h-messages">Messages</h3>
+<p>A sync ends with one line a calendar:</p>
+<table class="defs">
+<tr><td class="term long"><code>caldav: NAME: up to date</code></td><td>nothing changed on either side</td></tr>
+<tr><td class="term long"><code>... N from the calendar</code></td><td>entries added or changed in org</td></tr>
+<tr><td class="term"><code>... N to the calendar</code></td><td>events added or changed in the calendar</td></tr>
+</table>
+<p><code>... N deleted here</code>, <code>N deleted in the calendar</code></p>
+<p>When the sync could not run, the line says why instead:</p>
+<table class="defs">
+<tr><td class="term long"><code>401: the server refused the user, password or token</code></td><td>Wrong credentials. Run a password or token command in a terminal to see what it prints; for Google see <a class="hl" href="#org-extensions-caldav-google">org-extensions-caldav-google</a>.</td></tr>
+<tr><td class="term long"><code>404: not found (check the calendar's url)</code></td><td><code>url</code> is not a calendar: <code>:Org caldav_discover</code> lists them.</td></tr>
+<tr><td class="term long"><code>403: the server does not allow it</code></td><td>Usually a calendar you may only read.</td></tr>
+<tr><td class="term long"><code>it has no inbox ...</code>, <code>FILE not found</code>, <code>curl not found</code></td><td>What the calendar's settings lack; <code>:checkhealth org</code> says the same.</td></tr>
+</table>
+<p>Lines below it name the entries that need a look:</p>
+<table class="defs">
+<tr><td class="term"><code>&quot;Title&quot;: not sent: ...</code></td><td>The server refused it, and this is its reason. <code>412: it changed on the server</code> settles at the next sync; <code>403</code> can be a task sent to a calendar that holds only events. The change stays in org and is sent again by every sync until it is taken.</td></tr>
+<tr><td class="term long"><code>&quot;Title&quot; has no timestamp: not sent</code></td><td>An entry needs a date to be an event.</td></tr>
+<tr><td class="term long"><code>&quot;Title&quot;: summary changed here and in the calendar; kept the org one</code></td><td>The same field changed on both sides; <code>conflict</code> decided.</td></tr>
+<tr><td class="term long"><code>&quot;Title&quot;: its dates follow a rule of the calendar; change them there</code></td><td>A repeating event a repeater can't say: a date changed in org was put back.</td></tr>
+<tr><td class="term long"><code>&quot;Title&quot; is kept: it has subheadings</code></td><td>Its event was deleted in the calendar; delete the entry yourself.</td></tr>
+<tr><td class="term long"><code>N deletion(s) wait for :Org caldav_sync to ask about them</code></td><td>A sync in the background asks no questions.</td></tr>
+</table>
+<pre class="help">  <code>N new in the calendar, not added: it has no inbox</code></pre>
+<table class="defs">
+<tr><td class="term long"><code>two entries have the ID ...; only the first is synced</code></td><td>A copied entry: take the ID out of the copy.</td></tr>
+</table>
+<p>A sync in the background shows only the first line, with the number of notes; <code>:Org caldav_sync</code> shows them all.</p>
+<p>To start over with a calendar, delete its file in <code>state_dir</code>. The next sync matches entries and events by ID again and duplicates nothing.</p>
+<h3 id="h-options">Options</h3>
+<table class="defs">
+<tr><td class="term"><code>calendars</code></td><td>the calendars (above) ({})</td></tr>
+<tr><td class="term"><code>direction</code></td><td>&quot;twoway&quot;, &quot;pull&quot; or &quot;push&quot; (&quot;twoway&quot;)</td></tr>
+<tr><td class="term"><code>conflict</code></td><td>&quot;local&quot; (org wins) or &quot;remote&quot; (&quot;local&quot;)</td></tr>
+<tr><td class="term"><code>delete_local</code></td><td>&quot;ask&quot;, &quot;always&quot; or &quot;never&quot; (&quot;ask&quot;)</td></tr>
+<tr><td class="term"><code>delete_remote</code></td><td>&quot;ask&quot;, &quot;always&quot; or &quot;never&quot; (&quot;ask&quot;)</td></tr>
+<tr><td class="term"><code>todos</code></td><td>sync entries with a TODO keyword as tasks (false)</td></tr>
+<tr><td class="term"><code>past_days</code></td><td>days back events are picked up; false: all (30)</td></tr>
+<tr><td class="term"><code>recurrence_days</code></td><td>days ahead the occurrences of a rule are listed (90)</td></tr>
+<tr><td class="term"><code>interval</code></td><td>minutes between syncs in the background; 0: none (0)</td></tr>
+<tr><td class="term"><code>sync_on_open</code></td><td>sync a calendar when one of its files is shown (<a class="hl" href="#org-extensions-caldav-triggers">org-extensions-caldav-triggers</a>) (false)</td></tr>
+<tr><td class="term"><code>open_interval</code></td><td>minutes after a calendar's last sync before <code>sync_on_open</code> syncs it again (5)</td></tr>
+<tr><td class="term"><code>sync_on_save</code></td><td>sync a calendar after one of its files is saved (false)</td></tr>
+<tr><td class="term"><code>save</code></td><td>save the org files a sync changed (true)</td></tr>
+<tr><td class="term"><code>timezone</code></td><td>IANA zone of the timestamps (nil: the system's)</td></tr>
+<tr><td class="term"><code>tz_aliases</code></td><td>extra TZID -&gt; IANA zone names ({})</td></tr>
+<tr><td class="term"><code>state_dir</code></td><td>where the state of each calendar's last sync is kept (<code>stdpath(&quot;data&quot;) .. &quot;/org/caldav&quot;</code>)</td></tr>
+<tr><td class="term"><code>curl</code></td><td>the program requests are sent with and extra arguments, e.g. <code>{ &quot;curl&quot;, &quot;--netrc&quot; }</code> (<code>{ &quot;curl&quot; }</code>)</td></tr>
+<tr><td class="term"><code>timeout</code></td><td>seconds before a request is given up (60)</td></tr>
+</table>
+<p>Requests are sent with <code>curl</code>, which gets the address, the headers and the credentials on its standard input, not as arguments, so they don't show in the process list. <code>:checkhealth org</code> checks that <code>curl</code> is installed and each calendar's settings and files, and shows the last sync.</p>
+<h3 id="h-differences-from-org-caldav">Differences from org-caldav</h3>
+<ul>
+<li>A change is merged a field at a time and sent by editing the event the server has. org-caldav replaces the event with the export of the entry (dropping what org doesn't hold) and by default takes only the title and the timestamp from the calendar.</li>
+<li>The description is the entry's text as written, not its ASCII export.</li>
+<li>A rule a repeater can't say is written as dates, not as a diary sexp.</li>
+<li><code>past_days</code> defaults to 30 (org-caldav-days-in-past: everything).</li>
+<li>There is no datetree inbox, no select or exclude tags, no skip conditions and no OAuth sign-in.</li>
+</ul>
+</article>
+<nav class="pager"><a class="prev" href="../manual/org-extensions-ics.html"><span>上一页</span>iCalendar subscriptions</a><a class="next" href="../manual/org-extensions-cli.html"><span>下一页</span>Command line (org)</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L11836">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>

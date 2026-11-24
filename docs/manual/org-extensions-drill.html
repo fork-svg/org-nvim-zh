@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spaced repetition (org-drill) · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="../assets/site.js" defer></script>
+
+</head>
+<body data-root="../">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="../index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="../index.html">首页</a></li>
+<li class=""><a href="../guide.html">指南</a></li>
+<li class=""><a href="../playground.html">互动教程</a></li>
+<li><details class="group" open><summary>手册</summary><ul>
+<li class=""><a href="../manual/index.html">目录</a></li>
+<li class=""><a href="../manual/org-introduction.html">简介</a></li>
+<li class=""><a href="../manual/org-installation.html">安装</a></li>
+<li class=""><a href="../manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="../manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="../manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="../manual/org-tags.html">标签</a></li>
+<li class=""><a href="../manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="../manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="../manual/org-clock.html">计时和工作量</a></li>
+<li class=""><a href="../manual/org-agenda.html">日程</a></li>
+<li class=""><a href="../manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="../manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="../manual/org-capture.html">捕捉</a></li>
+<li class=""><a href="../manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="../manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="../manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="../manual/org-babel.html">源代码块（Babel）</a></li>
+<li class=""><a href="../manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="../manual/org-export.html">导出</a></li>
+<li class=""><a href="../manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="../manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="../manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="../manual/org-completion.html">补全</a></li>
+<li class=""><a href="../manual/org-appearance.html">外观和高亮</a></li>
+<li class=""><a href="../manual/org-config.html">配置参考</a></li>
+<li class=""><a href="../manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="../manual/org-commands.html">命令</a></li>
+<li class=""><a href="../manual/org-api.html">Lua API</a></li>
+<li class=""><a href="../manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="../manual/org-lint.html">检查</a></li>
+<li class=""><a href="../manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="../manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="../manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="../manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="../manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="../manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="../manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="../manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="../manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="../manual/org-extensions-drill.html" aria-current="page">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="../manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="../manual/org-extensions-hugo.html">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="../manual/org-extensions-caldav.html">CalDAV sync</a></li>
+<li class="sub"><a href="../manual/org-extensions-cli.html">Command line (org)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-code.html">Code and notes (code)</a></li>
+<li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="../manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="../manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="../manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="../examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="../examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="../examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="../examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="../examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="../examples/05-tags.html">标签</a></li>
+<li class=""><a href="../examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="../examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="../examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="../examples/09-agenda.html">日程</a></li>
+<li class=""><a href="../examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="../examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="../examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="../examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="../examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="../examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="../examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="../examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="../examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="../examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="../examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="../examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="../parity/review.html">兼容性审查</a></li>
+<li class=""><a href="../parity/index.html">目录</a></li>
+<li class=""><a href="../parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="../extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content manual">
+<article>
+<h1>Spaced repetition (org-drill)</h1>
+<div class="tags"><a class="tag" id="org-extensions-drill" href="#org-extensions-drill">org-extensions-drill</a></div>
+<p>Stability: stable (<a class="hl" href="org-extensions.html#org-extensions-stability">org-extensions-stability</a>)</p>
+<p><code>drill</code> turns headlines into flashcards and schedules their reviews by spaced repetition, like Emacs org-drill:</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({ <span class="h-m">extensions</span> <span class="h-o">=</span> { <span class="h-m">drill</span> <span class="h-o">=</span> { <span class="h-m">scope</span> <span class="h-o">=</span> <span class="h-s">&quot;agenda&quot;</span> } } })</code></pre>
+<p>A card is a headline tagged <code>:drill:</code> (the <code>tag</code> option; the tag must be on the headline itself, not inherited). The title and text are the question and the subheadings the answer:</p>
+<pre class="code"><code class="language-org"><span class="h-h">* Capital of France                                       </span><span class="h-t">:drill:</span>
+  What is the capital of France?
+<span class="h-h">** Answer</span>
+   Paris</code></pre>
+<p><code>:Org drill [scope]</code> (action <code>drill</code>, <code>&lt;prefix&gt;D</code>) starts a session over the cards that are due: cards whose SCHEDULED date is today or earlier, and unscheduled cards (new ones, and ones failed last time). The scope is <code>file</code> (the current buffer, the default of the <code>scope</code> option), <code>tree</code> (the subtree at the cursor, also action <code>drill_tree</code>), <code>agenda</code> (the agenda files), <code>directory</code> (the org files next to the current one), <code>tag:NAME</code> (cards in the agenda files that also have the tag NAME, inherited or not), or files and globs; <span class="key">&lt;Tab&gt;</span> completes them. Commented and archived cards are skipped, and so are cards with nothing to ask: like org-drill, only the entry's own text counts, so a simple card needs text above its answer subheading (two- and multisided cards need none).</p>
+<p>The cards are asked in org-drill's order: cards failed last time, overdue cards (late by more than <code>overdue_interval_factor</code> - 1 times their last interval, the most overdue first), young cards (a last interval of <code>days_before_old</code> days or less), then old and new cards mixed. Each group is shuffled (<code>shuffle</code>).</p>
+<p>The session opens in a floating window showing one card at a time, with</p>
+<h3 id="h-its-type-and-how-often-it-was-seen-keys-in-the-window">its type and how often it was seen. Keys in the window</h3>
+<table class="defs">
+<tr><td class="term"><span class="key">&lt;Space&gt;</span>  <span class="key">&lt;CR&gt;</span></td><td>show the answer</td></tr>
+<tr><td class="term">0 - 5</td><td>grade the answer (a grade key before the answer shows it)</td></tr>
+<tr><td class="term">s</td><td>skip the card</td></tr>
+<tr><td class="term">e</td><td>pause, and jump to the card to edit it; <code>:Org drill_resume</code> (action <code>drill_resume</code>) goes on</td></tr>
+<tr><td class="term"><span class="key">&lt;Esc&gt;</span></td><td>end the session; in the summary, close the window</td></tr>
+</table>
+<p>The grades are org-drill's:</p>
+<table class="defs">
+<tr><td class="term">0</td><td>wrong, and the answer is unfamiliar</td></tr>
+<tr><td class="term">1</td><td>wrong, but upon seeing the answer it felt familiar</td></tr>
+<tr><td class="term">2</td><td>wrong, but upon seeing the answer it seemed easy</td></tr>
+<tr><td class="term">3</td><td>correct, but it took a lot of effort</td></tr>
+<tr><td class="term">4</td><td>correct, after some hesitation</td></tr>
+<tr><td class="term">5</td><td>correct, and it was easy</td></tr>
+</table>
+<p>A grade of <code>failure_quality</code> (2) or less fails the card. Failed cards come back at the end of the session until they pass (<code>repeat_failed</code>), even after <code>maximum_duration</code>. The session asks at most <code>maximum_items_per_session</code> cards and stops asking new ones after <code>maximum_duration</code> minutes, then shows a summary: cards and answers, passed, failed, new and skipped cards, the average grade, how often each grade was given, and when each card comes back. The files the session changed are then written (<code>save_buffers</code>). <code>:Org drill_stats [scope]</code> counts the cards of a scope: all, due, new and recently failed.</p>
+<h3 id="h-cram-mode">Cram mode</h3>
+<p><code>:Org drill_cram [scope]</code> (action <code>drill_cram</code>, org-drill-cram) asks every card of the scope that was not reviewed in the last <code>cram_hours</code> (12) hours, due or not, without a card or time limit. Nothing is written: the cards keep their schedule.</p>
+<h3 id="h-leeches">Leeches</h3>
+<p>A card failed more than <code>leech_failure_threshold</code> (15) times is tagged <code>:leech:</code>. With <code>leech_method</code> &quot;skip&quot; (the default) leeches are left out of sessions until you untag them; &quot;warn&quot; asks them marked as a leech; false treats them like other cards.</p>
+<h3 id="h-card-types">Card types</h3>
+<p>The DRILL_CARD_TYPE property (inherited from parent headings, as in org-drill) sets a card's type:</p>
+<table class="defs">
+<tr><td class="term">simple</td><td>(default) the title and text are the question and the subheadings the answer; a card without subheadings has its text as the answer. Clozes in the text are hidden.</td></tr>
+<tr><td class="term">twosided</td><td>one of the first two subheadings, picked at random, is shown with the title; the other subheadings are the answer</td></tr>
+<tr><td class="term">multisided</td><td>like twosided, with any of the subheadings</td></tr>
+<tr><td class="term">hide1cloze</td><td>one cloze, at random, is hidden and the others shown (also <code>multicloze</code>)</td></tr>
+<tr><td class="term">hide2cloze</td><td>two clozes, at random, are hidden</td></tr>
+<tr><td class="term">show1cloze</td><td>one cloze, at random, is shown and the others hidden</td></tr>
+<tr><td class="term">show2cloze</td><td>two clozes are shown and the others hidden</td></tr>
+<tr><td class="term">hidefirst</td><td>the first cloze is hidden</td></tr>
+<tr><td class="term">hidelast</td><td>the last cloze is hidden</td></tr>
+<tr><td class="term">hide1_firstmore</td><td>the first cloze is hidden, except every <code>cloze_text_weight</code>th (4) repetition, when another one is</td></tr>
+<tr><td class="term">show1_lastmore</td><td>the last cloze is shown, except every Nth repetition, when another one is</td></tr>
+<tr><td class="term">show1_firstless</td><td>a cloze other than the first is shown, except every Nth repetition, when the first one is</td></tr>
+</table>
+<p>org-drill's language cards (<code>conjugate</code>, <code>decline_noun</code>, <code>spanish_verb</code>, <code>translate_number</code>) and <code>simpletyped</code> are asked like simple cards; a type org-drill doesn't know is skipped with a warning, like org-drill does.</p>
+<h3 id="h-clozes">Clozes</h3>
+<p>Text in single square brackets is a cloze deletion, hidden as <code>[...]</code> until the answer is shown. A hint follows <code>||</code>: <code>[Nile||river]</code> shows as <code>[river...]</code>. Links, timestamps, checkboxes, statistics cookies, footnotes and priorities are not clozes:</p>
+<pre class="code"><code class="language-org"><span class="h-h">* Rivers                                                  </span><span class="h-t">:drill:</span>
+  The longest river in the world is the [Nile||river]; it flows
+  north into the [Mediterranean||sea].</code></pre>
+<h3 id="h-scheduling">Scheduling</h3>
+<p>Reviews are scheduled like org-drill's <code>org-drill-smart-reschedule</code>, with the <code>algorithm</code> option (org-drill-spaced-repetition-algorithm):</p>
+<table class="defs">
+<tr><td class="term">sm5</td><td>(default, as in org-drill) SuperMemo 5: the intervals grow by &quot;optimal factors&quot; that are learned from your grades, starting at <code>sm5_initial_interval</code> (4) days. The factors are kept in <code>sm5_matrix_file</code> between sessions.</td></tr>
+<tr><td class="term">sm2</td><td><p>SuperMemo 2: every card has an ease, 2.5 at first; a passing grade changes it (+0.1 for a 5, unchanged for a 4, -0.14 for a</p>
+<ol>
+<li>and schedules the next review 1 day, then 6 days, then the</li>
+</ol>
+<p>last interval times the ease later.</p></td></tr>
+<tr><td class="term">simple8</td><td>org-drill's Simple8: the first interval depends on how often the card was failed, the next ones on its average grade and <code>learn_fraction</code>.</td></tr>
+</table>
+<p>The days until the next review never go down with a better grade (org-drill-hypothetical-next-review-dates), and a DRILL_CARD_WEIGHT property divides how much a card's interval grows. A failure keeps the ease, removes the card's SCHEDULED date (it is due again at once, and asked first next time) and starts the intervals over. The result is written to the card's SCHEDULED date and to the properties org-drill uses, so a deck can be shared with Emacs:</p>
+<table class="defs">
+<tr><td class="term">DRILL_LAST_INTERVAL</td><td>days until the review (<code>15.0</code>, <code>0.0</code> after a failure)</td></tr>
+<tr><td class="term">DRILL_REPEATS_SINCE_FAIL</td><td>passing answers in a row, plus one</td></tr>
+<tr><td class="term">DRILL_TOTAL_REPEATS</td><td>answers in all</td></tr>
+<tr><td class="term">DRILL_FAILURE_COUNT</td><td>failed answers</td></tr>
+<tr><td class="term">DRILL_AVERAGE_QUALITY</td><td>the average grade</td></tr>
+<tr><td class="term">DRILL_EASE</td><td>the ease factor</td></tr>
+<tr><td class="term">DRILL_LAST_QUALITY</td><td>the last grade</td></tr>
+<tr><td class="term">DRILL_LAST_REVIEWED</td><td>when it was last answered (inactive timestamp)</td></tr>
+</table>
+<p>Cards still using the old LEARN_DATA property are read, and it is removed when they are answered. A new planning line and property drawer take the indentation of the card's text.</p>
+<h3 id="h-lua">Lua</h3>
+<p><code>require(&quot;org.extensions.drill&quot;)</code> has <code>start(scope, cram)</code>, <code>cards(scope)</code>, <code>due_cards(scope, today, cram)</code>, <code>status(card, today)</code> and <code>reschedule(bufnr, lnum, card, quality)</code>; <code>.schedule</code> has the algorithms (<code>sm2</code>, <code>sm5</code>, <code>simple8</code>, <code>answer</code>) and <code>.cloze.parse(line)</code> finds the clozes of a line.</p>
+<h3 id="h-options">Options</h3>
+<table class="defs">
+<tr><td class="term"><code>tag</code></td><td>tag of the cards (&quot;drill&quot;)</td></tr>
+<tr><td class="term"><code>scope</code></td><td>scope without an argument (&quot;file&quot;)</td></tr>
+<tr><td class="term long"><code>maximum_items_per_session</code></td><td>0 for no limit (30)</td></tr>
+<tr><td class="term"><code>maximum_duration</code></td><td>minutes, 0 for no limit (20)</td></tr>
+<tr><td class="term"><code>failure_quality</code></td><td>grades at or below this fail (2)</td></tr>
+<tr><td class="term"><code>algorithm</code></td><td>&quot;sm5&quot; (default), &quot;sm2&quot; or &quot;simple8&quot;</td></tr>
+<tr><td class="term"><code>learn_fraction</code></td><td>growth of SM-5 and Simple8 intervals (0.5)</td></tr>
+<tr><td class="term"><code>sm5_initial_interval</code></td><td>first SM-5 interval in days (4.0)</td></tr>
+<tr><td class="term"><code>sm5_matrix_file</code></td><td>SM-5's learned factors (stdpath(&quot;data&quot;)/org/drill-sm5.json)</td></tr>
+<tr><td class="term long"><code>leech_failure_threshold</code></td><td>failures that make a leech (15); false</td></tr>
+<tr><td class="term"><code>leech_method</code></td><td>&quot;skip&quot; (default), &quot;warn&quot; or false</td></tr>
+<tr><td class="term"><code>cloze_text_weight</code></td><td>see the weighted card types (4); false</td></tr>
+<tr><td class="term"><code>cram_hours</code></td><td>cram asks cards older than this (12)</td></tr>
+<tr><td class="term"><code>days_before_old</code></td><td>young / old boundary in days (10)</td></tr>
+<tr><td class="term long"><code>overdue_interval_factor</code></td><td>when a card is overdue (1.2)</td></tr>
+<tr><td class="term"><code>repeat_failed</code></td><td>ask failed cards again (true)</td></tr>
+<tr><td class="term"><code>shuffle</code></td><td>random order within each group (true); off, the most overdue cards come first and old cards before new ones</td></tr>
+<tr><td class="term"><code>save_buffers</code></td><td>write changed files after a session (true)</td></tr>
+<tr><td class="term long"><code>width</code>, <code>height</code>, <code>border</code></td><td>the session window (72, 20, &quot;rounded&quot;)</td></tr>
+<tr><td class="term"><code>keys</code></td><td>{ reveal, skip, edit, quit }: a key or a list of keys each</td></tr>
+</table>
+<h3 id="h-differences-from-emacs-org-drill">Differences from Emacs org-drill</h3>
+<ul>
+<li>No random noise on intervals (org-drill-add-random-noise-to-intervals-p) and no adjustment for early or late reviews (org-drill-adjust-intervals-for-early-and-late-repetitions-p); both are off by default in org-drill.</li>
+<li><code>maximum_items_per_session</code> counts the cards picked for the session; org-drill counts passed cards, so failures there make room for more cards.</li>
+<li>The language cards and <code>simpletyped</code> are asked like simple cards, and custom card functions (org-drill-card-type-alist) are not supported.</li>
+<li>Very overdue cards are not &quot;lapsed&quot; (org-drill--lapse-very-overdue-entries-p, off in org-drill), and there is no <code>org-drill-again</code>, <code>org-drill-merge-buffers</code> or DATE_ADDED ordering.</li>
+<li>The question is shown in a floating window instead of narrowing the buffer to the entry, so its folds are left as they are.</li>
+</ul>
+</article>
+<nav class="pager"><a class="prev" href="../manual/org-extensions-pomodoro.html"><span>上一页</span>Pomodoro</a><a class="next" href="../manual/org-extensions-merge.html"><span>下一页</span>Structural git merges</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L11175">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>

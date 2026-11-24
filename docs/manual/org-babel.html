@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source blocks (Babel) · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="../assets/site.js" defer></script>
+
+</head>
+<body data-root="../">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="../index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="../index.html">首页</a></li>
+<li class=""><a href="../guide.html">指南</a></li>
+<li class=""><a href="../playground.html">互动教程</a></li>
+<li><details class="group" open><summary>手册</summary><ul>
+<li class=""><a href="../manual/index.html">目录</a></li>
+<li class=""><a href="../manual/org-introduction.html">简介</a></li>
+<li class=""><a href="../manual/org-installation.html">安装</a></li>
+<li class=""><a href="../manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="../manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="../manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="../manual/org-tags.html">标签</a></li>
+<li class=""><a href="../manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="../manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="../manual/org-clock.html">计时和工作量</a></li>
+<li class=""><a href="../manual/org-agenda.html">日程</a></li>
+<li class=""><a href="../manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="../manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="../manual/org-capture.html">捕捉</a></li>
+<li class=""><a href="../manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="../manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="../manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="../manual/org-babel.html" aria-current="page">源代码块（Babel）</a></li>
+<li class=""><a href="../manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="../manual/org-export.html">导出</a></li>
+<li class=""><a href="../manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="../manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="../manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="../manual/org-completion.html">补全</a></li>
+<li class=""><a href="../manual/org-appearance.html">外观和高亮</a></li>
+<li class=""><a href="../manual/org-config.html">配置参考</a></li>
+<li class=""><a href="../manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="../manual/org-commands.html">命令</a></li>
+<li class=""><a href="../manual/org-api.html">Lua API</a></li>
+<li class=""><a href="../manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="../manual/org-lint.html">检查</a></li>
+<li class=""><a href="../manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="../manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="../manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="../manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="../manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="../manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="../manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="../manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="../manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="../manual/org-extensions-drill.html">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="../manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="../manual/org-extensions-hugo.html">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="../manual/org-extensions-caldav.html">CalDAV sync</a></li>
+<li class="sub"><a href="../manual/org-extensions-cli.html">Command line (org)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-code.html">Code and notes (code)</a></li>
+<li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="../manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="../manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="../manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="../examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="../examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="../examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="../examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="../examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="../examples/05-tags.html">标签</a></li>
+<li class=""><a href="../examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="../examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="../examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="../examples/09-agenda.html">日程</a></li>
+<li class=""><a href="../examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="../examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="../examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="../examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="../examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="../examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="../examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="../examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="../examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="../examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="../examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="../examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="../parity/review.html">兼容性审查</a></li>
+<li class=""><a href="../parity/index.html">目录</a></li>
+<li class=""><a href="../parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="../extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content manual">
+<article>
+<h1>源代码块（Babel）</h1>
+<div class="tags"><a class="tag" id="org-babel" href="#org-babel">org-babel</a></div>
+<pre class="code"><code class="language-org"><span class="h-k">#+NAME:</span> hello
+<span class="h-k">#+begin_src</span> python :results output :var n=3
+for i in range(n): print(&quot;hi&quot;, i)
+<span class="h-k">#+end_src</span></code></pre>
+<p>Babel follows Emacs Org 9.8: the same header arguments, the same way values are read from programs and written back (tables, lists, <code>: </code> lines), the same <code>#+RESULTS</code> placement, <code>:cache</code> hashes and tangled files, so a file gives the same results in both editors.</p>
+<table class="defs">
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-c&gt;</span> or <span class="key">&lt;prefix&gt;</span>be</td><td>Execute the block, #+CALL line, inline src block or inline call at the cursor (asynchronously). With a count (C-u) a <code>:cache yes</code> block runs even when its hash is unchanged.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bb / bs</td><td>Execute every src block, #+CALL line, inline src block and inline call of the buffer / subtree, in order.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bk</td><td>Remove the result. With a count (C-u), remove every result in the buffer.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bn / bp</td><td>Next / previous block.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>'</td><td>Edit the block in a buffer with the language's filetype, the cursor at the same place in the code (and back in the block where it was in the code on leaving). With a count (C-u) on a block with a <code>:session</code>, show the session instead. See <a class="hl" href="#org-babel-edit-special">org-babel-edit-special</a>.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bt</td><td>Tangle the file (<code>:Org tangle</code>). With a count of 1 (C-u) only the block at the cursor; with 2 or more (C-u C-u) the blocks with the same <code>:tangle</code> value.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bf</td><td>Tangle another file.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bv</td><td>Show the expanded block (noweb, :prologue, variables, :epilogue) in a split.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bI / bc</td><td>Show the block's merged header args / report a header arg of the #+begin_src line that looks like a misspelt one (within 2 edits of a known name, like Emacs).</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bj</td><td>Insert a header argument (names and values completed).</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bg / br</td><td>Go to a named block / a named result.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bu</td><td>Go to the head of the block.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bo</td><td>Open the result (follows a file link, or shows it).</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bd</td><td>Split the block at the cursor into two (mid-line at the cursor's column), re-indent the blocks like org-indent-block and go to the last one; in Visual mode wrap the selection in a new block (or, inside a block, make it a block of its own); elsewhere insert a block, in the blank lines after a block of the same language without asking for one.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bi</td><td>Add the named blocks of a file to the Library of Babel, so #+CALL, :var and noweb can use them everywhere (also <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-v&gt;</span><span class="key">&lt;Tab&gt;</span>).</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bz / bZ</td><td>Show the block's session (with a count, first assign its :var values there); bZ also opens the edit buffer.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bl</td><td>Send the block to its session and show the session.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bK</td><td>Kill the block's session.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bC</td><td>Cancel the evaluation of the block at the cursor (elsewhere: the only one running, or pick one); with a count, every running evaluation. See <a class="hl" href="#org-babel-async">org-babel-async</a>.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>ba</td><td>Show the block's hash (the one <code>:cache yes</code> stores).</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bh</td><td>List the Babel key bindings.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bm</td><td>Select the block body (Visual line mode).</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>bx</td><td>Run Normal-mode keys in the block's edit buffer and write the result back (e.g. <code>gg=G</code> to reindent).</td></tr>
+<tr><td class="term"><span class="key">&lt;Tab&gt;</span> on #+RESULTS</td><td>Fold / unfold the result (org-babel-hide-result-toggle); <code>:Org babel_hide_all_results</code> folds every result.</td></tr>
+<tr><td class="term long"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-c&gt;</span> on the hash of <code>#+RESULTS[hash]:</code></td><td>Copy the hash to the unnamed register and show it (org-babel-hash-at-point, <code>:Org babel_hash_at_point</code>).</td></tr>
+<tr><td class="term long">:Org babel_remove_inline_result</td><td>Remove the <code>{{{results(...)}}}</code> after the inline src block or inline call at the cursor, with the white space before it (org-babel-remove-inline-result; <span class="key">&lt;prefix&gt;</span>bk does not remove inline results, like Emacs).</td></tr>
+<tr><td class="term">#+CALL: name(n=5)</td><td>Execute a named block with arguments (C-c C-c on it). <code>#+NAME:</code> above a call names its results. Arguments without <code>name=</code> fill the block's variables in order: <code>#+CALL: add(10, 20)</code>.</td></tr>
+<tr><td class="term">src_lua{return 1}</td><td>Inline block: C-c C-c on it inserts or replaces <code> {{{results(=1=)}}}</code> after it. <code>:results raw</code> inserts the bare value; tables, lists and multi-line results are an error (&quot;Inline error: ... cannot be used&quot;).</td></tr>
+<tr><td class="term">call_name(n=5)</td><td>Inline call, same as above.</td></tr>
+</table>
+<h3 id="h-evaluation">Evaluation</h3>
+<p>Before a block runs you are asked &quot;Evaluate this LANG code block on your system?&quot; unless <code>babel.confirm_evaluate</code> is false. It can also be a function <code>function(lang, body) return true end</code> that decides (like Emacs' <code>org-confirm-babel-evaluate</code>). <code>:eval query</code> always asks, <code>:eval no</code> and <code>:eval never</code> (or <code>:noeval</code>) never run, <code>:eval never-export</code>/<code>no-export</code> only skip export, <code>:eval query-export</code> asks when exporting. Executing the buffer or a subtree asks for every block, like Emacs. With <code>babel.no_eval_on_ctrl_c_ctrl_c</code> C-c C-c does not evaluate blocks.</p>
+<p>Errors: whatever a program writes to stderr, and its exit code when it fails, go to the <code>*Org-Babel Error Output*</code> buffer (shown in a split); the result keeps the standard output only, like <code>org-babel-eval</code>. A missing reference or an inline result that cannot be inserted stops the execution of the buffer.</p>
+<div class="tags"><a class="tag" id="org-babel-async" href="#org-babel-async">org-babel-async</a></div>
+<h3 id="h-running-in-the-background">Running in the background</h3>
+<p>C-c C-c, <span class="key">&lt;prefix&gt;</span>bb and <span class="key">&lt;prefix&gt;</span>bs never block Neovim: the code runs as a separate process (or in its session) and its result is inserted when it is done; executing the buffer or a subtree still runs the blocks one after the other, in order. Meanwhile:</p>
+<ul>
+<li>A spinner is drawn after the first line of the running block (virtual text, highlight group <code>OrgBabelRunning</code>; the buffer does not change), with the seconds elapsed after the first one. <code>babel.spinner</code> sets its frames (<code>false</code>: a still &quot;executing…&quot;), <code>babel.spinner_interval</code> the milliseconds between them.</li>
+<li>What the program prints (standard output and error) shows as it arrives, as virtual lines below the block: a header with the spinner and the seconds elapsed (and &quot;last 10 of 57 lines&quot; once some are hidden), then the last <code>babel.live_output</code> lines (default 10; <code>false</code> or 0 turns this off). Colour codes and control characters are dropped, and after a carriage return only what follows it shows (progress bars). They are virtual text (highlight groups <code>OrgBabelRunning</code> and <code>OrgBabelOutput</code>): the result inserted when the run ends is the same as without them, and they go away then, or when the run is cancelled or fails. Blocks run as a separate process stream this way (shell, Python, C, ... without <code>:session</code>); session blocks and Lua blocks run inside Neovim show their result only.</li>
+<li>You can keep editing. The result follows its block when lines are added or removed above it. Without a placeholder (below), a result is discarded with a warning when its block was changed or deleted during the run.</li>
+<li>With <code>babel.async = true</code> every run first writes a placeholder id as the result, like <code>:async</code> session blocks in Emacs (see Sessions below): the result replaces the placeholder wherever the block is then, even if the block was edited; if the placeholder was deleted, the result is discarded with a warning. <code>:async no</code> on a block (or in <code>default_header_args</code>) keeps it out. The placeholder and the result are one undo step, when nothing else changed the buffer in between.</li>
+<li><span class="key">&lt;prefix&gt;</span>bC (<code>:Org babel_cancel</code>) cancels the evaluation at the cursor: its process is killed (with its child processes), or its session sent an interrupt (C-c). A placeholder becomes <code>: [ Babel evaluation cancelled ]</code>; without one the previous result stays as it was. Executing the buffer or a subtree stops there. Not on a running block, it cancels the only running evaluation, or asks which one; with a count, all of them. Unloading (<code>:bwipeout</code>, <code>:bdelete</code>) a buffer cancels its evaluations; quitting Neovim cancels them all.</li>
+<li>A program still running after <code>babel.timeout</code> ms (Emacs has no timeout) is killed the same way, with its child processes, in the background or not: the output so far is the result, and the error output says it timed out (exit code 124).</li>
+</ul>
+<p>What needs a value at once still waits for it, as in Emacs, with no spinner or placeholder: export, the blocks a <code>:var</code> reference, a noweb call or <code>:post</code> evaluates, and <code>org-sbe</code> in table formulas. Lua blocks run inside Neovim (unless <code>babel.languages.lua.cmd</code> names an interpreter), so they hold Neovim while they run and cannot be cancelled; so do the few steps of some language ports that wait for a helper tool (LaTeX image conversion, <code>screen</code>).</p>
+<p>Hooks are <code>User</code> autocommands: <code>OrgBabelAfterExecute</code> (after a result is inserted; <code>data</code> has bufnr, lang, name, result), <code>OrgBabelTanglePre</code>, <code>OrgBabelTangleBody</code> (the body being tangled is in <code>require(&quot;org.babel.tangle&quot;).body</code>, which the callback may change), <code>OrgBabelTanglePost</code> (per written file, <code>data.file</code>) and <code>OrgBabelTangleFinished</code>.</p>
+<h3 id="h-results">Results</h3>
+<p>A block's result is its value (<code>:results value</code>, the default) or what it prints (<code>:results output</code>). Like Emacs:</p>
+<ul>
+<li>Python, Ruby and JavaScript values are read from their printed form: <code>[[1,2],None,[3,4]]</code> is a table with a hline, <code>1.0</code>, big integers, <code>True</code>, <code>None</code> keep their spelling, a dict stays text (a table with <code>:results table</code>, a <code>key :: value</code> list with <code>:results list</code>), <code>:results verbatim</code> / <code>pp</code> / <code>scalar</code> keep the text (pprint for pp).</li>
+<li>Shell blocks default to their output (<code>:results value</code> is the exit status). Unless <code>output</code>, <code>verbatim</code>, <code>raw</code>, <code>org</code>, <code>html</code>, <code>code</code>, <code>pp</code> or <code>file</code> is given, the text is read like <code>org-babel-import-elisp-from-file</code>: several lines become a table split at tabs, commas or runs of spaces, numbers are read, one line stays text (<code>echo a b</code> gives <code>: a b</code>, <code>printf 'a\nb\n'</code> a two-row table).</li>
+<li>sqlite runs <code>sqlite3 -csv</code> (<code>-header</code> with <code>:colnames yes</code>) and passes <code>:header :echo :bail :csv :column :html :line :list :separator :nullvalue</code> (and <code>:readonly yes</code>) to it.</li>
+<li>Lua blocks run inside Neovim (not an external <code>lua</code> like Emacs): a returned table becomes a table or list, <code>return &quot;a&quot;, &quot;b&quot;</code> gives <code>a, b</code>, <code>nil</code> gives <code>nil</code>. Code runs in the editor process: it can use the <code>vim</code> API, but <code>os.exit()</code> or a blocking loop affects Neovim, and <code>babel.timeout</code> cannot stop it. <code>print</code> goes to the result.</li>
+</ul>
+<p>Results are inserted after <code>#+RESULTS:</code> like <code>org-babel-insert-result</code>: text as <code>: </code> lines (an example block from <code>babel.min_lines_for_block_output</code> lines), lists as tables (with <code>:results list</code> as a plain list), <code>raw</code>, <code>drawer</code> (<code>:results:</code> ... <code>:end:</code>), <code>org</code>, <code>html</code>, <code>latex</code>, <code>code</code> and <code>:wrap</code> as in Emacs. A paragraph below <code>#+RESULTS:</code> is not part of the result and stays when the result is replaced.</p>
+<h3 id="h-sessions">Sessions</h3>
+<p><code>:session [name]</code> runs the block in a live interpreter (a REPL) shared by every block with the same language and name (no name = <code>default</code>), so variables, imports, functions and the working directory persist between blocks, like Emacs' comint sessions. Supported: shells (sh, bash, zsh, fish), python, js/node, ruby (irb), R, julia, ocaml, scheme, haskell (ghci), SQL (sqlite3, psql, mysql) and lua (lua sessions keep their globals inside Neovim; what a function from an earlier block prints goes to the block that calls it). Other languages ignore <code>:session</code> with a warning.</p>
+<ul>
+<li>The REPL runs in a terminal buffer named like Emacs: <code>*shell*</code>, <code>*Python*</code>, <code>*ruby*</code>, <code>*Javascript REPL*</code>, <code>*R*</code>, <code>*julia*</code>, <code>*OCaml*</code>, <code>*scheme*</code>, <code>*ob-haskell*</code>, <code>*SQL*</code> (<code>*lua*</code> for lua) for the default session, <code>*name*</code> for <code>:session name</code> (a name that already has earmuffs is used as is, so <code>:session *Python*</code> is the default python session). <span class="key">&lt;prefix&gt;</span>bz (C-c C-v C-z) shows it; type into it (Insert mode) to use the REPL: what you define there is seen by the next block, and the other way round. A session of another language with the same name gets <code>*name*&lt;2&gt;</code>.</li>
+<li>Each evaluation is written to a file and the REPL is sent one line that runs it and prints begin / end-of-evaluation markers (like ob-comint's eoe indicator); the result is what the code printed between them. Shells <code>.</code> (source) the file, so <code>cd</code>, variables and functions stay. python, ruby, node and R define a small helper at start-up that evaluates the file in the REPL's global scope (irb's own binding, so irb locals are shared). julia's helper (loaded with <code>julia -L</code>) runs the file in <code>Main</code>; the OCaml toplevel reads it with <code>#use</code> (the helpers come from an <code>-init</code> file, which first <code>#use</code>s your own <code>.ocamlinit</code>); a scheme REPL <code>load</code>s a small program that evaluates the forms one by one in <code>(interaction-environment)</code>. julia, ocaml and scheme show the block's code in the REPL buffer before its output. ghci and the SQL clients read a file that prints the markers itself (<code>:script</code>, <code>.read</code>, <code>\i</code>, <code>source</code>). A line half-typed at the prompt is discarded (C-u) before a block is sent.</li>
+<li><code>:results value</code> is the value of the last expression, formatted like Emacs (python uses ob-python's <code>__org_babel_python_format_value</code>; R writes it as a tab-separated table like ob-R; julia writes it with CSV.jl as without a session; ocaml parses the toplevel's last <code>name : type = value</code> answer like ob-ocaml; scheme <code>write</code>s the last form's value; haskell keeps <code>it</code> after the last line in <code>__LAST_VALUE_IMPROBABLE_NAME__</code> and prints it with <code>show</code>, quotes removed, like ob-haskell; SQL blocks are tables as without a session, see below), or the returned value (lua); shells use their output unless <code>:results value</code> is explicit, which gives the exit status. <code>:results output</code> is what the REPL printed, with stderr merged, prompts and the input echo left out.</li>
+<li>The session starts in the block's <code>:dir</code>. Shells start without their start-up files (bash <code>--norc</code>, zsh <code>-f</code>, fish <code>--no-config</code>) for a predictable prompt; python runs <code>python3 -i</code> (your PYTHONSTARTUP is still loaded), ruby runs <code>irb</code> next to the configured <code>ruby</code> (a <code>:ruby</code> header argument is the REPL command itself, like Emacs), js runs a node REPL, R runs <code>R</code> next to the configured <code>Rscript</code>, julia runs <code>julia -i --banner=no --color=no --history-file=no</code> (<code>cmd</code>; a <code>session_cmd</code> is used as it is), ocaml runs <code>cmd</code> (<code>ocaml</code>, or <code>session_cmd</code>) and scheme the REPL of its implementation (<code>:scheme</code>, else <code>impl</code>): guile (<code>guile --no-auto-compile</code>), chez (<code>scheme</code>), chicken (<code>csi</code>), chibi, gambit (<code>gsi</code>), racket (<code>racket -i</code>) or mit (<code>mit-scheme --quiet</code>), or the command <code>session_commands</code> gives it. One scheme session runs one implementation. haskell runs the <code>cmd</code> of <code>babel.languages.haskell</code> (ghci). A top-level <code>let</code>/<code>const</code> in a js session becomes <code>var</code>, so blocks can be evaluated again.</li>
+<li>haskell: a definition of several lines (a type signature and its equations, an indented body) is sent between <code>:{</code> and <code>:}</code>; code that has <code>:{</code> itself is sent as it is.</li>
+<li>SQL (<code>sqlite</code> blocks, and <code>sql</code> blocks with no <code>:engine</code> or <code>:engine sqlite</code>, <code>postgresql</code>/<code>postgres</code> or <code>mysql</code>/<code>mariadb</code>) keeps one client connected (sqlite3, psql, mysql), so temporary tables, settings and variables last from one block to the next. The block that starts the session gives the connection: <code>:db</code> (sqlite3), <code>:dbhost</code>, <code>:dbport</code>, <code>:dbuser</code>, <code>:dbpassword</code>, <code>:database</code> and <code>:cmdline</code> like the one-shot command line of ob-sql; later blocks only send their code. Each block first sets the output format (sqlite3 CSV with its <code>:colnames</code>, <code>:separator</code>, <code>:nullvalue</code> and format headers; psql unaligned and tab-separated, <code>:colnames no</code> for no header), so results are tables as without a session. A last statement without <code>;</code> gets one. mysql runs in batch mode (<code>-B --force</code>, with <code>--commands</code> for MySQL 9 clients); its <code>:colnames no</code> is read when the session starts. Errors are printed in the result and the session goes on. A <code>:session</code> with another engine is an error.</li>
+<li><span class="key">&lt;prefix&gt;</span>bl (C-c C-v C-l) runs the block in its session and shows it. <span class="key">&lt;prefix&gt;</span>bK kills the session: the interpreter is stopped and its buffer wiped, like killing the session buffer in Emacs; wiping the buffer yourself does the same. When the interpreter exits (<code>exit()</code>), the next block starts a new one.</li>
+<li>Every evaluation runs in the background, so Neovim never blocks (in Emacs only <code>:async</code> evaluations do); requests to one session run in order. Without <code>:async</code>, a result is discarded (with a warning) when its block was edited during the run. Cancelling one (<a class="hl" href="#org-babel-async">org-babel-async</a>) interrupts the REPL with C-c and drops its result; the session keeps running for the next block.</li>
+<li><code>:async</code> (or <code>:async yes</code>) on a session block works like Emacs (org-babel-comint-async): <code>#+RESULTS:</code> gets a placeholder id at once, and the result replaces that placeholder when it arrives, even if the block was edited or moved meanwhile. Deleting the placeholder discards the result. <code>:async no</code>, <code>:session none</code>, export, <code>:var</code> references and <code>:results silent</code>/<code>none</code>/<code>append</code>/<code>prepend</code> run without a placeholder; lua sessions finish at once and ignore it. <code>babel.async = true</code> gives every block a placeholder, with a session or not (<a class="hl" href="#org-babel-async">org-babel-async</a>).</li>
+</ul>
+<h3 id="h-languages">Languages</h3>
+<p><code>babel.languages</code> maps a language name to <code>{ cmd = &quot;...&quot;, ext = &quot;...&quot;, default_header_args = {...} }</code>. <code>default_header_args</code> are that language's defaults (Emacs <code>org-babel-default-header-args:LANG</code>). Emacs enables only emacs-lisp (<code>org-babel-load-languages</code>); the plugin enables shells, python, lua, js/ts, ruby, perl, php, R, go, rust, sqlite, sql, C, C++/cpp and D as well, and the ports of <a class="hl" href="#org-babel-languages">org-babel-languages</a>. <code>:python</code>, <code>:ruby</code> and <code>:cmd</code> (js) choose the interpreter of one block, like Emacs.</p>
+<ul>
+<li>emacs-lisp (elisp): run in a separate Emacs, <code>emacs -Q --batch</code> (<code>babel.emacs_lisp = { command = &quot;emacs&quot;, args = { &quot;-Q&quot;, &quot;--batch&quot; } }</code>; drop <code>-Q</code> to load your init file), wrapped like ob-emacs-lisp: <code>:var</code> values are bound as quoted Lisp data, <code>:lexical</code>, <code>:prologue</code> and <code>:epilogue</code> apply, the value is printed with <code>prin1</code> and read back (lists become tables), <code>:results output</code> collects what <code>princ</code> / <code>print</code> write, <code>pp</code>/<code>code</code> use <code>pp-to-string</code>. That Emacs is not the editor: each evaluation starts a fresh process, so there are no buffers, no state between blocks and no sessions. Without Emacs (<code>command = false</code> or not installed) side-effect-free code runs on the Lisp interpreter of table formulas (<a class="hl" href="org-tables.html#org-table-calc">org-table-calc</a>).</li>
+<li>python: <code>:return expr</code> (the value of <code>expr</code>), <code>:preamble</code>, and <code>:results graphics file :file x.png</code> (the matplotlib figure is saved).</li>
+<li>C, C++ (cpp) and D (ob-C): compiled with gcc / g++ (rdmd for D) and run; <code>:includes &lt;stdio.h&gt;</code>, <code>:defines N 5</code>, <code>:namespaces std</code>, <code>:flags -O2</code>, <code>:libs -lm</code>, <code>:main no</code>, <code>:cmdline args</code>; table variables become arrays with <code>NAME_rows</code> / <code>NAME_cols</code> (and <code>NAME_h(row, &quot;col&quot;)</code> with <code>:colnames yes</code>).</li>
+<li>sql (ob-sql): <code>:engine postgresql|mysql|mssql|sqsh|vertica|monetdb|dbi</code> runs that client with <code>:dbhost :dbport :dbuser :dbpassword :database</code> (<code>:out-file</code>); without <code>:engine</code> the plugin runs sqlite3 with <code>:db</code>. <code>$name</code> in the body is replaced by <code>:var name</code> (a table becomes a CSV file name).</li>
+<li>Value conversion like ob-python / ob-ruby / ob-lua: <code>hline_to</code> is the text an hline of a table variable becomes (python and lua &quot;None&quot;, ruby &quot;nil&quot;; in Neovim's Lua, <code>None</code> is nil), <code>None_to</code> (python, lua) and <code>nil_to</code> (ruby) what a None / nil of a list result becomes (&quot;hline&quot;); lua <code>multiple_values_separator</code> (&quot;, &quot;) joins several returned values. <code>lua = { cmd = &quot;lua&quot; }</code> (or luajit, ...) runs lua blocks in that interpreter like ob-lua instead of inside Neovim. <code>python = { session_cmd = &quot;ipython -i&quot; }</code> starts sessions with that command as it is (org-babel-python-command-session); <code>session_cmd</code> of julia and ocaml, and <code>scheme = { session_commands = { guile = &quot;guile -q&quot; } }</code>, likewise name the REPL of their sessions.</li>
+<li>Shells: <code>babel.shell_names</code> (org-babel-shell-names: sh bash zsh fish csh ash dash ksh mksh posh) run like sh, as the program of that name; <code>babel.shell_results_defaults_to_output = false</code> makes a block without <code>:results</code> words give its exit status.</li>
+</ul>
+<div class="tags"><a class="tag" id="org-babel-languages" href="#org-babel-languages">org-babel-languages</a></div>
+<p>Ports of Emacs ob-LANG.el, enabled by default; each <code>babel.languages</code> entry holds that file's options (named after the Emacs variables, see <a class="hl" href="org-config.html">org-config</a>). Programs that are missing give an error when a block runs. C-c C-v v shows the body as the Emacs expand function makes it. Command lines (a build, a compiled program) run with <code>sh -c</code> when <code>sh</code> is on $PATH, else with 'shell' and 'shellcmdflag' (cmd.exe, PowerShell on Windows); with PowerShell, a line that starts with a quoted program gets the call operator <code>&amp;</code>.</p>
+<ul>
+<li>plantuml: to the <code>:file</code> (<code>-tpng</code>, <code>-tsvg</code>, ... from its extension; <code>:results verbatim</code> gives the text), <code>:var</code> as <code>!define</code>, @startuml / @enduml added. <code>exec_mode</code> &quot;jar&quot; (java -jar <code>jar_path</code>, <code>:java</code> options) or &quot;plantuml&quot; (<code>executable_path</code>), <code>args</code> ({ &quot;-headless&quot; }), <code>svg_text_to_path</code> (inkscape).</li>
+<li>ditaa: NAME.png by default (<code>:file-ext png</code>), <code>.svg</code> with --svg, <code>.eps</code> and <code>.pdf</code> with DitaaEps.jar (and epstopdf); <code>exec_mode</code> &quot;jar&quot; (<code>java_exec</code> -jar <code>jar_path</code>) or &quot;ditaa&quot; (<code>exec</code>), <code>:cmdline</code>, <code>:java</code>.</li>
+<li>gnuplot: <code>:file</code> (terminal from its extension, <code>terms</code>), <code>:term</code>, <code>:title</code>, <code>:set '(&quot;grid&quot;)</code>, <code>:line</code>, <code>:xlabels</code>, <code>:ylabels</code>, <code>:timefmt</code>, <code>:timeind</code>, <code>:missing</code>; a table variable is written to a data file whose name replaces <code>$name</code>. <code>:results output</code> gives what gnuplot printed.</li>
+<li>latex: the body is the result (<code>:results latex</code>); <code>:var</code> names are replaced. With <code>:file</code>: .png like LaTeX previews (<code>process_alist.png</code>, latex + dvipng; <code>:buffer no</code> draws black on transparent), .svg through a PDF and <code>pdf_svg_process</code> (<code>preamble</code>, <code>begin_env</code>, <code>end_env</code>), .pdf with the LaTeX export's compiler (<code>:fit</code>, <code>:border</code>, <code>:pdfheight</code>, <code>:pdfwidth</code>, <code>:headers</code>, <code>:packages</code>), other images with <code>:imagemagick yes</code> (<code>:iminoptions</code>, <code>:imoutoptions</code>), .html with <code>htlatex</code>, .tikz as it is.</li>
+<li>lilypond: engraved to the <code>:file</code> (png, pdf or eps). Arrange mode (<code>:Org babel_lilypond_toggle_arrange_mode</code>): evaluating a block tangles all lilypond blocks to FILE.ly (<code>:Org babel_lilypond_tangle</code>), engraves it (<code>gen_png</code>, <code>gen_html</code>, <code>gen_pdf</code>, <code>gen_svg</code>, <code>use_eps</code>), then opens the PDF and plays the MIDI file with <code>commands</code>. Toggles: <code>babel_lilypond_toggle_{arrange_mode,png_generation,html_generation,</code> <code>pdf_generation,pdf_display,midi_play}</code>.</li>
+<li>java: the body is wrapped in a class and a main method (<code>:classname</code>, <code>:imports</code>, a <code>package</code> line), compiled with javac (<code>:cmpflag</code>) and run with java (<code>:cmdline</code>, <code>:cmdargs</code>); <code>:results value</code> returns the value of the main method. Default <code>:results output :dir .</code>.</li>
+<li>csharp: a .NET project (<code>:usings '(&quot;System.Text&quot;)</code>, <code>:class</code>, <code>:main no</code>, <code>:references</code>, <code>:framework</code>, <code>:nugetconfig</code>) restored, built and run with dotnet.</li>
+<li>haskell: sent to ghci (<code>cmd</code>), or compiled with ghc for <code>:compile yes</code> (<code>:flags</code>, <code>:libs</code>). <code>:Org babel_haskell_export_to_lhs</code> exports the file to FILE.lhs (with a count, runs lhs2tex to FILE.tex).</li>
+<li>clojure, clojurescript: babashka, clojure-cli or nbb (<code>backend</code>, or <code>:backend</code>), <code>:ns</code>, <code>:var</code> as <code>let</code> bindings.</li>
+<li>lisp (Common Lisp): evaluated by <code>cmd</code> (<code>sbcl --script</code>) with <code>*default-pathname-defaults*</code> set to the block's directory (<code>dir_fmt</code>) and <code>:package</code>.</li>
+<li>scheme: guile by default (<code>impl</code>, <code>:scheme chez|chicken|chibi|racket| ...</code>, <code>commands</code>); the value of the last form, <code>:var</code> as <code>define</code>.</li>
+<li>fortran: compiled with gfortran (<code>cmd</code>), wrapped in <code>program main</code>; <code>:flags</code>, <code>:cmdline</code>, <code>:includes</code>, <code>:defines</code>, <code>:main no</code>.</li>
+<li>julia, groovy, ocaml, maxima: <code>:var</code> and value results like their ob-LANG.el (julia writes the value with CSV.jl and DataFrames.jl; groovy ignores <code>:var</code> like Emacs; maxima <code>:batch</code>, <code>:graphics-pkg</code>).</li>
+<li>processing: HTML running the sketch with processing.js; <code>:Org babel_processing_view_sketch</code> runs it with processing-java.</li>
+<li>screen: the block is pasted into the screen session <code>:session</code> (&quot;default&quot;), started in <code>:terminal</code> (xterm) running <code>:cmd</code> (sh); <code>:Org babel_screen_test</code> checks the setup.</li>
+<li>calc: no program needed; each line runs on a Calc stack (the Calc of table formulas, 12 digits, degrees). A <code>:var</code> name pushes its value, a line <code>'KEY</code> runs that Calc key on the stack (<code>'+ '- '* '/ '^ '% '\ ': '| 'B</code> on two values, <code>'n '&amp; 'Q 'L 'E 'S 'C 'T 'A 'F 'R '!</code> on one, <code>'P</code> pushes pi), another line is a formula whose value is pushed (<code>:var</code> names replaced). The top of the stack is the result: a matrix gives a table, a vector a row (<code>:results verbatim</code>: the text).</li>
+<li>dot (Graphviz): <code>cmd :cmdline -o :file</code> (<code>:cmdline</code> defaults to <code>-T</code> and the file's extension, <code>:cmd</code> replaces <code>cmd</code>), <code>$NAME</code> replaced by <code>:var NAME</code>. The diagrams extension (<a class="hl" href="org-extensions-diagrams.html">org-extensions-diagrams</a>) replaces it while it handles dot.</li>
+<li>sed: <code>cmd -f SCRIPT :cmd-line :in-file</code>; <code>:stdin ref</code> feeds a value.</li>
+<li>sass: <code>cmd :cmdline IN OUT</code>; the CSS is the result, or goes to <code>:file</code>.</li>
+<li>octave, matlab: the code with <code>name=value;</code> lines is fed to <code>cmd</code> (<code>octave -q</code>, <code>matlab -nosplash</code>); a value result is written by the wrapper of ob-octave to a file read back as a table; a graphics <code>:file</code> is printed with <code>print -dpng</code>.</li>
+<li>forth: the lines run in gforth (<code>cmd</code>); <code>:results output</code> gives what each line printed, the default the last line's (<code>:session none</code> is an error like Emacs).</li>
+<li>awk: <code>cmd -f SCRIPT :cmd-line -v NAME='VALUE'... :in-file</code> (<code>cmd</code> &quot;awk&quot;); a table variable is passed tab-separated, a list one element per line; <code>:stdin ref</code> feeds a value the same way.</li>
+<li>css, makefile: the body is the result; nothing runs.</li>
+<li>org: the body is raw Org with <code>$NAME</code> replaced by <code>:var NAME</code>; <code>:results latex</code>, <code>html</code> or <code>ascii</code> give its body-only export. The defaults are <code>:results raw silent</code> and <code>:exports code</code>, so add <code>:results replace</code> to insert it.</li>
+</ul>
+<h3 id="h-header-arguments">Header arguments</h3>
+<p>Header arguments merge like Emacs: <code>babel.default_header_args</code> (inline blocks: <code>default_inline_header_args</code>, #+CALL: the called block's, then <code>default_lob_header_args</code>), the language's <code>default_header_args</code>, the <code>header-args</code> and <code>header-args:LANG</code> properties (the nearest headline that sets one wins; <code>header-args+:</code> adds to the inherited value; <code>#+PROPERTY:</code> applies when no headline sets it), the <code>#+begin_src</code> line, then <code>#+HEADER:</code> lines (the last wins). Lisp in header arguments: like org-babel-read, <code>:var x=(+ 1 2)</code> and the values of :dir, :file, :output-dir, :file-desc, :file-ext, :tangle, :results, :exports, :session, :cmdline, :prologue, :epilogue, :wrap, :shebang, :mkdirp, :eval, :cache, :noweb and :comments that start with <code>(</code> (<code>:dir (concat (getenv &quot;HOME&quot;) &quot;/tmp&quot;)</code>) are evaluated: on the Lisp interpreter of table formulas, else in a separate <code>emacs --batch</code> with Org loaded (<code>babel.emacs_lisp</code>). A header value that can't be evaluated is kept as text; a <code>:var</code> form is an error.</p>
+<table class="defs">
+<tr><td class="term">:results</td><td>output|value; replace|append|prepend|silent|none|discard; verbatim|scalar|table|vector|list|file; raw|org|drawer|html| latex|code|pp|link|graphics</td></tr>
+<tr><td class="term">:var</td><td>name=value, name=&quot;string&quot;, name=named-table, name=list, name=table[1,2], name=table[1:3,-1] (0-based ranges and negative indices count every row, the header and hlines included; <code>[,1]</code> = a column). A reference to a src block or <code>#+CALL</code> evaluates it: name=block, name=block(x=1), name=block(1, 2), name=block[:results output](x=1), name=block(x=1)[0]; <code>name=block[]</code> is its body text. Other forms: file.org:name, an ID or CUSTOM_ID (the headline's text), Emacs Lisp literals <code>'(1 2 3)</code> and forms <code>(+ 1 2)</code> (see &quot;Lisp in header arguments&quot; above). Bash gets tables as associative arrays and lists as arrays; sqlite/sql replace <code>$name</code>.</td></tr>
+<tr><td class="term">:hlines</td><td>yes: keep the hlines of table variables (None / nil / hline)</td></tr>
+<tr><td class="term">:separator</td><td>cell separator of tables given to shells (default: tab)</td></tr>
+<tr><td class="term">:stdin</td><td>ref: feed a value to the stdin of a shell block</td></tr>
+<tr><td class="term">:session</td><td>[name]: see Sessions above</td></tr>
+<tr><td class="term">:colnames</td><td>a table variable whose 2nd row is the only hline loses its header row; <code>yes</code> always takes the first row as names and puts them back on a table result of the same width (the default, like Emacs 9.8, does not put them back); <code>no</code> keeps the header as data; <code>'(a b)</code> names the result's columns</td></tr>
+<tr><td class="term">:rownames</td><td>yes: the same for the first column</td></tr>
+<tr><td class="term">:wrap</td><td>[type [params]] wrap the result in #+begin_type (default <code>results</code>), e.g. <code>:wrap src python</code>, <code>:wrap export html</code>; <code>:wrap no</code> inserts the result as it is</td></tr>
+<tr><td class="term">:cache</td><td>yes: store a hash in <code>#+RESULTS[hash]:</code> and reuse the result while the parameters and body are unchanged. The hash is computed like <code>org-babel-sha1-hash</code>, so it matches Emacs (<code>babel.hash_show_time</code> adds the date). Works on #+CALL too.</td></tr>
+<tr><td class="term">:file</td><td>with <code>:results file</code> the result is written to the file (relative to <code>:dir</code>; the directory must exist) and a link is inserted (relative to the Org file); <code>:results file link</code> / <code>graphics</code> only links. :output-dir (created), :file-ext (with #+NAME), :file-mode <code>(identity #o755)</code>, :sep (for tables), :file-desc (no value = the file name, <code>[]</code> = none)</td></tr>
+<tr><td class="term long">:dir :cmdline :prologue :epilogue :noweb-ref</td><td>supported, with :mkdirp yes (for :dir); the shell of a shell block reads its :cmdline (<code>:cmdline &quot;a 'b c' $HOME&quot;</code> gives three arguments)</td></tr>
+<tr><td class="term">:noweb</td><td>yes|no|tangle|eval|no-export|strip-export|strip-tangle| tangle-eval. Every &lt;<span class="key">&lt;ref&gt;</span>&gt; of a line is expanded (references may contain spaces: <code>&lt;&lt;add(a=3, b=4)&gt;&gt;</code>); blocks sharing a :noweb-ref are joined with :noweb-sep (default a newline); :noweb-prefix no stops repeating the text before the reference. <code>&lt;&lt;name(x=1)&gt;&gt;</code> inserts the result of evaluating the block; <code>&lt;&lt;id&gt;&gt;</code> of a headline with that CUSTOM_ID or ID inserts its text. Blocks in COMMENT subtrees are skipped.</td></tr>
+<tr><td class="term">:exports</td><td>code|results|both|none (for export)</td></tr>
+<tr><td class="term">:post</td><td>name(arg=*this*): run the named block on the result; its result is inserted instead</td></tr>
+<tr><td class="term long">:tangle :comments :padline :shebang :tangle-mode :no-expand</td><td>see below</td></tr>
+</table>
+<p>Switches: <code>-i</code> keeps the indentation of the lines (like <code>src_preserve_indentation</code>, Emacs <code>org-src-preserve-indentation</code>), otherwise the common indentation of a block is removed before it runs; <code>-n</code> / <code>+n</code> number lines and <code>-r</code> / <code>-l &quot;fmt&quot;</code> handle coderefs (always removed before a block runs). Labels are <code>(ref:name)</code> unless a block has <code>-l &quot;fmt&quot;</code> or <code>coderef_label_format</code> sets another default (org-coderef-label-format).</p>
+<h3 id="h-tangling">Tangling</h3>
+<p><code>:tangle yes|FILE</code> writes a block to a file (<code>yes</code>: the Org file's name with the extension of <code>babel.tangle_lang_exts</code> or the language name, as Emacs: <code>python</code> → <code>.py</code>, <code>sh</code> → <code>.sh</code>, <code>bash</code> → <code>.bash</code>). Like <code>org-babel-tangle</code>:</p>
+<ul>
+<li>the Org buffer is saved first; blocks in COMMENT and :ARCHIVE: subtrees are skipped; <code>:var</code> assignments, <code>:prologue</code>/<code>:epilogue</code> and noweb references (<code>:noweb yes|tangle</code>) are written; <code>-r</code> removes coderef labels; unchanged files are not rewritten.</li>
+<li><code>:comments link</code> (and <code>yes</code>) wraps each block in <code>[[file:x.org::*Heading][Heading:N]]</code> ... <code>Heading:N ends here</code> comments (N counts the blocks of the entry; a named block uses its name; the link is relative to the tangled file, <code>babel.tangle_use_relative_file_links</code>), <code>:comments org</code> writes the Org text before the block as comments, <code>both</code> does both, <code>noweb</code> also wraps every noweb expansion. The formats are <code>babel.tangle_comment_format_beg</code> / <code>_end</code>. The Org text of <code>:comments org</code> loses its common indentation, or goes through the function <code>babel.process_comment_text</code> (org-babel-process-comment-text).</li>
+<li>an existing target is overwritten in place; with <code>babel.tangle_remove_file_before_write</code> = true it is deleted and recreated (a symlink is replaced by a file), with &quot;auto&quot; (the default) only when it is read-only, with false never (org-babel-tangle-remove-file-before-write).</li>
+<li><code>:padline no</code> removes the blank line between blocks; <code>:shebang</code> goes on the first line and makes the file executable; <code>:mkdirp yes</code> creates the directory; <code>:tangle-mode o755</code>, <code>(identity #o755)</code>, <code>rwxr-xr-x</code> or <code>u+x</code> (added to <code>babel.tangle_default_file_mode</code>) set the mode.</li>
+</ul>
+<p>From a tangled file:</p>
+<table class="defs">
+<tr><td class="term">:Org tangle_jump</td><td>jump to the Org block the cursor is in (org-babel-tangle-jump-to-org)</td></tr>
+<tr><td class="term">:Org detangle [file]</td><td>copy the edited bodies back into the Org blocks (org-babel-detangle; needs link comments)</td></tr>
+<tr><td class="term">:Org tangle_clean</td><td>remove the link comments and noweb references (Emacs 9.8's org-babel-tangle-clean removes nothing because of a bug; this does what its documentation says)</td></tr>
+</table>
+<p><code>:Org babel_load_file [file]</code> tangles the <code>lua</code> blocks of an Org file to FILE.lua (again only when the Org file is newer) and runs it with <code>dofile</code>, the Lua counterpart of <code>org-babel-load-file</code> (e.g. an init.org).</p>
+<h3 id="h-library-of-babel-and-tables">Library of Babel and tables</h3>
+<p><code>org-sbe</code> works in Emacs Lisp table formulas:</p>
+<pre class="code"><code class="language-org">| 2 | 4 |
+<span class="h-k">#+TBLFM:</span> $2='(org-sbe &quot;square&quot; (x $1))</code></pre>
+<p>evaluates the block <code>square</code> with <code>x</code> set to the first column (<code>$$1</code> passes the field as a string, a first string argument holds header arguments).</p>
+<h3 id="h-export">导出</h3>
+<p>With <code>babel.evaluate_on_export = true</code> (the default, Emacs <code>org-export-use-babel</code>) exporting first evaluates, in a copy of the buffer, the blocks and #+CALL lines with <code>:exports results|both</code>, inline src blocks and calls, and <code>:exports code|none</code> blocks that use a session; each one is confirmed like any evaluation. <code>:eval never-export|no-export</code> blocks keep their existing results. With <code>false</code>, export uses the <code>#+RESULTS</code> already in the buffer.</p>
+<p>The exported code of a block is <code>babel.exp_code_template</code> (org-babel-exp-code-template, default <code>&quot;#+begin_src %lang%switches%header-args\n%body\n#+end_src&quot;</code>), of an inline src block <code>babel.exp_inline_code_template</code>; <code>%lang</code>, <code>%name</code>, <code>%body</code>, <code>%switches</code>, <code>%header-args</code> and <code>%ARG</code> for each header argument (printed like Emacs: <code>%exports</code> gives <code>&quot;code&quot;</code>, <code>%var</code> gives <code>(x . 1)</code>) are filled in. <code>babel.exp_call_line_template</code> (default <code>&quot;&quot;</code>) is exported in place of <code>#+CALL</code> lines and <code>call_</code> objects, with <code>%line</code> for the call, e.g. <code>&quot;\n: call: %line&quot;</code>. Results with ten or more lines use <code>#+BEGIN_EXAMPLE</code> with <code>babel.uppercase_example_markers</code> (org-babel-uppercase-example-markers).</p>
+<div class="tags"><a class="tag" id="org-babel-edit-special" href="#org-babel-edit-special">org-babel-edit-special</a></div>
+<p><span class="key">&lt;prefix&gt;</span>' (C-c ') also edits, like <code>org-edit-special</code>: example, export and comment blocks, LaTeX environments, <code>: </code> fixed-width areas, the body of an inline src block (kept on one line), the definition of the footnote at the cursor (inline definitions cannot contain blank lines), a LaTeX fragment (<code>$x$</code>, <code>\(x\)</code>, <code>\[x\]</code>); it visits the file of an INCLUDE, SETUPFILE or BIBLIOGRAPHY keyword, runs deadline / schedule on a planning line and the date prompt on a timestamp, and follows a link. Elsewhere: &quot;No special environment to edit here&quot;.</p>
+<p><code>:w</code> refuses conflicting edits to the source. Review both versions and use <code>:w!</code> to overwrite an intact tracked region, or <code>:wq!</code> to overwrite and close. Deleted or wholly replaced regions and wiped source buffers cannot be forced; copy the edit contents manually to the intended location. Example editing honors <code>-i</code>, <code>src_preserve_indentation</code>, and <code>edit_src_content_indentation</code>.</p>
+<p>Edit buffers, like Emacs' org-src buffers:</p>
+<ul>
+<li>the winbar says &quot;Edit, then exit with ‘<span class="key">&lt;C-c&gt;</span>'’ or abort with ‘<span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-k&gt;</span>’&quot; (the first <code>mappings.edit_src</code> keys; <code>edit_src_persistent_message = false</code> hides it).</li>
+<li><span class="key">&lt;prefix&gt;</span>' on a region that already has an edit buffer asks &quot;Return to existing edit buffer ([n] will revert changes)?&quot;: yes shows it again, no discards it and opens a new one. With <code>src_ask_before_returning_to_edit_buffer = false</code> it goes back at once. <code>:Org edit_src_continue</code> goes back without asking to the edit buffer of the region at the cursor (org-edit-src-continue, Emacs' mouse-1 on it).</li>
+<li><code>edit_src_auto_save_idle_delay = N</code> writes the edit buffer back to the Org buffer after N seconds without changes (0: never). <code>edit_src_turn_on_auto_save = true</code> saves its contents, when idle ('updatetime'), to <code>org-src-XXXXXX-%Y-%d-%m.txt</code> next to the Org file, like Emacs' auto-save; the file is left there, as in Emacs.</li>
+<li>the filetype comes from <code>src_lang_modes</code> (org-src-lang-modes: <code>C</code> → <code>c</code>, <code>elisp</code> → <code>lisp</code>, the shells → <code>sh</code>, ...), else from the language's extension; the same table picks the syntax used to highlight blocks. <code>: </code> areas get <code>edit_fixed_width_region_mode</code> (a filetype or a function of the buffer; none by default).</li>
+<li>the edit buffer of a block with a <code>:session</code> is associated with it (org-src-associate-babel-session): <code>mappings.edit_src.send_to_session</code> (<span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-c&gt;</span>, <span class="key">&lt;prefix&gt;</span>e) sends the buffer, or in Visual mode the selected lines, to the session (started when needed) and shows it.</li>
+</ul>
+<div class="tags"><a class="tag" id="org-src-highlight" href="#org-src-highlight">org-src-highlight</a></div>
+<p>The body of a src block is highlighted in its language, like Emacs' org-src-fontify-natively. When Neovim has a tree-sitter parser and a highlights query for the language (Neovim bundles c, lua, markdown, query, vim and vimdoc; nvim-treesitter or <a class="hl" href="https://neovim.io/doc/user/helptag.html?tag=treesitter-parsers">treesitter-parsers</a> add more), the body is drawn with tree-sitter's captures, the <code>@keyword.lua</code>, <code>@string.c</code>, ... groups Neovim uses for a buffer of that language, so it looks the same as in a file of that language and your colorscheme's tree-sitter colors apply. Injected languages are highlighted too (the inline markup of a markdown block, Vim script in a Lua <code>vim.cmd()</code> string) in blocks of up to 1,000 lines. Only the blocks on screen are parsed, each once for its text: moving around or editing elsewhere doesn't parse a block again; a longer block is parsed again from the tree it had after an edit in it. Other languages get their Vim syntax (<code>syntax/&lt;lang&gt;.vim</code>) included into the buffer's syntax. The language name goes through <code>src_lang_modes</code> first (<code>elisp</code> → <code>lisp</code>, <code>shell</code> → <code>sh</code> → the bash parser). <code>ui.src_highlight_engine</code> chooses: &quot;auto&quot; (the default), &quot;treesitter&quot; (languages without a parser stay plain) or &quot;syntax&quot; (always the Vim syntax); <code>ui.src_highlight = false</code> turns both off. A parser installed while the file is open is used after <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-c&gt;</span> on a <code>#+</code> line (which refreshes the buffer's setup) or when the file is opened again. As in Emacs, a block shows its text as typed: the Vim syntax of json and markdown blocks is included without its concealing (<code>g:vim_json_conceal</code>, <code>g:markdown_syntax_conceal</code> stay as you set them for your own files). TAB on a line of a src block (<code>src_tab_acts_natively</code>, default true) indents it for its language, like a round trip through the edit buffer: the body gets the block's content indentation and the line the indentation that the filetype's 'indentexpr' (or 'cindent') computes, or that of the line above when the filetype has none. <code>:Org escape_code_in_region</code> / <code>unescape_code_in_region</code> add or remove the comma that protects lines starting with <code>*</code> or <code>#+</code> in the selected lines (org-escape-code-in-region).</p>
+<h3 id="h-not-supported">Not supported</h3>
+<ul>
+<li>emacs-lisp sessions, and emacs-lisp code that acts on the editor (buffers, windows, the Org document): it runs in a separate Emacs (see Languages above).</li>
+<li>Header values in Lisp run without your Emacs session: functions and variables you defined there don't exist (see &quot;Lisp in header arguments&quot;), and without an Emacs executable only the forms the table formula interpreter knows are evaluated.</li>
+<li><code>org-babel-load-file</code> for Emacs Lisp, and Emacs hook functions (hooks are <code>User</code> autocommands instead).</li>
+<li><code>:results xmp</code> (Ruby rcodetools), Indium js sessions, SQL sessions of engines other than sqlite3, PostgreSQL and MySQL, and <code>:dbconnection</code> (Emacs' <code>sql-connection-alist</code>).</li>
+<li>Attachment links for <code>:file</code> results inside the attachment directory (<code>attachment:</code> links) and <code>:dir 'attach</code>.</li>
+</ul>
+</article>
+<nav class="pager"><a class="prev" href="../manual/org-tables.html"><span>上一页</span>表格和公式</a><a class="next" href="../manual/org-dblocks.html"><span>下一页</span>动态块</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L4867">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>

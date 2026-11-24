@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clocking and effort · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="../assets/site.js" defer></script>
+
+</head>
+<body data-root="../">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="../index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="../index.html">首页</a></li>
+<li class=""><a href="../guide.html">指南</a></li>
+<li class=""><a href="../playground.html">互动教程</a></li>
+<li><details class="group" open><summary>手册</summary><ul>
+<li class=""><a href="../manual/index.html">目录</a></li>
+<li class=""><a href="../manual/org-introduction.html">简介</a></li>
+<li class=""><a href="../manual/org-installation.html">安装</a></li>
+<li class=""><a href="../manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="../manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="../manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="../manual/org-tags.html">标签</a></li>
+<li class=""><a href="../manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="../manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="../manual/org-clock.html" aria-current="page">计时和工作量</a></li>
+<li class=""><a href="../manual/org-agenda.html">日程</a></li>
+<li class=""><a href="../manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="../manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="../manual/org-capture.html">捕捉</a></li>
+<li class=""><a href="../manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="../manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="../manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="../manual/org-babel.html">源代码块（Babel）</a></li>
+<li class=""><a href="../manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="../manual/org-export.html">导出</a></li>
+<li class=""><a href="../manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="../manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="../manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="../manual/org-completion.html">补全</a></li>
+<li class=""><a href="../manual/org-appearance.html">外观和高亮</a></li>
+<li class=""><a href="../manual/org-config.html">配置参考</a></li>
+<li class=""><a href="../manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="../manual/org-commands.html">命令</a></li>
+<li class=""><a href="../manual/org-api.html">Lua API</a></li>
+<li class=""><a href="../manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="../manual/org-lint.html">检查</a></li>
+<li class=""><a href="../manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="../manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="../manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="../manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="../manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="../manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="../manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="../manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="../manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="../manual/org-extensions-drill.html">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="../manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="../manual/org-extensions-hugo.html">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="../manual/org-extensions-caldav.html">CalDAV sync</a></li>
+<li class="sub"><a href="../manual/org-extensions-cli.html">Command line (org)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-code.html">Code and notes (code)</a></li>
+<li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="../manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="../manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="../manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="../examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="../examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="../examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="../examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="../examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="../examples/05-tags.html">标签</a></li>
+<li class=""><a href="../examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="../examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="../examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="../examples/09-agenda.html">日程</a></li>
+<li class=""><a href="../examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="../examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="../examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="../examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="../examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="../examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="../examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="../examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="../examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="../examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="../examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="../examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="../parity/review.html">兼容性审查</a></li>
+<li class=""><a href="../parity/index.html">目录</a></li>
+<li class=""><a href="../parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="../extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content manual">
+<article>
+<h1>计时和工作量</h1>
+<div class="tags"><a class="tag" id="org-clock" href="#org-clock">org-clock</a></div>
+<table class="defs">
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>xi</td><td>Clock in on the current entry. Any running clock is stopped first, and <code>clock.in_switch_to_state</code> can change the TODO state. A count picks a task from the clock history (d default task, i the interrupted task, c the current one, 1-9 A-Z recent tasks); 16 also marks the entry as the default task; 64 starts where the last clock stopped.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>xo</td><td>Clock out (global). <code>clock.out_switch_to_state</code> changes the TODO state; with a count, you are asked for the state.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>xq</td><td>Cancel the running clock (global).</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>xj</td><td>Jump to the clocked entry (global), else to the last clocked one. With a count, pick from the history.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>xe</td><td>Set effort.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>xE</td><td>Set effort to the next value of <code>Effort_ALL</code>.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>xm</td><td>Change the effort of the clocked task (or the entry at the cursor); <code>+0:15</code> / <code>-10</code> add or subtract.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>xz</td><td>Resolve open clocks (with a count: only dangling ones, not the running clock). See <a class="hl" href="#org-clock-resolve">org-clock-resolve</a>.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>xd</td><td>Show the time clocked in each subtree next to its headline, for <code>clock.display_default_range</code> (this year). Count: 4 = today, 16 = ask for a range, 64 = only the total. Editing the buffer, <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-c&gt;</span> or calling it again hides the sums. Like Emacs, a sum covers the tags and also shows on folded headlines; the times line up on the displayed title.</td></tr>
+</table>
+<div class="tags"><a class="tag" id="org-clocktable" href="#org-clocktable">org-clocktable</a></div>
+<table class="defs">
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>xr</td><td>Insert a clock report (<code>#+BEGIN: clocktable</code>) for the entry at the cursor (:scope subtree), or the file before the first headline; update it when on one. With a count, update the first clock table of the buffer. A new block gets <code>clock.clocktable_default_properties</code>. The total and file time cells use <code>clock.total_time_cell_format</code> / <code>clock.file_time_cell_format</code> (&quot;*%s*&quot;). <code>clock.clocktable_formatter</code> replaces the table writer: <code>function(tables, params)</code> gets <code>{ { file, time, entries = { { level, headline, tags, timestamp, time (minutes), properties } } } }</code> and the block parameters, and returns the lines of the block (org-clock-clocktable-formatter).</td></tr>
+<tr><td class="term"><span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-c&gt;</span></td><td>On a CLOCK line: recompute its duration.</td></tr>
+<tr><td class="term">&lt;C-S-Up/Down&gt;</td><td>On a CLOCK line: shift both timestamps by the part under the cursor, keeping the duration.</td></tr>
+<tr><td class="term"><span class="key">&lt;M-K&gt;</span> / <span class="key">&lt;M-J&gt;</span></td><td>On a CLOCK timestamp (Emacs S-M-Up/Down): change it and move the touching timestamp of the previous (on a clock-in) or next (on a clock-out) task in the clock history by the same amount.</td></tr>
+<tr><td class="term"><span class="key">&lt;S-arrows&gt;</span></td><td>On a <code>#+BEGIN: clocktable</code> line: shift its :block (today -&gt; today-1, 2026-W39 -&gt; 2026-W40, ...).</td></tr>
+<tr><td class="term">:Org clock_in_last</td><td>Clock in the last clocked entry again (count: pick from the history; 16 = from the last clock-out; 64 = ask for the TODO state).</td></tr>
+<tr><td class="term long">:Org clock_mark_default_task</td><td>Mark the entry as the default task.</td></tr>
+<tr><td class="term long">:Org clock_toggle_auto_clockout</td><td>Turn auto clock-out on/off for this session.</td></tr>
+</table>
+<p>Clock lines go into the LOGBOOK drawer:</p>
+<pre class="code"><code class="language-org"><span class="h-m">:LOGBOOK:</span>
+CLOCK: <span class="h-n">[2026-09-23 Wed 10:00]</span>--<span class="h-n">[2026-09-23 Wed 11:30]</span> =&gt;  1:30
+<span class="h-m">:END:</span></code></pre>
+<p>As in Emacs, a clock line has nothing after its duration (<code>CLOCK:</code> in any case); a line with text after it is a paragraph and its time is not counted. A naked <code>CLOCK: =&gt; 2:00</code> adds two hours to the entry's clock sums, whatever their time range. A clock whose start has no time (<code>[2026-09-23 Wed]--...</code>) counts for nothing, and an end without a time takes the start's (org-clock-sum). A clock that ends before it starts counts for nothing too: in the clock table, CLOCKSUM, the statusline total, sorting by clocking time and the extensions that sum clocks.</p>
+<p>The drawer comes from the inherited <code>CLOCK_INTO_DRAWER</code> property (<code>nil</code> for none, a number N for &quot;once there are N clock lines&quot;), then <code>clock.into_drawer</code>, then the log drawer. With <code>log_note_clock_out</code> (or <code>#+STARTUP: lognoteclock-out</code>), clocking out asks for a note that goes below the CLOCK line. <code>clock.continuously</code> starts a new clock where the last one stopped, <code>clock.rounding_minutes</code> rounds clock times like Emacs (org-current-time): clocking out takes the nearest multiple, a tie going to the even one (with 10, 10:25 is 10:20); clocking in never starts in the future (with 10, 10:27 is 10:20). <code>clock.in_resume</code> continues an entry's open CLOCK line.</p>
+<p>Marking a clocked task done clocks it out (<code>clock.out_when_done</code>: true or a list of states). A running clock is restored after restarting Neovim (<code>clock.persist</code>: true, &quot;clock&quot; or &quot;history&quot;), after asking (<code>clock.persist_query_resume</code>). Quitting with a running clock asks whether to clock out and save first (<code>clock.ask_before_exiting</code>). Clocks of 0:00 are kept unless <code>clock.out_remove_zero_time</code> is set.</p>
+<p>The statusline shows <code>[clocked/effort] (Task)</code>, where the clocked time includes the task's earlier clocks (<code>clock.mode_line_total</code> or the <code>CLOCK_MODELINE_TOTAL</code> property: current, today, repeat, all, auto = since LAST_REPEAT for repeated tasks). Once it reaches the Effort you are notified once (<code>clock.notify_effort</code>, <code>clock.sound</code>, <code>clock.notification_handler</code>) and <code>clock.task_overrun_text</code> is prepended.</p>
+<p>User autocmds: <code>OrgClockInPrepare</code> (before the CLOCK line is written, e.g. to set an effort), <code>OrgClockIn</code>, <code>OrgClockOut</code>, <code>OrgClockCancel</code>, <code>OrgClockGoto</code>.</p>
+<div class="tags"><a class="tag" id="org-clock-resolve" href="#org-clock-resolve">org-clock-resolve</a></div>
+<h4>Resolving clocks</h4>
+<p>An open CLOCK line that isn't the running clock is dangling (e.g. after a crash). Clocking in resolves them first (<code>clock.auto_clock_resolution</code>), and after <code>clock.idle_time</code> idle minutes you are asked about the running clock (the system idle time is used on macOS and with xprintidle). Keys:</p>
+<table class="defs">
+<tr><td class="term">k / K</td><td>keep N of the minutes (default all) and stay clocked in / out</td></tr>
+<tr><td class="term">t / T</td><td>keep the time until a given time</td></tr>
+<tr><td class="term">g / G</td><td>you got back N minutes ago: clock out when you left, clock in again from then (G: stay out)</td></tr>
+<tr><td class="term">s / S</td><td>subtract the idle time: clock in again now (S: stay out; the next clock in offers to start from the subtracted time)</td></tr>
+<tr><td class="term">C</td><td>cancel the clock</td></tr>
+<tr><td class="term">j / J</td><td>jump to the clock (J: clock it out first)</td></tr>
+<tr><td class="term">i / q</td><td>ignore</td></tr>
+</table>
+<p><code>clock.auto_clockout_timer</code> clocks out after that many idle seconds.</p>
+<div class="tags"><a class="tag" id="org-durations" href="#org-durations">org-durations</a></div>
+<h4>Durations</h4>
+<p>A duration is numbers with units, optionally ending in H:MM or H:MM:SS: <code>3:12</code>, <code>1:23:45</code>, <code>1y 3d 3h 4min</code>, <code>1d3h5min</code>, <code>3d 13:35</code>, <code>2.35h</code>; a bare number is minutes. The units and their minutes come from <code>duration_units</code> (Emacs <code>org-duration-units</code>):</p>
+<pre class="code"><code class="language-lua">duration_units <span class="h-o">=</span> { <span class="h-m">min</span> <span class="h-o">=</span> <span class="h-n">1</span>, <span class="h-m">h</span> <span class="h-o">=</span> <span class="h-n">60</span>, <span class="h-m">d</span> <span class="h-o">=</span> <span class="h-n">1440</span>, <span class="h-m">w</span> <span class="h-o">=</span> <span class="h-n">10080</span>, <span class="h-m">m</span> <span class="h-o">=</span> <span class="h-n">43200</span>, <span class="h-m">y</span> <span class="h-o">=</span> <span class="h-n">525960</span> }</code></pre>
+<p>Setting <code>d = 480</code>, <code>w = 2400</code> makes <code>1d</code> an 8-hour work day in efforts and column sums; new units can be added (<code>wd = 480</code>). Ages ({@min} ...) keep the standard min/h/d.</p>
+<p>Durations in clock tables, clock sums, the clock mode line, effort changes and column summaries are written with <code>duration_format</code> (Emacs <code>org-duration-format</code>):</p>
+<table class="defs">
+<tr><td class="term">&quot;d h:mm&quot;</td><td><code>1d 2:30</code> from one day on, else <code>2:30</code> (the default, Emacs <code>((&quot;d&quot; . nil) (special . h:mm))</code>)</td></tr>
+<tr><td class="term">&quot;h:mm&quot;</td><td><code>26:30</code></td></tr>
+<tr><td class="term">&quot;h:mm:ss&quot;</td><td><code>26:30:00</code></td></tr>
+<tr><td class="term">a list</td><td><p>of <code>{ unit, required }</code> entries, <code>{ &quot;special&quot;, mode }</code> and &quot;compact&quot;: units with a zero value are dropped unless required; mode &quot;h:mm&quot; / &quot;h:mm:ss&quot; writes the time below the smallest unit above an hour as H:MM(:SS); a number of decimals writes one unit with a fraction (the first required unit or one not larger than the duration); &quot;compact&quot; drops the spaces. Examples: <code>{ { &quot;d&quot; }, { &quot;h&quot;, true }, { &quot;min&quot;, true } }</code> <code>1d 2h 30min</code></p>
+<table class="defs">
+<tr><td class="term long"><code>{ { &quot;d&quot; }, { &quot;h&quot; }, { &quot;special&quot;, 2 } }</code></td><td><code>1.10d</code></td></tr>
+<tr><td class="term long"><code>{ { &quot;h&quot;, true }, { &quot;special&quot;, 2 } }</code></td><td><code>26.50h</code></td></tr>
+<tr><td class="term long"><code>{ { &quot;w&quot; }, { &quot;special&quot;, &quot;h:mm&quot; }, &quot;compact&quot; }</code></td><td><code>1w32:00</code></td></tr>
+</table>
+<p>A dict form works too: <code>{ d = false, special = &quot;h:mm&quot; }</code>.</p></td></tr>
+</table>
+<p>Use <a class="hl" href="org-api.html">org-api</a> <code>require(&quot;org&quot;).statusline()</code> in your statusline.</p>
+</article>
+<nav class="pager"><a class="prev" href="../manual/org-dates.html"><span>上一页</span>日期和时间</a><a class="next" href="../manual/org-agenda.html"><span>下一页</span>日程</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L1841">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>

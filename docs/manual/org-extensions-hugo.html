@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hugo export (ox-hugo) · org.nvim</title>
+<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="../assets/site.js" defer></script>
+
+</head>
+<body data-root="../">
+<a class="skip" href="#content">跳到内容</a>
+<header class="topbar">
+<button class="icon menu" type="button" aria-label="Menu" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+<a class="brand" href="../index.html"><img src="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png" alt="" width="28" height="28">org.nvim 中文教程</a>
+<div class="search" role="search"><input id="search" type="search" placeholder="搜索文档  ( / )" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results"><ul id="search-results" role="listbox" hidden></ul></div>
+<button class="icon theme" type="button" aria-label="切换暗色模式" title="切换暗色模式"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3z"/><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<a class="icon" href="https://github.com/xheisenbugx/org.nvim" aria-label="org.nvim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Site"><ul>
+<li class=""><a href="../index.html">首页</a></li>
+<li class=""><a href="../guide.html">指南</a></li>
+<li class=""><a href="../playground.html">互动教程</a></li>
+<li><details class="group" open><summary>手册</summary><ul>
+<li class=""><a href="../manual/index.html">目录</a></li>
+<li class=""><a href="../manual/org-introduction.html">简介</a></li>
+<li class=""><a href="../manual/org-installation.html">安装</a></li>
+<li class=""><a href="../manual/org-structure.html">文档结构</a></li>
+<li class=""><a href="../manual/org-folding.html">可见性和折叠</a></li>
+<li class=""><a href="../manual/org-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../manual/org-todo.html">待办事项和优先级</a></li>
+<li class=""><a href="../manual/org-tags.html">标签</a></li>
+<li class=""><a href="../manual/org-properties.html">属性和列视图</a></li>
+<li class=""><a href="../manual/org-dates.html">日期和时间</a></li>
+<li class=""><a href="../manual/org-clock.html">计时和工作量</a></li>
+<li class=""><a href="../manual/org-agenda.html">日程</a></li>
+<li class=""><a href="../manual/org-match-syntax.html">匹配语法（标签/属性）</a></li>
+<li class=""><a href="../manual/org-sparse-tree.html">稀疏树</a></li>
+<li class=""><a href="../manual/org-capture.html">捕捉</a></li>
+<li class=""><a href="../manual/org-refile.html">整理和归档</a></li>
+<li class=""><a href="../manual/org-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../manual/org-footnotes.html">脚注</a></li>
+<li class=""><a href="../manual/org-tables.html">表格和公式</a></li>
+<li class=""><a href="../manual/org-babel.html">源代码块（Babel）</a></li>
+<li class=""><a href="../manual/org-dblocks.html">动态块</a></li>
+<li class=""><a href="../manual/org-export.html">导出</a></li>
+<li class=""><a href="../manual/org-timers.html">定时器和通知</a></li>
+<li class=""><a href="../manual/org-crypt.html">加密（org-crypt）</a></li>
+<li class=""><a href="../manual/org-sync.html">手机和同步</a></li>
+<li class=""><a href="../manual/org-completion.html">补全</a></li>
+<li class=""><a href="../manual/org-appearance.html">外观和高亮</a></li>
+<li class=""><a href="../manual/org-config.html">配置参考</a></li>
+<li class=""><a href="../manual/org-keymaps.html">按键映射参考</a></li>
+<li class=""><a href="../manual/org-commands.html">命令</a></li>
+<li class=""><a href="../manual/org-api.html">Lua API</a></li>
+<li class=""><a href="../manual/org-in-buffer-settings.html">缓冲区内设置</a></li>
+<li class=""><a href="../manual/org-lint.html">检查</a></li>
+<li class=""><a href="../manual/org-differences.html">与 Emacs 的差异</a></li>
+<li class=""><a href="../manual/org-extensions.html">扩展</a></li>
+<li class="sub"><a href="../manual/org-extensions-ql.html">org-ql</a></li>
+<li class="sub"><a href="../manual/org-extensions-super-agenda.html">org-super-agenda</a></li>
+<li class="sub"><a href="../manual/org-extensions-present.html">Presentations (org-present)</a></li>
+<li class="sub"><a href="../manual/org-extensions-roam.html">org-roam</a></li>
+<li class="sub"><a href="../manual/org-extensions-quickadd.html">Quick add (Todoist-style)</a></li>
+<li class="sub"><a href="../manual/org-extensions-review.html">Weekly review (GTD)</a></li>
+<li class="sub"><a href="../manual/org-extensions-pomodoro.html">Pomodoro</a></li>
+<li class="sub"><a href="../manual/org-extensions-drill.html">Spaced repetition (org-drill)</a></li>
+<li class="sub"><a href="../manual/org-extensions-merge.html">Structural git merges</a></li>
+<li class="sub"><a href="../manual/org-extensions-hugo.html" aria-current="page">Hugo export (ox-hugo)</a></li>
+<li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
+<li class="sub"><a href="../manual/org-extensions-caldav.html">CalDAV sync</a></li>
+<li class="sub"><a href="../manual/org-extensions-cli.html">Command line (org)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-code.html">Code and notes (code)</a></li>
+<li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
+<li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
+<li class="sub"><a href="../manual/org-extensions-src-lsp.html">Language servers in src blocks</a></li>
+<li class="sub"><a href="../manual/org-extensions-transclusion.html">Transclusion (org-transclusion)</a></li>
+<li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
+<li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
+<li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
+<li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
+<li class=""><a href="../manual/org-faq.html">常见问题和故障排除</a></li>
+</ul></details></li>
+<li><details class="group"><summary>示例</summary><ul>
+<li class=""><a href="../examples/tutorial.html">org.nvim 实践教程</a></li>
+<li class=""><a href="../examples/00-index.html">org.nvim 功能示例</a></li>
+<li class=""><a href="../examples/01-outline.html">大纲：标题、可见性和结构编辑</a></li>
+<li class=""><a href="../examples/02-markup.html">标记：强调、块、注释等</a></li>
+<li class=""><a href="../examples/03-lists.html">普通列表和复选框</a></li>
+<li class=""><a href="../examples/04-todo.html">待办事项、日志、重复和优先级</a></li>
+<li class=""><a href="../examples/05-tags.html">标签</a></li>
+<li class=""><a href="../examples/06-properties-columns.html">属性和列视图</a></li>
+<li class=""><a href="../examples/07-dates.html">日期和时间</a></li>
+<li class=""><a href="../examples/08-clocking.html">计时、工作量和时间表</a></li>
+<li class=""><a href="../examples/09-agenda.html">日程</a></li>
+<li class=""><a href="../examples/10-sparse-trees.html">稀疏树和匹配语法</a></li>
+<li class=""><a href="../examples/11-capture.html">捕捉：从任何地方记录笔记</a></li>
+<li class=""><a href="../examples/12-refile-archive.html">整理和归档</a></li>
+<li class=""><a href="../examples/13-links.html">链接、ID 和附件</a></li>
+<li class=""><a href="../examples/14-footnotes.html">脚注</a></li>
+<li class=""><a href="../examples/15-tables.html">表格：创建、编辑、排序和调整</a></li>
+<li class=""><a href="../examples/16-spreadsheet.html">电子表格：表格公式（#+TBLFM）</a></li>
+<li class=""><a href="../examples/17-babel.html">源代码块（Babel）深入</a></li>
+<li class=""><a href="../examples/18-dynamic-blocks.html">动态块</a></li>
+<li class=""><a href="../examples/19-export.html">导出：实践示例</a></li>
+<li class=""><a href="../examples/20-timers-reminders.html">定时器和提醒</a></li>
+<li class=""><a href="../examples/21-images-latex.html">图片和 LaTeX 预览</a></li>
+<li class=""><a href="../examples/22-extras.html">Extras: help, completion, lint, speed keys, inline tasks, crypt ...</a></li>
+</ul></details></li>
+<li><details class="group"><summary>兼容性</summary><ul>
+<li class=""><a href="../parity/review.html">兼容性审查</a></li>
+<li class=""><a href="../parity/index.html">目录</a></li>
+<li class=""><a href="../parity/differences.html">已知差异</a></li>
+</ul></details></li>
+<li class=""><a href="../extensions.html">Extensions status</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim">GitHub</a></li>
+<li><a href="https://github.com/xheisenbugx/org.nvim/releases">Releases</a></li>
+</ul></nav>
+<main id="content" class="content manual">
+<article>
+<h1>Hugo export (ox-hugo)</h1>
+<div class="tags"><a class="tag" id="org-extensions-hugo" href="#org-extensions-hugo">org-extensions-hugo</a></div>
+<p>Stability: stable (<a class="hl" href="org-extensions.html#org-extensions-stability">org-extensions-stability</a>)</p>
+<p><code>hugo</code> exports Org to Markdown for the Hugo static site generator, like the Emacs package ox-hugo: a post gets a TOML or YAML front matter and goes to <code>&lt;base_dir&gt;/content/&lt;section&gt;/&lt;name&gt;.md</code>.</p>
+<pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({
+  <span class="h-m">extensions</span> <span class="h-o">=</span> { <span class="h-m">hugo</span> <span class="h-o">=</span> { <span class="h-m">base_dir</span> <span class="h-o">=</span> <span class="h-s">&quot;~/blog&quot;</span> } },  <span class="h-c">-- or #+hugo_base_dir</span>
+})</code></pre>
+<p>It adds <code>H</code> to the export dispatcher (<span class="key">&lt;prefix&gt;</span>e, Emacs <code>C-c C-e H</code>):</p>
+<table class="defs">
+<tr><td class="term">H H</td><td>the post subtree at the cursor, or the file when it has no post subtrees (org-hugo-export-wim-to-md); action <code>hugo_export_wim</code></td></tr>
+<tr><td class="term">H h</td><td>the file as one post (org-hugo-export-to-md; the subtree at the cursor with the dispatcher's <code>s</code>); action <code>hugo_export_file</code></td></tr>
+<tr><td class="term">H O</td><td>like <code>H H</code>, then open the file</td></tr>
+<tr><td class="term">H o</td><td>like <code>H h</code>, then open the file</td></tr>
+<tr><td class="term">H A</td><td>every post subtree (or the file); action <code>hugo_export_all</code></td></tr>
+<tr><td class="term">H t</td><td>to a temporary Markdown buffer; action <code>hugo_export_buffer</code></td></tr>
+</table>
+<p><code>:Org hugo [wim|all|file|buffer] [open] [visible]</code> does the same.</p>
+<h3 id="h-two-ways-to-write-posts">Two ways to write posts</h3>
+<p>One post per file: the file needs <code>#+title</code>; <code>#+hugo_base_dir</code> (relative to the file), <code>#+hugo_section</code> (default <code>section</code>, &quot;posts&quot;), <code>#+date</code>, <code>#+description</code>, <code>#+filetags</code> and the other keywords below set its front matter. The file name (or <code>#+export_file_name</code>) names the post.</p>
+<pre class="code"><code class="language-org"><span class="h-k">#+title:</span> My first post
+<span class="h-k">#+hugo_base_dir:</span> ..
+<span class="h-k">#+hugo_section:</span> blog
+<span class="h-k">#+date:</span> 2026-10-05
+<span class="h-k">#+filetags:</span> emacs @tech</code></pre>
+<p>One post per subtree: every headline with an <code>EXPORT_FILE_NAME</code> property is a post, its title the headline. <code>EXPORT_HUGO_*</code> properties set its front matter, and a post inherits from its parents (and <code>#+PROPERTY:</code>) the ones ox-hugo inherits: the section, bundle, base dir, front matter format, tags, categories, menu, custom front matter, draft, weight, date, author and the other <code>EXPORT_HUGO_*</code> settings (not the title or file name). The keywords of the file are the defaults.</p>
+<pre class="code"><code class="language-org"><span class="h-k">#+hugo_base_dir:</span> ~/blog
+<span class="h-h">* Blog                                                         </span><span class="h-t">:emacs:</span>
+<span class="h-m">:PROPERTIES:</span>
+<span class="h-m">:EXPORT_HUGO_SECTION:</span> blog
+<span class="h-m">:END:</span>
+<span class="h-h">** </span><span class="h-k">DONE</span><span class="h-h"> First post                                            </span><span class="h-t">:@tech:</span>
+CLOSED: <span class="h-n">[2026-10-05 Mon 10:30]</span>
+<span class="h-m">:PROPERTIES:</span>
+<span class="h-m">:EXPORT_FILE_NAME:</span> first-post
+<span class="h-m">:END:</span>
+Hello!</code></pre>
+<p><code>EXPORT_HUGO_SECTION_FRAG</code> values of the post and its parents are added to the section as directories, and <code>EXPORT_HUGO_BUNDLE</code> (joined the same way) makes the post part of a page bundle: <code>content/&lt;section&gt;/&lt;bundle&gt;/</code>, with <code>EXPORT_FILE_NAME: index</code> (leaf bundle) or <code>_index</code> (branch bundle). Commented posts and posts with an exclude tag (<code>noexport</code>) are skipped.</p>
+<h3 id="h-front-matter">Front matter</h3>
+<table class="defs">
+<tr><td class="term">title</td><td><code>#+title</code> or the headline, markup removed, <code>---</code>, <code>--</code> and <code>...</code> as dashes and an ellipsis</td></tr>
+<tr><td class="term">date</td><td>the post's CLOSED time, else <code>#+date</code> / <code>EXPORT_DATE</code> (an Org date, or an RFC 3339 date kept as written)</td></tr>
+<tr><td class="term">publishDate</td><td>SCHEDULED, else <code>HUGO_PUBLISHDATE</code></td></tr>
+<tr><td class="term">expiryDate</td><td><code>HUGO_EXPIRYDATE</code></td></tr>
+<tr><td class="term">lastmod</td><td><code>HUGO_LASTMOD</code>; with <code>auto_set_lastmod</code> (or <code>HUGO_AUTO_SET_LASTMOD</code>) the time of the export, unless the date is less than <code>suppress_lastmod_period</code> seconds old</td></tr>
+<tr><td class="term">draft</td><td>true for a post in a TODO state (TODO, DRAFT, ...), false when done; else <code>HUGO_DRAFT</code> (t, true, yes / nil, false, no)</td></tr>
+<tr><td class="term">tags</td><td><code>HUGO_TAGS</code>, else the Org tags (inherited ones and <code>#+filetags</code> too) without <code>@</code>: <code>a_b</code> -&gt; &quot;a-b&quot;, <code>a___b</code> -&gt; &quot;a_b&quot; (<code>prefer_hyphen_in_tags</code>), <code>a__b</code> -&gt; &quot;a b&quot; (<code>allow_spaces_in_tags</code>)</td></tr>
+<tr><td class="term">categories</td><td><code>HUGO_CATEGORIES</code>, else the Org tags starting with <code>@</code></td></tr>
+<tr><td class="term">description</td><td><code>DESCRIPTION</code>, or a <code>#+begin_description</code> block</td></tr>
+<tr><td class="term">author</td><td><code>#+author</code> / <code>EXPORT_AUTHOR</code> (comma separated) as a list</td></tr>
+<tr><td class="term">aliases</td><td><code>HUGO_ALIASES</code>; one without &quot;/&quot; goes under the section</td></tr>
+<tr><td class="term">weight</td><td><code>HUGO_WEIGHT</code>: a number, <code>auto</code> (from the post's place among its sibling posts), or <code>:tags 10 :categories auto</code> for taxonomy weights (<code>:page</code> is the page weight)</td></tr>
+<tr><td class="term">menu</td><td><code>HUGO_MENU</code>: <code>:menu main :weight 10 :parent docs ...</code> (identifier and weight are set when missing); <code>HUGO_MENU_OVERRIDE</code> changes some of them</td></tr>
+<tr><td class="term">resources</td><td><code>HUGO_RESOURCES</code>: <code>:src &quot;*.png&quot; :title &quot;...&quot; :key value</code>; other keys go under <code>params</code>, and the files are copied into the bundle</td></tr>
+<tr><td class="term">custom</td><td><code>HUGO_CUSTOM_FRONT_MATTER</code>: <code>:key value</code> pairs, lists <code>'(a b)</code> and nested maps <code>'((k . v))</code>; <code>PROP+:</code> lines add to it</td></tr>
+<tr><td class="term">others</td><td><code>HUGO_SLUG</code>, <code>HUGO_URL</code>, <code>HUGO_TYPE</code>, <code>HUGO_LAYOUT</code>, <code>HUGO_LINKTITLE</code>, <code>HUGO_MARKUP</code>, <code>HUGO_OUTPUTS</code>, <code>HUGO_SERIES</code>, <code>HUGO_IMAGES</code>, <code>HUGO_VIDEOS</code>, <code>KEYWORDS</code>, <code>HUGO_AUDIO</code>, <code>HUGO_HEADLESS</code>, <code>HUGO_ISCJKLANGUAGE</code>, <code>HUGO_LOCALE</code> with <code>HUGO_WITH_LOCALE</code>, creator with <code>creator:t</code></td></tr>
+</table>
+<p><code>HUGO_FRONT_MATTER_KEY_REPLACE: old&gt;new</code> renames a key (<code>old&gt;nil</code> drops it). A <code>toml</code> or <code>yaml</code> source block with <code>:front_matter_extra t</code> is added to the front matter as it is. Each setting is a <code>#+hugo_...</code> keyword in the per-file flow and an <code>EXPORT_HUGO_...</code> property in a post subtree. Strings are quoted and escaped for TOML (like tomelr, a string with a newline or a double quote becomes a multi-line string) or YAML.</p>
+<h3 id="h-the-body">The body</h3>
+<p>Hugo (Goldmark) Markdown, like ox-hugo's: headings one level below the title (<code>HUGO_LEVEL_OFFSET</code>) with <code>{#anchor}</code> ids (the CUSTOM_ID or a slug of the title, like org-hugo-slug: letters and digits of any script kept, other characters, punctuation such as ’ — « » too, made hyphens), fenced code blocks with <code>{ linenos=true, hl_lines=[...] }</code> for <code>-n</code> and <code>:hl_lines</code> (the <code>highlight</code> shortcode with an empty <code>HUGO_CODE_FENCE</code>), <code>[^fn:1]</code> footnotes, pipe tables, <code>_italic_</code>, <code>~~strike~~</code>, <code>#+begin_details</code> / <code>#+begin_summary</code> as <span class="key">&lt;details&gt;</span>, other special blocks as HTML elements or <span class="key">&lt;div&gt;</span>s, or as paired shortcodes listed in <code>HUGO_PAIRED_SHORTCODES</code> (<code>%name</code> for Markdown contents, arguments from <code>#+attr_shortcode</code>), <code>#+hugo: more</code> as the summary splitter, <code>#+hugo:</code> lines and <code>@@hugo:...@@</code> written as they are, and equations escaped for MathJax.</p>
+<p>A standalone image becomes a <code>{{&lt; figure &gt;}}</code> shortcode with its caption and <code>#+attr_html</code> (<code>:alt :title :class :width :link ...</code>); an image in a sentence stays Markdown. A linked local file (with one of <code>copy_extensions</code>) is copied to the site: kept where it is under <code>static/</code>, into the bundle of a bundle post, else to <code>static/&lt;static_subdir&gt;/</code>. Links to headings of other posts of the file, and to other Org files (<code>[[file:other.org::#id]]</code>), become <code>{{&lt; relref &gt;}}</code>; <code>info:</code> links go to the manuals on the web.</p>
+<h3 id="h-options">Options</h3>
+<table class="defs">
+<tr><td class="term"><code>base_dir</code></td><td>the Hugo site (nil; <code>#+hugo_base_dir</code>)</td></tr>
+<tr><td class="term"><code>content_folder</code></td><td>(&quot;content&quot;; <code>#+hugo_base_content_folder</code>)</td></tr>
+<tr><td class="term"><code>section</code></td><td>(&quot;posts&quot;; <code>#+hugo_section</code>)</td></tr>
+<tr><td class="term"><code>front_matter_format</code></td><td>&quot;toml&quot; or &quot;yaml&quot; (&quot;toml&quot;)</td></tr>
+<tr><td class="term"><code>footer</code></td><td>text at the end of every post (&quot;&quot;)</td></tr>
+<tr><td class="term"><code>preserve_filling</code></td><td>keep the line breaks of paragraphs (true)</td></tr>
+<tr><td class="term"><code>delete_trailing_ws</code></td><td>(true)</td></tr>
+<tr><td class="term"><code>use_code_for_kbd</code></td><td><code>~code~</code> as <span class="key">&lt;kbd&gt;</span> (false)</td></tr>
+<tr><td class="term"><code>allow_spaces_in_tags</code></td><td>(true)</td></tr>
+<tr><td class="term"><code>prefer_hyphen_in_tags</code></td><td>(true)</td></tr>
+<tr><td class="term"><code>auto_set_lastmod</code></td><td>(false)</td></tr>
+<tr><td class="term long"><code>suppress_lastmod_period</code></td><td>seconds (0)</td></tr>
+<tr><td class="term"><code>with_toc</code></td><td>false, true or a depth (false; <code>toc:</code>)</td></tr>
+<tr><td class="term"><code>with_section_numbers</code></td><td>false, true, a level or &quot;onlytoc&quot; (false)</td></tr>
+<tr><td class="term"><code>static_subdir</code></td><td>(&quot;ox-hugo&quot;)</td></tr>
+<tr><td class="term"><code>copy_extensions</code></td><td>extensions of files copied to the site</td></tr>
+<tr><td class="term"><code>date_format</code></td><td>(&quot;%Y-%m-%dT%T%z&quot;)</td></tr>
+<tr><td class="term"><code>paired_shortcodes</code></td><td>(&quot;&quot;)</td></tr>
+<tr><td class="term"><code>link_desc_insert_type</code></td><td>&quot;Figure 1&quot; instead of &quot;1&quot; in links (false)</td></tr>
+<tr><td class="term"><code>container_element</code></td><td>HTML element around top-level sections (&quot;&quot;)</td></tr>
+<tr><td class="term long"><code>special_block_type_properties</code></td><td><code>raw</code>, <code>trim-pre</code>, <code>trim-post</code> per block type</td></tr>
+<tr><td class="term"><code>headline_anchor</code></td><td><code>{#anchor}</code> after headings (true)</td></tr>
+<tr><td class="term"><code>auto_export</code></td><td>export the post at the cursor (or the file) when a buffer with a Hugo base dir is written, like org-hugo-auto-export-mode (false)</td></tr>
+</table>
+<p>They are ox-hugo's <code>org-hugo-*</code> variables without the prefix. <code>:checkhealth org</code> checks <code>base_dir</code> and whether <code>hugo</code> is installed.</p>
+<h3 id="h-not-ported">Not ported</h3>
+<ul>
+<li>Blackfriday mode (<code>org-hugo-goldmark</code> nil), deprecated in ox-hugo.</li>
+<li>Dates, lastmod and notes from LOGBOOK drawers (the drawer is left out of the body).</li>
+<li>Coderef anchors in code blocks (<code>(ref:name)</code> links export as text), <code>#+toc: headlines :target</code>, ordered lists with custom counters written as HTML, inlined SVGs (<code>:inlined t</code>) and tag groups.</li>
+<li>Pandoc citations (<code>HUGO_PANDOC_CITATIONS</code>); Org citations work as in the other back-ends.</li>
+<li>Asynchronous export: the dispatcher's <code>a</code> toggle is ignored.</li>
+</ul>
+<p>On ox-hugo's own test site, 347 of its 406 per-subtree posts come out byte for byte the same (most of the others run code blocks or use the features above).</p>
+</article>
+<nav class="pager"><a class="prev" href="../manual/org-extensions-merge.html"><span>上一页</span>Structural git merges</a><a class="next" href="../manual/org-extensions-ics.html"><span>下一页</span>iCalendar subscriptions</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L11515">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+</main>
+</div>
+</body>
+</html>
