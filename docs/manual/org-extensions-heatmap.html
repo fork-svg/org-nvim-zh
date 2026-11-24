@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Heatmap · org.nvim</title>
-<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<title>热力图 · org.nvim</title>
+<meta name="description" content="org.nvim：在 Neovim 中使用纯 Lua 实现的 Emacs Org 模式。">
 <link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
 <link rel="stylesheet" href="../assets/site.css">
 <script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
@@ -83,7 +83,7 @@
 <li class="sub"><a href="../manual/org-extensions-views.html">Views: kanban, timeline, heatmap, sidebar</a></li>
 <li class="sub"><a href="../manual/org-extensions-kanban.html">Kanban board</a></li>
 <li class="sub"><a href="../manual/org-extensions-timeline.html">Timeline</a></li>
-<li class="sub"><a href="../manual/org-extensions-heatmap.html" aria-current="page">Heatmap</a></li>
+<li class="sub"><a href="../manual/org-extensions-heatmap.html" aria-current="page">热力图</a></li>
 <li class="sub"><a href="../manual/org-extensions-sidebar.html">Today sidebar</a></li>
 <li class="sub"><a href="../manual/org-extensions-journal.html">Journal (org-journal)</a></li>
 <li class=""><a href="../manual/org-migrate.html">从 nvim-orgmode 迁移</a></li>
@@ -126,36 +126,36 @@
 </ul></nav>
 <main id="content" class="content manual">
 <article>
-<h1>Heatmap</h1>
+<h1>热力图</h1>
 <div class="tags"><a class="tag" id="org-extensions-heatmap" href="#org-extensions-heatmap">org-extensions-heatmap</a></div>
-<p>Stability: stable (<a class="hl" href="org-extensions.html#org-extensions-stability">org-extensions-stability</a>)</p>
-<p>A calendar heatmap in the style of GitHub's contribution graph: a column per week, a row per weekday, each day shaded by what was done that day.</p>
+<p>稳定性：稳定（<a class="hl" href="org-extensions.html#org-extensions-stability">org-extensions-stability</a>）</p>
+<p>类似 GitHub 贡献图的日历热力图：每周一列，每天一行，每天根据当天完成的工作量着色。</p>
 <pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({ <span class="h-m">extensions</span> <span class="h-o">=</span> { <span class="h-m">heatmap</span> <span class="h-o">=</span> { <span class="h-m">weeks</span> <span class="h-o">=</span> <span class="h-n">26</span> } } })</code></pre>
-<p><code>:Org heatmap [clock|closed|habit] [tag|file]</code>, or the action <code>heatmap_open</code> (<code>&lt;prefix&gt;Vh</code>). The kinds:</p>
+<p><code>:Org heatmap [clock|closed|habit] [tag|file]</code>，或操作 <code>heatmap_open</code>（<code>&lt;prefix&gt;Vh</code>）。类型：</p>
 <table class="defs">
-<tr><td class="term"><code>clock</code></td><td>minutes clocked (CLOCK lines; a clock over midnight is split between the two days, a running clock counts up to now; the time that elapsed counts, like the clock table, so a clock over a DST change counts an hour less or more)</td></tr>
-<tr><td class="term"><code>closed</code></td><td>tasks marked done: CLOSED dates, <code>- State &quot;DONE&quot;</code> and <code>- CLOSING NOTE</code> log entries and the LAST_REPEAT property, once per task and day</td></tr>
-<tr><td class="term"><code>habit</code></td><td>the same for habits (<code>STYLE: habit</code>)</td></tr>
+<tr><td class="term"><code>clock</code></td><td>计时分钟数（CLOCK 行；跨午夜的时间会分到两天，正在进行的计时会计算到现在；计算经过的时间，类似时间表，因此跨夏令时变更的时间会多算或少算一小时）</td></tr>
+<tr><td class="term"><code>closed</code></td><td>标记为完成的任务：CLOSED 日期、<code>- State "DONE"</code> 和 <code>- CLOSING NOTE</code> 日志条目以及 LAST_REPEAT 属性，每个任务每天只计一次</td></tr>
+<tr><td class="term"><code>habit</code></td><td>与 closed 相同，但仅针对习惯（<code>STYLE: habit</code>）</td></tr>
 </table>
-<p>A habit only leaves a trace when marking it done logs something: with <code>log_repeat</code> on (the default) every completion is counted; with it off, only the last one (its LAST_REPEAT, which clocked tasks get too) is.</p>
-<p>A bare word is a tag (<code>+work</code> and <code>:work:</code> work too); a path ending in <code>.org</code> is the source.</p>
-<p>There are five shades: empty days, then four levels. By default the levels split the days with any value in quartiles; <code>thresholds</code> sets the lower bound of each level instead (e.g. <code>{ 30, 60, 120, 240 }</code> minutes). The colours are mixed from the foreground of <code>color_group</code> and the background of <code>Normal</code>, and follow colorscheme changes; <code>colors</code> sets all five. Under the grid: the total, active days, the average of an active day, the current streak (ending today, or yesterday while today is empty), the longest one and the best day.</p>
-<p>The cursor starts on today; the line at the bottom shows the selected day's total and its biggest entries. With <code>weeks = 0</code> the number of weeks follows the editor's width when it is resized. Only the days shown are counted, so years of CLOCK lines cost little (100,000 clocks: about 30 ms).</p>
-<h3 id="h-keys">Keys</h3>
+<p>习惯只有在标记为完成并记录日志时才会留下痕迹：启用 <code>log_repeat</code>（默认）时，每次完成都会被计数；关闭时，只有最后一次（其 LAST_REPEAT，计时任务也会有）会被计数。</p>
+<p>单个单词视为标签（<code>+work</code> 和 <code>:work:</code> 也可以）；以 <code>.org</code> 结尾的路径是数据来源。</p>
+<p>有五种深浅：空日，然后四个级别。默认情况下，级别将有值的日期按四分位数划分；<code>thresholds</code> 设置每个级别的下限（例如 <code>{ 30, 60, 120, 240 }</code> 分钟）。颜色由 <code>color_group</code> 的前景和 <code>Normal</code> 的背景混合而成，并跟随配色方案变化；<code>colors</code> 设置全部五种。网格下方显示：总计、活跃天数、活跃日的平均值、当前连续天数（到今天为止，或如果今天为空则到昨天）、最长连续天数和最佳单日。</p>
+<p>光标从今天开始；底部行显示所选日期的总计及其最大条目。设置 <code>weeks = 0</code> 时，周数会跟随编辑器宽度调整。只计算显示的日期，因此多年的 CLOCK 行也很快（100,000 条记录：约 30 毫秒）。</p>
+<h3 id="h-keys">按键</h3>
 <table class="defs">
-<tr><td class="term"><span class="key">&lt;Tab&gt;</span></td><td>next kind (clock, closed, habit)</td></tr>
-<tr><td class="term">h / l</td><td>previous / next week</td></tr>
-<tr><td class="term">k / j</td><td>previous / next day</td></tr>
-<tr><td class="term"><span class="key">&lt;CR&gt;</span></td><td>the agenda of that day (a split heatmap stays open)</td></tr>
-<tr><td class="term">r</td><td>refresh</td></tr>
-<tr><td class="term"><span class="key">&lt;Esc&gt;</span> q</td><td>quit</td></tr>
+<tr><td class="term"><span class="key">&lt;Tab&gt;</span></td><td>下一种类型（clock、closed、habit）</td></tr>
+<tr><td class="term">h / l</td><td>上一周 / 下一周</td></tr>
+<tr><td class="term">k / j</td><td>上一天 / 下一天</td></tr>
+<tr><td class="term"><span class="key">&lt;CR&gt;</span></td><td>该天的日程（分割的热力图保持打开）</td></tr>
+<tr><td class="term">r</td><td>刷新</td></tr>
+<tr><td class="term"><span class="key">&lt;Esc&gt;</span> q</td><td>退出</td></tr>
 </table>
-<h3 id="h-options-defaults">Options (defaults)</h3>
+<h3 id="h-options-defaults">选项（默认值）</h3>
 <table class="defs">
 <tr><td class="term"><code>kind</code></td><td>&quot;clock&quot;</td></tr>
 <tr><td class="term"><code>source</code></td><td>&quot;agenda&quot;</td></tr>
 <tr><td class="term"><code>tag</code></td><td>nil</td></tr>
-<tr><td class="term"><code>weeks</code></td><td>0 (fit the window, at most 53)</td></tr>
+<tr><td class="term"><code>weeks</code></td><td>0（适应窗口，最多 53）</td></tr>
 <tr><td class="term"><code>cell</code></td><td>&quot;■&quot;</td></tr>
 <tr><td class="term"><code>thresholds</code></td><td>nil</td></tr>
 <tr><td class="term"><code>color_group</code></td><td>&quot;DiagnosticOk&quot;</td></tr>
@@ -163,10 +163,10 @@
 <tr><td class="term"><code>layout</code></td><td>&quot;float&quot;</td></tr>
 <tr><td class="term"><code>keys</code></td><td><code>next_kind</code>, <code>prev_week</code>, <code>next_week</code>, <code>next_day</code>, <code>prev_day</code>, <code>agenda</code>, <code>refresh</code>, <code>quit</code></td></tr>
 </table>
-<p>Highlight groups: <code>OrgHeatmap0</code> to <code>OrgHeatmap4</code> (the shades, set from the options), <code>OrgHeatmapTitle</code>, <code>OrgHeatmapHint</code>, <code>OrgHeatmapLabel</code>, <code>OrgHeatmapValue</code>, <code>OrgHeatmapDetail</code>.</p>
+<p>高亮组：<code>OrgHeatmap0</code> 到 <code>OrgHeatmap4</code>（深浅程度，从选项设置），<code>OrgHeatmapTitle</code>、<code>OrgHeatmapHint</code>、<code>OrgHeatmapLabel</code>、<code>OrgHeatmapValue</code>、<code>OrgHeatmapDetail</code>。</p>
 </article>
-<nav class="pager"><a class="prev" href="../manual/org-extensions-timeline.html"><span>上一页</span>Timeline</a><a class="next" href="../manual/org-extensions-sidebar.html"><span>下一页</span>Today sidebar</a></nav>
-<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L14002">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+<nav class="pager"><a class="prev" href="../manual/org-extensions-timeline.html"><span>上一页</span>时间线</a><a class="next" href="../manual/org-extensions-sidebar.html"><span>下一页</span>今日侧边栏</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L14002">在 GitHub 上查看源码</a> · org.nvim 基于 MIT 许可证。</footer>
 </main>
 </div>
 </body>
