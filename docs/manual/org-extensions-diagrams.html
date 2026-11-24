@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Diagrams (ob-mermaid, ob-dot, ob-plantuml) · org.nvim</title>
-<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<title>图表（ob-mermaid, ob-dot, ob-plantuml） · org.nvim</title>
+<meta name="description" content="org.nvim：在 Neovim 中使用纯 Lua 实现的 Emacs Org 模式。">
 <link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
 <link rel="stylesheet" href="../assets/site.css">
 <script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
@@ -74,7 +74,7 @@
 <li class="sub"><a href="../manual/org-extensions-ics.html">iCalendar subscriptions</a></li>
 <li class="sub"><a href="../manual/org-extensions-caldav.html">CalDAV sync</a></li>
 <li class="sub"><a href="../manual/org-extensions-cli.html">Command line (org)</a></li>
-<li class="sub"><a href="../manual/org-extensions-diagrams.html" aria-current="page">Diagrams (ob-mermaid, ob-dot, ob-plantuml)</a></li>
+<li class="sub"><a href="../manual/org-extensions-diagrams.html" aria-current="page">图表（ob-mermaid, ob-dot, ob-plantuml）</a></li>
 <li class="sub"><a href="../manual/org-extensions-code.html">Code and notes (code)</a></li>
 <li class="sub"><a href="../manual/org-extensions-literate.html">Literate Neovim config (literate)</a></li>
 <li class="sub"><a href="../manual/org-extensions-lsp.html">Language server</a></li>
@@ -126,14 +126,14 @@
 </ul></nav>
 <main id="content" class="content manual">
 <article>
-<h1>Diagrams (ob-mermaid, ob-dot, ob-plantuml)</h1>
+<h1>图表（ob-mermaid, ob-dot, ob-plantuml）</h1>
 <div class="tags"><a class="tag" id="org-extensions-diagrams" href="#org-extensions-diagrams">org-extensions-diagrams</a></div>
-<p>Stability: stable (<a class="hl" href="org-extensions.html#org-extensions-stability">org-extensions-stability</a>)</p>
-<p><code>diagrams</code> renders diagram source blocks to images: <code>mermaid</code> (with mermaid-cli's <code>mmdc</code>, like the third-party ob-mermaid), <code>dot</code> (Graphviz, like Emacs's ob-dot) and the built-in <code>plantuml</code> port (<a class="hl" href="org-babel.html#org-babel-languages">org-babel-languages</a>):</p>
+<p>稳定性：稳定（<a class="hl" href="org-extensions.html#org-extensions-stability">org-extensions-stability</a>）</p>
+<p><code>diagrams</code> 扩展将图表源代码块渲染为图片：支持 <code>mermaid</code>（使用 mermaid-cli 的 <code>mmdc</code>，类似第三方 ob-mermaid）、<code>dot</code>（Graphviz，类似 Emacs 的 ob-dot）以及内置的 <code>plantuml</code> 移植版（<a class="hl" href="org-babel.html#org-babel-languages">org-babel-languages</a>）：</p>
 <pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org&quot;</span>).<span class="h-f">setup</span>({
   <span class="h-m">extensions</span> <span class="h-o">=</span> { <span class="h-m">diagrams</span> <span class="h-o">=</span> { <span class="h-m">render_on_save</span> <span class="h-o">=</span> <span class="h-n">true</span> } },
 })</code></pre>
-<p><code>C-c C-c</code> on a block writes the diagram to its <code>:file</code> and inserts a <code>[[file:...]]</code> result, as for any babel language (both languages default to <code>:results file :exports results</code>):</p>
+<p>在代码块上按 <code>C-c C-c</code> 会将图表写入其 <code>:file</code> 并插入 <code>[[file:...]]</code> 结果，与任何 babel 语言一样（两种语言默认使用 <code>:results file :exports results</code>）：</p>
 <pre class="code"><code class="language-org"><span class="h-k">#+begin_src</span> mermaid :file flow.png :theme dark
 flowchart LR
   A --&gt; B
@@ -142,51 +142,51 @@ flowchart LR
 <span class="h-k">#+begin_src</span> dot :file deps.svg :var color=&quot;red&quot;
 digraph { a [color=$color]; a -&gt; b }
 <span class="h-k">#+end_src</span></code></pre>
-<p>mermaid takes ob-mermaid's header arguments <code>:theme</code>, <code>:background-color</code>, <code>:width</code>, <code>:height</code>, <code>:scale</code>, <code>:mermaid-config-file</code>, <code>:css-file</code> and <code>:puppeteer-config-file</code> (ob-mermaid's spelling <code>:pupeteer-config-file</code> also works). dot runs <code>CMD IN CMDLINE -o OUT</code> like ob-dot: <code>:cmd</code> (default <code>dot</code>), <code>:cmdline</code> (default <code>-T</code> plus the extension of <code>:file</code>) and <code>$NAME</code> replaced by <code>:var NAME</code>. plantuml keeps its own options in <code>babel.languages.plantuml</code>; when no <code>jar_path</code> is set but a <code>plantuml</code> command is installed, that command is used.</p>
-<h3 id="h-beyond-emacs">Beyond Emacs</h3>
+<p>mermaid 接受 ob-mermaid 的头部参数 <code>:theme</code>、<code>:background-color</code>、<code>:width</code>、<code>:height</code>、<code>:scale</code>、<code>:mermaid-config-file</code>、<code>:css-file</code> 和 <code>:puppeteer-config-file</code>（ob-mermaid 的拼写 <code>:pupeteer-config-file</code> 也有效）。dot 运行 <code>CMD IN CMDLINE -o OUT</code>，类似 ob-dot：<code>:cmd</code>（默认 <code>dot</code>）、<code>:cmdline</code>（默认 <code>-T</code> 加上 <code>:file</code> 的扩展名），<code>$NAME</code> 由 <code>:var NAME</code> 替换。plantuml 保留其在 <code>babel.languages.plantuml</code> 中的选项；当未设置 <code>jar_path</code> 但安装了 <code>plantuml</code> 命令时，将使用该命令。</p>
+<h3 id="h-beyond-emacs">超越 Emacs</h3>
 <ul>
-<li>A block without <code>:file</code> gets <code>output_dir/LANG-HASH8.EXT</code> (HASH8 starts the content hash; EXT is <code>:file-ext</code> or <code>format</code>), relative to the org file's directory or <code>:dir</code>. Emacs errors instead; set <code>auto_file = false</code> for that.</li>
-<li>Rendered diagrams are cached in <code>cache_dir</code> by a hash of the language, the command and options, the output format and the expanded body. An unchanged diagram is copied from the cache instead of being rendered again. For plantuml the key also covers the files the text pulls in with <code>!include</code> (<code>!include_once</code>, <code>!include_many</code>, <code>!includesub</code>; local files, four levels deep), so editing one renders again. <code>:Org diagrams_rerender</code> renders the block at point without the cache and <code>:Org diagrams_clear_cache</code> empties it. At startup the cache drops entries unused for <code>cache_max_age</code> days, then the least recently used beyond <code>cache_max_size</code> megabytes. Both only touch cache entries (files named by the hash); other files in <code>cache_dir</code> are left alone.</li>
-<li>With <code>auto_preview</code> (the default) the result image is shown inline after the block runs, when an image backend is available (<a class="hl" href="org-appearance.html#org-images">org-images</a>; SVG needs ImageMagick).</li>
-<li>With <code>render_on_save</code> every diagram block of an org buffer is rendered after the buffer is written, one block after another in the background, so Neovim stays responsive while mmdc or dot run. When they are done and nothing but the results changed, the buffer is written again, so the file on disk has the new results; when you edited it meanwhile, the buffer is left modified for you to save. Blocks run without the evaluation prompt, except those with <code>:eval no</code>, <code>never</code> or <code>query</code>, which are skipped. Unchanged diagrams come from the cache at once.</li>
-<li><code>:Org diagrams_clean</code> deletes the generated files (<code>LANG-HASH8.EXT</code>) in the current file's <code>output_dir</code> that no org file of that directory links to or names (open buffers count with their unsaved text), after asking; <code>:Org diagrams_clean dry</code> only lists them. Files you named yourself with <code>:file</code> are never touched.</li>
-<li>The tools run without a shell (an argument list) unless the command is a shell fragment (a string of several words) or the block sets <code>:cmd</code> or <code>:cmdline</code>, which are shell text as in ob-dot.</li>
+<li>没有 <code>:file</code> 的块会生成 <code>output_dir/LANG-HASH8.EXT</code>（HASH8 是内容哈希的开头；EXT 是 <code>:file-ext</code> 或 <code>format</code>），相对于 org 文件的目录或 <code>:dir</code>。Emacs 会报错；设置 <code>auto_file = false</code> 可获得该行为。</li>
+<li>渲染的图表会缓存在 <code>cache_dir</code> 中，键为语言、命令和选项、输出格式以及展开后内容的哈希。未更改的图表会从缓存复制，而不是重新渲染。对于 plantuml，键还包括文本通过 <code>!include</code>（<code>!include_once</code>、<code>!include_many</code>、<code>!includesub</code>；本地文件，最多四层）引入的文件，因此编辑这些文件会触发重新渲染。<code>:Org diagrams_rerender</code> 不使用缓存渲染当前块，<code>:Org diagrams_clear_cache</code> 清空缓存。启动时，缓存会删除 <code>cache_max_age</code> 天未使用的条目，然后删除超出 <code>cache_max_size</code> 兆字节的最久未使用条目。两者都只影响缓存条目（以哈希命名的文件）；<code>cache_dir</code> 中的其他文件不受影响。</li>
+<li>启用 <code>auto_preview</code>（默认）时，块运行后会在内联显示结果图片，前提是图像后端可用（<a class="hl" href="org-appearance.html#org-images">org-images</a>；SVG 需要 ImageMagick）。</li>
+<li>启用 <code>render_on_save</code> 时，保存 org 缓冲区后会渲染其中的所有图表块，在后台逐个处理，因此 mmdc 或 dot 运行时 Neovim 仍保持响应。完成后，如果只有结果发生变化，缓冲区会再次写入，使磁盘上的文件包含新结果；如果您在此期间进行了编辑，缓冲区会保持修改状态供您保存。块运行时不会显示评估提示，但 <code>:eval no</code>、<code>never</code> 或 <code>query</code> 的块会被跳过。未更改的图表会立即从缓存获取。</li>
+<li><code>:Org diagrams_clean</code> 会询问后删除当前文件 <code>output_dir</code> 中生成的文件（<code>LANG-HASH8.EXT</code>），这些文件不被该目录中的任何 org 文件链接或引用（打开的缓冲区按其未保存的文本计算）；<code>:Org diagrams_clean dry</code> 只列出它们。您用 <code>:file</code> 自己命名的文件永远不会被删除。</li>
+<li>工具运行时不使用 shell（参数列表），除非命令是 shell 片段（多个单词的字符串）或块设置了 <code>:cmd</code> 或 <code>:cmdline</code>，这些是 ob-dot 中的 shell 文本。</li>
 </ul>
-<h3 id="h-actions">Actions</h3>
+<h3 id="h-actions">操作</h3>
 <table class="defs">
-<tr><td class="term"><code>diagrams_render</code></td><td>render the diagram block at point (what <code>C-c C-c</code> does there); not applicable elsewhere</td></tr>
-<tr><td class="term"><code>diagrams_rerender</code></td><td>the same, ignoring the cache</td></tr>
-<tr><td class="term"><code>diagrams_render_buffer</code></td><td>render every diagram block of the buffer</td></tr>
-<tr><td class="term"><code>diagrams_clear_cache</code></td><td>delete the cached renders</td></tr>
-<tr><td class="term"><code>diagrams_clean</code></td><td>delete generated diagrams nothing links to</td></tr>
+<tr><td class="term"><code>diagrams_render</code></td><td>渲染光标处的图表块（与 <code>C-c C-c</code> 在此处的作用相同）；不适用于其他地方</td></tr>
+<tr><td class="term"><code>diagrams_rerender</code></td><td>同上，但忽略缓存</td></tr>
+<tr><td class="term"><code>diagrams_render_buffer</code></td><td>渲染缓冲区中的每个图表块</td></tr>
+<tr><td class="term"><code>diagrams_clear_cache</code></td><td>删除缓存的渲染</td></tr>
+<tr><td class="term"><code>diagrams_clean</code></td><td>删除没有链接的已生成图表</td></tr>
 </table>
-<p>No default keys; use <code>:Org &lt;action&gt;</code> or bind them in <code>mappings.org</code>.</p>
-<h3 id="h-options-defaults-in-parentheses">Options (defaults in parentheses)</h3>
+<p>没有默认按键；使用 <code>:Org &lt;action&gt;</code> 或在 <code>mappings.org</code> 中绑定。</p>
+<h3 id="h-options-defaults-in-parentheses">选项（括号内为默认值）</h3>
 <table class="defs">
-<tr><td class="term"><code>languages</code></td><td>handled languages ({ &quot;mermaid&quot;, &quot;dot&quot;, &quot;plantuml&quot; }); a language left out keeps its core behaviour</td></tr>
-<tr><td class="term"><code>mermaid</code></td><td>{ <code>command</code> (&quot;mmdc&quot;; a string runs through the shell, so &quot;npx -y @mermaid-js/mermaid-cli&quot; works, or a list of words), <code>args</code> ({}), <code>theme</code>, <code>background</code>, <code>config_file</code>, <code>puppeteer_config</code> } (defaults for the header arguments above)</td></tr>
-<tr><td class="term"><code>dot</code></td><td>{ <code>command</code> (&quot;dot&quot;), <code>args</code> ({}) }</td></tr>
-<tr><td class="term"><code>auto_file</code></td><td>generate a <code>:file</code> when there is none (true)</td></tr>
-<tr><td class="term"><code>output_dir</code></td><td>directory of generated names (&quot;diagrams&quot;)</td></tr>
-<tr><td class="term"><code>format</code></td><td>extension of generated names (&quot;png&quot;)</td></tr>
-<tr><td class="term"><code>cache</code></td><td>use the cache (true)</td></tr>
-<tr><td class="term"><code>cache_dir</code></td><td>stdpath(&quot;cache&quot;) .. &quot;/org/diagrams&quot;</td></tr>
-<tr><td class="term"><code>auto_preview</code></td><td>preview the result image (true)</td></tr>
-<tr><td class="term"><code>render_on_save</code></td><td>render diagram blocks after writing (false)</td></tr>
-<tr><td class="term"><code>cache_max_age</code></td><td>days an unused cache entry is kept (90; false: ever)</td></tr>
-<tr><td class="term"><code>cache_max_size</code></td><td>megabytes the cache is pruned to (200; false: no limit)</td></tr>
+<tr><td class="term"><code>languages</code></td><td>处理的语言（{ "mermaid", "dot", "plantuml" }）；未包含的语言保留其核心行为</td></tr>
+<tr><td class="term"><code>mermaid</code></td><td>{ <code>command</code>（"mmdc"；字符串通过 shell 运行，因此 "npx -y @mermaid-js/mermaid-cli" 可用，或单词列表），<code>args</code>（{}），<code>theme</code>，<code>background</code>，<code>config_file</code>，<code>puppeteer_config</code> }（上述头部参数的默认值）</td></tr>
+<tr><td class="term"><code>dot</code></td><td>{ <code>command</code>（"dot"），<code>args</code>（{}）}</td></tr>
+<tr><td class="term"><code>auto_file</code></td><td>没有 <code>:file</code> 时自动生成（true）</td></tr>
+<tr><td class="term"><code>output_dir</code></td><td>生成名称的目录（"diagrams"）</td></tr>
+<tr><td class="term"><code>format</code></td><td>生成名称的扩展名（"png"）</td></tr>
+<tr><td class="term"><code>cache</code></td><td>使用缓存（true）</td></tr>
+<tr><td class="term"><code>cache_dir</code></td><td>stdpath("cache") .. "/org/diagrams"</td></tr>
+<tr><td class="term"><code>auto_preview</code></td><td>预览结果图片（true）</td></tr>
+<tr><td class="term"><code>render_on_save</code></td><td>保存后渲染图表块（false）</td></tr>
+<tr><td class="term"><code>cache_max_age</code></td><td>未使用的缓存条目保留天数（90；false：永久）</td></tr>
+<tr><td class="term"><code>cache_max_size</code></td><td>缓存修剪到的兆字节数（200；false：无限制）</td></tr>
 </table>
-<p><code>:checkhealth org</code> shows which renderers (mmdc, dot, plantuml or the jar and java) are installed, whether results can be previewed, and the cache directory. None of the tools is needed to load the extension; a block whose tool is missing reports it and inserts no result.</p>
-<h3 id="h-limits">Limits</h3>
+<p><code>:checkhealth org</code> 显示安装了哪些渲染器（mmdc、dot、plantuml 或 jar 和 java），结果是否可以预览，以及缓存目录。加载扩展不需要任何工具；缺少工具的块会报告该情况并不插入结果。</p>
+<h3 id="h-limits">限制</h3>
 <ul>
-<li>Generated names change with the body, so an edited diagram leaves its old file behind in <code>output_dir</code> until <code>diagrams_clean</code>.</li>
-<li>Only plantuml includes are followed: a mermaid config or CSS file, and dot's <code>image=</code> or <code>imagepath</code> files, are not part of the cache key; use <code>diagrams_rerender</code> after changing them.</li>
-<li>Without Graphviz installed only fake tools were run in the tests; the argument order follows ob-dot (<code>dot IN -TEXT [args] -o OUT</code>).</li>
-<li>Only file results are cached. plantuml's text output (<code>:results verbatim</code>, no <code>:file</code>) is left to the core port.</li>
+<li>生成的名称随内容变化，因此编辑图表会将其旧文件留在 <code>output_dir</code> 中，直到运行 <code>diagrams_clean</code>。</li>
+<li>只跟踪 plantuml 的 include：mermaid 的配置或 CSS 文件，以及 dot 的 <code>image=</code> 或 <code>imagepath</code> 文件，不是缓存键的一部分；更改它们后请使用 <code>diagrams_rerender</code>。</li>
+<li>未安装 Graphviz 时，测试中只运行了模拟工具；参数顺序遵循 ob-dot（<code>dot IN -TEXT [args] -o OUT</code>）。</li>
+<li>只缓存文件结果。plantuml 的文本输出（<code>:results verbatim</code>，无 <code>:file</code>）由核心移植版处理。</li>
 </ul>
 </article>
-<nav class="pager"><a class="prev" href="../manual/org-extensions-cli.html"><span>上一页</span>Command line (org)</a><a class="next" href="../manual/org-extensions-code.html"><span>下一页</span>Code and notes (code)</a></nav>
-<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L12812">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+<nav class="pager"><a class="prev" href="../manual/org-extensions-cli.html"><span>上一页</span>命令行（org）</a><a class="next" href="../manual/org-extensions-code.html"><span>下一页</span>代码和笔记（code）</a></nav>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L12812">在 GitHub 上查看源码</a> · org.nvim 基于 MIT 许可证。</footer>
 </main>
 </div>
 </body>
