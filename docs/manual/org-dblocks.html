@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dynamic blocks · org.nvim</title>
-<meta name="description" content="org.nvim: Emacs Org mode for Neovim, in pure Lua.">
+<title>动态块 · org.nvim</title>
+<meta name="description" content="org.nvim：在 Neovim 中使用纯 Lua 实现的 Emacs Org 模式。">
 <link rel="icon" href="https://raw.githubusercontent.com/xheisenbugx/org.nvim/media/logo.png">
 <link rel="stylesheet" href="../assets/site.css">
 <script>try{var t=localStorage.getItem('org-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
@@ -131,43 +131,43 @@
 <pre class="code"><code class="language-org"><span class="h-k">#+BEGIN:</span> clocktable :scope file :maxlevel 2 :block thisweek
 <span class="h-k">#+END:</span></code></pre>
 <table class="defs">
-<tr><td class="term"><span class="key">&lt;prefix&gt;</span>xu / xU</td><td>Update the block at the cursor / all blocks. <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-c&gt;</span> on the <code>#+BEGIN:</code> line also updates it.</td></tr>
+<tr><td class="term"><span class="key">&lt;prefix&gt;</span>xu / xU</td><td>更新光标处的块 / 所有块。在 <code>#+BEGIN:</code> 行按 <span class="key">&lt;C-c&gt;</span><span class="key">&lt;C-c&gt;</span> 也可更新。</td></tr>
 </table>
-<p>clocktable parameters (the output matches Emacs 9.8):</p>
+<p>clocktable 参数（输出与 Emacs 9.8 一致）：</p>
 <table class="defs">
 <tr><td class="term">:scope</td><td>file|subtree|tree|treeN|agenda|agenda-with-archives| file-with-archives|(&quot;a.org&quot; &quot;b.org&quot;)</td></tr>
 <tr><td class="term">:maxlevel</td><td>N (default 2)</td></tr>
-<tr><td class="term">:block</td><td>today, yesterday, thisweek, lastweek, thismonth, lastmonth, thisq, lastq, thisyear, lastyear (the this* forms and today take -N / +N), untilnow, 2026-09-23, 2026-W39, 2026-Q3, 2026-09, 2026. It wins over :tstart / :tend.</td></tr>
-<tr><td class="term">:tstart / :tend</td><td>timestamps or <span class="key">&lt;now&gt;</span>, <span class="key">&lt;today&gt;</span>, <span class="key">&lt;yesterday&gt;</span>, <span class="key">&lt;tomorrow&gt;</span>, &lt;-2d&gt;, &lt;+1w&gt;, &lt;-3h&gt; (h from now, d w m y from today)</td></tr>
-<tr><td class="term">:wstart / :mstart</td><td>first day of the week (1 = Monday) / of the month</td></tr>
-<tr><td class="term">:step</td><td>day|week|semimonth|month|quarter|year: one table per period of the :block or :tstart/:tend range (<code>:stepskip0 t</code> skips empty ones)</td></tr>
-<tr><td class="term">:match</td><td>a match string (<a class="hl" href="org-match-syntax.html">org-match-syntax</a>)</td></tr>
-<tr><td class="term">:formula</td><td><code>%</code> adds a percentage column; <code>&quot;$3=$2;t&quot;</code> adds a #+TBLFM line. A #+TBLFM below the table survives updates.</td></tr>
-<tr><td class="term">:sort (2 . ?T)</td><td>sort the rows by a column (a/A n/N t/T)</td></tr>
-<tr><td class="term">:lang de</td><td>headers in de, es, fr, nl, nn, pl, pt-BR or sk</td></tr>
-<tr><td class="term">:filetitle t</td><td>#+TITLE instead of the file name in the file column</td></tr>
-<tr><td class="term long">:properties (&quot;Effort&quot; &quot;OWNER&quot;)</td><td>property columns (<code>:inherit-props t</code>)</td></tr>
-<tr><td class="term">:level t</td><td>a level column</td></tr>
-<tr><td class="term">:timestamp t</td><td>a timestamp column</td></tr>
-<tr><td class="term">:tags t</td><td>a tags column</td></tr>
-<tr><td class="term">:emphasize t</td><td>bold level 1, italic 2</td></tr>
-<tr><td class="term">:link t</td><td>link headlines</td></tr>
-<tr><td class="term">:fileskip0 t</td><td>skip files without time</td></tr>
-<tr><td class="term">:hidefiles t</td><td>no file column</td></tr>
-<tr><td class="term">:tcolumns N</td><td>at most N time columns</td></tr>
-<tr><td class="term">:compact t</td><td>one time column, indented headlines</td></tr>
-<tr><td class="term">:indent nil</td><td>no <code>\_</code> indentation</td></tr>
-<tr><td class="term">:narrow 40!</td><td>cut headlines at 40 characters (the default); :narrow 40 adds a &lt;40&gt; width row instead</td></tr>
-<tr><td class="term">:header &quot;text&quot;</td><td>replace the <code>#+CAPTION:</code> line</td></tr>
+<tr><td class="term">:block</td><td>today, yesterday, thisweek, lastweek, thismonth, lastmonth, thisq, lastq, thisyear, lastyear（this* 形式和 today 可接受 -N / +N），untilnow, 2026-09-23, 2026-W39, 2026-Q3, 2026-09, 2026。此参数优先于 :tstart / :tend。</td></tr>
+<tr><td class="term">:tstart / :tend</td><td>时间戳或 <span class="key">&lt;now&gt;</span>、<span class="key">&lt;today&gt;</span>、<span class="key">&lt;yesterday&gt;</span>、<span class="key">&lt;tomorrow&gt;</span>、&lt;-2d&gt;、&lt;+1w&gt;、&lt;-3h&gt;（h 从现在算起，d w m y 从今天算起）</td></tr>
+<tr><td class="term">:wstart / :mstart</td><td>一周的第一天（1 = 周一）/ 月份的第一天</td></tr>
+<tr><td class="term">:step</td><td>day|week|semimonth|month|quarter|year：按 :block 或 :tstart/:tend 范围内的每个周期生成一个表格（<code>:stepskip0 t</code> 跳过空周期）</td></tr>
+<tr><td class="term">:match</td><td>匹配字符串（<a class="hl" href="org-match-syntax.html">org-match-syntax</a>）</td></tr>
+<tr><td class="term">:formula</td><td><code>%</code> 添加百分比列；<code>"$3=$2;t"</code> 添加 #+TBLFM 行。表格下方的 #+TBLFM 在更新时会保留。</td></tr>
+<tr><td class="term">:sort (2 . ?T)</td><td>按列排序行（a/A n/N t/T）</td></tr>
+<tr><td class="term">:lang de</td><td>表头语言：de（德语）、es（西班牙语）、fr（法语）、nl（荷兰语）、nn（新挪威语）、pl（波兰语）、pt-BR（巴西葡萄牙语）或 sk（斯洛伐克语）</td></tr>
+<tr><td class="term">:filetitle t</td><td>在文件列中使用 #+TITLE 而不是文件名</td></tr>
+<tr><td class="term long">:properties ("Effort" "OWNER")</td><td>属性列（<code>:inherit-props t</code> 启用继承）</td></tr>
+<tr><td class="term">:level t</td><td>层级列</td></tr>
+<tr><td class="term">:timestamp t</td><td>时间戳列</td></tr>
+<tr><td class="term">:tags t</td><td>标签列</td></tr>
+<tr><td class="term">:emphasize t</td><td>第1级标题加粗，第2级斜体</td></tr>
+<tr><td class="term">:link t</td><td>为标题添加链接</td></tr>
+<tr><td class="term">:fileskip0 t</td><td>跳过没有时间的文件</td></tr>
+<tr><td class="term">:hidefiles t</td><td>不显示文件列</td></tr>
+<tr><td class="term">:tcolumns N</td><td>最多 N 个时间列</td></tr>
+<tr><td class="term">:compact t</td><td>单个时间列，标题缩进</td></tr>
+<tr><td class="term">:indent nil</td><td>不使用 <code>\_</code> 缩进</td></tr>
+<tr><td class="term">:narrow 40!</td><td>将标题截断为 40 个字符（默认值）；:narrow 40 则添加 &lt;40&gt; 宽度行</td></tr>
+<tr><td class="term">:header "text"</td><td>替换 <code>#+CAPTION:</code> 行</td></tr>
 </table>
-<p>columnview parameters: <code>:id local|global|file:path|ID</code> (default local; a local or ID view covers the subtree of the entry holding the <code>COLUMNS</code> property that entry inherits, else the entry's own subtree, as column view does), <code>:maxlevel</code>, <code>:skip-empty-rows</code>, <code>:indent</code>, <code>:format</code>, <code>:match</code> (tags / property match), <code>:exclude-tags (a b)</code> (inherited tags count), <code>:hlines t|N</code> (a hline before each entry, or each entry of level N or less), <code>:vlines t</code> (column groups), <code>:link t</code> (link items to their headings), <code>:formatter</code> (the name of a global Lua function <code>function(rows, params)</code> returning the lines; <code>columns_dblock_formatter</code> sets one for every block; rows are the titles, &quot;hline&quot;, then <code>{ level = n, hl = headline, cells... }</code>). Like Emacs (org-columns-dblock-write-default), a first row of width cookies (<code>&lt;25&gt;</code>) is written when the format has widths, and the columns are shrunk; ITEM loses statistics cookies, footnote references, targets and inline src blocks / calls; archived and commented subtrees are skipped. Keywords like <code>#+NAME:</code> above the table and the first <code>#+TBLFM:</code> line below it are kept, and the formulas re-applied. A <code>|</code> in a value is written as <code>\vert{}</code> (Emacs writes it raw, which breaks the table).</p>
-<p>Custom blocks:</p>
+<p>columnview 参数：<code>:id local|global|file:path|ID</code>（默认 local；local 或 ID 视图覆盖持有 <code>COLUMNS</code> 属性的条目所继承的子树，否则是该条目自己的子树，与列视图行为一致），<code>:maxlevel</code>，<code>:skip-empty-rows</code>，<code>:indent</code>，<code>:format</code>，<code>:match</code>（标签/属性匹配），<code>:exclude-tags (a b)</code>（继承的标签也算），<code>:hlines t|N</code>（在每个条目前添加水平线，或在 N 级及以下的条目前添加），<code>:vlines t</code>（列分组），<code>:link t</code>（将项目链接到其标题），<code>:formatter</code>（全局 Lua 函数名 <code>function(rows, params)</code> 返回行内容；<code>columns_dblock_formatter</code> 为每个块设置格式化器；rows 包含标题、"hline"，然后是 <code>{ level = n, hl = headline, cells... }</code>）。与 Emacs（org-columns-dblock-write-default）一样，当格式有宽度时，会写入宽度标记行（<code>&lt;25&gt;</code>），列会收缩；ITEM 会失去统计标记、脚注引用、目标和内联源代码块/调用；已归档和注释的子树会被跳过。<code>#+NAME:</code> 等关键字和表格下方的第一个 <code>#+TBLFM:</code> 行会保留，公式会重新应用。值中的 <code>|</code> 会写为 <code>\vert{}</code>（Emacs 直接写入原始字符，会破坏表格）。</p>
+<p>自定义块：</p>
 <pre class="code"><code class="language-lua"><span class="h-f">require</span>(<span class="h-s">&quot;org.dblock&quot;</span>).<span class="h-f">register</span>(<span class="h-s">&quot;myblock&quot;</span>, <span class="h-k">function</span>(params, ctx)
   <span class="h-k">return</span> { <span class="h-s">&quot;| generated | table |&quot;</span> }
 <span class="h-k">end</span>)</code></pre>
 </article>
 <nav class="pager"><a class="prev" href="../manual/org-babel.html"><span>上一页</span>源代码块（Babel）</a><a class="next" href="../manual/org-export.html"><span>下一页</span>导出</a></nav>
-<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L5535">View source on GitHub</a> · org.nvim is MIT licensed.</footer>
+<footer><a href="https://github.com/xheisenbugx/org.nvim/blob/v3.7.0/doc/org.txt#L5535">在 GitHub 上查看源码</a> · org.nvim 基于 MIT 许可证。</footer>
 </main>
 </div>
 </body>
